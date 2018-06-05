@@ -118,12 +118,12 @@ Se não for encontrado esse CPF na tabela funcionário, não poderá ser criada 
 create table cargo(
 	id_cargo int not null primary key,
     
-    nome varchar(30)
+    descricao varchar(30)
     
 )engine = InnoDB; /* O cargo que o usuário tiver definirá a quais tabelas ele terá acesso e quais não, se é possível 
 modificá-la ou apenas fazer uma consulta nela. */
 
-insert into cargo(id_cargo,nome)
+insert into cargo(id_cargo,descricao)
 values
 (01,'Agente Administrativo'),
 (02,'Assistente Social'),
