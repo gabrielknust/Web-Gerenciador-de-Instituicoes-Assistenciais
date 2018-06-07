@@ -36,10 +36,10 @@ class Cargo extends Funcionario
     }
 
     // Insert
-    public function incluir($idcargo, $descricao, $carga_horaria)
+    public function incluir($descricao, $carga_horaria)
     {
         try {
-            $sql = 'INSERT cargo (idcargo, descricao, ) VALUES (:idcargo, :descricao, )';
+            $sql = 'INSERT cargo (descricao, ) VALUES (:descricao, )';
             $sql = str_replace("'", "\'", $sql);
             $acesso = new Acesso();
             
@@ -47,7 +47,6 @@ class Cargo extends Funcionario
             
             $stmt = $pdo->prepare($sql);
             
-            $stmt->bindParam(':idcargo', $idcargo);
             $stmt->bindParam(':descricao', $descricao);
             
             $stmt->execute();

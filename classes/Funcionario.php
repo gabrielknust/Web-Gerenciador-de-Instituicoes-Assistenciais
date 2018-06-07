@@ -198,19 +198,16 @@ class Funcionario extends Pessoa
         $this->nome_pai = $nome_pai;
     }
     //Insert
-    public function incluir($idfuncionario, $idpessoa, $idcargo, $imagem, $vale_transporte, $data_admissao, $registro_geral, $orgao_emissor, $data_expedicao, $pis, $ctps, $uf_ctps, $zona, $certificado_reservista_numero, $nome_mae, $nome_pai) {
+    public function incluir($imagem, $vale_transporte, $data_admissao, $registro_geral, $orgao_emissor, $data_expedicao, $pis, $ctps, $uf_ctps, $zona, $certificado_reservista_numero, $nome_mae, $nome_pai) {
         try {
-            $sql = 'INSERT cargo (idfuncionario, idpessoa, idcargo, imagem, vale_transporte, data_admissao, registro_geral, orgao_emissor, data_expedicao, pis, ctps, uf_ctps, zona, certificado_reservista_numero, nome_mae, nome_pai) VALUES (:idfuncionario, :idpessoa, :idcargo, :imagem, :vale_transporte, :data_admissao, :registro_geral, :orgao_emissor, :data_expedicao, :pis, :ctps, :uf_ctps, :zona, :certificado_reservista_numero, :nome_mae, :nome_pai)';
+            $sql = 'INSERT cargo (imagem, vale_transporte, data_admissao, registro_geral, orgao_emissor, data_expedicao, pis, ctps, uf_ctps, zona, certificado_reservista_numero, nome_mae, nome_pai) VALUES (:imagem, :vale_transporte, :data_admissao, :registro_geral, :orgao_emissor, :data_expedicao, :pis, :ctps, :uf_ctps, :zona, :certificado_reservista_numero, :nome_mae, :nome_pai)';
             $sql = str_replace("'", "\'", $sql);
             $acesso = new Acesso();
             
             $pdo = $acesso->conexao();
             
             $stmt = $pdo->prepare($sql);
-            
-            $stmt->bindParam(':idfuncionario', $idfuncionario);
-            $stmt->bindParam(':idpessoa', $idpessoa);
-            $stmt->bindParam(':idcargo', $idcargo);
+
             $stmt->bindParam(':imagem', $imagem);
             $stmt->bindParam(':vale_transporte', $vale_transporte);
             $stmt->bindParam(':data_admissao', $data_admissao);

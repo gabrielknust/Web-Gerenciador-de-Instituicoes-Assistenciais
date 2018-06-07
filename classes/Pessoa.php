@@ -185,10 +185,10 @@ abstract class Pessoa
     }
 
     // Insert
-    public function incluir($idpessoa, $nome, $telefone, $data_nascimento, $cpf, $sexo, $email, $senha, $cep, $cidade, $bairro, $ibge, $rua, $numero_endereco, $complemento)
+    public function incluir($nome, $telefone, $data_nascimento, $cpf, $sexo, $email, $senha, $cep, $cidade, $bairro, $ibge, $rua, $numero_endereco, $complemento)
     {
         try {
-            $sql = 'INSERT pessoa (idpessoa, nome, telefone, data_nascimento, cpf, sexo, email, senha, cep, cidade, bairro, ibge, rua, numero_endereco, complemento) VALUES (:idpessoa, :nome, :telefone, :data_nascimento, :cpf, :sexo, :email, :senha, :cep, :cidade, :bairro, :ibge, :rua, :numero_endereco, :complemento)';
+            $sql = 'INSERT pessoa (nome, telefone, data_nascimento, cpf, sexo, email, senha, cep, cidade, bairro, ibge, rua, numero_endereco, complemento) VALUES (:idpessoa, :nome, :telefone, :data_nascimento, :cpf, :sexo, :email, :senha, :cep, :cidade, :bairro, :ibge, :rua, :numero_endereco, :complemento)';
             $sql = str_replace("'", "\'", $sql);
             $acesso = new Acesso();
             
@@ -196,7 +196,6 @@ abstract class Pessoa
             
             $stmt = $pdo->prepare($sql);
             
-            $stmt->bindParam(':idpessoa', $idpessoa);
             $stmt->bindParam(':nome', $nome);
             $stmt->bindParam(':telefone', $telefone);
             $stmt->bindParam(':data_nascimento', $data_nascimento);
