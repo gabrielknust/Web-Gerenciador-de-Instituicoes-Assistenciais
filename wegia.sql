@@ -23,17 +23,33 @@ create table pessoa (
 create table interno(
 	id_interno int not null primary key,
     id_pessoa int not null,
+    id_situacao_interno int not null,
     
-    internacao date not null,
-    saida date,
-    readmitido date,
-    obito date,
     nome_contato_urgente varchar(60),
     telefone_contato_urgente_1 varchar(33),
     telefone_contato_urgente_2 varchar(33),
     telefone_contato_urgente_3 varchar(33),
     
     foreign key(id_pessoa) references pessoa(id_pessoa)
+    
+)engine = InnoDB;
+
+create table situacao_interno(
+	id_situacao_interno int not null primary key,
+    
+    descricao varchar (50) not null
+    
+)engine = InnoDB;
+
+create table movimentacao_interno(
+	id_movimentacao int not null primary key,
+    id_interno int not null,
+    id_situacao_interno int not null,
+    
+    data_hora date not null,
+    
+    foreign key(id_interno) references interno(id_interno),
+    foreign key(id_situacao_interno) references situacao_interno(id_situacao_interno)
     
 )engine = InnoDB;
 
@@ -114,7 +130,26 @@ há uma verificação nela antes de ser criado um usuário, só pode haver um us
 cadastrado na tabela funcionários. Será pedido o CPF na hora do cadastro de uma conta, esse CPF será procurado na tabela
 funcionários, se este existir ele reconhecerá que a conta a ser criada pertence ao funcionário com CPF correspondente.
 Se não for encontrado esse CPF na tabela funcionário, não poderá ser criada a conta */
- 
+
+create table situacao_funcionario(
+	id_situacao_funcionario int not null primary key,
+    
+    descricao varchar (50) not null
+    
+)engine = InnoDB;
+
+create table movimentacao_funcionario(
+	id_movimentacao int not null primary key,
+    id_funcionario int not null,
+    id_situacao_funcionario int not null,
+    
+    data_hora date not null,
+    
+	foreign key(id_funcionario) references funcionario(id_funcionario),
+    foreign key(id_situacao_funcionario) references situacao_funcionario(id_situacao_funcionario)
+    
+)engine = InnoDB;
+
 create table cargo(
 	id_cargo int not null primary key,
     
@@ -123,6 +158,7 @@ create table cargo(
 )engine = InnoDB; /* O cargo que o usuário tiver definirá a quais tabelas ele terá acesso e quais não, se é possível 
 modificá-la ou apenas fazer uma consulta nela. */
 
+/*
 insert into cargo(id_cargo,descricao)
 values
 (01,'Agente Administrativo'),
@@ -171,129 +207,3 @@ create table voluntario_judicial_cargo(
     foreign key(id_cargo) references cargo(id_cargo),
     foreign key(id_voluntarioJ) references voluntario_judicial(id_voluntario_judicial)
 )engine = InnoDB;
-
-/*create table permissao(
-	id_permissao int not null primary key,
-	
-    descricao varchar(100)
-)engine = InnoDB;  tabela que tem uma ligação de muitos para muitos com o cargo. Ela diz as tabelas que poderão ser 
- acessadas pelos cargos 
-
-insert into permissao(id_permissao,descricao)
-values
-(01,'alimentos'),
-(02,'estoque'); /* tabelas que serão acessadas 
-
-create table cargo_permissao(
-	id_cargo int not null,
-    id_permissao int not null,
-    
-    foreign key(id_cargo) references cargo(id_cargo),
-    foreign key(id_permissao) references permissao(id_permissao)
-)engine = InnoDB; # tabela que vai definir qual cargo acessa qual tabela
-
-insert into cargo_permissao(id_cargo,id_permissao)
-values
-(05,01),
-(05,02);*/
-
-#select user();
-
-create table categoria(
-	id_categoria int not null primary key,
-    
-    descricao varchar(50)
-    
-)engine = InnoDB;
-
-create table produto(
-	id_produto int not null primary key,
-    id_categoria int not null,
-    
-    descricao varchar(50),
-
-    foreign key(id_categoria) references categoria(id_categoria)
-    
-)engine = InnoDB; # vai dizer quais produtos existem na instituição. Ex: arroz, feijão, camisa masculina, casaco, roteador...
-
-create table estoque(
-	id_estoque int not null primary key,
-    id_produto int not null,
-    
-    qtd float,
-    
-    foreign key(id_produto) references produto(id_produto)
-    
-)engine = InnoDB;
-
-create table entrada(
-	id_entrada int not null primary key,
-    id_funcionario int not null,
-    
-    data_entrada date,
-    total float,
-    
-    foreign key(id_funcionario) references funcionario(id_funcionario)
-    
-)engine = InnoDB;
-
-create table item_entrada(
-	id_item_entrada int not null primary key,
-    id_entrada int not null,
-    
-    id_produto int not null,
-    qtd float,
-    valor_unitario float,
-    
-    foreign key(id_entrada) references entrada(id_entrada),
-    foreign key(id_produto) references produto(id_produto)
-    
-)engine = InnoDB;
-
-create table saida(
-	id_saida int not null primary key,
-    id_funcionario int not null,
-    
-    data_saida date,
-    total float,
-    
-    foreign key(id_funcionario) references funcionario(id_funcionario)
-    
-)engine = InnoDB;
-
-create table item_saida(
-	id_item_saida int not null primary key,
-    id_saida int not null,
-    id_produto int not null,
-    
-    qtd float,
-    valor_unitario float,
-    
-    foreign key(id_saida) references saida(id_saida),
-    foreign key(id_produto) references produto(id_produto)
-
-)engine = InnoDB;
-
-/*create table destino(
-	
-)engine = InnoDB;
-
-create table socio(
-	id_socio int not null primary key,
-    nome varchar(100) not null,
-    cpf varchar(14) not null,
-	email varchar(80) not null,
-    email_secundário varchar(80),
-    telefone varchar(13) not null,
-    cep varchar(9) not null,
-    estado varchar(2),
-    cidade varchar(30),
-    bairro varchar(40),
-    rua varchar(40),
-    complemento varchar(100),
-    data_nascimento date,
-    valor decimal(10,2) not null
-)engine = InnoDB;
-
-create table log(
-);*/
