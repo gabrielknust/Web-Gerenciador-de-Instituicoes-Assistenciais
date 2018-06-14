@@ -1,5 +1,6 @@
 <?php
 require_once ('acesso.php');
+require_once ('pessoa.php');
 
 class Funcionario extends Pessoa
 {
@@ -44,23 +45,9 @@ class Funcionario extends Pessoa
 
     protected $situacao;
 
-    public function __construct($idpessoa, $nome, $telefone, $data_nascimento, $cpf, $sexo, $idfuncionario, $idpessoa, $idcargo, $imagem, $vale_transporte, $data_admissao, $registro_geral, $orgao_emissor, $data_expedicao, $pis, $ctps, $uf_ctps, $zona, $certificado_reservista_numero, $nome_mae, $nome_pai)
+    public function __construct()
     {
-        parent::__construct($idpessoa, $nome, $telefone, $data_nascimento, $cpf, $sexo);
-        $this->idfuncionario = $idfuncionario;
-        $this->idpessoa = $idpessoa;
-        $this->idcargo = $idcargo;
-        $this->vale_transporte = $vale_transporte;
-        $this->registro_geral = $registro_geral;
-        $this->orgao_emissor = $orgao_emissor;
-        $this->data_expedicao = $data_expedicao;
-        $this->pis = $pis;
-        $this->ctps = $ctps;
-        $this->uf_ctps = $uf_ctps;
-        $this->zona = $zona;
-        $this->certificado_reservista_numero = $certificado_reservista_numero;
-        $this->nome_mae = $nome_mae;
-        $this->nome_pai = $nome_pai;
+        parent::__construct();
     }
 
     public function getId_funcionario()
