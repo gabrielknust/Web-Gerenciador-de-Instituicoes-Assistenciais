@@ -151,28 +151,6 @@ create table cargo(
 )engine = InnoDB; /* O cargo que o usuário tiver definirá a quais tabelas ele terá acesso e quais não, se é possível 
 modificá-la ou apenas fazer uma consulta nela. */
 
-/*
-insert into cargo(id_cargo,descricao)
-values
-(01,'Agente Administrativo'),
-(02,'Assistente Social'),
-(03,'Auxiliar Administrativo'),
-(04,'Auxiliar de Enfermagem'),
-(05,'Cozinheiro(a)'),
-(06,'Cuidador(a)'),
-(07,'Enfermeira Chefe'),
-(08,'Enfermeiro(a)'),
-(09,'Fisioterapeuta'),
-(10,'Motorista'),
-(11,'Nutricionista'),
-(12,'Pedreiro'),
-(13,'Psicólogo(a)'),
-(14,'Recreador(a)'),
-(15,'Recepcionista'),
-(16,'Serviços Gerais'),
-(17,'Técnico de Enfermagem'),
-(18,'Técnico de Informática'); /* cargos existentes na tabela CARGO */
-
 create table funcionario_cargo(
 	id_cargo int not null,
 	id_funcionario int not null,
