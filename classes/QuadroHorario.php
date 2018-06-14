@@ -1,5 +1,5 @@
 <?php
-class Cargahoraria extends Funcionario
+class QuadroHorario extends Funcionario
 {
     private $idfuncionario;
     private $tipo;
@@ -126,7 +126,7 @@ class Cargahoraria extends Funcionario
     //Insert
     public function incluir($tipo,$carga_mensal,$primeira_entrada,$primeira_saida,$segunda_entrada,$segunda_saida,$carga_diaria,$dias_trabalhados,$folgas) {
         try {
-            $sql = 'INSERT cargo (tipo, carga_mensal, primeira_entrada, primeira_saida, segunda_entrada, segunda_saida, carga_diaria,dias_trabalhados,folgas) VALUES (:tipo, :carga_mensal, :primeira_entrada, :primeira_saida, :segunda_entrada, :segunda_saida, :carga_diaria, :dias_trabalhados, :folgas)';
+            $sql = 'INSERT quadro_horario (tipo, carga_mensal, primeira_entrada, primeira_saida, segunda_entrada, segunda_saida, carga_diaria,dias_trabalhados,folgas) VALUES (:tipo, :carga_mensal, :primeira_entrada, :primeira_saida, :segunda_entrada, :segunda_saida, :carga_diaria, :dias_trabalhados, :folgas)';
             $sql = str_replace("'", "\'", $sql);
             $acesso = new Acesso();
             
