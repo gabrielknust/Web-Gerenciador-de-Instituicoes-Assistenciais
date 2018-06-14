@@ -5,7 +5,7 @@ use wegia;
 create table pessoa (
 	id_pessoa int not null primary key,
     
-    login varchar(40), #CPF da pessoa
+    cpf varchar(40), #CPF da pessoa
     senha varchar(70),
     nome varchar(100) not null,
     sexo varchar(10) not null,
@@ -96,7 +96,7 @@ create table funcionario(
 	id_funcionario int not null primary key,
     id_pessoa int not null,
     id_quadro_horario int not null,
-    
+
     vale_transporte int,
     data_admissao date not null,
 	pis int,
