@@ -8,11 +8,4 @@
 	</buildSpec>
 	<natures>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>.link1</name>
-			<type>2</type>
-			<location>C:/wamp64/www/WEGIA/.metadata/.plugins/org.eclipse.php.core/__language__/a0fe6998</location>
-		</link>
-	</linkedResources>
 </projectDescription>

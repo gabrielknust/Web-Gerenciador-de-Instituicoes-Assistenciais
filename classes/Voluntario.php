@@ -33,17 +33,16 @@ class Voluntario extends Pessoa
         $this->tipo = $tipo;
     }
     //Insert
-    public function incluir($idvoluntario,$tipo) {
+    public function incluir($tipo) {
         try {
-            $sql = 'INSERT cargo (idvoluntario,tipo) VALUES (:idvoluntario, :tipo)';
+            $sql = 'INSERT cargo (tipo) VALUES (:tipo)';
             $sql = str_replace("'", "\'", $sql);
             $acesso = new Acesso();
             
             $pdo = $acesso->conexao();
             
             $stmt = $pdo->prepare($sql);
-            
-            $stmt->bindParam(':idfuncionario', $idfuncionario);
+
             $stmt->bindParam(':tipo', $tipo);
             $stmt->execute();
             
