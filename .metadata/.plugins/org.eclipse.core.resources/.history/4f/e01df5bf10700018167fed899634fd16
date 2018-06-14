@@ -319,13 +319,13 @@ abstract class Pessoa
             $stmt = $pdo->prepare($sql);
             
             $stmt->bindParam(':idpessoa', $idpessoa);
-            $stmt->bindParam(':login', $login);
-            $stmt->bindParam(':senha', $senha);
             $stmt->bindParam(':nome', $nome);
-            $stmt->bindParam(':sexo', $sexo);
             $stmt->bindParam(':telefone', $telefone);
             $stmt->bindParam(':data_nascimento', $data_nascimento);
-            $stmt->bindParam(':imagem', $imagem);
+            $stmt->bindParam(':cpf', $cpf);
+            $stmt->bindParam(':sexo', $sexo);
+            $stmt->bindParam(':email', $email);
+            $stmt->bindParam(':senha', $senha);
             $stmt->bindParam(':cep', $cep);
             $stmt->bindParam(':cidade', $cidade);
             $stmt->bindParam(':bairro', $bairro);
@@ -333,11 +333,6 @@ abstract class Pessoa
             $stmt->bindParam(':rua', $rua);
             $stmt->bindParam(':numero_endereco', $numero_endereco);
             $stmt->bindParam(':complemento', $complemento);
-            $stmt->bindParam(':registro_geral', $registro_geral);
-            $stmt->bindParam(':orgao_emissor', $orgao_emissor);
-            $stmt->bindParam(':data_expedicao', $data_expedicao);
-            $stmt->bindParam(':nome_mae', $nome_mae);
-            $stmt->bindParam(':nome_pai', $nome_pai);
             $stmt->execute();
         } catch (PDOException $e) {
             echo 'Error: <b>  na tabela pessoas = ' . $sql . '</b> <br /><br />' . $e->getMessage();

@@ -318,7 +318,6 @@ abstract class Pessoa
             
             $stmt = $pdo->prepare($sql);
             
-            $stmt->bindParam(':idpessoa', $idpessoa);
             $stmt->bindParam(':login', $login);
             $stmt->bindParam(':senha', $senha);
             $stmt->bindParam(':nome', $nome);
