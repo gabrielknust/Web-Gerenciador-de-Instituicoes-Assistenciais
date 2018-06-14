@@ -113,6 +113,7 @@ create table funcionario(
     camisa varchar(2),
     usa_vtp varchar(3),
     cesta_basica varchar(3),
+    situacao varchar(10),
 	
     foreign key(id_pessoa) references pessoa(id_pessoa),
     foreign key(id_quadro_horario) references quadro_horario(id_quadro_horario)
