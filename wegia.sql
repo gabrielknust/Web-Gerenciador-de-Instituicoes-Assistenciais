@@ -3,7 +3,7 @@ create database wegia default charset utf8;
 use wegia;
 
 create table pessoa (
-	id_pessoa int not null primary key,
+	id_pessoa int not null primary key auto_increment,
     
     cpf varchar(40), #CPF da pessoa
     senha varchar(70),
@@ -27,7 +27,7 @@ create table pessoa (
 )engine = InnoDB;
 
 create table interno(
-	id_interno int not null primary key,
+	id_interno int not null primary key auto_increment,
     id_pessoa int not null,
     id_situacao_interno int not null,
     
@@ -41,14 +41,14 @@ create table interno(
 )engine = InnoDB;
 
 create table situacao_interno(
-	id_situacao_interno int not null primary key,
+	id_situacao_interno int not null primary key auto_increment,
     
     descricao varchar (50) not null
     
 )engine = InnoDB;
 
 create table movimentacao_interno(
-	id_movimentacao int not null primary key,
+	id_movimentacao int not null primary key auto_increment,
     id_interno int not null,
     id_situacao_interno int not null,
     
@@ -60,7 +60,7 @@ create table movimentacao_interno(
 )engine = InnoDB;
 
 create table voluntario(
-	id_voluntario int not null primary key,
+	id_voluntario int not null primary key auto_increment,
     id_pessoa int not null,
     
     foreign key(id_pessoa) references pessoa(id_pessoa)
@@ -68,7 +68,7 @@ create table voluntario(
 )engine = InnoDB;
 
 create table voluntario_judicial(
-	id_voluntario_judicial int not null primary key,
+	id_voluntario_judicial int not null primary key auto_increment,
     id_pessoa int not null,
     
 	documento_judicial varchar(40),
@@ -77,7 +77,7 @@ create table voluntario_judicial(
 )engine = InnoDB;
 
  create table quadro_horario(
-	id_quadro_horario int not null primary key,
+	id_quadro_horario int not null primary key auto_increment,
 	escala varchar(15),
 	tipo varchar(15),
 	carga_horaria decimal(5,2),	
@@ -93,7 +93,7 @@ create table voluntario_judicial(
  )engine = InnoDB;
 
 create table funcionario(
-	id_funcionario int not null primary key,
+	id_funcionario int not null primary key auto_increment,
     id_pessoa int not null,
     id_quadro_horario int not null,
 
@@ -125,14 +125,14 @@ funcionários, se este existir ele reconhecerá que a conta a ser criada pertenc
 Se não for encontrado esse CPF na tabela funcionário, não poderá ser criada a conta */
 
 create table situacao_funcionario(
-	id_situacao_funcionario int not null primary key,
+	id_situacao_funcionario int not null primary key auto_increment,
     
     descricao varchar (50) not null
     
 )engine = InnoDB;
 
 create table movimentacao_funcionario(
-	id_movimentacao int not null primary key,
+	id_movimentacao int not null primary key auto_increment,
     id_funcionario int not null,
     id_situacao_funcionario int not null,
     
@@ -144,7 +144,7 @@ create table movimentacao_funcionario(
 )engine = InnoDB;
 
 create table cargo(
-	id_cargo int not null primary key,
+	id_cargo int not null primary key auto_increment,
     
     descricao varchar(30)
     
@@ -152,7 +152,7 @@ create table cargo(
 modificá-la ou apenas fazer uma consulta nela. */
 
 create table funcionario_cargo(
-	id_cargo int not null,
+	id_cargo int not null ,
 	id_funcionario int not null,
     
     primary key(id_cargo,id_funcionario),
