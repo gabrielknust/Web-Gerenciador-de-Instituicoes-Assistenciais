@@ -4,45 +4,45 @@ require_once ('acesso.php');
 abstract class Pessoa
 {
     
-    protected $idpessoa;
+    private $idpessoa;
     
-    protected $login;
+    private $cpf;
     
-    protected $senha;
+    private $senha;
     
-    protected $nome;
+    private $nome;
     
-    protected $sexo;
+    private $sexo;
     
-    protected $telefone;
+    private $telefone;
     
-    protected $data_nascimento;
+    private $data_nascimento;
     
-    protected $imagem;
+    private $imagem;
     
-    protected $cep;
+    private $cep;
     
-    protected $cidade;
+    private $cidade;
     
-    protected $bairro;
+    private $bairro;
     
-    protected $ibge;
+    private $ibge;
     
-    protected $rua;
+    private $rua;
     
-    protected $numero_endereco;
+    private $numero_endereco;
     
-    protected $complemento;
+    private $complemento;
     
-    protected $registro_geral;
+    private $registro_geral;
     
-    protected $orgao_emissor;
+    private $orgao_emissor;
     
-    protected $data_expedicao;
+    private $data_expedicao;
     
-    protected $nome_mae;
+    private $nome_mae;
     
-    protected $nome_pai;
+    private $nome_pai;
     
     
     
@@ -51,9 +51,9 @@ abstract class Pessoa
         return $this->idpessoa;
     }
     
-    public function getLogin()
+    public function getcpf()
     {
-        return $this->login;
+        return $this->cpf;
     }
     
     public function getSenha()
@@ -151,9 +151,9 @@ abstract class Pessoa
         $this->idpessoa = $idpessoa;
     }
     
-    public function setLogin($login)
+    public function setcpf($cpf)
     {
-        $this->login = $login;
+        $this->cpf = $cpf;
     }
     
     public function setSenha($senha)
@@ -247,42 +247,6 @@ abstract class Pessoa
     }
     
     // Insert
-    public function incluir($login, $senha, $nome, $sexo, $telefone, $data_nascimento, $imagem, $cep, $cidade, $bairro, $ibge, $rua, $numero_endereco, $complemento, $registro_geral, $orgao_emissor, $data_expedicao, $nome_mae, $nome_pai)
-    {
-        try {
-            $sql = 'INSERT pessoa (login, senha, nome, sexo, telefone, data_nascimento, imagem, cep, cidade, bairro, ibge, rua, numero_endereco, complemento, registro_geral, orgao_emissor, data_expedicao, nome_mae, nome_pai)';
-            $sql = str_replace("'", "\'", $sql);
-            $acesso = new Acesso();
-            
-            $pdo = $acesso->conexao();
-            
-            $stmt = $pdo->prepare($sql);
-            
-            $stmt->bindParam(':login', $login);
-            $stmt->bindParam(':senha', $senha);
-            $stmt->bindParam(':nome', $nome);
-            $stmt->bindParam(':sexo', $sexo);
-            $stmt->bindParam(':telefone', $telefone);
-            $stmt->bindParam(':data_nascimento', $data_nascimento);
-            $stmt->bindParam(':imagem', $imagem);
-            $stmt->bindParam(':cep', $cep);
-            $stmt->bindParam(':cidade', $cidade);
-            $stmt->bindParam(':bairro', $bairro);
-            $stmt->bindParam(':ibge', $ibge);
-            $stmt->bindParam(':rua', $rua);
-            $stmt->bindParam(':numero_endereco', $numero_endereco);
-            $stmt->bindParam(':complemento', $complemento);
-            $stmt->bindParam(':registro_geral', $registro_geral);
-            $stmt->bindParam(':orgao_emissor', $orgao_emissor);
-            $stmt->bindParam(':data_expedicao', $data_expedicao);
-            $stmt->bindParam(':nome_mae', $nome_mae);
-            $stmt->bindParam(':nome_pai', $nome_pai);
-            
-            $stmt->execute();
-        } catch (PDOException $e) {
-            echo 'Error: <b>  na tabela pessoas = ' . $sql . '</b> <br /><br />' . $e->getMessage();
-        }
-    }
     
     // excluir
     public function excluir($idpessoa)
@@ -305,44 +269,7 @@ abstract class Pessoa
         }
     }
     
-    // Editar
-    public function alterar($idpessoa, $login, $senha, $nome, $sexo, $telefone, $data_nascimento, $imagem, $cep, $cidade, $bairro, $ibge, $rua, $numero_endereco, $complemento, $registro_geral, $orgao_emissor, $data_expedicao, $nome_mae, $nome_pai)
-    {
-        try {
-            $sql = 'update pessoas set  idpessoa=:idpessoa, nome=:nome, telefone=:telefone, data_nascimento=:data_nascimento, cpf=:cpf, sexo=:sexo, email=:email, senha=:senha, cep=:cep, cidade=:cidade, bairro=:bairro, ibge=:ibge, rua=:rua, numero_endereco=:numero_endereco, complemento=:complemento WHERE idpessoa = :idpessoa';
-            $sql = str_replace("'", "\'", $sql);
-            $acesso = new Acesso();
-            
-            $pdo = $acesso->conexao();
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            
-            $stmt = $pdo->prepare($sql);
-            
-            $stmt->bindParam(':idpessoa', $idpessoa);
-            $stmt->bindParam(':login', $login);
-            $stmt->bindParam(':senha', $senha);
-            $stmt->bindParam(':nome', $nome);
-            $stmt->bindParam(':sexo', $sexo);
-            $stmt->bindParam(':telefone', $telefone);
-            $stmt->bindParam(':data_nascimento', $data_nascimento);
-            $stmt->bindParam(':imagem', $imagem);
-            $stmt->bindParam(':cep', $cep);
-            $stmt->bindParam(':cidade', $cidade);
-            $stmt->bindParam(':bairro', $bairro);
-            $stmt->bindParam(':ibge', $ibge);
-            $stmt->bindParam(':rua', $rua);
-            $stmt->bindParam(':numero_endereco', $numero_endereco);
-            $stmt->bindParam(':complemento', $complemento);
-            $stmt->bindParam(':registro_geral', $registro_geral);
-            $stmt->bindParam(':orgao_emissor', $orgao_emissor);
-            $stmt->bindParam(':data_expedicao', $data_expedicao);
-            $stmt->bindParam(':nome_mae', $nome_mae);
-            $stmt->bindParam(':nome_pai', $nome_pai);
-            $stmt->execute();
-        } catch (PDOException $e) {
-            echo 'Error: <b>  na tabela pessoas = ' . $sql . '</b> <br /><br />' . $e->getMessage();
-        }
-    }
+    
     
     public function consultar($sql)
     {
