@@ -11,7 +11,7 @@ create table pessoa (
     sexo varchar(10) not null,
     telefone varchar(33),
     data_nascimento date not null,
-    imagem mediumtext,
+    imagem longtext,
     cep int not null,
     cidade varchar(40) not null,
     bairro varchar(40) not null,
