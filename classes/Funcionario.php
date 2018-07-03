@@ -249,19 +249,36 @@ class Funcionario extends Pessoa
     }
     
     // Insert
-    public function incluir($id_pessoa, $id_quadro_horario, $vale_transporte, $data_admissao, $pis, $ctps, $uf_ctps, $numero_titulo, $zona, $secao, $certificado_reservista_numero, $certificado_reservista_serie, $calcado, $calca, $jaleco, $camisa, $usa_vtp, $cesta_basica, $situacao)
+    public function incluir($id_quadro_horario, $vale_transporte, $data_admissao, $pis, $ctps, $uf_ctps, $numero_titulo, $zona, $secao, $certificado_reservista_numero, $certificado_reservista_serie, $calcado, $calca, $jaleco, $camisa, $usa_vtp, $cesta_basica, $situacao)
     {
         try {
-            $sql = 'INSERT funcionario (id_pessoa, id_quadro_horario, vale_transporte, data_admissao, pis, ctps, uf_ctps, numero_titulo, zona, secao, certificado_reservista_numero, certificado_reservista_serie, calcado, calca, jaleco, camisa, usa_vtp, cesta_basica, situacao) VALUES (:id_pessoa, :id_quadro_horario, :vale_transporte, :data_admissao, :pis, :ctps, :uf_ctps, :numero_titulo, :zona, :secao, :certificado_reservista_numero, :certificado_reservista_serie, :calcado, :calca, :jaleco, :camisa, :usa_vtp, :cesta_basica, :situacao)';
+            $sql = 'call funcionario (:id_quadro_horario, :cpf, :senha, :nome, :sexo, :telefone, :data_nascimento, :imagem, :cep, :cidade, :bairro, :rua, :numero_endereco, :complemento, :registro_geral, :orgao_emissor, :data_expedicao, :nome_mae, :nome_pai, :vale_transporte, :data_admissao, :pis, :ctps, :uf_ctps, :numero_titulo, :zona, :secao, :certificado_reservista_numero, :certificado_reservista_serie, :calcado, :calca, :jaleco, :camisa, :usa_vtp, :cesta_basica, :situacao);';
             $sql = str_replace("'", "\'", $sql);
             $acesso = new Acesso();
             
             $pdo = $acesso->conexao();
-            
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $stmt = $pdo->prepare($sql);
             
-            $stmt->bindParam(':id_pessoa', $id_pessoa);
             $stmt->bindParam(':id_quadro_horario', $id_quadro_horario);
+            $stmt->bindParam(':cpf', $cpf);
+            $stmt->bindParam(':senha', $senha);
+            $stmt->bindParam(':nome', $nome);
+            $stmt->bindParam(':sexo', $sexo);
+            $stmt->bindParam(':telefone', $telefone);
+            $stmt->bindParam(':data_nascimento', $data_nascimento);
+            $stmt->bindParam(':imagem', $imagem);
+            $stmt->bindParam(':cep', $cep);
+            $stmt->bindParam(':cidade', $cidade);
+            $stmt->bindParam(':bairro', $bairro);
+            $stmt->bindParam(':rua', $rua);
+            $stmt->bindParam(':numero_endereco', $numero_endereco);
+            $stmt->bindParam(':complemento', $complemento);
+            $stmt->bindParam(':registro_geral', $registro_geral);
+            $stmt->bindParam(':orgao_emissor', $orgao_emissor);
+            $stmt->bindParam(':data_expedicao', $data_expedicao);
+            $stmt->bindParam(':nome_mae', $nome_mae);
+            $stmt->bindParam(':nome_pai', $nome_pai);
             $stmt->bindParam(':vale_transporte', $vale_transporte);
             $stmt->bindParam(':data_admissao', $data_admissao);
             $stmt->bindParam(':pis', $pis);
@@ -278,8 +295,9 @@ class Funcionario extends Pessoa
             $stmt->bindParam(':camisa', $camisa);
             $stmt->bindParam(':usa_vtp', $usa_vtp);
             $stmt->bindParam(':cesta_basica', $cesta_basica);
-            
             $stmt->bindParam(':situacao', $situacao);
+            
+            
             $stmt->execute();
         } catch (PDOException $e) {
             echo 'Error: <b>  na tabela pessoas = ' . $sql . '</b> <br /><br />' . $e->getMessage();

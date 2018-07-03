@@ -1,7 +1,7 @@
 <?php
 
-require './classes/Cargo.php';
+require './classes/Funcionario.php';
 
-$cargo = new Cargo();
+$funcionario = new Funcionario();
 
-$cargo->incluir('Guilherme');
+$funcionario->incluir('1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1');
