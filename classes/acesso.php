@@ -28,13 +28,8 @@ class Acesso {
     }
 
     public function conexao() {
-
-
-
         try {
-
             $pdo = new PDO('mysql:host=' . $this->getHost() . ';dbname=' . $this->getBanco(), $this->getUsuario(), $this->getSenha());
-
             return $pdo;
         } catch (PDOException $e) {
 
