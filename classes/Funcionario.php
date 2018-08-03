@@ -45,6 +45,8 @@ class Funcionario extends Pessoa
     
     protected $situacao;
     
+    protected $quadro_horario;
+    
     public function __construct()
     {}
     
@@ -249,10 +251,10 @@ class Funcionario extends Pessoa
     }
     
     // Insert
-    public function incluir($id_quadro_horario, $vale_transporte, $data_admissao, $pis, $ctps, $uf_ctps, $numero_titulo, $zona, $secao, $certificado_reservista_numero, $certificado_reservista_serie, $calcado, $calca, $jaleco, $camisa, $usa_vtp, $cesta_basica, $situacao)
+    public function incluir($pessoa,$funcionario)
     {
         try {
-            $sql = 'call funcionario (:id_quadro_horario, :cpf, :senha, :nome, :sexo, :telefone, :data_nascimento, :imagem, :cep, :cidade, :bairro, :rua, :numero_endereco, :complemento, :registro_geral, :orgao_emissor, :data_expedicao, :nome_mae, :nome_pai, :vale_transporte, :data_admissao, :pis, :ctps, :uf_ctps, :numero_titulo, :zona, :secao, :certificado_reservista_numero, :certificado_reservista_serie, :calcado, :calca, :jaleco, :camisa, :usa_vtp, :cesta_basica, :situacao);';
+            $sql = 'call funcionario (:id_quadro_horario, :cpf, :senha, :nome, :sexo, :telefone, :data_nascimento, :imagem, :cep, :cidade, :bairro, :rua, :numero_endereco, :complemento, :registro_geral, :orgao_emissor, :data_expedicao, :nome_mae, :nome_pai, :vale_transporte, :data_admissao, :pis, :ctps, :uf_ctps, :numero_titulo, :zona, :secao, :certificado_reservista_numero, :certificado_reservista_serie, :calcado, :calca, :jaleco, :camisa, :usa_vtp, :cesta_basica, :situacao,:escala ,:tipo ,:carga_horaria ,:entrada1 ,:saida1 ,:entrada2 ,:saida2 ,:total ,:dias_trabalhados ,:folga ,:observacoes ,:id_pessoa );';
             $sql = str_replace("'", "\'", $sql);
             $acesso = new Acesso();
             
@@ -296,6 +298,18 @@ class Funcionario extends Pessoa
             $stmt->bindParam(':usa_vtp', $usa_vtp);
             $stmt->bindParam(':cesta_basica', $cesta_basica);
             $stmt->bindParam(':situacao', $situacao);
+            $stmt->bindParam(':escala',$escala);
+            $stmt->bindParam(':tipo',$tipo);
+            $stmt->bindParam(':carga_horaria',$carga_horaria);
+            $stmt->bindParam(':entrada1',$entrada1);
+            $stmt->bindParam(':saida1',$saida1);
+            $stmt->bindParam(':entrada2',$entrada2);
+            $stmt->bindParam(':saida2',$saida2);
+            $stmt->bindParam(':total',$total);
+            $stmt->bindParam(':dias_trabalhados',$dias_trabalhados);
+            $stmt->bindParam(':folga',$folga);
+            $stmt->bindParam(':observacoes',$observacoes);
+            $stmt->bindParam(':id_pessoa',$id_pessoa);
             
             
             $stmt->execute();

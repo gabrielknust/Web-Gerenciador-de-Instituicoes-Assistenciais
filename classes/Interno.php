@@ -18,10 +18,16 @@ class Interno extends Pessoa
     private $telefone_contato_urgente_3;
 
     // Insert
-    public function incluir($id_pessoa, $id_situacao_interno, $nome_contato_urgente, $telefone_contato_urgente_1, $telefone_contato_urgente_2, $telefone_contato_urgente_3)
+    public function incluir($idusuarios, $nome, $identidade, $cpf, $sexo, $nascimento, $local_nascimento, $endereco, $bairro, $observaoes, $foto, $cidade, $uf, $cep, $email, $idestadocivil, $instituicao_indicou, $instituicao_trabalho, $endereco_trab, $cidade_trab, $cep_trab, $uf_trab, $tel_trab, $cargo_trab, $funcao, 
+        $id_situacao_interno,$nome_contato_urgente)
     {
         try {
-            $sql = 'call interno (:id pessoa, :id_situacao_interno, :nome_contato_urgente, :telefone_contato_urgente_1, :telefone_contato_urgente_2, :telefone_contato_urgente_3)';
+
+            $id_pessoa= $this->incluirPessoa($idusuarios, $nome, $identidade, $cpf, $sexo, $nascimento, $local_nascimento, $endereco, $bairro, $observaoes, $foto, $cidade, $uf, $cep, $email, $idestadocivil, $instituicao_indicou, $instituicao_trabalho, $endereco_trab, $cidade_trab, $cep_trab, $uf_trab, $tel_trab, $cargo_trab, $funcao);
+            
+            $sql = 'call cadinterno (:nome,:cpf, :senha, :sexo, :telefone,:data_nascimento,:imagem,:cep ,:cidade, :bairro,
+        :logradouro, :numero_endereco, :complemento, :registro_geral, :orgao_emissor, :data_expedicao, 
+        :nome_pai, :nome_mae)';
             $sql = str_replace("'", "\'", $sql);
             $acesso = new Acesso();
             
