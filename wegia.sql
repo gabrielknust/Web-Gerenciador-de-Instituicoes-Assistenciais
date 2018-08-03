@@ -201,7 +201,6 @@ create table voluntario_judicial_cargo(
     foreign key(id_voluntarioJ) references voluntario_judicial(id_voluntario_judicial)
 )engine = InnoDB;
 
-drop procedure inserir;
 delimiter $$
 create procedure inserir(in $id_quadro_horario int,in $cpf varchar(40),in $senha varchar(70),in $nome varchar(100),in $sexo varchar(10),in $telefone varchar(33),in $data_nascimento date,in $imagem longtext,in $cep int,in $cidade varchar(40),in $bairro varchar(40),in $rua varchar(40),in $numero_endereco varchar(7),in $complemento varchar(50),in $registro_geral varchar(13),in $orgao_emissor varchar(20),in $data_expedicao date,in $nome_mae varchar(100),in $nome_pai varchar(100),in $vale_transporte varchar(16),in $data_admissao date,in $pis varchar(14),in $ctps varchar(15),in $uf_ctps varchar(2),in $numero_titulo varchar(15),in $zona varchar(3),in $secao varchar(4),in $certificado_reservista_numero int,in $certificado_reservista_serie varchar(10),in $calcado varchar(2),in $calca varchar(2),in $jaleco varchar(2),in $camisa varchar(2),in $usa_vtp varchar(3),in $cesta_basica varchar(3),in $situacao varchar(10), in $escala varchar(100),in $tipo varchar(20),in $carga_horaria varchar(50),in $entrada1 varchar(50),in $saida1 varchar(50),in $entrada2 varchar(50),in $saida2 varchar(50),in $total varchar(50),in $dias_trabalhados varchar(50),in $folga varchar(50),in $observacoes varchar(50),in $id_pessoa int)
 begin
@@ -210,5 +209,3 @@ begin
     insert into funcionario(id_pessoa, id_quadro_horario,vale_transporte,data_admissao,pis,ctps,uf_ctps,numero_titulo,zona,secao,certificado_reservista_numero,certificado_reservista_serie,calcado,calca,jaleco,camisa,usa_vtp,cesta_basica,situacao) values ($id_pessoa,$id_quadro_horario,$vale_transporte,$data_admissao,$pis,$ctps,$uf_ctps,$numero_titulo,$zona,$secao,$certificado_reservista_numero,$certificado_reservista_serie,$calcado,$calca,$jaleco,$camisa,$usa_vtp,$cesta_basica,$situacao);
 end $$
 delimiter ;
-call inserir (1,"cpf" ,"senha" ,"nome" ,"sexo" ,"telefone" ,'2008-11-11',"aaaaaaaaaaaaaaaaaaaaaaaaaaaa",1,"cidade" ,"bairro" ,"rua" ,"numero_endereco" ,"complemento" ,"registro_geral" ,"orgao_emissor" ,'2008-11-11',"nome_mae" ,"nome_pai" ,"vale_transporte" ,'2008-11-11',"pis" ,"ctps" ,"uf_ctps" ,"numero_titulo" ,"zona" ,"secao" ,1,"certificado_reservista_serie" ,"calcado" ,"calca" ,"jaleco" ,"camisa" ,"usa_vtp" ,"cesta_basica" ,"situacao","escala","tipo","aa","aa","aa","aa","aa","aa","aa","aa","aa",1);
-select * from funcionario;
