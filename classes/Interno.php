@@ -18,16 +18,27 @@ class Interno extends Pessoa
     private $telefone_contato_urgente_3;
 
     // Insert
+<<<<<<< HEAD
+    public function incluir($cpf, $senha, $nome, $sexo, $telefone, $data_nascimento, $imagem, $cep, $cidade, $bairro, $rua, $numero_endereco, $complemento, $registro_geral, $orgao_emissor, $data_expedicao, $nome_mae, $nome_pai, $id_situacao_interno, $nome_contato_urgente, $telefone_contato_urgente_1, $telefone_contato_urgente_2, $telefone_contato_urgente_3)
+=======
     public function incluir($idusuarios, $nome, $identidade, $cpf, $sexo, $nascimento, $local_nascimento, $endereco, $bairro, $observaoes, $foto, $cidade, $uf, $cep, $email, $idestadocivil, $instituicao_indicou, $instituicao_trabalho, $endereco_trab, $cidade_trab, $cep_trab, $uf_trab, $tel_trab, $cargo_trab, $funcao, 
         $id_situacao_interno,$nome_contato_urgente)
+>>>>>>> 7472d8d2476c85f4cdc853725547e686eee36d10
     {
+        
+        $id_pessoa= $this->incluirPessoa($cpf, $senha, $nome, $sexo, $telefone, $data_nascimento, $imagem, $cep, $cidade, $bairro, $rua, $numero_endereco, $complemento, $registro_geral, $orgao_emissor, $data_expedicao, $nome_mae, $nome_pai);
+        
         try {
+<<<<<<< HEAD
+            $sql = 'insert into interno (id_pessoa, id_situacao_interno, nome_contato_urgente, telefone_contato_urgente_1, telefone_contato_urgente_2, telefone_contato_urgente_3) values(:id_pessoa, :id_situacao_interno, :nome_contato_urgente, :telefone_contato_urgente_1, :telefone_contato_urgente_2, :telefone_contato_urgente_3)';
+=======
 
             $id_pessoa= $this->incluirPessoa($idusuarios, $nome, $identidade, $cpf, $sexo, $nascimento, $local_nascimento, $endereco, $bairro, $observaoes, $foto, $cidade, $uf, $cep, $email, $idestadocivil, $instituicao_indicou, $instituicao_trabalho, $endereco_trab, $cidade_trab, $cep_trab, $uf_trab, $tel_trab, $cargo_trab, $funcao);
             
             $sql = 'call cadinterno (:nome,:cpf, :senha, :sexo, :telefone,:data_nascimento,:imagem,:cep ,:cidade, :bairro,
         :logradouro, :numero_endereco, :complemento, :registro_geral, :orgao_emissor, :data_expedicao, 
         :nome_pai, :nome_mae)';
+>>>>>>> 7472d8d2476c85f4cdc853725547e686eee36d10
             $sql = str_replace("'", "\'", $sql);
             $acesso = new Acesso();
             

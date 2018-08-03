@@ -1,72 +1,83 @@
 <?php
 
-class Acesso {
+class Acesso
+{
 
     private $host = 'localhost';
+
     private $usuario = 'root';
+
     private $senha = '';
+
     private $banco = 'wegia';
 
-    function getHost() {
-
+    function getHost()
+    {
         return $this->host;
     }
 
-    function getUsuario() {
-
+    function getUsuario()
+    {
         return $this->usuario;
     }
 
-    function getSenha() {
-
+    function getSenha()
+    {
         return $this->senha;
     }
 
-    function getBanco() {
-
+    function getBanco()
+    {
         return $this->banco;
     }
 
+<<<<<<< HEAD
+    public function conexao()
+    {
+        try {
+            
+            $pdo = new PDO('mysql:host=' . $this->getHost() . ';dbname=' . $this->getBanco(), $this->getUsuario(), $this->getSenha());
+            
+=======
     public function conexao() {
         try {
             $pdo = new PDO('mysql:host=' . $this->getHost() . ';dbname=' . $this->getBanco(), $this->getUsuario(), $this->getSenha());
+>>>>>>> 7472d8d2476c85f4cdc853725547e686eee36d10
             return $pdo;
         } catch (PDOException $e) {
-
+            
             echo 'Erro ao conectar com o MySQL: ' . $e->getMessage();
         }
     }
 
-    public function query($sql) {
-
-
+    public function query($sql)
+    {
         $pdo = $this->conexao();
         $rs = $pdo->query($sql);
-
-        if (!$rs) {
-
+        
+        if (! $rs) {
+            
             echo " <b>Reveja a consulta (SQL) : $sql</b>";
         }
-
+        
         $this->result = $rs->fetchAll();
-
+        
         $this->linha = $rs->rowCount();
     }
 
-    public function execute($sql) {
-
+    public function execute($sql)
+    {
         $pdo = $this->conexao();
-
+        
         $rs = $pdo->prepare($sql);
-
-        //$this->linha = $rs->rowCount();        
+        
+        // $this->linha = $rs->rowCount();
     }
 
-    public function __destruct() {
-
+    public function __destruct()
+    {
         @mysqli_close($this->cnx);
     }
-
 }
 
 ?>

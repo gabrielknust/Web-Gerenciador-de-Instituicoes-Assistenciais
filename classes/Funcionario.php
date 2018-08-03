@@ -251,18 +251,24 @@ class Funcionario extends Pessoa
     }
     
     // Insert
+<<<<<<< HEAD
+    public function incluir($cpf, $senha, $nome, $sexo, $telefone, $data_nascimento, $imagem, $cep, $cidade, $bairro, $rua, $numero_endereco, $complemento, $registro_geral, $orgao_emissor, $data_expedicao, $nome_mae, $nome_pai, $id_quadro_horario, $vale_transporte, $data_admissao, $pis, $ctps, $uf_ctps, $numero_titulo , $zona, $secao, $certificado_reservista_numero, $certificado_reservista_serie, $calcado, $calca, $jaleco, $camisa, $usa_vtp, $cesta_basica, $situacao)
+    {
+        try {
+            $sql = 'INSERT pessoa (cpf, senha, nome, sexo, telefone, data_nascimento, imagem, cep, cidade, bairro, rua, numero_endereco, complemento, registro_geral, orgao_emissor, data_expedicao, nome_mae, nome_pai) VALUES (:cpf,:senha,:nome,:sexo,:telefone,:data_nascimento,:imagem,:cep,:cidade,:bairro,:rua,:numero_endereco,:complemento,:registro_geral,:orgao_emissor,:data_expedicao,:nome_mae,:nome_pai);';
+=======
     public function incluir($pessoa,$funcionario)
     {
         try {
             $sql = 'call funcionario (:id_quadro_horario, :cpf, :senha, :nome, :sexo, :telefone, :data_nascimento, :imagem, :cep, :cidade, :bairro, :rua, :numero_endereco, :complemento, :registro_geral, :orgao_emissor, :data_expedicao, :nome_mae, :nome_pai, :vale_transporte, :data_admissao, :pis, :ctps, :uf_ctps, :numero_titulo, :zona, :secao, :certificado_reservista_numero, :certificado_reservista_serie, :calcado, :calca, :jaleco, :camisa, :usa_vtp, :cesta_basica, :situacao,:escala ,:tipo ,:carga_horaria ,:entrada1 ,:saida1 ,:entrada2 ,:saida2 ,:total ,:dias_trabalhados ,:folga ,:observacoes ,:id_pessoa );';
+>>>>>>> 7472d8d2476c85f4cdc853725547e686eee36d10
             $sql = str_replace("'", "\'", $sql);
             $acesso = new Acesso();
             
             $pdo = $acesso->conexao();
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $stmt = $pdo->prepare($sql);
-            
-            $stmt->bindParam(':id_quadro_horario', $id_quadro_horario);
+            ;
             $stmt->bindParam(':cpf', $cpf);
             $stmt->bindParam(':senha', $senha);
             $stmt->bindParam(':nome', $nome);
@@ -280,6 +286,16 @@ class Funcionario extends Pessoa
             $stmt->bindParam(':orgao_emissor', $orgao_emissor);
             $stmt->bindParam(':data_expedicao', $data_expedicao);
             $stmt->bindParam(':nome_mae', $nome_mae);
+<<<<<<< HEAD
+            $stmt->bindParam(':nome_pai', $nome_pai);   
+            
+            $stmt->execute();
+        } catch (PDOException $e) {
+            echo 'Error: <b>  na tabela pessoas = ' . $sql . '</b> <br /><br />' . $e->getMessage();
+        }
+        
+        try {
+=======
             $stmt->bindParam(':nome_pai', $nome_pai);
             $stmt->bindParam(':vale_transporte', $vale_transporte);
             $stmt->bindParam(':data_admissao', $data_admissao);
@@ -310,7 +326,17 @@ class Funcionario extends Pessoa
             $stmt->bindParam(':folga',$folga);
             $stmt->bindParam(':observacoes',$observacoes);
             $stmt->bindParam(':id_pessoa',$id_pessoa);
+>>>>>>> 7472d8d2476c85f4cdc853725547e686eee36d10
             
+            
+            
+            $sql = 'INSERT funcionario (id_quadro_horario, vale_transporte, data_admissao, pis, ctps, uf_ctps, numero_titulo , zona, secao, certificado_reservista_numero, certificado_reservista_serie, calcado, calca, jaleco, camisa, usa_vtp, cesta_basica, situacao) VALUES (:id_quadro_horario, :vale_transporte, :data_admissao, :pis, :ctps, :uf_ctps, :numero_titulo , :zona, :secao, :certificado_reservista_numero, :certificado_reservista_serie, :calcado, :calca, :jaleco, :camisa, :usa_vtp, :cesta_basica, :situacao);';
+            $sql = str_replace("'", "\'", $sql);
+            $acesso = new Acesso();
+            
+            $pdo = $acesso->conexao();
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $stmt = $pdo->prepare($sql);
             
             $stmt->execute();
         } catch (PDOException $e) {
