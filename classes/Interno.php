@@ -1,28 +1,16 @@
 <?php
 require_once ('acesso.php');
-class Voluntario extends Pessoa {
-	private $id_voluntario;
-	private $id_pessoa;
-	public function __construct($idpessoa, $nome, $telefone, $data_nascimento, $cpf, $sexo, $idvoluntario, $idpessoa, $tipo) {
-		parent::__construct ( $idpessoa, $nome, $telefone, $data_nascimento, $cpf, $sexo );
-		$this->idvoluntario = $idvoluntario;
-		$this->idpessoa = $idpessoa;
-		$this->tipo = $tipo;
-	}
-	public function getIdvoluntario() {
-		return $this->idvoluntario;
-	}
-	public function getTipo() {
-		return $this->tipo;
-	}
-	public function setIdvoluntario($idvoluntario) {
-		$this->idvoluntario = $idvoluntario;
-	}
-	public function setTipo($tipo) {
-		$this->tipo = $tipo;
-	}
+require_once 'Pessoa.php';
+class Interno extends Pessoa {
+	private $id_interno;
+	private $id_situacao_interno;
+	private $nome_contato_urgente;
+	private $telefone_contato_urgente_1;
+	private $telefone_contato_urgente_2;
+	private $telefone_contato_urgente_3;
+	
 	// Insert
-	public function incluir($cpf, $senha, $nome, $sexo, $telefone, $data_nascimento, $imagem, $cep, $cidade, $bairro, $logradouro, $numero_endereco, $complemento, $registro_geral, $orgao_emissor, $data_expedicao, $nome_mae, $nome_pai) {
+	public function incluir($cpf, $senha, $nome, $sexo, $telefone, $data_nascimento, $imagem, $cep, $cidade, $bairro, $logradouro, $numero_endereco, $complemento, $registro_geral, $orgao_emissor, $data_expedicao, $nome_mae, $nome_pai, $id_situacao_interno, $nome_contato_urgente, $telefone_contato_urgente_1, $telefone_contato_urgente_2, $telefone_contato_urgente_3) {
 		$id_pessoa = $this->incluirPessoa ( $cpf, $senha, $nome, $sexo, $telefone, $data_nascimento, $imagem, $cep, $cidade, $bairro, $logradouro, $numero_endereco, $complemento, $registro_geral, $orgao_emissor, $data_expedicao, $nome_mae, $nome_pai );
 		
 		try {
@@ -49,7 +37,7 @@ class Voluntario extends Pessoa {
 	}
 	
 	// excluir
-	public function excluir($idcargo) {
+	public function excluir($idfuncionario) {
 		try {
 			$sql = 'DELETE from cargo WHERE idcargo = :idcargo';
 			$sql = str_replace ( "'", "\'", $sql );
@@ -72,6 +60,7 @@ class Voluntario extends Pessoa {
 	public function alterar($idfuncionario, $tipo, $carga_mensal, $primeira_entrada, $primeira_saida, $segunda_entrada, $segunda_saida, $carga_diaria, $dias_trabalhados, $folgas) {
 		try {
 			$sql = 'update pessoas set idfuncionario=:idfuncionario, idpessoa=:idpessoa, idcargo=:idcargo, imagem=:imagem, vale_transporte=:vale_transporte, data_admissao=:data_admissao, registro_geral=:registro_geral, orgao_emissor=:orgao_emissor, data_expedicao=:data_expedicao, pis=:pis, ctps=:ctps, uf_ctps=:uf_ctps, zona=:zona, certificado_reservista_numero=:certificado_reservista_numero, nome_mae=:nome_mae, nome_pai=:nome_pai';
+			
 			$sql = str_replace ( "'", "\'", $sql );
 			$acesso = new Acesso ();
 			
@@ -81,12 +70,27 @@ class Voluntario extends Pessoa {
 			$stmt = $pdo->prepare ( $sql );
 			
 			$stmt->bindParam ( ':idfuncionario', $idfuncionario );
-			$stmt->bindParam ( ':tipo', $tipo );
+			$stmt->bindParam ( ':idpessoa', $idpessoa );
+			$stmt->bindParam ( ':idcargo', $idcargo );
+			$stmt->bindParam ( ':imagem', $imagem );
+			$stmt->bindParam ( ':vale_transporte', $vale_transporte );
+			$stmt->bindParam ( ':data_admissao', $data_admissao );
+			$stmt->bindParam ( ':registro_geral', $registro_geral );
+			$stmt->bindParam ( ':orgao_emissor', $orgao_emissor );
+			$stmt->bindParam ( ':data_expedicao', $data_expedicao );
+			$stmt->bindParam ( ':pis', $pis );
+			$stmt->bindParam ( ':ctps', $ctps );
+			$stmt->bindParam ( ':uf_ctps', $uf_ctps );
+			$stmt->bindParam ( ':zona', $zona );
+			$stmt->bindParam ( ':certificado_reservista_numero', $certificado_reservista_numero );
+			$stmt->bindParam ( ':nome_mae', $nome_mae );
+			$stmt->bindParam ( ':nome_pai', $nome_pai );
 			$stmt->execute ();
 		} catch ( PDOException $e ) {
 			echo 'Error: <b>  na tabela pessoas = ' . $sql . '</b> <br /><br />' . $e->getMessage ();
 		}
 	}
+	
 	// Consultar
 	public function consultar($sql) {
 		$acesso = new Acesso ();
