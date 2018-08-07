@@ -1,35 +1,30 @@
 <?php
+require_once ('acesso.php');
+require_once ('logs.php');
 
-/* ----------------------------------------------
-  Smart Web Developer - SWD 2.0
-  Criado em 04/11/2011
-  Autor:Vinícius Marques da Silva Ferreira
-  Contato:profvmarques@gmail.com
-  Projeto:systfm  Criado em:29/03/2018
-  ---------------------------------------------- */
-require_once('acesso.php');
-require_once('logs.php');
+class Perfil
+{
 
-class Perfil {
-
-//Atributos da classe
+    // Atributos da classe
     private $idperfil;
+
     private $descricao;
 
-    //Insert
-    public function incluir($descricao) {
-        try {            
+    // Insert
+    public function incluir($descricao)
+    {
+        try {
             $sql = 'insert into perfil(descricao) values( :descricao);';
             $sql = str_replace("'", "\'", $sql);
             $acesso = new Acesso();
             $pdo = $acesso->conexao();
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
+            
             $stmt = $pdo->prepare($sql);
-
+            
             $stmt->bindParam(':descricao', $descricao);
             $stmt->execute();
-
+            
             $logs = new Logs();
             $logs->incluir($_SESSION['idusuarios'], $sql, 'perfil', 'Inserir');
         } catch (PDOException $e) {
@@ -37,23 +32,23 @@ class Perfil {
         }
     }
 
-    //excluir
-    public function excluir($idperfil) {
+    // excluir
+    public function excluir($idperfil)
+    {
         try {
             $sql = 'delete from perfil where idperfil= :idperfil';
             $sql = str_replace("'", "\'", $sql);
             $acesso = new Acesso();
-
-
+            
             $pdo = $acesso->conexao();
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
+            
             $stmt = $pdo->prepare($sql);
-
+            
             $stmt->bindParam(':idperfil', $idperfil);
-
+            
             $stmt->execute();
-
+            
             $logs = new Logs();
             $logs->incluir($_SESSION['idusuarios'], $sql, 'perfil', 'Alterar');
         } catch (PDOException $e) {
@@ -61,23 +56,23 @@ class Perfil {
         }
     }
 
-    //Editar
-    public function alterar($idperfil, $descricao) {
+    // Editar
+    public function alterar($idperfil, $descricao)
+    {
         try {
             $sql = 'update perfil set idperfil=:idperfil,descricao=:descricao where idperfil= :idperfil';
             $sql = str_replace("'", "\'", $sql);
             $acesso = new Acesso();
-
-
+            
             $pdo = $acesso->conexao();
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
+            
             $stmt = $pdo->prepare($sql);
-
+            
             $stmt->bindParam(':idperfil', $idperfil);
             $stmt->bindParam(':descricao', $descricao);
             $stmt->execute();
-
+            
             $logs = new Logs();
             $logs->incluir($_SESSION['idusuarios'], $sql, 'perfil', 'Alterar');
         } catch (PDOException $e) {
@@ -85,14 +80,14 @@ class Perfil {
         }
     }
 
-    public function consultar($sql) {
+    public function consultar($sql)
+    {
         $acesso = new Acesso();
         $acesso->conexao();
         $acesso->query($sql);
         $this->Linha = $acesso->linha;
         $this->Result = $acesso->result;
     }
-
 }
 
 ?>
