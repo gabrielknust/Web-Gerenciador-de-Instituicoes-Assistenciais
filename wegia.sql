@@ -21,32 +21,50 @@ create table pessoa (
     orgao_emissor varchar(20),
     data_expedicao date,
     nome_mae varchar(100),
-    nome_pai varchar(100)
+    nome_pai varchar(100),
+    tipo_sanguineo varchar(5)
+    
+)engine = InnoDB;
+
+create table documento(
+	id_documento int primary key auto_increment,
+    imagem longtext,
+    imagem_extensao varchar(10),
+    descricao varchar(40)
+
+)engine = InnoDB;
+
+create table pessoa_documento(
+	id_pessoa int not null,
+    id_documento int not null,
+    primary key(id_pessoa,id_documento),
+    foreign key(id_pessoa) references pessoa (id_pessoa),
+	foreign key(id_documento) references documento (id_documento)
     
 )engine = InnoDB;
 
 create table situacao_interno(
 	id_situacao_interno int not null primary key auto_increment,
+    
     data_hora datetime,
-    descricao varchar(50)
+    descricao varchar(50),
+    imagem longtext,
+    imagem_extensao varchar(10)
     
 )engine = InnoDB;
 
 create table interno(
 	id_interno int not null primary key auto_increment,
     id_pessoa int,
-    id_situacao_interno int,
     
     nome_contato_urgente varchar(60),
     telefone_contato_urgente_1 varchar(33),
     telefone_contato_urgente_2 varchar(33),
     telefone_contato_urgente_3 varchar(33),
     
-    foreign key(id_pessoa) references pessoa(id_pessoa),
-    foreign key(id_situacao_interno) references situacao_interno(id_situacao_interno)
+    foreign key(id_pessoa) references pessoa(id_pessoa)
     
 )engine = InnoDB;
-
 
 create table movimentacao_interno(
     id_interno int not null,
@@ -77,6 +95,7 @@ create table voluntario_judicial(
 
  create table quadro_horario(
 	id_quadro_horario int not null primary key auto_increment,
+    
 	escala varchar(15),
 	tipo varchar(15),
 	carga_horaria decimal(5,2),	
@@ -125,8 +144,11 @@ Se não for encontrado esse CPF na tabela funcionário, não poderá ser criada 
 
 create table situacao_funcionario(
 	id_situacao_funcionario int not null primary key auto_increment,
+    
 	data_hora datetime,
-    descricao varchar (50)
+    descricao varchar (50),
+    imagem longtext,
+    imagem_extensao varchar(40)
     
 )engine = InnoDB;
 
@@ -142,6 +164,7 @@ create table movimentacao_funcionario(
 
 create table cargo(
 	id_cargo int not null primary key auto_increment,
+    
     descricao varchar(30)
     
 )engine = InnoDB; /* O cargo que o usuário tiver definirá a quais tabelas ele terá acesso e quais não, se é possível 
@@ -196,3 +219,29 @@ create table voluntario_judicial_cargo(
     foreign key(id_cargo) references cargo(id_cargo),
     foreign key(id_voluntarioJ) references voluntario_judicial(id_voluntario_judicial)
 )engine = InnoDB;
+
+
+DELIMITER &&
+
+CREATE  PROCEDURE cadinterno(in nome varchar(100),in cpf varchar(40), in senha varchar(70), in sexo char(1), in telefone int(11),in data_nascimento date, 
+in imagem longtext, in cep int(11), in cidade varchar(40), in bairro varchar(40), in logradouro varchar(40), in numero_endereco int(11),
+in complemento varchar(50), in registro_geral varchar(20), in orgao_emissor varchar(20), in data_expedicao date,in nome_pai varchar(100),
+in nome_mae varchar(100), in tipo_sanguineo varchar(5))
+
+begin
+
+declare idP int;
+
+insert into pessoa(nome,cpf, senha, sexo, telefone,data_nascimento,imagem,cep ,cidade, bairro, logradouro, numero_endereco,
+complemento,registro_geral,orgao_emissor,data_expedicao, nome_pai, nome_mae, tipo_sanguineo) 
+values(nome,cpf, senha, sexo, telefone,data_nascimento,imagem,cep ,cidade, bairro, logradouro, numero_endereco,
+complemento,registro_geral,orgao_emissor,data_expedicao, nome_pai, nome_mae, tipo_sanguineo );
+
+select max(id_pessoa) into idP FROM pessoa;
+
+
+insert into interno(id_pessoa) values(idP);
+
+end &&
+
+DELIMITER ;
