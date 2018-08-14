@@ -8,34 +8,6 @@ class Voluntario extends Pessoa
 
     private $id_pessoa;
 
-    public function __construct($idpessoa, $nome, $telefone, $data_nascimento, $cpf, $sexo, $idvoluntario, $idpessoa, $tipo)
-    {
-        parent::__construct($idpessoa, $nome, $telefone, $data_nascimento, $cpf, $sexo);
-        $this->idvoluntario = $idvoluntario;
-        $this->idpessoa = $idpessoa;
-        $this->tipo = $tipo;
-    }
-
-    public function getIdvoluntario()
-    {
-        return $this->idvoluntario;
-    }
-
-    public function getTipo()
-    {
-        return $this->tipo;
-    }
-
-    public function setIdvoluntario($idvoluntario)
-    {
-        $this->idvoluntario = $idvoluntario;
-    }
-
-    public function setTipo($tipo)
-    {
-        $this->tipo = $tipo;
-    }
-
     // Insert
     public function incluir($cpf, $senha, $nome, $sexo, $telefone, $data_nascimento, $imagem, $cep, $cidade, $bairro, $logradouro, $numero_endereco, $complemento, $registro_geral, $orgao_emissor, $data_expedicao, $nome_mae, $nome_pai)
     {

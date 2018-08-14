@@ -9,9 +9,6 @@ class Cargo
 
     private $descricao;
 
-    public function __construct()
-    {}
-
     // Insert
     public function incluir($descricao)
     {

@@ -6,49 +6,26 @@ class Funcionario extends Pessoa
 {
 
     private $id_funcionario;
-
     private $id_pessoa;
-
     private $id_quadro_horario;
-
     private $vale_transporte;
-
     private $data_admissao;
-
     private $pis;
-
     private $ctps;
-
     private $uf_ctps;
-
     private $numero_titulo;
-
     private $zona;
-
     private $secao;
-
     private $certificado_reservista_numero;
-
     private $certificado_reservista_serie;
-
     private $calcado;
-
     private $calca;
-
     private $jaleco;
-
     private $camisa;
-
     private $usa_vtp;
-
     private $cesta_basica;
-
     private $situacao;
-
     private $quadro_horario;
-
-    public function __construct()
-    {}
 
     // Insert
     public function incluir($cpf, $senha, $nome, $sexo, $telefone, $data_nascimento, $imagem, $cep, $cidade, $bairro, $logradouro, $numero_endereco, $complemento, $registro_geral, $orgao_emissor, $data_expedicao, $nome_mae, $nome_pai, $id_quadro_horario, $vale_transporte, $data_admissao, $pis, $ctps, $uf_ctps, $numero_titulo, $zona, $secao, $certificado_reservista_numero, $certificado_reservista_serie, $calcado, $calca, $jaleco, $camisa, $usa_vtp, $cesta_basica, $situacao)
