@@ -12,28 +12,6 @@ class Voluntario extends Pessoa
     public function incluir($cpf, $senha, $nome, $sexo, $telefone, $data_nascimento, $imagem, $cep, $cidade, $bairro, $logradouro, $numero_endereco, $complemento, $registro_geral, $orgao_emissor, $data_expedicao, $nome_mae, $nome_pai)
     {
         $id_pessoa = $this->incluirPessoa($cpf, $senha, $nome, $sexo, $telefone, $data_nascimento, $imagem, $cep, $cidade, $bairro, $logradouro, $numero_endereco, $complemento, $registro_geral, $orgao_emissor, $data_expedicao, $nome_mae, $nome_pai);
-        
-        try {
-            $sql = 'insert into interno (id_pessoa, id_situacao_interno, nome_contato_urgente, telefone_contato_urgente_1, telefone_contato_urgente_2, telefone_contato_urgente_3) values(:id_pessoa, :id_situacao_interno, :nome_contato_urgente, :telefone_contato_urgente_1, :telefone_contato_urgente_2, :telefone_contato_urgente_3)';
-            
-            $sql = str_replace("'", "\'", $sql);
-            $acesso = new Acesso();
-            
-            $pdo = $acesso->conexao();
-            
-            $stmt = $pdo->prepare($sql);
-            
-            $stmt->bindParam(':id_pessoa', $id_pessoa);
-            $stmt->bindParam(':id_situacao_interno', $id_situacao_interno);
-            $stmt->bindParam(':nome_contato_urgente', $nome_contato_urgente);
-            $stmt->bindParam(':telefone_contato_urgente_1', $telefone_contato_urgente_1);
-            $stmt->bindParam(':telefone_contato_urgente_2', $telefone_contato_urgente_2);
-            $stmt->bindParam(':telefone_contato_urgente_3', $telefone_contato_urgente_3);
-            
-            $stmt->execute();
-        } catch (PDOException $e) {
-            echo 'Error: <b>  na tabela pessoas = ' . $sql . '</b> <br /><br />' . $e->getMessage();
-        }
     }
 
     // excluir

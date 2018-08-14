@@ -3,7 +3,7 @@
 require_once'../classes/Funcionario.php';
 require_once'../classes/util.php';
 
-public function formatoDataYMD($data)
+function formatoDataYMD($data)
     {
         $data_arr = explode("/", $data);
         
