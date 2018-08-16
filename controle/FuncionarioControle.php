@@ -1,7 +1,8 @@
 <?php
 
 require_once'../classes/Funcionario.php';
-require_once'../classes/util.php';
+
+$funcionario=new Funcionario();
 
 function formatoDataYMD($data)
     {
@@ -11,10 +12,9 @@ function formatoDataYMD($data)
         
         return $datac;
     }
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-		$cpf = $_POST['cpf'];
+function inserir()
+{
+	$cpf = $_POST['cpf'];
 
 		$senha = '';
 
@@ -84,12 +84,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 	    $situacao=$_POST['situacao'];
 
-	    $util=new Util();
-
-	    $funcionario=new Funcionario();
-
 	    $funcionario->incluir($cpf, $senha, $nome, $sexo, $telefone, $data_nascimento, $imagem, $cep, $cidade, $bairro, $logradouro, $numero_endereco, $complemento, $registro_geral, $orgao_emissor, $data_expedicao, $nome_mae, $nome_pai, $id_quadro_horario, $vale_transporte, $data_admissao, $pis, $ctps, $uf_ctps, $numero_titulo, $zona, $secao, $certificado_reservista_numero, $certificado_reservista_serie, $calcado, $calca, $jaleco, $camisa, $usa_vtp, $cesta_basica, $situacao);
 
 	    header("Location:../index.html");
 }
+function listar()
+{
+	$funcionario=new Funcionario();
+	$nome=$_GET['nome'];
+	return $funcionario->listar($nome);
+}
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
+		
+}
+$consulta=listar();
+print_r($consulta);
