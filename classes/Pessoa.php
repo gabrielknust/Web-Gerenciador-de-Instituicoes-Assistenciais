@@ -41,13 +41,15 @@ abstract class Pessoa
     private $nome_mae;
 
     private $nome_pai;
+    
+    private $tipo_sanguineo;
 
     // Insert
-    public function incluirPessoa($cpf, $senha, $nome, $sexo, $telefone, $data_nascimento, $imagem, $cep, $cidade, $bairro, $logradouro, $numero_endereco, $complemento, $registro_geral, $orgao_emissor, $data_expedicao, $nome_mae, $nome_pai)
+    public function incluirPessoa($cpf, $senha, $nome, $sexo, $telefone, $data_nascimento, $imagem, $cep, $cidade, $bairro, $logradouro, $numero_endereco, $complemento, $registro_geral, $orgao_emissor, $data_expedicao, $nome_mae, $nome_pai, $tipo_sanguineo)
     {
         try {
             
-            $sql = 'insert into pessoa( cpf, senha, nome, sexo, telefone, data_nascimento, imagem, cep, cidade, bairro, logradouro, numero_endereco, complemento, registro_geral, orgao_emissor, data_expedicao, nome_mae, nome_pai) values ( :cpf, :senha, :nome, :sexo, :telefone, :data_nascimento, :imagem, :cep, :cidade, :bairro, :logradouro, :numero_endereco, :complemento, :registro_geral, :orgao_emissor, :data_expedicao, :nome_mae, :nome_pai);';
+            $sql = 'insert into pessoa( cpf, senha, nome, sexo, telefone, data_nascimento, imagem, cep, cidade, bairro, logradouro, numero_endereco, complemento, registro_geral, orgao_emissor, data_expedicao, nome_mae, nome_pai, tipo_sanguineo) values ( :cpf, :senha, :nome, :sexo, :telefone, :data_nascimento, :imagem, :cep, :cidade, :bairro, :logradouro, :numero_endereco, :complemento, :registro_geral, :orgao_emissor, :data_expedicao, :nome_mae, :nome_pai, :tipo_sanguineo);';
             
             $sql = str_replace("'", "\'", $sql);
             
@@ -75,6 +77,7 @@ abstract class Pessoa
             $stmt->bindParam(':data_expedicao', $data_expedicao);
             $stmt->bindParam(':nome_mae', $nome_mae);
             $stmt->bindParam(':nome_pai', $nome_pai);
+            $stmt->bindParam(':tipo_sanguineo', $tipo_sanguineo);
             
             $stmt->execute();
             
