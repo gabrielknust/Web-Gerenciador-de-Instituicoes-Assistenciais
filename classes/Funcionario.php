@@ -1,6 +1,6 @@
 <?php
-require_once ('acesso.php');
-require_once ('Pessoa.php');
+require_once 'acesso.php';
+require_once 'Pessoa.php';
 include_once 'Conexao.php';
 
 class Funcionario extends Pessoa
@@ -26,9 +26,8 @@ class Funcionario extends Pessoa
     private $usa_vtp;
     private $cesta_basica;
     private $situacao;
-    private $quadro_horario;
 
-    public function Construir($vale_transporte,$data_admissao,$pis,$ctps,$uf_ctps,$numero_titulo,$zona,$secao,$certificado_reservista_numero,$certificado_reservista_serie,$calcado,$calca,$jaleco,$camisa,$usa_vtp,$cesta_basica,$situacao,$quadro_horario)
+    public function __construct($vale_transporte,$data_admissao,$pis,$ctps,$uf_ctps,$numero_titulo,$zona,$secao,$certificado_reservista_numero,$certificado_reservista_serie,$calcado,$calca,$jaleco,$camisa,$usa_vtp,$cesta_basica,$situacao)
     {
         $this->vale_transporte=$vale_transporte;
         $this->data_admissao=$data_admissao;
@@ -47,7 +46,6 @@ class Funcionario extends Pessoa
         $this->usa_vtp=$usa_vtp;
         $this->cesta_basica=$cesta_basica;
         $this->situacao=$situacao;
-        $this->quadro_horario=$quadro_horario;
     }
     
     public function getId_funcionario()
@@ -65,6 +63,96 @@ class Funcionario extends Pessoa
         return $this->id_quadro_horario;
     }
 
+    public function getVale_transporte()
+    {
+        return $this->vale_transporte;
+    }
+
+    public function getData_admissao()
+    {
+        return $this->data_admissao;
+    }
+
+    public function getPis()
+    {
+        return $this->pis;
+    }
+
+    public function getCtps()
+    {
+        return $this->ctps;
+    }
+
+    public function getUf_ctps()
+    {
+        return $this->uf_ctps;
+    }
+
+    public function getNumero_titulo()
+    {
+        return $this->numero_titulo;
+    }
+
+    public function getZona()
+    {
+        return $this->zona;
+    }
+
+    public function getSecao()
+    {
+        return $this->secao;
+    }
+
+    public function getCertificado_reservista_numero()
+    {
+        return $this->certificado_reservista_numero;
+    }
+
+    public function getCertificado_reservista_serie()
+    {
+        return $this->certificado_reservista_serie;
+    }
+
+    public function getCalcado()
+    {
+        return $this->calcado;
+    }
+
+    public function getCalca()
+    {
+        return $this->calca;
+    }
+
+    public function getJaleco()
+    {
+        return $this->jaleco;
+    }
+
+    public function getCamisa()
+    {
+        return $this->camisa;
+    }
+
+    public function getUsa_vtp()
+    {
+        return $this->usa_vtp;
+    }
+
+    public function getCesta_basica()
+    {
+        return $this->cesta_basica;
+    }
+
+    public function getSituacao()
+    {
+        return $this->situacao;
+    }
+
+    public function getQuadro_horario()
+    {
+        return $this->quadro_horario;
+    }
+
     public function setId_funcionario($id_funcionario)
     {
         $this->id_funcionario = $id_funcionario;
@@ -80,10 +168,100 @@ class Funcionario extends Pessoa
         $this->id_quadro_horario = $id_quadro_horario;
     }
 
-    // Insert
-    public function incluir($cpf, $senha, $nome, $sexo, $telefone, $data_nascimento, $imagem, $cep, $cidade, $bairro, $logradouro, $numero_endereco, $complemento, $registro_geral, $orgao_emissor, $data_expedicao, $nome_mae, $nome_pai, $tipo_sanguineo, $id_quadro_horario, $vale_transporte, $data_admissao, $pis, $ctps, $uf_ctps, $numero_titulo, $zona, $secao, $certificado_reservista_numero, $certificado_reservista_serie, $calcado, $calca, $jaleco, $camisa, $usa_vtp, $cesta_basica, $situacao)
+    public function setVale_transporte($vale_transporte)
     {
-        $id_pessoa = $this->incluirPessoa($cpf, $senha, $nome, $sexo, $telefone, $data_nascimento, $imagem, $cep, $cidade, $bairro, $logradouro, $numero_endereco, $complemento, $registro_geral, $orgao_emissor, $data_expedicao, $nome_mae, $nome_pai, $tipo_sanguineo);
+        $this->vale_transporte = $vale_transporte;
+    }
+
+    public function setData_admissao($data_admissao)
+    {
+        $this->data_admissao = $data_admissao;
+    }
+
+    public function setPis($pis)
+    {
+        $this->pis = $pis;
+    }
+
+    public function setCtps($ctps)
+    {
+        $this->ctps = $ctps;
+    }
+
+    public function setUf_ctps($uf_ctps)
+    {
+        $this->uf_ctps = $uf_ctps;
+    }
+
+    public function setNumero_titulo($numero_titulo)
+    {
+        $this->numero_titulo = $numero_titulo;
+    }
+
+    public function setZona($zona)
+    {
+        $this->zona = $zona;
+    }
+
+    public function setSecao($secao)
+    {
+        $this->secao = $secao;
+    }
+
+    public function setCertificado_reservista_numero($certificado_reservista_numero)
+    {
+        $this->certificado_reservista_numero = $certificado_reservista_numero;
+    }
+
+    public function setCertificado_reservista_serie($certificado_reservista_serie)
+    {
+        $this->certificado_reservista_serie = $certificado_reservista_serie;
+    }
+
+    public function setCalcado($calcado)
+    {
+        $this->calcado = $calcado;
+    }
+
+    public function setCalca($calca)
+    {
+        $this->calca = $calca;
+    }
+
+    public function setJaleco($jaleco)
+    {
+        $this->jaleco = $jaleco;
+    }
+
+    public function setCamisa($camisa)
+    {
+        $this->camisa = $camisa;
+    }
+
+    public function setUsa_vtp($usa_vtp)
+    {
+        $this->usa_vtp = $usa_vtp;
+    }
+
+    public function setCesta_basica($cesta_basica)
+    {
+        $this->cesta_basica = $cesta_basica;
+    }
+
+    public function setSituacao($situacao)
+    {
+        $this->situacao = $situacao;
+    }
+
+    public function setQuadro_horario($quadro_horario)
+    {
+        $this->quadro_horario = $quadro_horario;
+    }
+
+    // Insert
+    public function incluir($pessoa,$funcionario)
+    {
+        $id_pessoa = $this->incluirPessoa($pessoa);
         
         try {
             $sql = 'insert into funcionario (id_pessoa, id_quadro_horario, vale_transporte, data_admissao, pis, ctps, uf_ctps, numero_titulo, zona, secao, certificado_reservista_numero, certificado_reservista_serie, calcado, calca, jaleco, camisa, usa_vtp, cesta_basica, situacao) VALUES (:id_pessoa, :id_quadro_horario, :vale_transporte, :data_admissao, :pis, :ctps, :uf_ctps, :numero_titulo, :zona, :secao, :certificado_reservista_numero, :certificado_reservista_serie, :calcado, :calca, :jaleco, :camisa, :usa_vtp, :cesta_basica, :situacao);';
@@ -95,25 +273,25 @@ class Funcionario extends Pessoa
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $stmt = $pdo->prepare($sql);
             
-            $stmt->bindParam(':id_pessoa', $id_pessoa);
-            $stmt->bindParam(':id_quadro_horario', $id_quadro_horario);
-            $stmt->bindParam(':vale_transporte', $vale_transporte);
-            $stmt->bindParam(':data_admissao', $data_admissao);
-            $stmt->bindParam(':pis', $pis);
-            $stmt->bindParam(':ctps', $ctps);
-            $stmt->bindParam(':uf_ctps', $uf_ctps);
-            $stmt->bindParam(':numero_titulo', $numero_titulo);
-            $stmt->bindParam(':zona', $zona);
-            $stmt->bindParam(':secao', $secao);
-            $stmt->bindParam(':certificado_reservista_numero', $certificado_reservista_numero);
-            $stmt->bindParam(':certificado_reservista_serie', $certificado_reservista_serie);
-            $stmt->bindParam(':calcado', $calcado);
-            $stmt->bindParam(':calca', $calca);
-            $stmt->bindParam(':jaleco', $jaleco);
-            $stmt->bindParam(':camisa', $camisa);
-            $stmt->bindParam(':usa_vtp', $usa_vtp);
-            $stmt->bindParam(':cesta_basica', $cesta_basica);
-            $stmt->bindParam(':situacao', $situacao);
+            $stmt->bindParam(':id_pessoa', $funcionario->getIdPessoa());
+            $stmt->bindParam(':id_quadro_horario', $funcionario->getId_quadro_horario());
+            $stmt->bindParam(':vale_transporte', $funcionario->getVale_transporte());
+            $stmt->bindParam(':data_admissao', $funcionario->getData_admissao());
+            $stmt->bindParam(':pis', $funcionario->getPis());
+            $stmt->bindParam(':ctps', $funcionario->getCtps());
+            $stmt->bindParam(':uf_ctps', $funcionario->getUf_ctps());
+            $stmt->bindParam(':numero_titulo', $funcionario->getNumero_titulo());
+            $stmt->bindParam(':zona', $funcionario->getZona());
+            $stmt->bindParam(':secao', $funcionario->getSecao());
+            $stmt->bindParam(':certificado_reservista_numero', $funcionario->getCertificado_reservista_numero());
+            $stmt->bindParam(':certificado_reservista_serie', $funcionario->getCertificado_reservista_serie());
+            $stmt->bindParam(':calcado', $funcionario->getCalcado());
+            $stmt->bindParam(':calca', $funcionario->getCalca());
+            $stmt->bindParam(':jaleco', $funcionario->getJaleco());
+            $stmt->bindParam(':camisa', $funcionario->getCamisa());
+            $stmt->bindParam(':usa_vtp', $funcionario->getUsa_vtp());
+            $stmt->bindParam(':cesta_basica', $funcionario->getCesta_basica());
+            $stmt->bindParam(':situacao', $funcionario->getSituacao());
             
             $stmt->execute();
         } catch (PDOException $e) {
@@ -218,7 +396,7 @@ class Funcionario extends Pessoa
                 ':id' => $id
             ));
             while ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) {
-                $cliente = new Cliente($linha['nome'], $linha['cpf'], $linha['login'], $linha['endereco'], $linha['senha']);
+                $cliente = new Funcionario($linha['nome'], $linha['cpf'], $linha['login'], $linha['endereco'], $linha['senha']);
                 $cliente->setId($linha['id']);
             }
         } catch (PDOException $e) {

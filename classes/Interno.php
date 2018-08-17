@@ -17,10 +17,70 @@ class Interno extends Pessoa
 
     private $telefone_contato_urgente_3;
 
-    // Insert
-    public function incluir($cpf, $senha, $nome, $sexo, $telefone, $data_nascimento, $imagem, $cep, $cidade, $bairro, $logradouro, $numero_endereco, $complemento, $registro_geral, $orgao_emissor, $data_expedicao, $nome_mae, $nome_pai, $nome_contato_urgente, $telefone_contato_urgente_1, $telefone_contato_urgente_2, $telefone_contato_urgente_3)
+    public function getId_interno()
     {
-        $id_pessoa = $this->incluirPessoa($cpf, $senha, $nome, $sexo, $telefone, $data_nascimento, $imagem, $cep, $cidade, $bairro, $logradouro, $numero_endereco, $complemento, $registro_geral, $orgao_emissor, $data_expedicao, $nome_mae, $nome_pai);
+        return $this->id_interno;
+    }
+
+    public function getId_situacao_interno()
+    {
+        return $this->id_situacao_interno;
+    }
+
+    public function getNome_contato_urgente()
+    {
+        return $this->nome_contato_urgente;
+    }
+
+    public function getTelefone_contato_urgente_1()
+    {
+        return $this->telefone_contato_urgente_1;
+    }
+
+    public function getTelefone_contato_urgente_2()
+    {
+        return $this->telefone_contato_urgente_2;
+    }
+
+    public function getTelefone_contato_urgente_3()
+    {
+        return $this->telefone_contato_urgente_3;
+    }
+
+    public function setId_interno($id_interno)
+    {
+        $this->id_interno = $id_interno;
+    }
+
+    public function setId_situacao_interno($id_situacao_interno)
+    {
+        $this->id_situacao_interno = $id_situacao_interno;
+    }
+
+    public function setNome_contato_urgente($nome_contato_urgente)
+    {
+        $this->nome_contato_urgente = $nome_contato_urgente;
+    }
+
+    public function setTelefone_contato_urgente_1($telefone_contato_urgente_1)
+    {
+        $this->telefone_contato_urgente_1 = $telefone_contato_urgente_1;
+    }
+
+    public function setTelefone_contato_urgente_2($telefone_contato_urgente_2)
+    {
+        $this->telefone_contato_urgente_2 = $telefone_contato_urgente_2;
+    }
+
+    public function setTelefone_contato_urgente_3($telefone_contato_urgente_3)
+    {
+        $this->telefone_contato_urgente_3 = $telefone_contato_urgente_3;
+    }
+
+    // Insert
+    public function incluir($pessoa,$interno)
+    {
+        $id_pessoa = $this->incluirPessoa($pessoa);
         
         try {
             $sql = 'insert into interno (id_pessoa, nome_contato_urgente, telefone_contato_urgente_1, telefone_contato_urgente_2, telefone_contato_urgente_3) values(:id_pessoa, :nome_contato_urgente, :telefone_contato_urgente_1, :telefone_contato_urgente_2, :telefone_contato_urgente_3)';
@@ -32,11 +92,11 @@ class Interno extends Pessoa
             
             $stmt = $pdo->prepare($sql);
             
-            $stmt->bindParam(':id_pessoa', $id_pessoa);
-            $stmt->bindParam(':nome_contato_urgente', $nome_contato_urgente);
-            $stmt->bindParam(':telefone_contato_urgente_1', $telefone_contato_urgente_1);
-            $stmt->bindParam(':telefone_contato_urgente_2', $telefone_contato_urgente_2);
-            $stmt->bindParam(':telefone_contato_urgente_3', $telefone_contato_urgente_3);
+            $stmt->bindParam(':id_pessoa', $interno->getId_pessoa());
+            $stmt->bindParam(':nome_contato_urgente', $interno->getNome_contato_urgente());
+            $stmt->bindParam(':telefone_contato_urgente_1', $interno->getTelefone_contato_urgente_1());
+            $stmt->bindParam(':telefone_contato_urgente_2', $interno->getTelefone_contato_urgente_2());
+            $stmt->bindParam(':telefone_contato_urgente_3', $interno->getTelefone_contato_urgente_3());
             
             $stmt->execute();
         } catch (PDOException $e) {
