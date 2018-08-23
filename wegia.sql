@@ -1,10 +1,10 @@
 create database wegia default charset utf8;
 
 use wegia;
-
+/*--------------------------- Cadastro -------------------------------- */
 create table pessoa (
 	id_pessoa int not null primary key auto_increment,
-    cpf varchar(40), #CPF da pessoa
+    cpf varchar(20),
     senha varchar(70),
     nome varchar(100),
     sexo char(1),
@@ -221,6 +221,7 @@ create table voluntario_judicial_cargo(
 )engine = InnoDB;
 
 
+
 DELIMITER &&
 
 CREATE  PROCEDURE cadinterno(in nome varchar(100),in cpf varchar(40), in senha varchar(70), in sexo char(1), in telefone int(11),in data_nascimento date, 
@@ -235,7 +236,7 @@ declare idP int;
 insert into pessoa(nome,cpf, senha, sexo, telefone,data_nascimento,imagem,cep ,cidade, bairro, logradouro, numero_endereco,
 complemento,registro_geral,orgao_emissor,data_expedicao, nome_pai, nome_mae, tipo_sanguineo) 
 values(nome,cpf, senha, sexo, telefone,data_nascimento,imagem,cep ,cidade, bairro, logradouro, numero_endereco,
-complemento,registro_geral,orgao_emissor,data_expedicao, nome_pai, nome_mae, tipo_sanguineo );
+complemento,registro_geral,orgao_emissor,data_expedicao, nome_pai, nome_mae, tipo_sanguineo);
 
 select max(id_pessoa) into idP FROM pessoa;
 
@@ -244,4 +245,137 @@ insert into interno(id_pessoa) values(idP);
 
 end &&
 
+
+CREATE  PROCEDURE cadquadrohora(in escala varchar(15), in tipo varchar(15), in carga_horaria decimal(5,2), in entrada1 varchar(5),in saida1 varchar(5), 
+in entrada2 varchar(5), in saida2 varchar(5), in total varchar(5), in dias_trabalhados varchar(100), in folga varchar(30), in observacoes varchar(240))
+
+begin
+
+declare idF int;
+
+insert into quadro_horario(escala, tipo, carga_horaria, entrada1, saida1, entrada2, saida2,total, dias_trabalhados, folga, observacoes)
+values(escala, tipo, carga_horaria, entrada1, saida1, entrada2, saida2,total, dias_trabalhados, folga, observacoes);
+
+select max(id_quadro_horario) into idF FROM funcionario;
+
+
+insert into funcionario(id_quadro_horario) values(idF);
+
+end &&
+
+CREATE  PROCEDURE cadfuncionario(in nome varchar(100),in cpf varchar(40), in senha varchar(70), in sexo char(1), in telefone int(11),in data_nascimento date, 
+in imagem longtext, in cep int(11), in cidade varchar(40), in bairro varchar(40), in logradouro varchar(40), in numero_endereco int(11),
+in complemento varchar(50), in registro_geral varchar(20), in orgao_emissor varchar(20), in data_expedicao date,in nome_pai varchar(100),
+in nome_mae varchar(100), in tipo_sanguineo varchar(5))
+
+begin
+
+declare idP int;
+
+insert into pessoa(nome, cpf, senha, sexo, telefone,data_nascimento,imagem, cep ,cidade, bairro, logradouro, numero_endereco,
+complemento,registro_geral,orgao_emissor,data_expedicao, nome_pai, nome_mae, tipo_sanguineo)
+values(nome,cpf, senha, sexo, telefone,data_nascimento,imagem,cep ,cidade, bairro, logradouro, numero_endereco,
+complemento,registro_geral,orgao_emissor,data_expedicao, nome_pai, nome_mae, tipo_sanguineo);
+
+select max(id_funcionario) into idP FROM pessoa;
+
+
+insert into pessoa(id_funcionario) values(idP);
+
+end &&
+
 DELIMITER ;
+
+/*------------------------------------------- Estoque ---------------------------------------------------*/
+
+create table categoria_produto(
+	id_categoria_produto int not null primary key,
+    descricao varchar(240)
+)engine = InnoDB;
+
+create table unidade(
+	id_unidade int not null primary key,
+    descricao varchar(240)
+)engine = InnoDB;
+
+create table produto(
+	id_produto int not null primary key auto_increment,
+    id_categoria_produto int not null,
+    id_unidade int not null,
+    
+    preco decimal(10,2),
+    descricao varchar(240),
+    codigo varchar(15) unique,
+    
+    foreign key(id_categoria_produto) references categoria_produto(id_categoria_produto),
+    foreign key(id_unidade) references unidade(id_unidade)
+)engine = InnoDB;
+
+create table almoxarifado(
+	id_almoxarifado int not null primary key,
+    descricao varchar(240)
+)engine = InnoDB;
+
+create table estoque(
+	id_produto int not null,
+    id_almoxarifado int not null,
+    qtd decimal(10,3),
+    
+    primary key(id_produto,id_almoxarifado),
+    foreign key(id_produto) references produto(id_produto),
+    foreign key(id_almoxarifado) references almoxarifado(id_almoxarifado)
+)engine = InnoDB;
+
+create table origem(
+	id_origem int not null primary key auto_increment,
+    nome varchar(100),
+    cpf_cnpj varchar(20),
+    telefone varchar(33)
+)engine = InnoDB;
+
+create table entrada(
+	id_entrada int not null primary key auto_increment,
+    id_origem int not null,
+    data date,
+    valor_total decimal(10,3),
+    
+    foreign key(id_origem) references origem(id_origem)
+)engine = InnoDB;
+
+create table ientrada(
+	id_ientrada int not null primary key auto_increment,
+    id_entrada int not null,
+    id_produto int not null,
+    qtd decimal(10,3),
+    voluntário varchar(100),
+    
+    foreign key(id_entrada) references entrada(id_entrada),
+    foreign key(id_produto) references produto(id_produto)
+)engine = InnoDB;
+
+create table destino(
+	id_destino int not null primary key auto_increment,
+    nome varchar(100),
+    cpf_cnpj varchar(20),
+    telefone varchar(33)
+)engine = InnoDB;
+
+create table saida(
+	id_saida int not null primary key auto_increment,
+    id_destino int not null,
+    data date,
+    valor_total decimal(10,3),
+    
+    foreign key(id_destino) references destino(id_destino)
+)engine = InnoDB;
+
+create table isaida(
+	id_isaida int not null primary key auto_increment,
+    id_saida int not null,
+    id_produto int not null,
+    qtd decimal(10,3),
+    voluntário varchar(100),
+    
+    foreign key(id_saida) references saida(id_saida),
+    foreign key(id_produto) references produto(id_produto)
+)engine = InnoDB;
