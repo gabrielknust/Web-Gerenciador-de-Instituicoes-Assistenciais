@@ -41,6 +41,7 @@
 		<script src="../Functions/onlyNumbers.js"></script>
 		<script src="../Functions/onlyChars.js"></script>
 		<script src="../Functions/enviar_dados.js"></script>
+		<script src="../Functions/mascara.js"></script>
 
 	</head>
 		<body>
@@ -204,7 +205,7 @@
 											          <h4 class="modal-title">Adicionar uma Foto</h4>
 											        </div>
 											        <div class="modal-body"> 
-											        	<form method="get" action="../controle/Control.php">
+											        	<form method="get" action="#">
 											        	<div class="form-group">
 															<label class="col-md-4 control-label" for="imgperfil">Carregue uma imagem de perfil:</label>
 															<div class="col-md-8">
@@ -324,7 +325,7 @@
 												<div class="form-group">
 													<label class="col-md-3 control-label" for="profileFirstName">Nome completo</label>
 													<div class="col-md-8">
-														<input type="text" class="form-control" name="nome" id="nome" id="profileFirstName" onkeypress="return Onlychars(event)">
+														<input type="text" class="form-control" name="nome" id="nome" id="profileFirstName" onkeypress="return Onlychars(event)" required>
 													</div>
 												</div>
 												<div class="form-group">
@@ -335,27 +336,39 @@
 													</div>
 												</div>
 												<div class="form-group">
-													<label class="col-md-3 control-label" for="profileCompany">Telefone</label>
+													<label class="col-md-3 control-label" for="profileCompany">Telefone contato 1</label>
 													<div class="col-md-8">
-														<input type="text" name="telefone" class="form-control" minlength="11" id="profileCompany" id="telefone" onkeypress="return Onlynumbers(event)" >
+														<input type="text" name="telefone1" class="form-control" minlength="11" id="profileCompany" id="telefone1" maxlength="13" placeholder="(##)#########" onkeypress="return Onlynumbers(event)" onkeyup="mascara('(##)#########',this,event)" >
+													</div>
+												</div>
+												<div class="form-group">
+													<label class="col-md-3 control-label" for="profileCompany">Telefone contato 2</label>
+													<div class="col-md-8">
+														<input type="text" name="telefone2" class="form-control" minlength="11" id="profileCompany" id="telefone2" maxlength="13" placeholder="(##)#########" onkeypress="return Onlynumbers(event)" onkeyup="mascara('(##)#########',this,event)" >
+													</div>
+												</div>
+												<div class="form-group">
+													<label class="col-md-3 control-label" for="profileCompany">Telefone contato 3</label>
+													<div class="col-md-8">
+														<input type="text" name="telefone3" class="form-control" minlength="11" id="profileCompany" id="telefone3" maxlength="13" placeholder="(##)#########" onkeypress="return Onlynumbers(event)" onkeyup="mascara('(##)#########',this,event)" >
 													</div>
 												</div>
 												<div class="form-group">
 													<label class="col-md-3 control-label" for="profileCompany">Nascimento</label>
 													<div class="col-md-8">
-														<input type="date" name="nascimento" class="form-control" id="profileCompany" id="nascimento">
+														<input type="text" name="nascimento" class="form-control" id="profileCompany" id="nascimento" placeholder="dd/mm/aaaa" maxlength="10" onkeypress="return Onlynumbers(event)" onkeyup="mascara('##/##/####',this,event)" required>
 													</div>
 												</div>
 												<div class="form-group">
 													<label class="col-md-3 control-label" for="profileName">Nome do Pai</label>
 													<div class="col-md-8">
-														<input type="text" name="pai" class="form-control"  onkeypress="return Onlychars(event)" id="pai">
+														<input type="text" name="pai" class="form-control"  onkeypress="return Onlychars(event)" id="pai" required>
 													</div>
 												</div>
 												<div class="form-group">
 													<label class="col-md-3 control-label" for="profileFirstName">Nome da Mãe</label>
 													<div class="col-md-8">
-														<input type="text" name="nomeMae" class="form-control" id="mae" id="profileFirstName" onkeypress="return Onlychars(event)">
+														<input type="text" name="nomeMae" class="form-control" id="mae" id="profileFirstName" onkeypress="return Onlychars(event)" required>
 													</div>
 												</div>
 												<div class="form-group">
@@ -382,28 +395,28 @@
 												<div class="form-group">
 													<label class="col-md-3 control-label" for="profileCompany">Número do RG</label>
 													<div class="col-md-6">
-														<input type="text" name="rg" class="form-control" id="rg" id="profileCompany" onkeypress="return Onlynumbers(event)">
+														<input type="text" name="rg" class="form-control" id="rg" id="profileCompany" maxlength="12" placeholder="##.###.###-#" onkeypress="return Onlynumbers(event)" onkeyup="mascara('##.###.###-#',this,event)" required>
 													</div>
 												</div>
 												
 												<div class="form-group">
 													<label class="col-md-3 control-label" for="profileCompany">Órgão Emissor</label>
 													<div class="col-md-6">
-														<input type="text" name="orgaoEmissor" class="form-control" id="profileCompany" id="orgao_emissor" onkeypress="return Onlychars(event)">
+														<input type="text" name="orgaoEmissor" class="form-control" id="profileCompany" id="orgao_emissor" onkeypress="return Onlychars(event)" required>
 													</div>
 												</div>
 												
 												<div class="form-group">
 													<label class="col-md-3 control-label" for="profileCompany">Data de Expedição</label>
 													<div class="col-md-6">
-														<input type="date" name="dataExpedicao" class="form-control" id="profileCompany" id="data_expedicao">
+														<input type="text" name="dataExpedicao" class="form-control" id="profileCompany" id="data_expedicao" placeholder="dd/mm/aaaa" maxlength="10" onkeypress="return Onlynumbers(event)" onkeyup="mascara('##/##/####',this,event)" required>
 													</div>
 												</div>
 												
 												<div class="form-group">
 													<label class="col-md-3 control-label" for="profileCompany">Número do CPF</label>
 													<div class="col-md-6">
-														<input type="text" name="numeroCPF" class="form-control" id="profileCompany" id="cpf" onkeypress="return Onlynumbers(event)">
+														<input type="text" name="numeroCPF" class="form-control" id="profileCompany" id="cpf" maxlength="14" placeholder="###.###.###-##" onkeypress="return Onlynumbers(event)" onkeyup="mascara('###.###.###-##',this,event)" required>
 													</div>
 												</div>
 												
@@ -431,14 +444,14 @@
 													<div class="col-md-8">
 														<div class="checkbox">
 															<label for="beneficio">
-																<input type="checkbox" name="inss" value="inss" id="beneficio" >INSS
-															</label>
+																<input type="checkbox" name="inss" value="inss" id="beneficio" >
+															</label>INSS
 														</div>
 														
 														<div class="checkbox">
 															<label for="beneficio">
-																<input type="checkbox" name="loas" value="loas" id="beneficio" >LOAS
-															</label>
+																<input type="checkbox" name="loas" value="loas" id="beneficio" >
+															</label>LOAS
 														</div>
 														
 														<div class="checkbox">
@@ -500,15 +513,7 @@
 												<div class="panel-body" style="display: block;">
 													<section class="simple-compose-box mb-xlg ">
 
-															<textarea name="observacoes" data-plugin-textarea-autosize placeholder="Observações" rows="1"></textarea>
-
-														<div class="compose-box-footer">
-															<ul class="compose-btn">
-																<li>
-																	<a class="btn btn-primary btn-xs">Post</a>
-																</li>
-															</ul>
-														</div>
+															<textarea name="observacoes" data-plugin-textarea-autosize placeholder="Observações" rows="1" style="height: 10vw"></textarea>
 													</section>
 												</div>
 											</section>
