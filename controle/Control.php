@@ -1,5 +1,5 @@
 <?php
-	extract($_REQUEST);
+	/*extract($_REQUEST);
 	if(!isset($nomeClasse) || (empty($nomeClasse) || !isset($metodo) || (empty($metodo)))
 	{
 		$msg="Página inválida, utilize as funções do sistema!";
@@ -7,5 +7,7 @@
 	}
 	include_once $nomeClasse.".php";
 	$objeto= new $nomeClasse();
-	$objeto->$metodo;
+	$objeto->$metodo;*/
+	$x=extract($_REQUEST);
+	var_dump($x);
 ?>
