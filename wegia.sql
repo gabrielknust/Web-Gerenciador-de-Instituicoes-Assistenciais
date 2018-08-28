@@ -17,6 +17,7 @@ create table pessoa (
     logradouro varchar(40),
     numero_endereco varchar(10),
     complemento varchar(50),
+    ibge varchar(20),
 	registro_geral varchar(13), 
     orgao_emissor varchar(20),
     data_expedicao date,
@@ -63,6 +64,33 @@ create table interno(
     telefone_contato_urgente_3 varchar(33),
     
     foreign key(id_pessoa) references pessoa(id_pessoa)
+    
+)engine = InnoDB;
+
+create table beneficios(
+	id_beneficio int not null primary key auto_increment,
+    
+    curatelo char(1),
+    inss varchar(60),
+    loas varchar(60),
+    bpc varchar(60),
+    funrural varchar(60),
+    rg varchar(60),
+    cpf varchar(60),
+    titulo_de_eleitor varchar(60),
+    ctps varchar(60),
+    saf varchar(60),
+    sus varchar(60)
+    
+)engine = InnoDB;
+
+create table beneficio_interno(
+	id_interno int not null,
+    id_beneficio int not null,
+    
+    primary key(id_interno,id_beneficio),
+    foreign key(id_interno) references interno(id_interno),
+    foreign key(id_beneficio) references beneficio(id_beneficio)
     
 )engine = InnoDB;
 
@@ -234,21 +262,19 @@ create table voluntario_judicial_cargo(
     foreign key(id_voluntarioJ) references voluntario_judicial(id_voluntario_judicial)
 )engine = InnoDB;
 
-
-
 DELIMITER &&
 
-CREATE  PROCEDURE cadinterno(in nome varchar(100),in cpf varchar(40), in senha varchar(70), in sexo char(1), in telefone int(11),in data_nascimento date, 
+CREATE  PROCEDURE cadinterno(in nome varchar(100),in cpf varchar(40),senha varchar(70), in sexo char(1), in telefone int(11),in data_nascimento date, 
 in imagem longtext, in cep int(11), in cidade varchar(40), in bairro varchar(40), in logradouro varchar(40), in numero_endereco int(11),
-in complemento varchar(50), in registro_geral varchar(20), in orgao_emissor varchar(20), in data_expedicao date,in nome_pai varchar(100),
+in complemento varchar(50), in ibge varchar(20), in registro_geral varchar(20), in orgao_emissor varchar(20), in data_expedicao date,in nome_pai varchar(100),
 in nome_mae varchar(100), in tipo_sanguineo varchar(5), in nome_contato_urgente varchar(60),in telefone_contato_urgente_1 varchar(33),in telefone_contato_urgente_2 varchar(33),in telefone_contato_urgente_3 varchar(33))
 
 begin
 
 declare idP int;
 
-insert into pessoa(nome,cpf, senha, sexo, telefone,data_nascimento,imagem,cep ,cidade, bairro, logradouro, numero_endereco,
-complemento,registro_geral,orgao_emissor,data_expedicao, nome_pai, nome_mae, tipo_sanguineo) 
+insert into pessoa(nome,cpf,senha,sexo, telefone,data_nascimento,imagem,cep ,cidade, bairro, logradouro, numero_endereco,
+complemento,ibge,registro_geral,orgao_emissor,data_expedicao, nome_pai, nome_mae, tipo_sanguineo) 
 values(nome,cpf, senha, sexo, telefone,data_nascimento,imagem,cep ,cidade, bairro, logradouro, numero_endereco,
 complemento,registro_geral,orgao_emissor,data_expedicao, nome_pai, nome_mae, tipo_sanguineo);
 
@@ -259,9 +285,9 @@ insert into interno(id_pessoa,nome_contato_urgente,telefone_contato_urgente_1,te
 
 end &&
 
-CREATE  PROCEDURE cadfuncionario(in nome varchar(100),in cpf varchar(40), in senha varchar(70), in sexo char(1), in telefone int(11),in data_nascimento date, 
+CREATE  PROCEDURE cadfuncionario(in nome varchar(100),in cpf varchar(40),in senha varchar(70), in sexo char(1), in telefone int(11),in data_nascimento date, 
 in imagem longtext, in cep int(11), in cidade varchar(40), in bairro varchar(40), in logradouro varchar(40), in numero_endereco int(11),
-in complemento varchar(50), in registro_geral varchar(20), in orgao_emissor varchar(20), in data_expedicao date,in nome_pai varchar(100),
+in complemento varchar(50),in ibge varchar(20), in registro_geral varchar(20), in orgao_emissor varchar(20), in data_expedicao date,in nome_pai varchar(100),
 in nome_mae varchar(100), in tipo_sanguineo varchar(5),	in escala varchar(15),in tipo varchar(15),in carga_horaria decimal(5,2),
 in entrada1 varchar(5),in saida1 varchar(5),in entrada2 varchar(5),in saida2 varchar(5),in total varchar(5),in dias_trabalhados varchar(100),
 in folga varchar(30),in observacoes varchar(240),in vale_transporte varchar(16),in data_admissao date,in pis varchar(14),in ctps varchar(15),
@@ -273,7 +299,7 @@ begin
 declare idP int;
 declare idQ int;
 
-insert into pessoa(nome, cpf, senha, sexo, telefone,data_nascimento,imagem, cep ,cidade, bairro, logradouro, numero_endereco,
+insert into pessoa(nome, cpf, senha, telefone,data_nascimento,imagem, cep ,cidade, bairro, logradouro, numero_endereco,
 complemento,registro_geral,orgao_emissor,data_expedicao, nome_pai, nome_mae, tipo_sanguineo)
 values(nome,cpf, senha, sexo, telefone,data_nascimento,imagem,cep ,cidade, bairro, logradouro, numero_endereco,
 complemento,registro_geral,orgao_emissor,data_expedicao, nome_pai, nome_mae, tipo_sanguineo);
