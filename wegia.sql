@@ -235,8 +235,6 @@ create table voluntario_judicial_cargo(
     foreign key(id_voluntarioJ) references voluntario_judicial(id_voluntario_judicial)
 )engine = InnoDB;
 
-
-
 DELIMITER &&
 
 CREATE  PROCEDURE cadinterno(in nome varchar(100),in cpf varchar(40), in sexo char(1), in telefone int(11),in data_nascimento date, 
