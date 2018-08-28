@@ -66,6 +66,33 @@ create table interno(
     
 )engine = InnoDB;
 
+create table beneficios(
+	id_beneficio int not null primary key auto_increment,
+    
+    curatelo char(1),
+    inss varchar(60),
+    loas varchar(60),
+    bpc varchar(60),
+    funrural varchar(60),
+    rg varchar(60),
+    cpf varchar(60),
+    titulo_de_eleitor varchar(60),
+    ctps varchar(60),
+    saf varchar(60),
+    sus varchar(60)
+    
+)engine = InnoDB;
+
+create table beneficio_interno(
+	id_interno int not null,
+    id_beneficio int not null,
+    
+    primary key(id_interno,id_beneficio),
+    foreign key(id_interno) references interno(id_interno),
+    foreign key(id_beneficio) references beneficio(id_beneficio)
+    
+)engine = InnoDB;
+
 create table movimentacao_interno(
     id_interno int not null,
     id_situacao_interno int not null,
