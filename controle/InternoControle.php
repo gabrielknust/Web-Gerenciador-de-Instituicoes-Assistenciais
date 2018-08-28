@@ -49,8 +49,19 @@ class InternoControle
         }else if((!isset($curatela)) || (empty($curatela))){
             $msg .= "Existência da curatela do interno não informada. Por favor, informe a existência!";
             header('Location: ../html/interno.php?msg='.$msg);
-        }{
-            $interno = new Interno($numeroCPF,$nome,$sexo,$nascimento,$rg,$orgaoEmissor,$dataExpedicao,$nomeMae,$pai,$sangue);
+        }else if((!isset($observacoes)) || (empty($observacoes))){
+            $observacoes=NULL;
+        }else if((!isset($telefone1)) || (empty($telefone1))){
+            $telefone1=null;
+        }else if((!isset($telefone2)) || (empty($telefone2))){
+            $telefone2=null;
+        }else if((!isset($telefone3)) || (empty($telefone3))){
+            $telefone3=null;
+        }else if((!isset($contatoUrgente)) || (empty($contatoUrgente))){
+            $contatoUrgente=null;
+        }
+            $senha=null;
+            $interno = new Interno($numeroCPF,$nome,$sexo,$nascimento,$rg,$orgaoEmissor,$dataExpedicao,$nomeMae,$pai,$sangue,$senha,$telefone,$imagem,$cep,$cidade,$bairro,$logradouro,$numeroEndereco,$complemento,$contatoUrgente,$telefone1,$telefone2,$telefone3);
             return $interno;
         }
     }
