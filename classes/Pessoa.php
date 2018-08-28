@@ -16,7 +16,7 @@ abstract class Pessoa
 
     private $telefone;
 
-    private $data_nascimento;
+    private $dataNascimento;
 
     private $imagem;
 
@@ -28,22 +28,21 @@ abstract class Pessoa
 
     private $logradouro;
 
-    private $numero_endereco;
+    private $numeroEndereco;
 
     private $complemento;
 
-    private $registro_geral;
+    private $registroGeral;
 
     private $orgao_emissor;
 
-    private $data_expedicao;
+    private $dataExpedicao;
 
-    private $nome_mae;
+    private $nomeMae;
 
-    private $nome_pai;
+    private $nomePai;
     
-    private $tipo_sanguineo;
-    
+    private $tipoSanguineo;
     public function getIdpessoa()
     {
         return $this->idpessoa;
@@ -74,9 +73,9 @@ abstract class Pessoa
         return $this->telefone;
     }
 
-    public function getData_nascimento()
+    public function getDataNascimento()
     {
-        return $this->data_nascimento;
+        return $this->dataNascimento;
     }
 
     public function getImagem()
@@ -104,9 +103,9 @@ abstract class Pessoa
         return $this->logradouro;
     }
 
-    public function getNumero_endereco()
+    public function getNumeroEndereco()
     {
-        return $this->numero_endereco;
+        return $this->numeroEndereco;
     }
 
     public function getComplemento()
@@ -114,9 +113,9 @@ abstract class Pessoa
         return $this->complemento;
     }
 
-    public function getRegistro_geral()
+    public function getRegistroGeral()
     {
-        return $this->registro_geral;
+        return $this->registroGeral;
     }
 
     public function getOrgao_emissor()
@@ -124,23 +123,123 @@ abstract class Pessoa
         return $this->orgao_emissor;
     }
 
-    public function getData_expedicao()
+    public function getDataExpedicao()
     {
-        return $this->data_expedicao;
+        return $this->dataExpedicao;
     }
 
-    public function getNome_mae()
+    public function getNomeMae()
     {
-        return $this->nome_mae;
+        return $this->nomeMae;
     }
 
-    public function getNome_pai()
+    public function getNomePai()
     {
-        return $this->nome_pai;
+        return $this->nomePai;
     }
 
-    public function getTipo_sanguineo()
+    public function getTipoSanguineo()
     {
-        return $this->tipo_sanguineo;
+        return $this->tipoSanguineo;
+    }
+
+    public function setIdpessoa($idpessoa)
+    {
+        $this->idpessoa = $idpessoa;
+    }
+
+    public function setCpf($cpf)
+    {
+        $this->cpf = $cpf;
+    }
+
+    public function setSenha($senha)
+    {
+        $this->senha = $senha;
+    }
+
+    public function setNome($nome)
+    {
+        $this->nome = $nome;
+    }
+
+    public function setSexo($sexo)
+    {
+        $this->sexo = $sexo;
+    }
+
+    public function setTelefone($telefone)
+    {
+        $this->telefone = $telefone;
+    }
+
+    public function setDataNascimento($dataNascimento)
+    {
+        $this->dataNascimento = $dataNascimento;
+    }
+
+    public function setImagem($imagem)
+    {
+        $this->imagem = $imagem;
+    }
+
+    public function setCep($cep)
+    {
+        $this->cep = $cep;
+    }
+
+    public function setCidade($cidade)
+    {
+        $this->cidade = $cidade;
+    }
+
+    public function setBairro($bairro)
+    {
+        $this->bairro = $bairro;
+    }
+
+    public function setLogradouro($logradouro)
+    {
+        $this->logradouro = $logradouro;
+    }
+
+    public function setNumeroEndereco($numeroEndereco)
+    {
+        $this->numeroEndereco = $numeroEndereco;
+    }
+
+    public function setComplemento($complemento)
+    {
+        $this->complemento = $complemento;
+    }
+
+    public function setRegistroGeral($registroGeral)
+    {
+        $this->registroGeral = $registroGeral;
+    }
+
+    public function setOrgao_emissor($orgao_emissor)
+    {
+        $this->orgao_emissor = $orgao_emissor;
+    }
+
+    public function setDataExpedicao($dataExpedicao)
+    {
+        $this->dataExpedicao = $dataExpedicao;
+    }
+
+    public function setNomeMae($nomeMae)
+    {
+        $this->nomeMae = $nomeMae;
+    }
+
+    public function setNomePai($nomePai)
+    {
+        $this->nomePai = $nomePai;
+    }
+
+    public function setTipoSanguineo($tipoSanguineo)
+    {
+        $this->tipoSanguineo = $tipoSanguineo;
     }
 }
