@@ -5,7 +5,6 @@ use wegia;
 create table pessoa (
 	id_pessoa int not null primary key auto_increment,
     cpf varchar(20),
-    senha varchar(70),
     nome varchar(100),
     sexo char(1),
     telefone varchar(25),
@@ -116,6 +115,7 @@ create table funcionario(
     id_pessoa int,
     id_quadro_horario int,
     
+	senha varchar(70),
     vale_transporte varchar(16),
     data_admissao date not null,
 	pis varchar(14),
@@ -239,7 +239,7 @@ create table voluntario_judicial_cargo(
 
 DELIMITER &&
 
-CREATE  PROCEDURE cadinterno(in nome varchar(100),in cpf varchar(40), in senha varchar(70), in sexo char(1), in telefone int(11),in data_nascimento date, 
+CREATE  PROCEDURE cadinterno(in nome varchar(100),in cpf varchar(40), in sexo char(1), in telefone int(11),in data_nascimento date, 
 in imagem longtext, in cep int(11), in cidade varchar(40), in bairro varchar(40), in logradouro varchar(40), in numero_endereco int(11),
 in complemento varchar(50), in ibge varchar(20), in registro_geral varchar(20), in orgao_emissor varchar(20), in data_expedicao date,in nome_pai varchar(100),
 in nome_mae varchar(100), in tipo_sanguineo varchar(5), in nome_contato_urgente varchar(60),in telefone_contato_urgente_1 varchar(33),in telefone_contato_urgente_2 varchar(33),in telefone_contato_urgente_3 varchar(33))
@@ -248,7 +248,7 @@ begin
 
 declare idP int;
 
-insert into pessoa(nome,cpf, senha, sexo, telefone,data_nascimento,imagem,cep ,cidade, bairro, logradouro, numero_endereco,
+insert into pessoa(nome,cpf,sexo, telefone,data_nascimento,imagem,cep ,cidade, bairro, logradouro, numero_endereco,
 complemento,ibge,registro_geral,orgao_emissor,data_expedicao, nome_pai, nome_mae, tipo_sanguineo) 
 values(nome,cpf, senha, sexo, telefone,data_nascimento,imagem,cep ,cidade, bairro, logradouro, numero_endereco,
 complemento,registro_geral,orgao_emissor,data_expedicao, nome_pai, nome_mae, tipo_sanguineo);
@@ -260,7 +260,7 @@ insert into interno(id_pessoa,nome_contato_urgente,telefone_contato_urgente_1,te
 
 end &&
 
-CREATE  PROCEDURE cadfuncionario(in nome varchar(100),in cpf varchar(40), in senha varchar(70), in sexo char(1), in telefone int(11),in data_nascimento date, 
+CREATE  PROCEDURE cadfuncionario(in nome varchar(100),in cpf varchar(40), in sexo char(1), in telefone int(11),in data_nascimento date, 
 in imagem longtext, in cep int(11), in cidade varchar(40), in bairro varchar(40), in logradouro varchar(40), in numero_endereco int(11),
 in complemento varchar(50),in ibge varchar(20), in registro_geral varchar(20), in orgao_emissor varchar(20), in data_expedicao date,in nome_pai varchar(100),
 in nome_mae varchar(100), in tipo_sanguineo varchar(5),	in escala varchar(15),in tipo varchar(15),in carga_horaria decimal(5,2),
@@ -274,7 +274,7 @@ begin
 declare idP int;
 declare idQ int;
 
-insert into pessoa(nome, cpf, senha, sexo, telefone,data_nascimento,imagem, cep ,cidade, bairro, logradouro, numero_endereco,
+insert into pessoa(nome, cpf, senha, telefone,data_nascimento,imagem, cep ,cidade, bairro, logradouro, numero_endereco,
 complemento,registro_geral,orgao_emissor,data_expedicao, nome_pai, nome_mae, tipo_sanguineo)
 values(nome,cpf, senha, sexo, telefone,data_nascimento,imagem,cep ,cidade, bairro, logradouro, numero_endereco,
 complemento,registro_geral,orgao_emissor,data_expedicao, nome_pai, nome_mae, tipo_sanguineo);
@@ -286,7 +286,7 @@ values(escala, tipo, carga_horaria, entrada1, saida1, entrada2, saida2,total, di
 
 select max(id_quadro_horario) into idQ FROM quadro_horario;
 
-insert into funcionario(id_pessoa,id_quadro_horario,id_pessoa,id_quadro_horario,vale_transporte,data_admissao,pis,ctps,
+insert into funcionario(id_pessoa,id_quadro_horario,id_pessoa,id_quadro_horario,senha,vale_transporte,data_admissao,pis,ctps,
 uf_ctps,numero_titulo,zona,secao,certificado_reservista_numero,certificado_reservista_serie,calcado,calca,jaleco,camisa,
 usa_vtp,cesta_basica,situacao)
 values(idP,idQ,    id_pessoa,id_quadro_horario,vale_transporte,data_admissao,pis,ctps,uf_ctps,numero_titulo,zona,secao,
