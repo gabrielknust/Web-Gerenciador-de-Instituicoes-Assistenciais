@@ -16,55 +16,78 @@ class InternoControle
         if((!isset($nome)) || (empty($nome))){
             $msg = "Nome do interno não informado. Por favor, informe um nome!";
             header('Location: ../html/interno.php?msg='.$msg);
-        }else if((!isset($sexo)) || (empty($sexo))){
+        }
+        if((!isset($sexo)) || (empty($sexo))){
             $msg .= "Sexo do interno não informado. Por favor, informe um sexo!";
             header('Location: ../html/interno.php?msg='.$msg);
-        }else if((!isset($Nascimento)) || (empty($Nascimento))){
+        }
+        if((!isset($nascimento)) || (empty($nascimento))){
             $msg .= "Data de nascimento do interno não informado. Por favor, informe uma data de nascimento!";
             header('Location: ../html/interno.php?msg='.$msg);
-        }else if((!isset($pai)) || (empty($pai))){
+        }
+        if((!isset($pai)) || (empty($pai))){
             $msg .= "Nome do pai do interno não informado. Por favor, informe um nome!";
             header('Location: ../html/interno.php?msg='.$msg);
-        }else if((!isset($nomeMae)) || (empty($nomeMae))){
+        }
+        if((!isset($nomeMae)) || (empty($nomeMae))){
             $msg .= "Nome da mae do interno não informado. Por favor, informe um nome!";
             header('Location: ../html/interno.php?msg='.$msg);
-        }else if((!isset($sangue)) || (empty($sangue))){
+        }
+        if((!isset($sangue)) || (empty($sangue))){
             $msg .= "Tipo sanguineo do interno não informado. Por favor, informe um tipo sanguineo!";
             header('Location: ../html/interno.php?msg='.$msg);
-        }else if((!isset($rg)) || (empty($rg))){
+        }
+        if((!isset($rg)) || (empty($rg))){
             $msg .= "Registro geral do interno não informado. Por favor, informe um registro geral!";
             header('Location: ../html/interno.php?msg='.$msg);
-        }else if((!isset($orgaoEmissor)) || (empty($orgaoEmissor))){
+        }
+        if((!isset($orgaoEmissor)) || (empty($orgaoEmissor))){
             $msg .= "Orgao emissor do interno não informado. Por favor, informe um orgão emissor!";
             header('Location: ../html/interno.php?msg='.$msg);
-        }else if((!isset($dataExpedicao)) || (empty($dataExpedicao))){
+        }
+        if((!isset($dataExpedicao)) || (empty($dataExpedicao))){
             $msg .= "Data de expedição do rg do interno não informado. Por favor, informe um data de expedição!";
             header('Location: ../html/interno.php?msg='.$msg);
-        }else if((!isset($numeroCPF)) || (empty($numeroCPF))){
+        }
+        if((!isset($numeroCPF)) || (empty($numeroCPF))){
             $msg .= "CPF do interno não informado. Por favor, informe um CPF!";
             header('Location: ../html/interno.php?msg='.$msg);
-        }else if((!isset($certidao)) || (empty($certidao))){
+        }
+        if((!isset($certidao)) || (empty($certidao))){
             $msg .= "Existência da certidão do interno não informada. Por favor, informe a existência!";
             header('Location: ../html/interno.php?msg='.$msg);
-        }else if((!isset($curatela)) || (empty($curatela))){
+        }
+        if((!isset($curatela)) || (empty($curatela))){
             $msg .= "Existência da curatela do interno não informada. Por favor, informe a existência!";
             header('Location: ../html/interno.php?msg='.$msg);
-        }else if((!isset($observacoes)) || (empty($observacoes))){
+        }
+        if((!isset($observacoes)) || (empty($observacoes))){
             $observacoes=NULL;
-        }else if((!isset($telefone1)) || (empty($telefone1))){
+        }
+        if((!isset($telefone1)) || (empty($telefone1))){
             $telefone1=null;
-        }else if((!isset($telefone2)) || (empty($telefone2))){
+        }
+        if((!isset($telefone2)) || (empty($telefone2))){
             $telefone2=null;
-        }else if((!isset($telefone3)) || (empty($telefone3))){
+        }
+        if((!isset($telefone3)) || (empty($telefone3))){
             $telefone3=null;
-        }else if((!isset($contatoUrgente)) || (empty($contatoUrgente))){
+        }
+        if((!isset($contatoUrgente)) || (empty($contatoUrgente))){
             $contatoUrgente=null;
         }
+            $telefone = null;
             $senha=null;
+            $imagem=null;
+            $cep=null;
+            $cidade=null;
+            $bairro=null;
+            $logradouro=null;
+            $numeroEndereco=null;
+            $complemento=null;
             $interno = new Interno($numeroCPF,$nome,$sexo,$nascimento,$rg,$orgaoEmissor,$dataExpedicao,$nomeMae,$pai,$sangue,$senha,$telefone,$imagem,$cep,$cidade,$bairro,$logradouro,$numeroEndereco,$complemento,$contatoUrgente,$telefone1,$telefone2,$telefone3);
             return $interno;
         }
-    }
     
     public function listarTodos(){
         extract($_REQUEST);
