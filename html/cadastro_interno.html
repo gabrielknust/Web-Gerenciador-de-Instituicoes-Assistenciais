@@ -43,6 +43,9 @@
 		<script src="../Functions/enviar_dados.js"></script>
 		<script src="../Functions/mascara.js"></script>
 
+		<!-- jquery functions -->
+
+
 	</head>
 		<body>
 		<section class="body">
@@ -331,7 +334,7 @@
 												<div class="form-group">
 													<label class="col-md-3 control-label" for="profileLastName">Sexo</label>
 													<div class="col-md-8">
-														<input type="radio" name="sexo" id="radio" id="M" value="m" style="margin-top: 10px; margin-left: 15px;"><i class="fa fa-male" style="font-size: 20px;"></i>
+														<input type="radio" name="sexo" id="radio" id="M" value="m" style="margin-top: 10px margin-left: 15px;" required><i class="fa fa-male" style="font-size: 20px;" ></i>
 														<input type="radio" name="sexo" id="radio" id="F" value="f" style="margin-top: 10px; margin-left: 15px;"><i class="fa fa-female" style="font-size: 20px;"></i> 
 													</div>
 												</div>
@@ -375,7 +378,7 @@
 													<label class="col-md-3 control-label" for="inputSuccess">Tipo Sanguíneo</label>
 													<div class="col-md-6">
 													<select name="sangue" id="sangue" class="form-control input-lg mb-md">
-														<option selected disabled>Selecionar</option>
+														<option selected disabled value="blank">Selecionar</option>
 														<option value="A+">A+</option>
 														<option value="A-">A-</option>
 														<option value="B+">B+</option>
@@ -423,8 +426,8 @@
 												<div class="form-group">
 													<label class="col-md-3 control-label" for="profileLastName">Certidão de Nascimento</label>
 													<div class="col-md-4">
-														<input type="radio" name="certidao" id="radio" id="s" value="certidaosim" style="margin-top: 15px; margin-left: 15px;"><i class="fa fa-check" style="font-size: 20px;"></i>
-														<input type="radio" name="certidao" id="radio" id="n" value="certidaonao" style="margin-top: 15px; margin-left: 15px;"><i class="fa fa-times" style="font-size: 20px;"></i>
+														<input type="radio" name="certidao" id="radio" id="s" value="certidaosim" style="margin-top: 15px; margin-left: 15px;" required><i class="fa fa-check" style="font-size: 20px;"></i>
+														<input type="radio" name="certidao" id="radio" id="n" value="certidaonao" style="margin-top: 15px; margin-left: 15px;" required><i class="fa fa-times" style="font-size: 20px;"></i>
 													</div>
 												</div>
 												
