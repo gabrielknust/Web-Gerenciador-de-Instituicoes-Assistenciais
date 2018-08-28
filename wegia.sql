@@ -17,6 +17,7 @@ create table pessoa (
     logradouro varchar(40),
     numero_endereco varchar(10),
     complemento varchar(50),
+    ibge varchar(20),
 	registro_geral varchar(13), 
     orgao_emissor varchar(20),
     data_expedicao date,
@@ -240,7 +241,7 @@ DELIMITER &&
 
 CREATE  PROCEDURE cadinterno(in nome varchar(100),in cpf varchar(40), in senha varchar(70), in sexo char(1), in telefone int(11),in data_nascimento date, 
 in imagem longtext, in cep int(11), in cidade varchar(40), in bairro varchar(40), in logradouro varchar(40), in numero_endereco int(11),
-in complemento varchar(50), in registro_geral varchar(20), in orgao_emissor varchar(20), in data_expedicao date,in nome_pai varchar(100),
+in complemento varchar(50), in ibge varchar(20), in registro_geral varchar(20), in orgao_emissor varchar(20), in data_expedicao date,in nome_pai varchar(100),
 in nome_mae varchar(100), in tipo_sanguineo varchar(5), in nome_contato_urgente varchar(60),in telefone_contato_urgente_1 varchar(33),in telefone_contato_urgente_2 varchar(33),in telefone_contato_urgente_3 varchar(33))
 
 begin
@@ -248,7 +249,7 @@ begin
 declare idP int;
 
 insert into pessoa(nome,cpf, senha, sexo, telefone,data_nascimento,imagem,cep ,cidade, bairro, logradouro, numero_endereco,
-complemento,registro_geral,orgao_emissor,data_expedicao, nome_pai, nome_mae, tipo_sanguineo) 
+complemento,ibge,registro_geral,orgao_emissor,data_expedicao, nome_pai, nome_mae, tipo_sanguineo) 
 values(nome,cpf, senha, sexo, telefone,data_nascimento,imagem,cep ,cidade, bairro, logradouro, numero_endereco,
 complemento,registro_geral,orgao_emissor,data_expedicao, nome_pai, nome_mae, tipo_sanguineo);
 
@@ -261,7 +262,7 @@ end &&
 
 CREATE  PROCEDURE cadfuncionario(in nome varchar(100),in cpf varchar(40), in senha varchar(70), in sexo char(1), in telefone int(11),in data_nascimento date, 
 in imagem longtext, in cep int(11), in cidade varchar(40), in bairro varchar(40), in logradouro varchar(40), in numero_endereco int(11),
-in complemento varchar(50), in registro_geral varchar(20), in orgao_emissor varchar(20), in data_expedicao date,in nome_pai varchar(100),
+in complemento varchar(50),in ibge varchar(20), in registro_geral varchar(20), in orgao_emissor varchar(20), in data_expedicao date,in nome_pai varchar(100),
 in nome_mae varchar(100), in tipo_sanguineo varchar(5),	in escala varchar(15),in tipo varchar(15),in carga_horaria decimal(5,2),
 in entrada1 varchar(5),in saida1 varchar(5),in entrada2 varchar(5),in saida2 varchar(5),in total varchar(5),in dias_trabalhados varchar(100),
 in folga varchar(30),in observacoes varchar(240),in vale_transporte varchar(16),in data_admissao date,in pis varchar(14),in ctps varchar(15),
