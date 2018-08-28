@@ -17,16 +17,14 @@ class InternoControle
             //$msg = "Descricao da categoria não informada. Por favor, informe uma descrição válida!";
             //header('Location: /sisvenda/html/categoria.php?msg='.$msg);
         //}else{
-            $categoria = new Interno();
-            //$categoria->setDescricao($descricao);
-            return $categoria;
+            $interno = new Interno($numeroCPF,$nome,$sexo,$nascimento,$rg,$orgaoEmissor,$dataExpedicao,$nomePai,$nomeMae,$sangue);
+            return $interno;
        // }
-        
     }
     
     public function listarTodos(){
         extract($_REQUEST);
-        $catDAO= new CategoriaDAO();
+        $internoDAO= new InternoDAO();
         $categorias = $catDAO->listarTodos();
         session_start();
         $_SESSION['categorias']=$categorias;
@@ -38,9 +36,9 @@ class InternoControle
         $intDAO= new InternoDAO();
         try{
             $intDAO->adicionar($interno);
-            $msg= "A categoria ".$interno->getDescricao()." foi adicionada!";
+            $msg= "O interno ".$interno->getNome()." foi adicionado!";
         } catch (Exception $e){
-            $msg= "Não foi possível registrar a categoria"."<br>".$e->getMessage();
+            $msg= "Não foi possível registrar o interno"."<br>".$e->getMessage();
         }
-        header('Location: /sisvenda/html/msg.php?msg='.$msg);
+        header('Location: ../html/msg.php?msg='.$msg);
     }

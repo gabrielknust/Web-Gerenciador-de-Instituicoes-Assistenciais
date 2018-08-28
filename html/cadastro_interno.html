@@ -208,7 +208,7 @@
 											          <h4 class="modal-title">Adicionar uma Foto</h4>
 											        </div>
 											        <div class="modal-body"> 
-											        	<form method="get" action="#">
+											        	<form method="get" action="../control.php">
 											        	<div class="form-group">
 															<label class="col-md-4 control-label" for="imgperfil">Carregue uma imagem de perfil:</label>
 															<div class="col-md-8">
@@ -526,6 +526,8 @@
 													<div class="col-md-9 col-md-offset-3">
 														<input type="submit" class="btn btn-primary" onclick="return enviar_dados()">
 														<input type="reset" class="btn btn-default">
+														<input type="hidden" name="nomeClasse" value="InternoControle">
+														<input type="hidden" name="metodo" value="incluir">
 													</div>
 												</div>
 											</div>

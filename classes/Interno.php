@@ -17,33 +17,15 @@ class Interno extends Pessoa
 
     private $telefone_contato_urgente_3;
 
-    private function __construct($cpf,$senha,$nome,$sexo,$telefone,$data_nascimento,$imagem,$cep,$cidade,$bairro,$logradouro,$numero_endereco,$complemento,$registro_geral,$orgao_emissor,$data_expedicao,$nome_mae,$nome_pai,$tipo_sanguineo,$nome_contato_urgente,$telefone_contato_urgente_1,$telefone_contato_urgente_2,$telefone_contato_urgente_3)
+    private function __construct($cpf,$nome,$sexo,$data_nascimento,$registro_geral,$orgao_emissor,$data_expedicao,$nome_mae,$nome_pai,$tipo_sanguineo)
     {
         $this->cpf=$cpf;
-
-        $this->senha=$senha;
 
         $this->nome=$nome;
 
         $this->sexo=$sexo;
 
-        $this->telefone=$telefone;
-
         $this->data_nascimento=$data_nascimento;
-
-        $this->imagem=$imagem;
-
-        $this->cep=$cep;
-
-        $this->cidade=$cidade;
-
-        $this->bairro=$bairro;
-
-        $this->logradouro=$logradouro;
-
-        $this->numero_endereco=$numero_endereco;
-
-        $this->complemento=$complemento;
 
         $this->registro_geral=$registro_geral;
 
@@ -56,14 +38,6 @@ class Interno extends Pessoa
         $this->nome_pai=$nome_pai;
         
         $this->tipo_sanguineo=$tipo_sanguineo;
-
-        $this->nome_contato_urgente=$nome_contato_urgente;
-
-        $this->telefone_contato_urgente_1=$telefone_contato_urgente_1;
-
-        $this->telefone_contato_urgente_2=$telefone_contato_urgente_2;
-
-        $this->telefone_contato_urgente_3=$telefone_contato_urgente_3;
     }
 
     public function getId_interno()
