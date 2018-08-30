@@ -37,9 +37,12 @@
 		<!-- Head Libs -->
 		<script src="../assets/vendor/modernizr/modernizr.js"></script>
 
+		<!-- Javascript functions -->
 		<script src="../Functions/onlyNumbers.js"></script>
 		<script src="../Functions/onlyChars.js"></script>
 		<script src="../Functions/enviar_dados.js"></script>
+		<script src="../Functions/mascara.js"></script>
+		<script src="../Functions/validar_senha.js"></script>
 		<script type="text/javascript" >
 
     
@@ -357,44 +360,44 @@
 												<div class="form-group">
 													<label class="col-md-3 control-label" for="profileFirstName">Nome completo</label>
 													<div class="col-md-8">
-														<input type="text" class="form-control" id="profileFirstName" id="nome"onkeypress="return Onlychars(event)"  onblur="return enviar_dados()">
+														<input type="text" class="form-control" name="nome" id="profileFirstName" id="nome" onkeypress="return Onlychars(event)" required>
 													</div>
 												</div>
 												<div class="form-group">
 													<label class="col-md-3 control-label" for="profileLastName">Sexo</label>
 													<div class="col-md-8">
-														<input type="radio" name="gender" id="radio" id="M" value="male" style="margin-top: 10px; margin-left: 15px;"><i class="fa fa-male" style="font-size: 20px;"></i>
-														<input type="radio" name="gender" id="radio" id="F" value="female" style="margin-top: 10px; margin-left: 15px;"><i class="fa fa-female" style="font-size: 20px;"></i> 
+														<input type="radio" name="gender" id="radio" id="M" value="m" style="margin-top: 10px; margin-left: 15px;" required><i class="fa fa-male" style="font-size: 20px;"></i>
+														<input type="radio" name="gender" id="radio" id="F" value="f" style="margin-top: 10px; margin-left: 15px;"><i class="fa fa-female" style="font-size: 20px;"></i> 
 													</div>
 												</div>
 												<div class="form-group">
 													<label class="col-md-3 control-label" for="profileCompany">Telefone</label>
 													<div class="col-md-8">
-														<input type="text" class="form-control" minlength="11" id="telefone" id="profileCompany" placeholder="Ex: (22)999999999" onkeypress="return Onlynumbers(event)">
+														<input type="text" class="form-control" minlength="12" name="telefone" id="telefone" id="profileCompany" placeholder="Ex: (22)999999999" onkeypress="return Onlynumbers(event)" onkeyup="mascara('(##)############',this,event)" required>
 													</div>
 												</div>
 												<div class="form-group">
 													<label class="col-md-3 control-label" for="profileCompany">Nascimento</label>
 													<div class="col-md-8">
-														<input type="date" class="form-control" id="profileCompany" id="nascimento" onkeypress="return Onlynumbers(event)">
+														<input type="text" placeholder="dd/mm/aaaa" maxlength="10" class="form-control" name="nascimento" id="profileCompany" id="nascimento" onkeypress="return Onlynumbers(event)" onkeyup="mascara('##/##/####',this,event)" required>
 													</div>
 												</div>
 												<div class="form-group">
 													<label class="col-md-3 control-label" for="profileFirstName">Nome do pai</label>
 													<div class="col-md-8">
-														<input type="text" class="form-control" id="profileFirstName pai" onkeypress="return Onlychars(event)">
+														<input type="text" class="form-control" name="nome_pai" id="profileFirstName pai" onkeypress="return Onlychars(event)" required>
 													</div>
 												</div>
 												<div class="form-group">
 													<label class="col-md-3 control-label" for="profileFirstName">Nome da mãe</label>
 													<div class="col-md-8">
-														<input type="text" class="form-control" id="profileFirstName" id="mae" onkeypress="return Onlychars(event)">
+														<input type="text" class="form-control" name="nome_mae" id="profileFirstName" id="mae" onkeypress="return Onlychars(event)" required>
 													</div>
 												</div>
 												<div class="form-group">
 													<label class="col-md-3 control-label" for="inputSuccess">Tipo sanguíneo</label>
 													<div class="col-md-6">
-													<select class="form-control input-lg mb-md" id="sangue">
+													<select class="form-control input-lg mb-md" name="sangue" id="sangue">
 														<option selected disabled>Selecionar</option>
 														<option value="A+">A+</option>
 														<option value="A-">A-</option>
@@ -415,49 +418,49 @@
 												<div class="form-group">
 													<label class="col-md-3 control-label" for="cep">CEP</label>
 													<div class="col-md-8">
-														<input type="text" name="cep"  value="" size="10" onblur="pesquisacep(this.value);" class="form-control" id="cep" placeholder="Ex: 11111-111" onkeypress="return Onlynumbers(event)">
+														<input type="text" name="cep"  value="" size="10" onblur="pesquisacep(this.value);" class="form-control" id="cep" maxlength="9" placeholder="Ex: 22222-222" onkeypress="return Onlynumbers(event)" onkeyup="mascara('#####-###',this,event)" required>
 													</div>
 												</div>
 												<div class="form-group">
 													<label class="col-md-3 control-label" for="uf">Estado</label>
 													<div class="col-md-8">
-														<input type="text" name="uf" size="60" class="form-control" id="uf">
+														<input type="text" name="uf" size="60" class="form-control" id="uf" required>
 													</div>
 												</div>
 												<div class="form-group">
 													<label class="col-md-3 control-label" for="cidade">Cidade</label>
 													<div class="col-md-8">
-														<input type="text" size="40" class="form-control" id="cidade">
+														<input type="text" size="40" class="form-control" name="cidade" id="cidade" required>
 													</div>
 												</div>
 												<div class="form-group">
 													<label class="col-md-3 control-label" for="bairro">Bairro</label>
 													<div class="col-md-8">
-														<input type="text" name="bairro" size="40" class="form-control" id="bairro">
+														<input type="text" name="bairro" size="40" class="form-control" id="bairro" required>
 													</div>
 												</div>
 												<div class="form-group">
 													<label class="col-md-3 control-label" for="rua">Logradouro</label>
 													<div class="col-md-8">
-														<input type="text" name="rua" size="2" class="form-control" id="rua">
+														<input type="text" name="rua" size="2" class="form-control" id="rua" required>
 													</div>
 												</div>
 												<div class="form-group">
 													<label class="col-md-3 control-label" for="profileCompany">Número</label>
 													<div class="col-md-8">
-														<input type="number" class="form-control" id="profileCompany" id="numero_residencia">
+														<input type="number" class="form-control" id="profileCompany" name="numero_residencia"  id="numero_residencia" required>
 													</div>
 												</div>
 												<div class="form-group">
 													<label class="col-md-3 control-label" for="profileCompany">Complemento</label>
 													<div class="col-md-8">
-														<input type="text" class="form-control" id="profileCompany">
+														<input type="text" class="form-control" name="complemento" id="complemento" id="profileCompany">
 													</div>
 												</div>
 												<div class="form-group">
 													<label class="col-md-3 control-label" for="ibge">IBGE</label>
 													<div class="col-md-8">
-														<input type="text" size="8" name="ibge" class="form-control" id="ibge">
+														<input type="text" size="8" name="ibge" class="form-control" name="ibge" id="ibge">
 													</div>
 												</div>
 												<br/>
@@ -469,67 +472,68 @@
 													<div class="form-group">
 														<label class="col-md-3 control-label" for="profileCompany">Número do RG</label>
 														<div class="col-md-6">
-															<input type="text" class="form-control" id="rg" id="profileCompany" placeholder="Ex: Ex: 22.222.222-2" onkeypress="return Onlynumbers(event)">
+															<input type="text" class="form-control" name="rg" id="rg" id="profileCompany" placeholder="Ex: 22.222.222-2" maxlength="12" onkeypress="return Onlynumbers(event)" onkeyup="mascara('##.###.###-#',this,event)" required>
 														</div>
 														
 													</div>
 													<div class="form-group">
 														<label class="col-md-3 control-label" for="profileCompany">Órgão emissor</label>
 														<div class="col-md-6">
-															<input type="text" class="form-control" id="profileCompany" id="orgao_emissor" onkeypress="return Onlychars(event)">
+															<input type="text" class="form-control" name="orgao_emissor" id="profileCompany" id="orgao_emissor" onkeypress="return Onlychars(event)" required>
 														</div>
 													</div>
 													<div class="form-group">
 														<label class="col-md-3 control-label" for="profileCompany">Data de expedição</label>
 														<div class="col-md-6">
-															<input type="date" class="form-control" id="profileCompany" id="data_expedicao">
+															<input type="text" class="form-control" maxlength="10" placeholder="dd/mm/aaaa" id="profileCompany" name="data_expedicao" id="data_expedicao" onkeypress="return Onlynumbers(event)" onkeyup="mascara('##/##/####',this,event)" required>
 														</div>
 													</div>
 													<div class="form-group">
 														<label class="col-md-3 control-label" for="profileCompany">Número do CPF</label>
 														<div class="col-md-6">
-															<input type="text" class="form-control" id="profileCompany" placeholder="Ex: 222.222.222-22" onkeypress="return Onlynumbers(event)" id="cpf">
+															<input type="text" class="form-control" id="profileCompany" id="cpf" name="cpf" placeholder="Ex: 222.222.222-22" maxlength="14" onkeypress="return Onlynumbers(event)" onkeyup="mascara('###.###.###-##',this,event)" required>
 														</div>														
 													</div>
 													<div class="form-group">
 														<label class="col-md-3 control-label" for="profileCompany">Título de eleitor</label>
 														<div class="col-md-6">
-															<input type="text" class="form-control" id="profileCompany" id="eleitor">
+															<input type="text" class="form-control" id="profileCompany" name="eleitor" id="eleitor" required>
 														</div>														
 													</div>
 													<div class="form-group">
 														<label class="col-md-3 control-label" for="profileCompany">Certificado de reservista</label>
 														<div class="col-md-6">
-															<input type="text" class="form-control" id="profileCompany" id="certificado_reservista">
+															<input type="text" class="form-control" name="certificado_reservista" id="profileCompany" id="certificado_reservista">
 														</div>														
 													</div>
 													<div class="form-group">
 														<label class="col-md-3 control-label" for="profileLastName">Certidão de nascimento</label>
 														<div class="col-md-4">
-															<input type="radio" name="certidao" id="radio" value="certidaosim" id="sim" style="margin-top: 15px; margin-left: 15px;"><i class="fa fa-check" style="font-size: 20px;"></i>
+															<input type="radio" name="certidao" id="radio" value="certidaosim" id="sim" style="margin-top: 15px; margin-left: 15px;" required
+															><i class="fa fa-check" style="font-size: 20px;"></i>
 															<input type="radio" name="certidao" id="radio" id="nao" value="certidaonao" style="margin-top: 15px; margin-left: 15px;"><i class="fa fa-times" style="font-size: 20px;"></i>
 														</div>
 													</div>
 													<br/>
 
-												<hr class="dotted short">
+												<!--<hr class="dotted short">
 												<h4 class="mb-xlg">Vestuário</h4>
 													<div class="form-group">
 														<label class="col-md-3 control-label" for="profileCompany">Calçado</label>
 														<div class="col-md-6">
-															<input type="number" class="form-control" id="profileCompany" maxlength="2" id="calcado">
+															<input type="number" class="form-control" name="calcado" id="calcado" id="profileCompany" maxlength="2" required>
 														</div>														
 													</div>
 													<div class="form-group">
 														<label class="col-md-3 control-label" for="profileCompany">Calça</label>
 														<div class="col-md-6">
-															<input type="number" class="form-control" id="profileCompany" id="calca">
+															<input type="number" class="form-control" name="calca" id="profileCompany" id="calca" required>
 														</div>														
 													</div>
 													<div class="form-group">
 													<label class="col-md-3 control-label" for="inputSuccess">Tamanho do Jaleco</label>
 													<div class="col-md-6">
-													<select class="form-control input-lg mb-md" id="jaleco">
+													<select class="form-control input-lg mb-md" name="jaleco" id="jaleco">
 														<option selected disabled>Selecionar</option>
 														<option value="PP" >PP</option>
 														<option value="P" >P</option>
@@ -542,7 +546,7 @@
 													<div class="form-group">
 													<label class="col-md-3 control-label" for="inputSuccess">Tamanho da Camisa</label>
 													<div class="col-md-6">
-													<select class="form-control input-lg mb-md" id="camisa">
+													<select class="form-control input-lg mb-md" name="camisa" id="camisa">
 														<option selected disabled>Selecionar</option>
 														<option value="PP">PP</option>
 														<option value="P">P</option>
@@ -551,22 +555,29 @@
 														<option value="GG">GG</option>
 													</select>
 													</div>	
-												</div>
+												</div> -->
 
 
 											<hr class="dotted short">
 											<h4 class="mb-xlg doch4">senha</h4>
 
 												<div class="form-group">
-													<label class="col-md-3 control-label" for="profileCompany">Senha</label>
+													<label class="col-md-3 control-label" >Senha</label>
 													<div class="col-md-6">
-														<input type="password" name="senha" class="form-control" id="profileCompany" id="senha">
+														<input type="password" name="senha" class="form-control" id="senha" required>	
+													</div><br>
+												</div>
+												<div class="form-group
+												,">
+													<label class="col-md-3 control-label" >Confirmação de senha</label>
+													<div class="col-md-6">
+														<input type="password" name="c_senha" class="form-control" id="c_senha" required>
 													</div>														
 												</div>	
 											<div class="panel-footer">
 												<div class="row">
 													<div class="col-md-9 col-md-offset-3">
-														<input type="submit" class="btn' btn-primary"  >
+														<input type="submit" class="btn btn-primary"  onclick="return enviar_dados()">
 														<input type="reset" class="btn btn-default">
 													</div>
 												</div>

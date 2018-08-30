@@ -14,8 +14,8 @@ class InternoDAO
             $pdo = $acesso->conexao();
             
             $stmt = $pdo->prepare($sql);
-            
-            $stmt->bindParam(':senha',$interno->getSenha());
+            $senha=$interno->getSenha();
+            $stmt->bindParam(':senha',$senha);
             $stmt->bindParam(':nome',$interno->getNome());
             $stmt->bindParam(':cpf',$interno->getCpf());
             $stmt->bindParam(':sexo',$interno->getSexo());

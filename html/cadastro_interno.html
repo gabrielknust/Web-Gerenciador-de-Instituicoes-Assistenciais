@@ -339,21 +339,27 @@
 													</div>
 												</div>
 												<div class="form-group">
+													<label class="col-md-3 control-label" for="profileFirstName">Nome do contato urgente</label>
+													<div class="col-md-8">
+														<input type="text" class="form-control" name="contatoUrgente" id="contatoUrgente" id="profileFirstName" onkeypress="return Onlychars(event)" required>
+													</div>
+												</div>
+												<div class="form-group">
 													<label class="col-md-3 control-label" for="profileCompany">Telefone contato 1</label>
 													<div class="col-md-8">
-														<input type="text" name="telefone1" class="form-control" minlength="11" id="profileCompany" id="telefone1" maxlength="13" placeholder="(##)#########" onkeypress="return Onlynumbers(event)" onkeyup="mascara('(##)#########',this,event)" >
+														<input type="text" name="telefone1" class="form-control" minlength="11" id="profileCompany" id="telefone1" minlength="12" placeholder="(22)999999999" onkeypress="return Onlynumbers(event)" onkeyup="mascara('(##)#############',this,event)" >
 													</div>
 												</div>
 												<div class="form-group">
 													<label class="col-md-3 control-label" for="profileCompany">Telefone contato 2</label>
 													<div class="col-md-8">
-														<input type="text" name="telefone2" class="form-control" minlength="11" id="profileCompany" id="telefone2" maxlength="13" placeholder="(##)#########" onkeypress="return Onlynumbers(event)" onkeyup="mascara('(##)#########',this,event)" >
+														<input type="text" name="telefone2" class="form-control" minlength="11" id="profileCompany" id="telefone2" maxlength="13" placeholder="(22)999999999" onkeypress="return Onlynumbers(event)" onkeyup="mascara('(##)#########',this,event)" >
 													</div>
 												</div>
 												<div class="form-group">
 													<label class="col-md-3 control-label" for="profileCompany">Telefone contato 3</label>
 													<div class="col-md-8">
-														<input type="text" name="telefone3" class="form-control" minlength="11" id="profileCompany" id="telefone3" maxlength="13" placeholder="(##)#########" onkeypress="return Onlynumbers(event)" onkeyup="mascara('(##)#########',this,event)" >
+														<input type="text" name="telefone3" class="form-control" minlength="11" id="profileCompany" id="telefone3" maxlength="13" placeholder="(22)999999999" onkeypress="return Onlynumbers(event)" onkeyup="mascara('(##)#########',this,event)" >
 													</div>
 												</div>
 												<div class="form-group">
@@ -398,7 +404,7 @@
 												<div class="form-group">
 													<label class="col-md-3 control-label" for="profileCompany">Número do RG</label>
 													<div class="col-md-6">
-														<input type="text" name="rg" class="form-control" id="rg" id="profileCompany" maxlength="12" placeholder="##.###.###-#" onkeypress="return Onlynumbers(event)" onkeyup="mascara('##.###.###-#',this,event)" required>
+														<input type="text" name="rg" class="form-control" id="rg" id="profileCompany" maxlength="12" placeholder="22.222.222-2" onkeypress="return Onlynumbers(event)" onkeyup="mascara('##.###.###-#',this,event)" required>
 													</div>
 												</div>
 												
@@ -419,7 +425,7 @@
 												<div class="form-group">
 													<label class="col-md-3 control-label" for="profileCompany">Número do CPF</label>
 													<div class="col-md-6">
-														<input type="text" name="numeroCPF" class="form-control" id="profileCompany" id="cpf" maxlength="14" placeholder="###.###.###-##" onkeypress="return Onlynumbers(event)" onkeyup="mascara('###.###.###-##',this,event)" required>
+														<input type="text" name="numeroCPF" class="form-control" id="profileCompany" id="cpf" maxlength="14" placeholder="222.222.222-22" onkeypress="return Onlynumbers(event)" onkeyup="mascara('###.###.###-##',this,event)" required>
 													</div>
 												</div>
 												

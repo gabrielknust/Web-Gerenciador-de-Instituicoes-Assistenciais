@@ -34,7 +34,7 @@ abstract class Pessoa
 
     private $registroGeral;
 
-    private $orgao_emissor;
+    private $orgaoEmissor;
 
     private $dataExpedicao;
 
@@ -43,6 +43,7 @@ abstract class Pessoa
     private $nomePai;
     
     private $tipoSanguineo;
+
     public function getIdpessoa()
     {
         return $this->idpessoa;
@@ -118,9 +119,9 @@ abstract class Pessoa
         return $this->registroGeral;
     }
 
-    public function getOrgao_emissor()
+    public function getOrgaoEmissor()
     {
-        return $this->orgao_emissor;
+        return $this->orgaoEmissor;
     }
 
     public function getDataExpedicao()
@@ -218,9 +219,9 @@ abstract class Pessoa
         $this->registroGeral = $registroGeral;
     }
 
-    public function setOrgao_emissor($orgao_emissor)
+    public function setOrgaoEmissor($orgaoEmissor)
     {
-        $this->orgao_emissor = $orgao_emissor;
+        $this->orgao_emissor = $orgaoEmissor;
     }
 
     public function setDataExpedicao($dataExpedicao)
