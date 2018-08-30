@@ -62,30 +62,34 @@ class InternoControle
             header('Location: ../html/interno.php?msg='.$msg);
         }
         if((!isset($observacoes)) || (empty($observacoes))){
-            $observacoes=NULL;
+            $observacoes='NULL';
         }
         if((!isset($telefone1)) || (empty($telefone1))){
-            $telefone1=null;
+            $telefone1='null';
         }
         if((!isset($telefone2)) || (empty($telefone2))){
-            $telefone2=null;
+            $telefone2='null';
         }
         if((!isset($telefone3)) || (empty($telefone3))){
-            $telefone3=null;
+            $telefone3='null';
         }
         if((!isset($contatoUrgente)) || (empty($contatoUrgente))){
-            $contatoUrgente=null;
+            $contatoUrgente='null';
         }
-            $telefone = null;
-            $senha=null;
-            $imagem=null;
-            $cep=null;
-            $cidade=null;
-            $bairro=null;
-            $logradouro=null;
-            $numeroEndereco=null;
-            $complemento=null;
-            $interno = new Interno($numeroCPF,$nome,$sexo,$nascimento,$rg,$orgaoEmissor,$dataExpedicao,$nomeMae,$pai,$sangue,$senha,$telefone,$imagem,$cep,$cidade,$bairro,$logradouro,$numeroEndereco,$complemento,$contatoUrgente,$telefone1,$telefone2,$telefone3);
+            $telefone = 'null';
+            $senha='null';
+            $imagem='null';
+            $cep='null';
+            $cidade='null';
+            $bairro='null';
+            $logradouro='null';
+            $numeroEndereco='null';
+            $complemento='null';
+            $interno = new Interno($numeroCPF,$nome,$sexo,$nascimento,$rg,$orgaoEmissor,$dataExpedicao,$nomeMae,$pai,$sangue,$senha,$telefone,$imagem,$cep,$cidade,$bairro,$logradouro,$numeroEndereco,$complemento);
+            $interno->setNomeContatoUrgente($contatoUrgente);
+            $interno->setTelefoneContatoUrgente1($telefone1);
+            $interno->setTelefoneContatoUrgente2($telefone2);
+            $interno->setTelefoneContatoUrgente3($telefone3);
             return $interno;
         }
     

@@ -6,7 +6,7 @@ class InternoDAO
 	public function incluir($interno)
     {        
         try {
-            $sql = 'call cadinterno(:nome,:cpf,:senha,:sexo,:telefone,:data_nascimento,:imagem,:cep,:cidade,:bairro,:logradouro,:numero_endereco,:complemento,:registro_geral,:orgao_emissor,:nome_pai,:nome_mae,:tipo_sanguineo,:nome_contato_urgente,:telefone_contato_urgente_1,:telefone_contato_urgente_2,:telefone_contato_urgente_3)';
+            $sql = 'call adinterno(:nome,:cpf,:senha,:sexo,:telefone,:data_nascimento,:imagem,:cep,:cidade,:bairro,:logradouro,:numero_endereco,:complemento,:ibge,:registro_geral,:orgao_emissor,:data_expedicao,:nome_pai,:nome_mae,:tipo_sanguineo,:nome_contato_urgente,:telefone_contato_urgente_1,:telefone_contato_urgente_2,:telefone_contato_urgente_3)';
             
             $sql = str_replace("'", "\'", $sql);
             $acesso = new Acesso();
@@ -15,29 +15,53 @@ class InternoDAO
             
             $stmt = $pdo->prepare($sql);
             $senha=$interno->getSenha();
+            $senha=$interno->getSenha();
+            $nome=$interno->getNome();
+            $cpf=$interno->getCpf();
+            $sexo=$interno->getSexo();
+            $telefone=$interno->getTelefone();
+            $nascimento=$interno->getDataNascimento();
+            $imagem=$interno->getImagem();
+            $cep=$interno->getCep();
+            $cidade=$interno->getCidade();
+            $bairro=$interno->getBairro();
+            $logradouro=$interno->getLogradouro();
+            $numeroEndereco=$interno->getNumeroEndereco();
+            $complemento=$interno->getComplemento();
+            $rg=$interno->getRegistroGeral();
+            $orgaoEmissor=$interno->getOrgaoEmissor();
+            $nomePai=$interno->getNomePai();        
+            $nomeMae=$interno->getNomeMae();
+            $sangue=$interno->getTipoSanguineo();
+            $nomeContatoUrgente=$interno->getNomeContatoUrgente();
+            $telefone1=$interno->getTelefoneContatoUrgente1();
+            $telefone2=$interno->getTelefoneContatoUrgente2();
+            $telefone3=$interno->getTelefoneContatoUrgente3();
+            $ibge="null";
             $stmt->bindParam(':senha',$senha);
-            $stmt->bindParam(':nome',$interno->getNome());
-            $stmt->bindParam(':cpf',$interno->getCpf());
-            $stmt->bindParam(':sexo',$interno->getSexo());
-            $stmt->bindParam(':telefone',$interno->getTelefone());
-            $stmt->bindParam(':data_nascimento',$interno->getDataNascimento());
-            $stmt->bindParam(':imagem',$interno->getImagem());        
-            $stmt->bindParam(':cep',$interno->getCep());
-            $stmt->bindParam(':cidade',$interno->getCidade());
-            $stmt->bindParam(':bairro',$interno->getBairro());
-            $stmt->bindParam(':logradouro',$interno->getLogradouro());
-            $stmt->bindParam(':numero_endereco',$interno->getNumeroEndereco());
-            $stmt->bindParam(':complemento',$interno->getComplemento());
-            $stmt->bindParam(':registro_geral',$interno->getRegistroGeral());
-            $stmt->bindParam(':orgao_emissor',$interno->getOrgaoEmissor());
-            $stmt->bindParam(':nome_pai',$interno->getNomePai());        
-            $stmt->bindParam(':nome_mae',$interno->getNomeMae());
-            $stmt->bindParam(':tipo_sanguineo',$interno->getTipoSanguineo());
-            $stmt->bindParam(':nome_contato_urgente',$interno->getNomeContatoUrgente());
-            $stmt->bindParam(':telefone_contato_urgente_1',$interno->getTelefoneContatoUrgente1());
-            $stmt->bindParam(':telefone_contato_urgente_2',$interno->getTelefoneContatoUrgente2());
-            $stmt->bindParam(':telefone_contato_urgente_3',$interno->getTelefoneContatoUrgente3());
-            
+            $stmt->bindParam(':nome',$nome);
+            $stmt->bindParam(':cpf',$cpf);
+            $stmt->bindParam(':sexo',$sexo);
+            $stmt->bindParam(':telefone',$telefone);
+            $stmt->bindParam(':data_nascimento',$nascimento);
+            $stmt->bindParam(':imagem',$imagem);        
+            $stmt->bindParam(':cep',$cep);
+            $stmt->bindParam(':cidade',$cidade);
+            $stmt->bindParam(':bairro',$bairro);
+            $stmt->bindParam(':logradouro',$logradouro);
+            $stmt->bindParam(':numero_endereco',$numeroEndereco);
+            $stmt->bindParam(':complemento',$complemento);
+            $stmt->bindParam(':registro_geral',$rg);
+            $stmt->bindParam(':orgao_emissor',$orgaoEmissor);
+            $stmt->bindParam(':nome_pai',$nomePai);        
+            $stmt->bindParam(':nome_mae',$nomeMae);
+            $stmt->bindParam(':tipo_sanguineo',$sangue);
+            $stmt->bindParam(':nome_contato_urgente',$nomeContatoUrgente);
+            $stmt->bindParam(':telefone_contato_urgente_1',$telefone1);
+            $stmt->bindParam(':telefone_contato_urgente_2',$telefone2);
+            $stmt->bindParam(':telefone_contato_urgente_3',$telefone3);
+            $stmt->bindParam(':ibge',$ibge);
+
             $stmt->execute();
         } catch (PDOException $e) {
             echo 'Error: <b>  na tabela interno = ' . $sql . '</b> <br /><br />' . $e->getMessage();
@@ -108,13 +132,12 @@ class InternoDAO
             $produtos = Array();
             while($linha = $consulta->fetch(PDO::FETCH_ASSOC)){
                 $interno = new Interno($cpf,$nome,$sexo,$dataNascimento,$registroGeral,$orgaoEmissor,$dataExpedicao,$nomeMae,$nomePai,$tipoSanguineo);
-                
                 $internos[] = $produto;
+            }
             } catch (PDOExeption $e){
                 echo 'Error:' . $e->getMessage;
             }
         }
-    }
 
     public function listar($nome){
         $nome = "%" . $nome . "%";

@@ -1,4 +1,4 @@
-create database wegia default charset utf8;
+create schema wegia default charset utf8;
 
 use wegia;
 /*--------------------------- Cadastro -------------------------------- */
@@ -263,18 +263,19 @@ create table voluntario_judicial_cargo(
     foreign key(id_voluntarioJ) references voluntario_judicial(id_voluntario_judicial)
 )engine = InnoDB;
 
+
 DELIMITER &&
 
-CREATE  PROCEDURE cadinterno(in nome varchar(100),in cpf varchar(40),senha varchar(70), in sexo char(1), in telefone int(11),in data_nascimento date, 
-in imagem longtext, in cep int(11), in cidade varchar(40), in bairro varchar(40), in logradouro varchar(40), in numero_endereco int(11),
-in complemento varchar(50), in ibge varchar(20), in registro_geral varchar(20), in orgao_emissor varchar(20), in data_expedicao date,in nome_pai varchar(100),
-in nome_mae varchar(100), in tipo_sanguineo varchar(5), in nome_contato_urgente varchar(60),in telefone_contato_urgente_1 varchar(33),in telefone_contato_urgente_2 varchar(33),in telefone_contato_urgente_3 varchar(33))
+CREATE  PROCEDURE cadinterno (in @nome varchar(100),in @cpf varchar(40),in @senha varchar(70), in @sexo char(1), in @telefone int(11),in @data_nascimento date, 
+in @imagem longtext, in @cep int(11), in @cidade varchar(40), in @bairro varchar(40), in @logradouro varchar(40), in @numero_endereco int(11),
+in @complemento varchar(50), in @ibge varchar(20), in @registro_geral varchar(20), in @orgao_emissor varchar(20), in @data_expedicao date,in @nome_pai varchar(100),
+in @nome_mae varchar(100), in @tipo_sanguineo varchar(5), in @nome_contato_urgente varchar(60),in @telefone_contato_urgente_1 varchar(33),in @telefone_contato_urgente_2 varchar(33),in @telefone_contato_urgente_3 varchar(33))
 
 begin
 
 declare idP int;
 
-insert into pessoa(nome,cpf,senha,sexo, telefone,data_nascimento,imagem,cep ,cidade, bairro, logradouro, numero_endereco,
+insert into pessoa(nome,cpf,senha,sexo,telefone,data_nascimento,imagem,cep ,cidade, bairro, logradouro, numero_endereco,
 complemento,ibge,registro_geral,orgao_emissor,data_expedicao, nome_pai, nome_mae, tipo_sanguineo) 
 values(nome,cpf, senha, sexo, telefone,data_nascimento,imagem,cep ,cidade, bairro, logradouro, numero_endereco,
 complemento,registro_geral,orgao_emissor,data_expedicao, nome_pai, nome_mae, tipo_sanguineo);

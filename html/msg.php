@@ -9,4 +9,3 @@
 <a href="../html/cadastro_interno.html">Adicionar outro interno</a>
 </body>
 </html>
-<?php

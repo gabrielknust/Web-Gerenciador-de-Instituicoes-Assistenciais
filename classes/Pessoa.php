@@ -44,6 +44,29 @@ abstract class Pessoa
     
     private $tipoSanguineo;
 
+    public function __construct($cpf,$nome,$sexo,$dataNascimento,$registroGeral,$orgaoEmissor,$dataExpedicao,$nomeMae,$nomePai,$tipoSanguineo,$senha,$telefone,$imagem,$cep,$cidade,$bairro,$logradouro,$numeroEndereco,$complemento)
+    {
+        $this->cpf=$cpf;
+        $this->nome=$nome;
+        $this->sexo=$sexo;
+        $this->dataNascimento=$dataNascimento;
+        $this->registroGeral=$registroGeral;
+        $this->orgaoEmissor=$orgaoEmissor;
+        $this->dataExpedicao=$dataExpedicao;
+        $this->nomeMae=$nomeMae;
+        $this->nomePai=$nomePai;
+        $this->tipoSanguineo=$tipoSanguineo;
+        $this->senha=$senha;
+        $this->telefone=$telefone;
+        $this->imagem=$imagem;
+        $this->cep=$cep;
+        $this->cidade=$cidade;
+        $this->bairro=$bairro;
+        $this->logradouro=$logradouro;
+        $this->numeroEndereco=$numeroEndereco;
+        $this->complemento=$complemento;
+    }
+
     public function getIdpessoa()
     {
         return $this->idpessoa;
