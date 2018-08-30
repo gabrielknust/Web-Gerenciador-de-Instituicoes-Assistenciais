@@ -17,11 +17,6 @@ class Interno extends Pessoa
 
     private $telefoneContatoUrgente3;
 
-    public function getnome2()
-    {
-        return $this->getNome();
-    }
-    
     public function getIdInterno()
     {
         return $this->idInterno;

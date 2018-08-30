@@ -6,14 +6,14 @@ class InternoDAO
 	public function incluir($interno)
     {        
         try {
-            $sql = 'call adinterno(:nome,:cpf,:senha,:sexo,:telefone,:data_nascimento,:imagem,:cep,:cidade,:bairro,:logradouro,:numero_endereco,:complemento,:ibge,:registro_geral,:orgao_emissor,:data_expedicao,:nome_pai,:nome_mae,:tipo_sanguineo,:nome_contato_urgente,:telefone_contato_urgente_1,:telefone_contato_urgente_2,:telefone_contato_urgente_3)';
-            
+            $sql = 'call cadinterno(:nome,:cpf,:senha,:sexo,:telefone,:data_nascimento,:imagem,:cep,:cidade,:bairro,:logradouro,:numero_endereco,:complemento,:ibge,:registro_geral,:orgao_emissor,:data_expedicao,:nome_pai,:nome_mae,:tipo_sanguineo,:nome_contato_urgente,:telefone_contato_urgente_1,:telefone_contato_urgente_2,:telefone_contato_urgente_3)';
             $sql = str_replace("'", "\'", $sql);
             $acesso = new Acesso();
             
             $pdo = $acesso->conexao();
             
             $stmt = $pdo->prepare($sql);
+
             $senha=$interno->getSenha();
             $senha=$interno->getSenha();
             $nome=$interno->getNome();
@@ -38,6 +38,8 @@ class InternoDAO
             $telefone2=$interno->getTelefoneContatoUrgente2();
             $telefone3=$interno->getTelefoneContatoUrgente3();
             $ibge="null";
+            $dataExpedicao=$interno->getDataExpedicao();
+
             $stmt->bindParam(':senha',$senha);
             $stmt->bindParam(':nome',$nome);
             $stmt->bindParam(':cpf',$cpf);
@@ -53,6 +55,7 @@ class InternoDAO
             $stmt->bindParam(':complemento',$complemento);
             $stmt->bindParam(':registro_geral',$rg);
             $stmt->bindParam(':orgao_emissor',$orgaoEmissor);
+            $stmt->bindParam(':data_expedicao',$dataExpedicao);
             $stmt->bindParam(':nome_pai',$nomePai);        
             $stmt->bindParam(':nome_mae',$nomeMae);
             $stmt->bindParam(':tipo_sanguineo',$sangue);
@@ -131,12 +134,13 @@ class InternoDAO
             $consulta = $pdo->query("SELECT p.nome,p.cpf, p.senha, p.sexo, p.telefone,p.data_nascimento,p.imagem, p.cep,p.cidade,p.bairro,p.logradouro,p.numero_endereco,p.complemento,p.ibge,p.registro_geral,p.orgao_emissor,p.data_expedicao,p.nome_pai,p.nome_mae,p.tipo_sanguineo,i.nome_contato_urgente,i.telefone_contato_urgente_1,i.telefone_contato_urgente_2,i.telefone_contato_urgente_3 FROM pessoa p INNER JOIN interno i ON p.id_pessoa = i.id_pessoa");
             $produtos = Array();
             while($linha = $consulta->fetch(PDO::FETCH_ASSOC)){
-                $interno = new Interno($cpf,$nome,$sexo,$dataNascimento,$registroGeral,$orgaoEmissor,$dataExpedicao,$nomeMae,$nomePai,$tipoSanguineo);
-                $internos[] = $produto;
+                $interno = new Interno($linha['cpf'],$linha['nome'],$linha['sexo'],$linha['data_nascimento'],$linha['registro_geral'],$linha['orgao_emissor'],$linha['data_expedicao'],$linha['nome_mae'],$linha['nome_pai'],$linha['tipo_sanguineo'],$linha['senha'],$linha['telefone'],$linha['imagem'],$linha['cep'],$linha['cidade'],$linha['bairro'],$linha['logradouro'],$linha['numero_endereco'],$linha['complemento']);
+                $internos[] = $interno;
             }
             } catch (PDOExeption $e){
                 echo 'Error:' . $e->getMessage;
             }
+            return $internos;
         }
 
     public function listar($nome){
@@ -149,7 +153,7 @@ class InternoDAO
                 ':nome' => $nome
             ));
             $internos = Array();
-            while ($linha = $consulat-fetch(PDO::FETCH_ASSOC)) {
+            while ($linha = $consulta-fetch(PDO::FETCH_ASSOC)) {
                 $interneo = new Interno();
                 $internos[] = $interno;
             }

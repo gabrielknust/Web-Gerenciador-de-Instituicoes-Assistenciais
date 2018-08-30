@@ -75,8 +75,8 @@ class InternoControle
         }
         if((!isset($contatoUrgente)) || (empty($contatoUrgente))){
             $contatoUrgente='null';
-        }
-            $telefone = 'null';
+        }   
+            $telefone='null';
             $senha='null';
             $imagem='null';
             $cep='null';
@@ -113,6 +113,5 @@ class InternoControle
         } catch (Exception $e){
             $msg= "Não foi possível registrar o interno"."<br>".$e->getMessage();
         }
-        header('Location: ../html/msg.php?msg='.$msg);
     }
 }
