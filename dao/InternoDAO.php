@@ -100,5 +100,40 @@ class InternoDAO
             echo 'Error: <b>  na tabela pessoas = ' . $sql . '</b> <br /><br />' . $e->getMessage();
         }
     }
+    public function listarTodos(){
+
+        try{
+            $pdo = Conexao::connect();
+            $consulta = $pdo->query("SELECT p.nome,p.cpf, p.senha, p.sexo, p.telefone,p.data_nascimento,p.imagem, p.cep,p.cidade,p.bairro,p.logradouro,p.numero_endereco,p.complemento,p.ibge,p.registro_geral,p.orgao_emissor,p.data_expedicao,p.nome_pai,p.nome_mae,p.tipo_sanguineo,i.nome_contato_urgente,i.telefone_contato_urgente_1,i.telefone_contato_urgente_2,i.telefone_contato_urgente_3 FROM pessoa p INNER JOIN interno i ON p.id_pessoa = i.id_pessoa");
+            $produtos = Array();
+            while($linha = $consulta->fetch(PDO::FETCH_ASSOC)){
+                $interno = new Interno($cpf,$nome,$sexo,$dataNascimento,$registroGeral,$orgaoEmissor,$dataExpedicao,$nomeMae,$nomePai,$tipoSanguineo);
+                
+                $internos[] = $produto;
+            } catch (PDOExeption $e){
+                echo 'Error:' . $e->getMessage;
+            }
+        }
+    }
+
+    public function listar($nome){
+        $nome = "%" . $nome . "%";
+        try{
+            $pdo = Conexao::connect();
+            $sqc = "SELECT p.nome,p.cpf, p.senha, p.sexo, p.telefone,p.data_nascimento,p.imagem, p.cep,p.cidade,p.bairro,p.logradouro,p.numero_endereco,p.complemento,p.ibge,p.registro_geral,p.orgao_emissor,p.data_expedicao,p.nome_pai,p.nome_mae,p.tipo_sanguineo,i.nome_contato_urgente,i.telefone_contato_urgente_1,i.telefone_contato_urgente_2,i.telefone_contato_urgente_3 FROM pessoa p INNER JOIN interno i ON p.id_pessoa = i.id_pessoa WHERE p.nome LIKE :nome";
+            $consulta = $pdo->prepare($sql);
+            $consulta->execute(array(
+                ':nome' => $nome
+            ));
+            $internos = Array();
+            while ($linha = $consulat-fetch(PDO::FETCH_ASSOC)) {
+                $interneo = new Interno();
+                $internos[] = $interno;
+            }
+        }catch (PDOExeption $e){
+            echo 'Error: ' .  $e->getMessage();
+        }
+        return $internos;
+    }
 }
 ?>

@@ -63,6 +63,8 @@ class InternoControle
         $_SESSION['internos']=$interno;
         header('Location: '.$nextPage);
     }
+
+
     
     public function incluir(){
         $interno = $this->verificar();

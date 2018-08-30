@@ -62,6 +62,7 @@ create table interno(
     telefone_contato_urgente_1 varchar(33),
     telefone_contato_urgente_2 varchar(33),
     telefone_contato_urgente_3 varchar(33),
+    observacao varchar(20000),
     
     foreign key(id_pessoa) references pessoa(id_pessoa)
     
@@ -70,7 +71,7 @@ create table interno(
 create table beneficios(
 	id_beneficio int not null primary key auto_increment,
     
-    curatelo char(1),
+    curatela char(1),
     inss varchar(60),
     loas varchar(60),
     bpc varchar(60),
@@ -90,7 +91,7 @@ create table beneficio_interno(
     
     primary key(id_interno,id_beneficio),
     foreign key(id_interno) references interno(id_interno),
-    foreign key(id_beneficio) references beneficio(id_beneficio)
+    foreign key(id_beneficio) references beneficios(id_beneficio)
     
 )engine = InnoDB;
 
