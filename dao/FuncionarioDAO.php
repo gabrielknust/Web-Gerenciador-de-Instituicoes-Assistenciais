@@ -5,7 +5,7 @@ class FuncionarioDAO
     public function incluir($funcionario,$quadrohorario)
     {
         try {
-            $sql = 'call cadfuncionario(:nome,:cpf,:senha,:sexo,:telefone,:data_nascimento,:imagem,:cep,:cidade,:bairro,:logradouro,:numero_endereco,:complemento,: registro_geral,: orgao_emissor,: data_expedicao date,:nome_pai,:nome_mae,:tipo_sanguo,:escala,:tipo,:carga_horaria,:entrada1,:saida1,:entrada2,:saida2,:total,:dias_trabalhados,:folga,:observacoes,:vale_transporte,:data_admissao,:date,:pis,:ctps,:uf_ctps,:numero_titulo,:zona,:secao,:certificado_reservista_numero,:certificado_reservista_serie,:calcado,:calca,:jaleco,:camisa,:usa_vtp,:cesta_basica,:situacao);';
+            $sql = 'call cadfuncionario(:nome,:cpf,:senha,:sexo,:telefone,:data_nascimento,:imagem,:cep,:cidade,:bairro,:logradouro,:numero_endereco,:complemento,:ibge,:registro_geral,:orgao_emissor,:data_expedicao,:nome_pai,:nome_mae,:tipo_sangue,:escala,:tipo,:carga_horaria,:entrada1,:saida1,:entrada2,:saida2,:total,:dias_trabalhados,:folga,:observacoes,:vale_transporte,:data_admissao,:date,:pis,:ctps,:uf_ctps,:numero_titulo,:zona,:secao,:certificado_reservista_numero,:certificado_reservista_serie,:calcado,:calca,:jaleco,:camisa,:usa_vtp,:cesta_basica,:situacao);';
             
             $sql = str_replace("'", "\'", $sql);
             $acesso = new Acesso();
@@ -100,31 +100,22 @@ class FuncionarioDAO
             echo 'Error: <b>  na tabela pessoas = ' . $sql . '</b> <br /><br />' . $e->getMessage();
         }
     }
+    public function listarTodos(){
 
-    // Consultar
-    public function listar($nome)
-    {
-        $nome = "%" . $nome . "%";
-        try {
+        try{
+            $internos=array();
             $pdo = Conexao::connect();
-            $sql = "SELECT * FROM funcionario where id_funcionario like :nome";
-            $consulta = $pdo->prepare($sql);
-            $consulta->execute(array(
-                ':nome' => $nome
-            ));
-            $funcionarios = Array();
-            while ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) {
-                $funcionario = new Funcionario;
-                $funcionario->Construir($linha['id_funcionario'],$linha['id_pessoa'],$linha['id_quadro_horario'],$linha['vale_transporte'],$linha['data_admissao'],$linha['pis'],$linha['ctps'],$linha['uf_ctps'],$linha['numero_titulo'],$linha['zona'],$linha['secao'],$linha['certificado_reservista_numero'],$linha['certificado_reservista_serie'],$linha['calcado'],$linha['calca'],$linha['jaleco'],$linha['camisa'],$linha['usa_vtp'],$linha['cesta_basica'],$linha['situacao']);
-                $funcionario->setId_funcionario($linha['id_funcionario']);
-                $funcionario->setId_pessoa($linha['id_pessoa']);
-                $funcionario->setId_quadro_horario($linha['id_quadro_horario']);
-                $funcionarios[] = $funcionario;
+            $consulta = $pdo->query("SELECT p.nome,p.cpf, p.senha, p.sexo, p.telefone,p.data_nascimento,p.imagem, p.cep,p.cidade,p.bairro,p.logradouro,p.numero_endereco,p.complemento,p.ibge,p.registro_geral,p.orgao_emissor,p.data_expedicao,p.nome_pai,p.nome_mae,p.tipo_sanguineo,i.nome_contato_urgente,i.telefone_contato_urgente_1,i.telefone_contato_urgente_2,i.telefone_contato_urgente_3 FROM pessoa p INNER JOIN interno i ON p.id_pessoa = i.id_pessoa");
+            $produtos = Array();
+            $x=0;
+            while($linha = $consulta->fetch(PDO::FETCH_ASSOC)){
+                $internos[$x]=array('cpf'=>$linha['cpf'],'nome'=>$linha['nome'],'sexo'=>$linha['sexo'],'data_nascimento'=>$linha['data_nascimento'],'registro_geral'=>$linha['registro_geral'],'orgao_emissor'=>$linha['orgao_emissor'],'data_expedicao'=>$linha['data_expedicao'],'nome_mae'=>$linha['nome_mae'],'nome_pai'=>$linha['nome_pai'],'tipo_sanguineo'=>$linha['tipo_sanguineo'],'senha'=>$linha['senha'],'telefone'=>$linha['telefone'],'imagem'=>$linha['imagem'],'cep'=>$linha['cep'],'cidade'=>$linha['cidade'],'bairro'=>$linha['bairro'],'logradouro'=>$linha['logradouro'],'numero_endereco'=>$linha['numero_endereco'],'complemento'=>$linha['complemento']);
+                $x++;
             }
-        } catch (PDOException $e) {
-            echo 'Error: ' . $e->getMessage();
-        }
-        return $funcionarios;
+            } catch (PDOExeption $e){
+                echo 'Error:' . $e->getMessage;
+            }
+            return json_encode($internos);
     }
     //Consultar um utilizando o cpf
     public function listarUm($cpf)

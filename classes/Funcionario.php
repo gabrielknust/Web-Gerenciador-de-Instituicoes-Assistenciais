@@ -27,7 +27,7 @@ class Funcionario extends Pessoa
     private $cesta_basica;
     private $situacao;
 
-    public function __construct($vale_transporte,$data_admissao,$pis,$ctps,$uf_ctps,$numero_titulo,$zona,$secao,$certificado_reservista_numero,$certificado_reservista_serie,$calcado,$calca,$jaleco,$camisa,$usa_vtp,$cesta_basica,$situacao,$idpessoa,$cpf,$senha,$nome,$sexo,$telefone,$data_nascimento,$imagem,$cep,$cidade,$bairro,$logradouro,$numero_endereco,$complemento,$registro_geral,$orgao_emissor,$data_expedicao,$nome_mae,$nome_pai,$tipo_sanguineo)
+    public function __construct($vale_transporte,$data_admissao,$pis,$ctps,$uf_ctps,$numero_titulo,$zona,$secao,$certificado_reservista_numero,$certificado_reservista_serie,$calcado,$calca,$jaleco,$camisa,$usa_vtp,$cesta_basica,$situacao,$cpf,$senha,$nome,$sexo,$telefone,$data_nascimento,$imagem,$cep,$cidade,$bairro,$logradouro,$numero_endereco,$complemento,$registro_geral,$orgao_emissor,$data_expedicao,$nome_mae,$nome_pai,$tipo_sanguineo)
     {
         $this->vale_transporte=$vale_transporte;
         $this->data_admissao=$data_admissao;
@@ -46,7 +46,6 @@ class Funcionario extends Pessoa
         $this->usa_vtp=$usa_vtp;
         $this->cesta_basica=$cesta_basica;
         $this->situacao=$situacao;
-        $this->idpessoa=$idpessoa;
         $this->cpf=$cpf;
         $this->senha=$senha;
         $this->nome=$nome;
@@ -66,6 +65,7 @@ class Funcionario extends Pessoa
         $this->nome_mae=$nome_mae;
         $this->nome_pai=$nome_pai;
         $this->tipo_sanguineo=$tipo_sanguineo;
+        $this->ibge=$ibge;
     }
     public function getId_funcionario()
     {
