@@ -99,6 +99,7 @@ class InternoControle
         $internos = $internoDAO->listarTodos();
         session_start();
         $_SESSION['internos']=$internos;
+        header('Location: ../html/tabela.php');
     }
 
     public function listarUm($cpf)

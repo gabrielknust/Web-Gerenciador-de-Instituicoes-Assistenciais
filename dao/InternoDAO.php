@@ -131,18 +131,19 @@ class InternoDAO
     public function listarTodos(){
 
         try{
+            $internos=array();
             $pdo = Conexao::connect();
             $consulta = $pdo->query("SELECT p.nome,p.cpf, p.senha, p.sexo, p.telefone,p.data_nascimento,p.imagem, p.cep,p.cidade,p.bairro,p.logradouro,p.numero_endereco,p.complemento,p.ibge,p.registro_geral,p.orgao_emissor,p.data_expedicao,p.nome_pai,p.nome_mae,p.tipo_sanguineo,i.nome_contato_urgente,i.telefone_contato_urgente_1,i.telefone_contato_urgente_2,i.telefone_contato_urgente_3 FROM pessoa p INNER JOIN interno i ON p.id_pessoa = i.id_pessoa");
             $produtos = Array();
+            $x=0;
             while($linha = $consulta->fetch(PDO::FETCH_ASSOC)){
-                $interno = new Interno($linha['cpf'],$linha['nome'],$linha['sexo'],$linha['data_nascimento'],$linha['registro_geral'],$linha['orgao_emissor'],$linha['data_expedicao'],$linha['nome_mae'],$linha['nome_pai'],$linha['tipo_sanguineo'],$linha['senha'],$linha['telefone'],$linha['imagem'],$linha['cep'],$linha['cidade'],$linha['bairro'],$linha['logradouro'],$linha['numero_endereco'],$linha['complemento']);
-                $interno->set
-                $internos[] = $interno;
+                $internos[$x]=array('cpf'=>$linha['cpf'],'nome'=>$linha['nome'],'sexo'=>$linha['sexo'],'data_nascimento'=>$linha['data_nascimento'],'registro_geral'=>$linha['registro_geral'],'orgao_emissor'=>$linha['orgao_emissor'],'data_expedicao'=>$linha['data_expedicao'],'nome_mae'=>$linha['nome_mae'],'nome_pai'=>$linha['nome_pai'],'tipo_sanguineo'=>$linha['tipo_sanguineo'],'senha'=>$linha['senha'],'telefone'=>$linha['telefone'],'imagem'=>$linha['imagem'],'cep'=>$linha['cep'],'cidade'=>$linha['cidade'],'bairro'=>$linha['bairro'],'logradouro'=>$linha['logradouro'],'numero_endereco'=>$linha['numero_endereco'],'complemento'=>$linha['complemento']);
+                $x++;
             }
             } catch (PDOExeption $e){
                 echo 'Error:' . $e->getMessage;
             }
-            return $internos;
+            return json_encode($internos);
         }
 
     public function listar($cpf){

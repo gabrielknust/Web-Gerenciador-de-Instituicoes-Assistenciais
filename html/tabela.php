@@ -1,3 +1,6 @@
+	<?php
+		session_start();
+	?>
 <!doctype html>
 <html class="fixed">
 	<head>
@@ -32,7 +35,6 @@
 
 		<!-- Head Libs -->
 		<script src="../assets/vendor/modernizr/modernizr.js"></script>
-
 	</head>
 	<body>
 		<section class="body">
@@ -271,7 +273,4 @@
 		<script src="../assets/javascripts/tables/examples.datatables.row.with.details.js"></script>
 		<script src="../assets/javascripts/tables/examples.datatables.tabletools.js"></script>
 	</body>
-</html>
-
-
-										
+</html>										
