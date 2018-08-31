@@ -1,4 +1,4 @@
-create database wegia default charset utf8;
+create schema wegia default charset utf8;
 
 use wegia;
 /*--------------------------- Cadastro -------------------------------- */
@@ -62,6 +62,7 @@ create table interno(
     telefone_contato_urgente_1 varchar(33),
     telefone_contato_urgente_2 varchar(33),
     telefone_contato_urgente_3 varchar(33),
+    observacao varchar(20000),
     
     foreign key(id_pessoa) references pessoa(id_pessoa)
     
@@ -70,7 +71,7 @@ create table interno(
 create table beneficios(
 	id_beneficio int not null primary key auto_increment,
     
-    curatelo char(1),
+    curatela char(1),
     inss varchar(60),
     loas varchar(60),
     bpc varchar(60),
@@ -90,7 +91,7 @@ create table beneficio_interno(
     
     primary key(id_interno,id_beneficio),
     foreign key(id_interno) references interno(id_interno),
-    foreign key(id_beneficio) references beneficio(id_beneficio)
+    foreign key(id_beneficio) references beneficios(id_beneficio)
     
 )engine = InnoDB;
 
@@ -261,25 +262,23 @@ create table voluntario_judicial_cargo(
     foreign key(id_cargo) references cargo(id_cargo),
     foreign key(id_voluntarioJ) references voluntario_judicial(id_voluntario_judicial)
 )engine = InnoDB;
+
 select * from pessoa;
-select * from interno;
-call cadinterno ('a','a','a','a',1,'2000-01-01','a',1,'a','a','a',1,'a','a','a','a','2000-01-01','a','a','a','a','a','a','a');
+
 DELIMITER &&
 
-CREATE  PROCEDURE cadinterno(in nome varchar(100),in cpf varchar(40),in senha varchar(70), in sexo char(1), in telefone int(11),in data_nascimento date, 
-in imagem longtext, in cep int(11), in cidade varchar(40), in bairro varchar(40), in logradouro varchar(40), in numero_endereco int(11),
-in complemento varchar(50), in ibge varchar(20), in registro_geral varchar(20), in orgao_emissor varchar(20), in data_expedicao date,in nome_pai varchar(100),
-in nome_mae varchar(100), in tipo_sanguineo varchar(5), in nome_contato_urgente varchar(60),in telefone_contato_urgente_1 varchar(33),in telefone_contato_urgente_2 varchar(33),in telefone_contato_urgente_3 varchar(33))
+CREATE  PROCEDURE cadinterno (in $nome varchar(100),in $cpf varchar(40),in $senha varchar(70), in $sexo char(1), in $telefone int(11),in $data_nascimento date, 
+in $imagem longtext, in $cep int(11), in $cidade varchar(40), in $bairro varchar(40), in $logradouro varchar(40), in $numero_endereco int(11),
+in $complemento varchar(50), in $ibge varchar(20), in $registro_geral varchar(20), in $orgao_emissor varchar(20), in $data_expedicao date,in $nome_pai varchar(100),
+in $nome_mae varchar(100), in $tipo_sanguineo varchar(5), in $nome_contato_urgente varchar(60),in $telefone_contato_urgente_1 varchar(33),in $telefone_contato_urgente_2 varchar(33),in $telefone_contato_urgente_3 varchar(33))
 
 begin
 
 declare idP int;
 
-insert into pessoa(nome,cpf,senha,sexo, telefone,data_nascimento,imagem,cep ,cidade, bairro, logradouro, numero_endereco,
-complemento,ibge,registro_geral,orgao_emissor,data_expedicao, nome_pai, nome_mae, tipo_sanguineo) 
-values(nome,cpf, senha, sexo, telefone,data_nascimento,imagem,cep ,cidade, bairro, logradouro, numero_endereco,
-complemento,ibge,registro_geral,orgao_emissor,data_expedicao, nome_pai, nome_mae, tipo_sanguineo);
-
+insert into pessoa(nome,cpf,senha,sexo,telefone,data_nascimento,imagem,cep ,cidade, bairro, logradouro, numero_endereco,
+complemento,ibge,registro_geral,orgao_emissor,data_expedicao, nome_pai, nome_mae, tipo_sanguineo)
+values($nome,$cpf, $senha, $sexo, $telefone,$data_nascimento,$imagem,$cep,$cidade,$bairro,$logradouro,$numero_endereco,$complemento,$ibge,$registro_geral,$orgao_emissor,$data_expedicao,$nome_pai,$nome_mae,$tipo_sanguineo);
 select max(id_pessoa) into idP FROM pessoa;
 
 
