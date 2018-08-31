@@ -1,5 +1,6 @@
 <?php
 require_once'../classes/Interno.php';
+require_once'../classes/Conexao.php';
 
 class InternoDAO
 {
@@ -135,6 +136,7 @@ class InternoDAO
             $produtos = Array();
             while($linha = $consulta->fetch(PDO::FETCH_ASSOC)){
                 $interno = new Interno($linha['cpf'],$linha['nome'],$linha['sexo'],$linha['data_nascimento'],$linha['registro_geral'],$linha['orgao_emissor'],$linha['data_expedicao'],$linha['nome_mae'],$linha['nome_pai'],$linha['tipo_sanguineo'],$linha['senha'],$linha['telefone'],$linha['imagem'],$linha['cep'],$linha['cidade'],$linha['bairro'],$linha['logradouro'],$linha['numero_endereco'],$linha['complemento']);
+                $interno->set
                 $internos[] = $interno;
             }
             } catch (PDOExeption $e){
@@ -143,7 +145,7 @@ class InternoDAO
             return $internos;
         }
 
-    public function listar($nome){
+    public function listar($cpf){
         $nome = "%" . $nome . "%";
         try{
             $pdo = Conexao::connect();

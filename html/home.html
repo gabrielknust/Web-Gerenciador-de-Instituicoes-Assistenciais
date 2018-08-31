@@ -45,6 +45,13 @@
 		<!-- Head Libs -->
 		<script src="../assets/vendor/modernizr/modernizr.js"></script>
 
+		<script type="text/javascript">
+			function listarInterno()
+			{
+				document.getElementById("listarInterno").submit();
+			}
+		</script>
+
 	</head>
 	<body>
 		<section class="body">
@@ -244,14 +251,17 @@
 						</div>
 						</a>
 
-						<a href="../html/funcionario.html">
+						<div onclick="listarInterno()">
 						<div class="col-lg-2 col-md-8 i">
-						<form>
-							<i  class="far fa-clipboard"></i>
-							<h4>Funcionários</h4>
+						<form id="listarInterno" method="POST" action="../controle/control.php">
+							<i  class="far fa-clipboard" id="listarInterno"></i>
+							<h4>Internos</h4>
+							<input type="hidden" name="nomeClasse" value="InternoControle">
+							<input type="hidden" name="metodo" value="listartodos">
+							<input type="hidden" name="nextPage" value="../html/listar.html">
 						</form>
 						</div>
-						</a>
+						</div>
 
 						<div class="col-lg-2 col-md-8 i">
 							<i class="far fa-calendar-alt"></i>

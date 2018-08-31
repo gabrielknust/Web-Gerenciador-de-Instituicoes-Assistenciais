@@ -98,11 +98,14 @@ class InternoControle
         $internoDAO= new InternoDAO();
         $internos = $internoDAO->listarTodos();
         session_start();
-        $_SESSION['internos']=$interno;
-        header('Location: '.$nextPage);
+        $_SESSION['internos']=$internos;
     }
 
-
+    public function listarUm($cpf)
+    {
+        $internoDAO=new InternoDAO();
+        
+    }
     
     public function incluir(){
         $interno = $this->verificar();
