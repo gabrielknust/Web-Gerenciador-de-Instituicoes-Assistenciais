@@ -37,6 +37,30 @@
 		<!-- Head Libs -->
 		<script src="../assets/vendor/modernizr/modernizr.js"></script>
 
+
+
+		<!-- Vendor -->
+		<script src="../assets/vendor/jquery/jquery.min.js"></script>
+		<script src="../assets/vendor/jquery-browser-mobile/jquery.browser.mobile.js"></script>
+		<script src="../assets/vendor/bootstrap/js/bootstrap.js"></script>
+		<script src="../assets/vendor/nanoscroller/nanoscroller.js"></script>
+		<script src="../assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+		<script src="../assets/vendor/magnific-popup/magnific-popup.js"></script>
+		<script src="../assets/vendor/jquery-placeholder/jquery.placeholder.js"></script>
+		
+		<!-- Specific Page Vendor -->
+		<script src="../assets/vendor/jquery-autosize/jquery.autosize.js"></script>
+		
+		<!-- Theme Base, Components and Settings -->
+		<script src="../assets/javascripts/theme.js"></script>
+		
+		<!-- Theme Custom -->
+		<script src="../assets/javascripts/theme.custom.js"></script>
+		
+		<!-- Theme Initialization Files -->
+		<script src="../assets/javascripts/theme.init.js"></script>
+
+
 		<!-- javascript functions -->
 		<script src="../Functions/onlyNumbers.js"></script>
 		<script src="../Functions/onlyChars.js"></script>
@@ -44,7 +68,20 @@
 		<script src="../Functions/mascara.js"></script>
 
 		<!-- jquery functions -->
-		>
+		<script>
+			$(function(){
+				$("#enviar").click(function(){
+
+					//if($("#imgPerfil").value == null){
+					//alert("Tem certeza que deseja não inserir uma imagem ao interno?");
+				//}
+
+				//if($("#inss").value != null && $("#"))
+				//});
+				$("#formulario").submit();
+			});				
+			
+		</script>
 
 	</head>
 		<body>
@@ -208,17 +245,17 @@
 											          <h4 class="modal-title">Adicionar uma Foto</h4>
 											        </div>
 											        <div class="modal-body"> 
-											        	<form method="get" action="#">
+											        	<form method="post" action="#" id="formulario">
 											        	<div class="form-group">
 															<label class="col-md-4 control-label" for="imgperfil">Carregue uma imagem de perfil:</label>
 															<div class="col-md-8">
 																<input type="file" name="imgPerfil" size="60" id="imgPerfil" class="form-control">
 															</div>
 														</div>
-														<div class="form-group">
-															<label class="col-md-4 control-label" >Carregue a imagem do RG:</label>
+														<div class="form-group" >
+															<label class="col-md-4 control-label" id="label-rg" >Carregue a imagem do RG:</label>
 															<div class="col-md-8">
-																<input type="file" name="imgRg" size="60" id="imgRg" class="form-control">
+																<input type="file" name="imgRg" size="60" id="imgRg" class="form-control" >
 															</div>
 														</div>
 														<div class="form-group">
@@ -518,7 +555,7 @@
 											<div class="panel-footer">
 												<div class="row">
 													<div class="col-md-9 col-md-offset-3">
-														<input type="submit" class="btn btn-primary" onclick="return enviar_dados()">
+														<button id="enviar" class="btn btn-primary" onclick="return enviar_dados()" data-target="#myModal">Enviar</button> 
 														<input type="reset" class="btn btn-default">
 													</div>
 												</div>
@@ -548,26 +585,6 @@
 			</aside>
 		</section>
 
-		<!-- Vendor -->
-		<script src="../assets/vendor/jquery/jquery.js"></script>
-		<script src="../assets/vendor/jquery-browser-mobile/jquery.browser.mobile.js"></script>
-		<script src="../assets/vendor/bootstrap/js/bootstrap.js"></script>
-		<script src="../assets/vendor/nanoscroller/nanoscroller.js"></script>
-		<script src="../assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-		<script src="../assets/vendor/magnific-popup/magnific-popup.js"></script>
-		<script src="../assets/vendor/jquery-placeholder/jquery.placeholder.js"></script>
 		
-		<!-- Specific Page Vendor -->
-		<script src="../assets/vendor/jquery-autosize/jquery.autosize.js"></script>
-		
-		<!-- Theme Base, Components and Settings -->
-		<script src="../assets/javascripts/theme.js"></script>
-		
-		<!-- Theme Custom -->
-		<script src="../assets/javascripts/theme.custom.js"></script>
-		
-		<!-- Theme Initialization Files -->
-		<script src="../assets/javascripts/theme.init.js"></script>
-
 	</body>
 </html>
