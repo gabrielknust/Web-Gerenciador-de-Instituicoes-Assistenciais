@@ -121,7 +121,7 @@ create table voluntario_judicial(
     foreign key(id_pessoa) references pessoa(id_pessoa)
     
 )engine = InnoDB;
-
+/*
  create table quadro_horario(
 	id_quadro_horario int not null primary key auto_increment,
     
@@ -138,11 +138,11 @@ create table voluntario_judicial(
 	observacoes varchar(240)
 
  )engine = InnoDB;
-
+*/
 create table funcionario(
 	id_funcionario int not null primary key auto_increment,
     id_pessoa int,
-    id_quadro_horario int,
+    /*id_quadro_horario int,*/
     
     vale_transporte varchar(16),
     data_admissao date not null,
@@ -301,9 +301,9 @@ declare idP int;
 declare idQ int;
 
 insert into pessoa(nome, cpf, senha, telefone,data_nascimento,imagem, cep ,cidade, bairro, logradouro, numero_endereco,
-complemento,registro_geral,orgao_emissor,data_expedicao, nome_pai, nome_mae, tipo_sanguineo)
+complemento,ibge,registro_geral,orgao_emissor,data_expedicao, nome_pai, nome_mae, tipo_sanguineo)
 values(nome,cpf, senha, sexo, telefone,data_nascimento,imagem,cep ,cidade, bairro, logradouro, numero_endereco,
-complemento,registro_geral,orgao_emissor,data_expedicao, nome_pai, nome_mae, tipo_sanguineo);
+complemento,ibge,registro_geral,orgao_emissor,data_expedicao, nome_pai, nome_mae, tipo_sanguineo);
 
 select max(id_pessoa) into idP FROM pessoa;
 
