@@ -1,6 +1,6 @@
 <?php
 require_once'../classes/Interno.php';
-require_once'../classes/Conexao.php';
+require_once'Conexao.php';
 
 class InternoDAO
 {
@@ -8,14 +8,9 @@ class InternoDAO
     {        
         try {
             $sql = 'call cadinterno(:nome,:cpf,:senha,:sexo,:telefone,:data_nascimento,:imagem,:cep,:cidade,:bairro,:logradouro,:numero_endereco,:complemento,:ibge,:registro_geral,:orgao_emissor,:data_expedicao,:nome_pai,:nome_mae,:tipo_sanguineo,:nome_contato_urgente,:telefone_contato_urgente_1,:telefone_contato_urgente_2,:telefone_contato_urgente_3)';
-            $sql = str_replace("'", "\'", $sql);
-            $acesso = new Acesso();
-            
-            $pdo = $acesso->conexao();
-            
+            $sql = str_replace("'", "\'", $sql);            
+            $pdo = Conexao::connect();
             $stmt = $pdo->prepare($sql);
-
-            $senha=$interno->getSenha();
             $senha=$interno->getSenha();
             $nome=$interno->getNome();
             $cpf=$interno->getCpf();
@@ -40,7 +35,6 @@ class InternoDAO
             $telefone3=$interno->getTelefoneContatoUrgente3();
             $ibge="null";
             $dataExpedicao=$interno->getDataExpedicao();
-
             $stmt->bindParam(':senha',$senha);
             $stmt->bindParam(':nome',$nome);
             $stmt->bindParam(':cpf',$cpf);
@@ -65,9 +59,8 @@ class InternoDAO
             $stmt->bindParam(':telefone_contato_urgente_2',$telefone2);
             $stmt->bindParam(':telefone_contato_urgente_3',$telefone3);
             $stmt->bindParam(':ibge',$ibge);
-
             $stmt->execute();
-        } catch (PDOException $e) {
+        }catch (PDOExeption $e) {
             echo 'Error: <b>  na tabela interno = ' . $sql . '</b> <br /><br />' . $e->getMessage();
         }
     }

@@ -162,8 +162,8 @@ create table funcionario(
     cesta_basica varchar(3),
     situacao varchar(10),
 	
-    foreign key(id_pessoa) references pessoa(id_pessoa),
-    foreign key(id_quadro_horario) references quadro_horario(id_quadro_horario)
+    foreign key(id_pessoa) references pessoa(id_pessoa)
+    /*foreign key(id_quadro_horario) references quadro_horario(id_quadro_horario)*/
     
 )engine = InnoDB;/* criação da tabela funcionario, irá armazenar todos os funcionarios e suas informações. A partir dela
 há uma verificação nela antes de ser criado um usuário, só pode haver um usuário de um funcionário se este estiver 
@@ -267,8 +267,8 @@ select * from pessoa;
 
 DELIMITER &&
 
-CREATE  PROCEDURE cadinterno (in $nome varchar(100),in $cpf varchar(40),in $senha varchar(70), in $sexo char(1), in $telefone int(11),in $data_nascimento date, 
-in $imagem longtext, in $cep int(11), in $cidade varchar(40), in $bairro varchar(40), in $logradouro varchar(40), in $numero_endereco int(11),
+CREATE  PROCEDURE cadinterno (in $nome varchar(100),in $cpf varchar(40),in $senha varchar(70), in $sexo char(1), in $telefone varchar(25),in $data_nascimento date, 
+in $imagem longtext, in $cep varchar(20), in $cidade varchar(40), in $bairro varchar(40), in $logradouro varchar(40), in $numero_endereco varchar(11),
 in $complemento varchar(50), in $ibge varchar(20), in $registro_geral varchar(20), in $orgao_emissor varchar(20), in $data_expedicao date,in $nome_pai varchar(100),
 in $nome_mae varchar(100), in $tipo_sanguineo varchar(5), in $nome_contato_urgente varchar(60),in $telefone_contato_urgente_1 varchar(33),in $telefone_contato_urgente_2 varchar(33),in $telefone_contato_urgente_3 varchar(33))
 
@@ -282,7 +282,7 @@ values($nome,$cpf, $senha, $sexo, $telefone,$data_nascimento,$imagem,$cep,$cidad
 select max(id_pessoa) into idP FROM pessoa;
 
 
-insert into interno(id_pessoa,nome_contato_urgente,telefone_contato_urgente_1,telefone_contato_urgente_2,telefone_contato_urgente_3) values(idP,nome_contato_urgente,telefone_contato_urgente_1,telefone_contato_urgente_2,telefone_contato_urgente_3);
+insert into interno(id_pessoa,nome_contato_urgente,telefone_contato_urgente_1,telefone_contato_urgente_2,telefone_contato_urgente_3) values(idP,$nome_contato_urgente,$telefone_contato_urgente_1,$telefone_contato_urgente_2,$telefone_contato_urgente_3);
 
 end &&
 
@@ -415,3 +415,6 @@ create table isaida(
     foreign key(id_saida) references saida(id_saida),
     foreign key(id_produto) references produto(id_produto)
 )engine = InnoDB;
+
+select * from interno;
+select * from pessoa;

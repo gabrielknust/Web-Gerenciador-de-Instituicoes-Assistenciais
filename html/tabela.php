@@ -35,6 +35,46 @@
 
 		<!-- Head Libs -->
 		<script src="../assets/vendor/modernizr/modernizr.js"></script>
+		
+		<!-- Vendor -->
+		<script src="../assets/vendor/jquery/jquery.min.js"></script>
+		<script src="../assets/vendor/jquery-browser-mobile/jquery.browser.mobile.js"></script>
+		<script src="../assets/vendor/bootstrap/js/bootstrap.js"></script>
+		<script src="../assets/vendor/nanoscroller/nanoscroller.js"></script>
+		<script src="../assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+		<script src="../assets/vendor/magnific-popup/magnific-popup.js"></script>
+		<script src="../assets/vendor/jquery-placeholder/jquery.placeholder.js"></script>
+		
+		<!-- Specific Page Vendor -->
+		<script src="../assets/vendor/jquery-autosize/jquery.autosize.js"></script>
+		
+		<!-- Theme Base, Components and Settings -->
+		<script src="../assets/javascripts/theme.js"></script>
+		
+		<!-- Theme Custom -->
+		<script src="../assets/javascripts/theme.custom.js"></script>
+		
+		<!-- Theme Initialization Files -->
+		<script src="../assets/javascripts/theme.init.js"></script>
+
+
+		<!-- javascript functions -->
+		<script src="../Functions/onlyNumbers.js"></script>
+		<script src="../Functions/onlyChars.js"></script>
+		<script src="../Functions/enviar_dados.js"></script>
+		<script src="../Functions/mascara.js"></script>
+		
+	   <!-- jquery functions -->
+	   <script>
+			$(function()
+				{
+					var internos=<?php echo $_SESSION['internos'];?>;
+					$.each(internos,function(i,item){
+						$("#tabela").append($("<tr>").attr("id",i).append($("<td>").text(item.nome)).append($("<td>").text(item.cpf)));
+					})
+				});
+				
+	   </script>
 	</head>
 	<body>
 		<section class="body">
@@ -186,35 +226,6 @@
 								<div class="panel-actions">
 									<a href="#" class="fa fa-caret-down"></a>
 								</div>
-						
-								<h2 class="panel-title">Funcionario</h2>
-							</header>
-							<div class="panel-body">
-								<table class="table table-bordered table-striped mb-none" id="datatable-default">
-									<thead>
-										<tr>
-											<th>nome</th>
-											<th>cpf</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr class="gradeX">
-											<td>ana</td>
-											<td>111.111.111-11</td>
-										</tr>
-										<tr class="gradeC">
-											<td>Trident</td>
-											<td>222.222.222-22</td>
-										</tr>
-									</tbody>
-								</table>
-							</div><br>
-						</section>
-						<section class="panel">
-							<header class="panel-heading">
-								<div class="panel-actions">
-									<a href="#" class="fa fa-caret-down"></a>
-								</div>
 								<h2 class="panel-title">Interno</h2>
 							</header>
 							<div class="panel-body">
@@ -223,20 +234,9 @@
 										<tr>
 											<th>Nome</th>
 											<th>CPF</th>
-											<th>Telefone(s)</th>
 										</tr>
 									</thead>
-									<tbody>
-										<tr class="gradeX">
-											<td>Gigi</td>
-											<td>333.333.333.33</td>
-											<td>3333-3333</td>
-										</tr>
-										<tr class="gradeC">
-											<td>Jorel</td>
-											<td>444.444.444.44</td>
-											<td>4444-4444</td>
-										</tr>
+									<tbody id="tabela">
 									</tbody>
 								</table>
 							</div>

@@ -1,6 +1,4 @@
 <?php
-require_once ('acesso.php');
-
 abstract class Pessoa
 {
 
@@ -46,7 +44,7 @@ abstract class Pessoa
     
     private $tipoSanguineo;
 
-    public function __construct($cpf,$nome,$sexo,$dataNascimento,$registroGeral,$orgaoEmissor,$dataExpedicao,$nomeMae,$nomePai,$tipoSanguineo,$senha,$telefone,$imagem,$cep,$cidade,$bairro,$logradouro,$numeroEndereco,$complemento,$ibge)
+    public function __construct($cpf,$nome,$sexo,$dataNascimento,$registroGeral,$orgaoEmissor,$dataExpedicao,$nomeMae,$nomePai,$tipoSanguineo,$senha,$telefone,$imagem,$cep,$cidade,$bairro,$logradouro,$numeroEndereco,$complemento)
     {
         $this->cpf=$cpf;
         $this->nome=$nome;
@@ -67,9 +65,16 @@ abstract class Pessoa
         $this->logradouro=$logradouro;
         $this->numeroEndereco=$numeroEndereco;
         $this->complemento=$complemento;
-        $this->ibge=$ibge;
     }
 
+    public function getIbge()
+    {
+        return $this->ibge;
+    }
+    public function setIbge($ibge)
+    {
+        $this->ibge=$ibge;
+    }
     public function getIdpessoa()
     {
         return $this->idpessoa;

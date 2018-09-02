@@ -1,5 +1,4 @@
 <?php
-require_once ('acesso.php');
 require_once 'Pessoa.php';
 
 class Interno extends Pessoa

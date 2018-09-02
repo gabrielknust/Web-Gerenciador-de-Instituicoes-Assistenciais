@@ -114,8 +114,10 @@ class InternoControle
         try{
             $intDAO->incluir($interno);
             $msg= "O interno ".$interno->getNome()." foi adicionado!";
-        } catch (Exception $e){
+        } catch (PDOException $e){
             $msg= "Não foi possível registrar o interno"."<br>".$e->getMessage();
+            echo $msg;
         }
+        tr
     }
 }
