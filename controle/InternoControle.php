@@ -118,6 +118,5 @@ class InternoControle
             $msg= "Não foi possível registrar o interno"."<br>".$e->getMessage();
             echo $msg;
         }
-        tr
     }
 }

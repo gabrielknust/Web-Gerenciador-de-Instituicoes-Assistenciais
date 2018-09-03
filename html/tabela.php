@@ -70,7 +70,14 @@
 				{
 					var internos=<?php echo $_SESSION['internos'];?>;
 					$.each(internos,function(i,item){
-						$("#tabela").append($("<tr>").attr("id",i).append($("<td>").text(item.nome)).append($("<td>").text(item.cpf)));
+						$("#tabela").append($("<tr>").attr("id",i).attr("class","teste").append($("<td>").text(item.nome)).append($("<td>").text(item.cpf)));
+					})
+					$(".teste").on("click",function(){
+						$.ajax({
+							method:"POST",
+							url:"profile_interno.html",
+							data:{id:$(this).attr(id)}
+						})
 					})
 				});
 				
