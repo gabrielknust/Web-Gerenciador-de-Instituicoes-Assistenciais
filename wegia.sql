@@ -70,7 +70,6 @@ create table interno(
 
 create table beneficios(
 	id_beneficio int not null primary key auto_increment,
-    
     curatela char(1),
     inss varchar(60),
     loas varchar(60),

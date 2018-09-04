@@ -1,3 +1,5 @@
+<?php session_start(); 
+?>
 <!doctype html>
 <html class="fixed">
 	<head>
@@ -24,6 +26,14 @@
 		<link rel="stylesheet" href="../assets/vendor/bootstrap-datepicker/css/datepicker3.css" />
 		<link rel="icon" href="../img/logofinal.png" type="image/x-icon">
 
+		<script src="../assets/vendor/jquery/jquery.min.js"></script>
+		<script src="../assets/vendor/jquery-browser-mobile/jquery.browser.mobile.js"></script>
+		<script src="../assets/vendor/bootstrap/js/bootstrap.js"></script>
+		<script src="../assets/vendor/nanoscroller/nanoscroller.js"></script>
+		<script src="../assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+		<script src="../assets/vendor/magnific-popup/magnific-popup.js"></script>
+		<script src="../assets/vendor/jquery-placeholder/jquery.placeholder.js"></script>
+
 		<!-- Theme CSS -->
 		<link rel="stylesheet" href="../assets/stylesheets/theme.css" />
 
@@ -35,6 +45,44 @@
 
 		<!-- Head Libs -->
 		<script src="../assets/vendor/modernizr/modernizr.js"></script>
+
+		<script>
+			$(function(){
+				var internos=<?php echo $_SESSION['internos'];?>;
+				var id=<?php echo $_GET['id']; ?>;
+				$.each(internos,function(i,item){
+					if(i==id)
+					{
+						console.log(item);
+						$("#nome").text("Nome: "+item.nome);
+						if(item.sexo=="m")
+						{
+							$("#sexo").html("Sexo: <i class='fa fa-male'></i>");
+						}
+						else if(item.sexo=="f")
+						{
+							$("#sexo").html("Sexo: <i class='fa fa-female'>");
+						}
+						if(item.telefone_contato_urgente_1!="null")
+						{
+							$("#telefone1").text("Telefone contato urgente 1: "+item.telefone_contato_urgente_1);
+						}
+						else
+						{
+							$("#telefone1").text("Telefone contato urgente 1: Não informado");
+						}
+						if(item.telefone_contato_urgente_2!="null")
+						{
+							$("#telefone2").text("Telefone contato urgente 2: "+item.telefone_contato_urgente_2);
+						}
+						else
+						{
+							$("#telefone2").text("Telefone contato urgente 2: Não informado");
+						}
+					}
+				})
+			});
+		</script>
 	</head>
 	<body>
 		<section class="body">
@@ -247,41 +295,39 @@
 													<ul class="nav nav-children" id="info">
 
 														<li id="cap">Dados Pessoais:</li>
-														<li>Nome:</li>
-														<li>Sexo: <i class="fa fa-male"></i>   <i class="fa fa-female"></i></li>
-														<li>Telefone1:</li>
-														<li>Telefone2:</li>
-														<li>Telefone3:</li>
-														<li>Tipo Sanguineo</li>
-														<li>Data de Nascimento:</li>
-														<li>CEP:</li>
-														<li>Cidade:</li>
-														<li>Bairro:</li>
-														<li>Logradouro:</li>
-														<li>Número:</li>
-														<li>Complemento:</li>
+														<li id="nome"></li>
+														<li id="sexo"></li>
+														<li id="telefone1">Telefone1:</li>
+														<li id="telefone2">Telefone2:</li>
+														<li id="telefone3">Telefone3:</li>
+														<li id="sangue">Tipo Sanguineo</li>
+														<li id="nascimento">Data de Nascimento:</li>
+														<li id="cep">CEP:</li>
+														<li id="cidade">Cidade:</li>
+														<li id="bairro">Bairro:</li>
+														<li id="logradouro">Logradouro:</li>
+														<li id="numero">Número:</li>
+														<li id="complemento">Complemento:</li>
 														<br/>
 
-														<li id="cap">RG</li>
-														<li>Número:</li>
-														<li>Data de Expedição do RG:</li>
+														<li>RG</li>
+														<li id="rg">Número:</li>
+														<li id="data_expedicao">Data de Expedição do RG:</li>
 														<br/>
 
 														<li id="cap">CPF</li>
-														<li>Número:</li> 
+														<li id="cpf">Número:</li> 
 														<br/>
 
 														<li id="cap">Beneficios</li>
-														<li>INSS:</li>
-														<li>LOAS:</li>
-														<li>FUNRURAL:</li>
-														<li>RG:</li>
-														<li>CPF:</li>
-														<li>Título de Eleitor:</li>
-														<li>CTPS:</li>
-														<li>SAF:</li>
-														<li>SUS:</li>
-														<li>BPC:</li>
+														<li id="inss">INSS:</li>
+														<li id="loas">LOAS:</li>
+														<li id="funrural">FUNRURAL:</li>
+														<li id="tituloEleitor">Título de Eleitor:</li>
+														<li id="ctps">CTPS:</li>
+														<li id="saf">SAF:</li>
+														<li id="sus">SUS:</li>
+														<li id="bpc">BPC:</li>
 														<br/>
 													</ul>
 												</div>

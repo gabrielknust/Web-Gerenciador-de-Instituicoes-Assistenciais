@@ -66,21 +66,17 @@
 		
 	   <!-- jquery functions -->
 	   <script>
+	   		function clicar(id)
+	   		{
+	   			window.location.href = "http://localhost/Web-Gerenciador-de-Instituicoes-Assistenciais/html/profile_interno.php?id="+id;
+	   		}
 			$(function()
 				{
 					var internos=<?php echo $_SESSION['internos'];?>;
 					$.each(internos,function(i,item){
-						$("#tabela").append($("<tr>").attr("id",i).attr("class","teste").append($("<td>").text(item.nome)).append($("<td>").text(item.cpf)));
-					})
-					$(".teste").on("click",function(){
-						$.ajax({
-							method:"POST",
-							url:"profile_interno.html",
-							data:{id:$(this).attr(id)}
-						})
+						$("#tabela").append($("<tr>").attr("onclick","clicar("+i+")").attr("class","teste").append($("<td>").text(item.nome)).append($("<td>").text(item.cpf)));
 					})
 				});
-				
 	   </script>
 	</head>
 	<body>
