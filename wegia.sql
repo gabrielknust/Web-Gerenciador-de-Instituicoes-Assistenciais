@@ -148,7 +148,7 @@ create table funcionario(
 	pis varchar(14),
     ctps varchar(15) not null,
     uf_ctps varchar(2),
-    numero_titulo varchar(15), 
+    numero_titulo varchar(15),
     zona varchar(3),
     secao varchar(4),
     certificado_reservista_numero int,
@@ -288,16 +288,16 @@ end &&
 CREATE  PROCEDURE cadfuncionario(in nome varchar(100),in cpf varchar(40),in senha varchar(70), in sexo char(1), in telefone int(11),in data_nascimento date, 
 in imagem longtext, in cep int(11), in cidade varchar(40), in bairro varchar(40), in logradouro varchar(40), in numero_endereco int(11),
 in complemento varchar(50),in ibge varchar(20), in registro_geral varchar(20), in orgao_emissor varchar(20), in data_expedicao date,in nome_pai varchar(100),
-in nome_mae varchar(100), in tipo_sanguineo varchar(5),	in escala varchar(15),in tipo varchar(15),in carga_horaria decimal(5,2),
+in nome_mae varchar(100), in tipo_sanguineo varchar(5),/*in escala varchar(15),in tipo varchar(15), in carga_horaria decimal(5,2),
 in entrada1 varchar(5),in saida1 varchar(5),in entrada2 varchar(5),in saida2 varchar(5),in total varchar(5),in dias_trabalhados varchar(100),
-in folga varchar(30),in observacoes varchar(240),in vale_transporte varchar(16),in data_admissao date,in pis varchar(14),in ctps varchar(15),
+in folga varchar(30),in observacoes varchar(240),*/in vale_transporte varchar(16),in data_admissao date,in pis varchar(14),in ctps varchar(15),
 in uf_ctps varchar(2),in numero_titulo varchar(15),in zona varchar(3),in secao varchar(4),in certificado_reservista_numero int,in certificado_reservista_serie varchar(10),
 in calcado varchar(2),in calca varchar(2),in jaleco varchar(2),in camisa varchar(2),in usa_vtp varchar(3),in cesta_basica varchar(3),in situacao varchar(10))
 
 begin
 
 declare idP int;
-declare idQ int;
+#declare idQ int;
 
 insert into pessoa(nome, cpf, senha, telefone,data_nascimento,imagem, cep ,cidade, bairro, logradouro, numero_endereco,
 complemento,ibge,registro_geral,orgao_emissor,data_expedicao, nome_pai, nome_mae, tipo_sanguineo)
@@ -306,10 +306,10 @@ complemento,ibge,registro_geral,orgao_emissor,data_expedicao, nome_pai, nome_mae
 
 select max(id_pessoa) into idP FROM pessoa;
 
-insert into quadro_horario(escala, tipo, carga_horaria, entrada1, saida1, entrada2, saida2,total, dias_trabalhados, folga, observacoes)
+/*insert into quadro_horario(escala, tipo, carga_horaria, entrada1, saida1, entrada2, saida2,total, dias_trabalhados, folga, observacoes)
 values(escala, tipo, carga_horaria, entrada1, saida1, entrada2, saida2,total, dias_trabalhados, folga, observacoes);
 
-select max(id_quadro_horario) into idQ FROM quadro_horario;
+select max(id_quadro_horario) into idQ FROM quadro_horario;*/
 
 insert into funcionario(id_pessoa,id_quadro_horario,id_pessoa,id_quadro_horario,vale_transporte,data_admissao,pis,ctps,
 uf_ctps,numero_titulo,zona,secao,certificado_reservista_numero,certificado_reservista_serie,calcado,calca,jaleco,camisa,
