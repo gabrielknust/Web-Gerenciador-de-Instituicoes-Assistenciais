@@ -1,3 +1,5 @@
+<?php session_start(); 
+?>
 <!doctype html>
 <html class="fixed">
 	<head>
@@ -5,7 +7,7 @@
 		<!-- Basic -->
 		<meta charset="UTF-8">
 
-		<title>Perfil</title>
+		<title>Perfil funcionário</title>
 		<meta name="keywords" content="HTML5 Admin Template" />
 		<meta name="description" content="Porto Admin - Responsive HTML5 Template">
 		<meta name="author" content="okler.net">
@@ -24,6 +26,14 @@
 		<link rel="stylesheet" href="../assets/vendor/bootstrap-datepicker/css/datepicker3.css" />
 		<link rel="icon" href="../img/logofinal.png" type="image/x-icon">
 
+		<script src="../assets/vendor/jquery/jquery.min.js"></script>
+		<script src="../assets/vendor/jquery-browser-mobile/jquery.browser.mobile.js"></script>
+		<script src="../assets/vendor/bootstrap/js/bootstrap.js"></script>
+		<script src="../assets/vendor/nanoscroller/nanoscroller.js"></script>
+		<script src="../assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+		<script src="../assets/vendor/magnific-popup/magnific-popup.js"></script>
+		<script src="../assets/vendor/jquery-placeholder/jquery.placeholder.js"></script>
+
 		<!-- Theme CSS -->
 		<link rel="stylesheet" href="../assets/stylesheets/theme.css" />
 
@@ -35,6 +45,100 @@
 
 		<!-- Head Libs -->
 		<script src="../assets/vendor/modernizr/modernizr.js"></script>
+
+		<!-- jquery functions -->
+		<script>
+			$(function(){
+
+				var funcionarios=<?php echo $_SESSION['funcionarios'];?>;
+				console.log(funcionarios);
+				var id=<?php echo $_GET['id']; ?>;
+				$.each(funcionarios,function(i,item){
+					if(i==id)
+					{
+
+
+						if (item.sexo == 'f') {
+							$('#reservista').hide();
+						}
+
+						console.log(item);
+						$("#nome").text("Nome: "+item.nome);
+
+						if(item.sexo=="m")
+						{
+							$("#sexo").html("Sexo: <i class='fa fa-male'></i>  Masculino");
+						}
+						else if(item.sexo=="f")
+						{
+							$("#sexo").html("Sexo: <i class='fa fa-female'>  Feminino");
+						}
+
+						$("#telefone").text("Telefone: "+item.telefone);
+
+						$("#sangue").text("Sangue: "+item.tipo_sanguineo);
+						
+						$("#nascimento").text("Data de nascimento: "+item.data_nascimento);
+
+						$("#cep").text("CEP: "+item.cep);
+
+						$("#cidade").text("Cidade: "+item.cidade);
+
+						$("#bairro").text("Bairro: "+item.bairro);
+
+						$("#logradouro").text("Logradouro: "+item.logradouro);
+
+						$("#numero").text("Numero: "+item.numero_endereco);
+
+						$("#complemento").text("Complemento: "+item.complemento);
+
+						$("#rg").text("Registro geral: "+item.registro_geral);
+
+						$("#data_expedicao").text("Data de expedição: "+item.data_expedicao);
+
+						$("#cpf").text("CPF: "+item.cpf);
+
+						$("#pis").text("PIS: "+item.pis);
+
+						$("#zona").text("Zona Eleitoral: "+item.zona);
+
+						$("#titulo_eleitor").text("Título de eleitor: "+item.numero_titulo);
+
+						$("#tituloEleitor").text("Título de eleitor: "+item.tituloEleitor);
+
+						$("#ctps").text("CTPS: "+item.ctps);
+
+						$("#uf_ctps").text("UF: "+item.uf_ctps);
+
+						$("#jaleco").text("Jaleco: "+item.jaleco);
+
+						$("#camisa").text("Camisa: "+item.camisa);
+
+						$("#calcado").text("Calçado: "+item.calcado);
+
+						$("#calca").text("Calça: "+item.calca);
+
+						$("#certificado_reservista_numero").text("Número: "+item.certificado_reservista_numero);
+
+						$("#certificado_reservista_serie").text("Série: "+item.certificado_reservista_serie);
+
+						if (item.usa_vtp== "Possui") {
+
+							$("#usa_vtp").html("Vale Transporte: <i class='fa fa-check'>");
+							$("#vale_transporte").text("Número do vale transporte: "+item.vale_transporte);
+
+						}else {
+							$("#usa_vtp").html("Vale Transporte: <i class='fa fa-times'>");
+							$("#vale_transporte").hide();
+						}
+
+						$("#data_admissao").text("Data de admissão: "+item.data_admissao);
+					}
+				})
+			});
+		</script>
+
+
 	</head>
 	<body>
 		<section class="body">
@@ -247,48 +351,55 @@
 													<ul class="nav nav-children" id="info">
 
 														<li id="cap">Dados Pessoais:</li>
-														<li>Nome:</li>
-														<li>Sexo: <i class="fa fa-male"></i>   <i class="fa fa-female"></i></li>
-														<li>Telefone:</li>
-														<li>Data de Nascimento:</li>
-														<li>Tipo Sanguineo</li>
-														<li>CEP:</li>
-														<li>Cidade:</li>
-														<li>Bairro:</li>
-														<li>Logradouro:</li>
-														<li>Número:</li>
-														<li>Complemento:</li>
+														<li id="nome">Nome:</li>
+														<li id="sexo">Sexo: <i class="fa fa-male"></i>   <i class="fa fa-female"></i></li>
+														<li id="telefone">Telefone:</li>
+														<li id="nascimento">Data de Nascimento:</li>
+														<li id="sangue">Tipo Sanguineo</li>
+														<li id="cep">CEP:</li>
+														<li id="cidade">Cidade:</li>
+														<li id="bairro">Bairro:</li>
+														<li id="logradouro">Logradouro:</li>
+														<li id="numero">Número:</li>
+														<li id="complemento">Complemento:</li>
 														<br/>
 
 														<li id="cap">RG</li>
-														<li>Número:</li>
-														<li>Data de Expedição do RG:</li>
+														<li id="rg">Número:</li>
+														<li id="data_expedicao">Data de Expedição do RG:</li>
 														<br/>
 
 														<li id="cap">CTPS</li>
-														<li>Número:</li> 
-														<li>PIS:</li>
-														<li>UF:</li>
+														<li id="ctps">Número:</li> 
+														<li id="uf_ctps">UF:</li>
+														<li id="pis">PIS:</li>
 														<br/>
 
-														<li>Zona Eleitoral: </li>
-														<li>Título de Eleitor:</li>
+														<li id="zona">Zona Eleitoral: </li>
+														<li id="titulo_eleitor">Título de Eleitor:</li>
 														<br/>
 														
+														<div id="reservista">
+															
 														<li id="cap">Certificado de Reservista</li>
-														<li>Número:</li>
-														<li>Série:</li>
+														<li id="certificado_reservista_numero">Número:</li>
+														<li id="certificado_reservista_serie">Série:</li>
 														<br/>
 
+														</div>
+
+														
+
 														<li id="cap">Empresa</li>
-														<li>Vale Transporte: <i class="fa fa-check"></i>   <i class="fa fa-times"></i> </li>
-														<li>Data de Admissão: 00/00/0000</li>
+														<li id="usa_vtp">Vale Transporte: <i class="fa fa-check"></i>   <i class="fa fa-times"></i> </li>
+														<li id="vale_transporte">Número do vale transporte</li>
+														<li id="data_admissao">Data de Admissão: 00/00/0000</li>
 														<br/>
 														<li id="cap">Vestuário</li>
-														<li>Calçado: </li>
-														<li>Calça: </li>
-														<li>Jaleco: </li>
-														<li>Camisa: </li>
+														<li id="calcado">Calçado: </li>
+														<li id="calca">Calça: </li>
+														<li id="jaleco">Jaleco: </li>
+														<li id="camisa">Camisa: </li>
 													</ul>
 												</div>
 											</section>

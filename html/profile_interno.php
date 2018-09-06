@@ -7,7 +7,7 @@
 		<!-- Basic -->
 		<meta charset="UTF-8">
 
-		<title>Perfil</title>
+		<title>Perfil interno</title>
 		<meta name="keywords" content="HTML5 Admin Template" />
 		<meta name="description" content="Porto Admin - Responsive HTML5 Template">
 		<meta name="author" content="okler.net">
@@ -55,30 +55,61 @@
 					{
 						console.log(item);
 						$("#nome").text("Nome: "+item.nome);
+
 						if(item.sexo=="m")
 						{
-							$("#sexo").html("Sexo: <i class='fa fa-male'></i>");
+							$("#sexo").html("Sexo: <i class='fa fa-male'></i>  Masculino");
 						}
 						else if(item.sexo=="f")
 						{
-							$("#sexo").html("Sexo: <i class='fa fa-female'>");
+							$("#sexo").html("Sexo: <i class='fa fa-female'>  Feminino");
 						}
-						if(item.telefone_contato_urgente_1!="null")
-						{
-							$("#telefone1").text("Telefone contato urgente 1: "+item.telefone_contato_urgente_1);
-						}
-						else
-						{
-							$("#telefone1").text("Telefone contato urgente 1: Não informado");
-						}
-						if(item.telefone_contato_urgente_2!="null")
-						{
-							$("#telefone2").text("Telefone contato urgente 2: "+item.telefone_contato_urgente_2);
-						}
-						else
-						{
-							$("#telefone2").text("Telefone contato urgente 2: Não informado");
-						}
+
+						$("#telefone1").text("Telefone contato urgente 1: "+item.telefone_contato_urgente_1);
+
+
+						$("#telefone2").text("Telefone contato urgente 2: "+item.telefone_contato_urgente_2);
+
+
+						$("#telefone3").text("Telefone contato urgente 3: "+item.telefone_contato_urgente_3);
+
+						$("#sangue").text("Sangue: "+item.tipo_sanguineo);
+						
+						$("#nascimento").text("Data de nascimento: "+item.data_nascimento);
+
+						$("#cep").text("CEP: "+item.cep);
+
+						$("#cidade").text("Cidade: "+item.cidade);
+
+						$("#bairro").text("Bairro: "+item.bairro);
+
+						$("#logradouro").text("Logradouro: "+item.logradouro);
+
+						$("#numero").text("Numero: "+item.numero_endereco);
+
+						$("#complemento").text("Complemento: "+item.complemento);
+
+						$("#rg").text("Registro geral: "+item.registro_geral);
+
+						$("#data_expedicao").text("Data de expedição: "+item.data_expedicao);
+
+						$("#cpf").text("CPF: "+item.cpf);
+
+						$("#inss").text("INSS: "+item.inss);
+
+						$("#loas").text("LOAS: "+item.loas);
+
+						$("#funrural").text("FUNRURAL: "+item.funrural);
+
+						$("#tituloEleitor").text("Título de eleitor: "+item.tituloEleitor);
+
+						$("#ctps").text("CTPS: "+item.ctps);
+
+						$("#saf").text("SAF: "+item.saf);
+
+						$("#sus").text("SUS: "+item.sus);
+
+						$("#bpc").text("BPC: "+item.bpc);
 					}
 				})
 			});

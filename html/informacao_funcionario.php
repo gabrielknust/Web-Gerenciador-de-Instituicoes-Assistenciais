@@ -64,11 +64,11 @@
 		<script src="../Functions/enviar_dados.js"></script>
 		<script src="../Functions/mascara.js"></script>
 		
-	   <!-- jquery functions -->
-	   <script>
+		<!-- jquery functions -->
+	   	   <<script>
 	   		function clicar(id)
 	   		{
-	   			window.location.href = "http://localhost/Web-Gerenciador-de-Instituicoes-Assistenciais/html/profile_interno.php?id="+id;
+	   			window.location.href = "http://localhost/Web-Gerenciador-de-Instituicoes-Assistenciais/html/profile_funcionario.php?id="+id;
 	   		}
 			$(function()
 				{
@@ -81,7 +81,6 @@
 	</head>
 	<body>
 		<section class="body">
-
 			<!-- start: header -->
 			<header class="header">
 				<div class="logo-container">
@@ -96,15 +95,6 @@
 				<!-- start: search & user box -->
 				<div class="header-right">
 			
-					<form action="pages-search-results.html" class="search nav-form">
-						<div class="input-group input-search">
-							<input type="text" class="form-control" name="q" id="q" placeholder="Search...">
-							<span class="input-group-btn">
-								<button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
-							</span>
-						</div>
-					</form>	
-					
 					<span class="separator"></span>
 			
 					<div id="userbox" class="userbox">
@@ -125,9 +115,6 @@
 								<li class="divider"></li>
 								<li>
 									<a role="menuitem" tabindex="-1" href="../html/profile.html"><i class="fa fa-user"></i> My Profile</a>
-								</li>
-								<li>
-									<a role="menuitem" tabindex="-1" href="#" data-lock-screen="true"><i class="fa fa-lock"></i> Lock Screen</a>
 								</li>
 								<li>
 									<a role="menuitem" tabindex="-1" href="../index.html"><i class="fa fa-power-off"></i> Logout</a>
@@ -191,15 +178,33 @@
 											</li>
 										</ul>
 									</li>
-							</nav>
-				
-						</div>
-				
-					</div>
-				
-				</aside>
-				<!-- end: sidebar -->
 
+									<li class="nav-parent nav-expanded nav-active">
+										<a>
+											<i class="fa fa-copy" aria-hidden="true"></i>
+											<span>informação</span>
+										</a>
+										<ul class="nav nav-children">
+											<li>
+												<a href="informacao_funcionario.php">
+													 informações funcionarios
+												</a>
+											</li>
+										</ul>
+										<ul class="nav nav-children">
+											<li>
+												<a href="informacao_interno.php">
+													 informações interno
+												</a>
+											</li>
+										</ul>
+									</li>
+							</nav>
+						</div>
+					</div>
+				</aside>
+				
+				<!-- end: sidebar -->
 				<section role="main" class="content-body">
 					<header class="page-header">
 						<h2>Informaçoes</h2>
@@ -207,12 +212,11 @@
 						<div class="right-wrapper pull-right">
 							<ol class="breadcrumbs">
 								<li>
-									<a href="index.html">
+									<a href="home.html">
 										<i class="fa fa-home"></i>
 									</a>
 								</li>
-								<li><span>Páginas</span></li>
-								<li><span>Perfil</span></li>
+								<li><span>Informações Funcionario</span></li>
 							</ol>
 					
 							<a class="sidebar-right-toggle"><i class="fa fa-chevron-left"></i></a>
@@ -229,22 +233,25 @@
 								<div class="panel-actions">
 									<a href="#" class="fa fa-caret-down"></a>
 								</div>
-								<h2 class="panel-title">Interno</h2>
+						
+								<h2 class="panel-title">Funcionario</h2>
 							</header>
 							<div class="panel-body">
-								<table class="table table-bordered table-striped mb-none" id="datatable-tabletools">
+								<table class="table table-bordered table-striped mb-none" id="datatable-default">
 									<thead>
 										<tr>
-											<th>Nome</th>
-											<th>CPF</th>
+											<th>nome</th>
+											<th>cpf</th>
+											<th>cargo</th>
 										</tr>
 									</thead>
 									<tbody id="tabela">
+										
 									</tbody>
 								</table>
-							</div>
+							</div><br>
 						</section>
-						<!-- end: page -->
+					<!-- end: page -->
 
 		<!-- Vendor -->
 		<script src="../assets/vendor/jquery/jquery.js"></script>
@@ -276,4 +283,7 @@
 		<script src="../assets/javascripts/tables/examples.datatables.row.with.details.js"></script>
 		<script src="../assets/javascripts/tables/examples.datatables.tabletools.js"></script>
 	</body>
-</html>										
+</html>
+
+
+										

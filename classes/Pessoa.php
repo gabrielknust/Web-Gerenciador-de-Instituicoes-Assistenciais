@@ -19,6 +19,8 @@ abstract class Pessoa
     private $imagem;
 
     private $cep;
+    
+    private $estado;
 
     private $cidade;
 
@@ -44,7 +46,7 @@ abstract class Pessoa
     
     private $tipoSanguineo;
 
-    public function __construct($cpf,$nome,$sexo,$dataNascimento,$registroGeral,$orgaoEmissor,$dataExpedicao,$nomeMae,$nomePai,$tipoSanguineo,$senha,$telefone,$imagem,$cep,$cidade,$bairro,$logradouro,$numeroEndereco,$complemento)
+    public function __construct($cpf,$nome,$sexo,$dataNascimento,$registroGeral,$orgaoEmissor,$dataExpedicao,$nomeMae,$nomePai,$tipoSanguineo,$senha,$telefone,$imagem,$cep,$cidade,$bairro,$logradouro,$numeroEndereco,$complemento,$ibge)
     {
         $this->cpf=$cpf;
         $this->nome=$nome;
@@ -65,8 +67,19 @@ abstract class Pessoa
         $this->logradouro=$logradouro;
         $this->numeroEndereco=$numeroEndereco;
         $this->complemento=$complemento;
+        $this->ibge=$ibge;
+    }
+    
+    public function getEstado()
+    {
+        return $this->estado;
     }
 
+    public function setEstado($estado)
+    {
+        $this->estado=$estado;
+    }
+    
     public function getIbge()
     {
         return $this->ibge;

@@ -67,253 +67,6 @@
 
 		<!-- jquery functions -->
 		<script>
-			$(function(){
-				var rg = 0;
-				var cpf = 0;
-				var certidao = 0;
-				var inss = 0;
-				var loas = 0;
-				var funrural = 0;
-				var titulo = 0;
-				var ctps = 0;
-				var saf = 0;
-				var sus = 0;
-				var bpc = 0;
-				var curatela = 0;
-
-				$("#label-rg").hide();
-				$("#imgRg").hide();
-
-				$("#label-cpf").hide();
-				$("#imgCpf").hide();
-				
-				$("#label-certidao").hide();
-				$("#imgCertidaoNascimento").hide();
-
-				$("#label-inss").hide();
-				$("#imgInss").hide();
-
-				$("#label-loas").hide();
-				$("#imgLoas").hide();
-
-				$("#label-funrural").hide();
-				$("#imgFunrural").hide();
-
-				$("#label-titulo").hide();
-				$("#imgTituloEleitor").hide();
-
-				$("#label-ctps").hide();
-				$("#imgCtps").hide();
-
-				$("#label-saf").hide();
-				$("#imgSaf").hide();
-
-				$("#label-sus").hide();
-				$("#imgSus").hide();
-
-				$("#label-bpc").hide();
-				$("#imgBpc").hide();
-
-				$("#label-curatela").hide();
-				$("#imgCuratela").hide();
-				
-				$("#rg-checkbox").click(function(){
-
-					if($("#rg-checkbox").is(':checked') == true){
-						$("#label-rg").show();
-						$("#imgRg").show();
-
-						rg = 1;
-					}
-					else{
-						$("#label-rg").hide();
-						$("#imgRg").hide();
-
-						rg = 0;	
-					}	
-				});
-
-				$("#cpf-checkbox").click(function(){
-					if($("#cpf-checkbox").is(':checked') == true){
-						$("#label-cpf").show();
-						$("#imgCpf").show();
-
-						cpf = 1;	
-					}
-					else{
-						$("#label-cpf").hide();
-						$("#imgCpf").hide();
-
-						cpf = 0;	
-					}
-				});
-				
-				$("#inss-checkbox").click(function(){
-					if($("#inss-checkbox").is(':checked') == true){
-						$("#imgInss").show();
-						$("#label-inss").show();
-
-						inss = 1;	
-					}
-					else{
-						$("#imgInss").hide();
-						$("#label-inss").hide();
-
-						inss = 0;
-					}
-				});
-
-				$("#loas-checkbox").click(function(){
-					if($("#loas-checkbox").is(':checked') == true){
-						$("#imgLoas").show();
-						$("#label-loas").show();
-
-						loas = 1;	
-					}
-					else{
-						$("#imgLoas").hide();
-						$("#label-loas").hide();
-
-						loas = 0;
-					}
-				});
-
-				$("#funrural-checkbox").click(function(){
-					if($("#funrural-checkbox").is(':checked') == true){
-						$("#imgFunrural").show();
-						$("#label-funrural").show();
-
-						funrural = 1;	
-					}
-					else{
-						$("#imgFunrural").hide();
-						$("#label-funrural").hide();
-
-						funrural = 0;	
-					}
-				});
-
-				$("#tituloEleitor-checkbox").click(function(){
-					if($("#tituloEleitor-checkbox").is(':checked') == true){
-						$("#imgTituloEleitor").show();
-						$("#label-titulo").show();
-
-						titulo = 1;	
-					}
-					else{
-						$("#imgTituloEleitor").hide();
-						$("#label-titulo").hide();
-
-						titulo = 0;
-					}
-				});
-
-				$("#ctps-checkbox").click(function(){
-					if($("#ctps-checkbox").is(':checked') == true){
-						$("#imgCtps").show();
-						$("#label-ctps").show();
-
-						ctps = 1;	
-					}
-					else{
-						$("#imgCtps").hide();
-						$("#label-ctps").hide();
-
-						ctps = 0;	
-					}
-				});
-
-				$("#saf-checkbox").click(function(){
-					if($("#saf-checkbox").is(':checked') == true){
-						$("#imgSaf").show();
-						$("#label-saf").show();	
-
-						saf = 1;
-					}
-					else{
-						$("#imgSaf").hide();
-						$("#label-saf").hide();	
-
-						saf = 0;
-					}
-				});
-
-				$("#sus-checkbox").click(function(){
-					if($("#sus-checkbox").is(':checked') == true){
-						$("#imgSus").show();
-						$("#label-sus").show();	
-
-						sus = 1;
-					}
-					else{
-						$("#imgSus").hide();
-						$("#label-sus").hide();
-
-						sus = 0;
-					}
-				});
-
-				$("#bpc-checkbox").click(function(){
-					if($("#bpc-checkbox").is(':checked') == true){
-						$("#imgBpc").show();
-						$("#label-bpc").show();	
-
-						bpc = 1;
-					}
-					else{
-						$("#imgBpc").hide();
-						$("#label-bpc").hide();	
-
-						bpc = 0;
-					}
-				});
-
-				$("#certidao-checkbox").click(function(){
-					if($("#certidao-checkbox").is(':checked') == true){
-						$("#label-certidao").show();
-						$("#imgCertidaoNascimento").show();
-
-						certidao = 1;
-					}
-					else{
-						$("#label-certidao").hide();
-						$("#imgCertidaoNascimento").hide();	
-						
-						certidao = 0;
-					}
-				});
-
-
-				$("#curatela-checkbox").click(function(){
-					if($("#curatela-checkbox").is(':checked') == true){
-						$("#label-curatela").show();
-						$("#imgCuratela").show();
-
-						curatela = 1;
-					}
-					else{
-						$("#label-curatela").hide();
-						$("#imgCuratela").hide();
-
-						curatela = 0;
-					}
-				});
-
-				$("#enviar").click(function(){
-
-				//if(rg == 1 && $("#imgRg").value == null){
-				//	alert("")
-				//}
-					//if($("#imgPerfil").value == null){
-					//alert("Tem certeza que deseja não inserir uma imagem ao interno?");
-				//}
-
-				//if($("#inss").value != null && $("#"))
-				$("#formulario").submit();
-				});
-
-			});				
-			
 		</script>
 
 	</head>
@@ -333,16 +86,6 @@
 			
 				<!-- start: search & user box -->
 				<div class="header-right">
-			
-					<form action="pages-search-results.html" class="search nav-form">
-						<div class="input-group input-search">
-							<input type="text" class="form-control" name="q" id="q" placeholder="Search...">
-							<span class="input-group-btn">
-								<button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
-							</span>
-						</div>
-					</form>	
-					
 					<span class="separator"></span>
 			
 					<div id="userbox" class="userbox">
@@ -465,30 +208,215 @@
 								<div class="panel-body">
 									<div class="thumb-info mb-md">
 										<img src="../img/semfoto.jpg" class="rounded img-responsive" alt="John Doe">
-										<i class="fas fa-camera-retro btn btn-info btn-lg" data-toggle="modal" data-target="#myModal"></i>
-										<div class="container">
+										<div class="form-group" >										
+										
+												<label class="control-label" id="label-perfil">Imagem de perfil:</label>
+												<input type="file" name="imgPerfil" size="60" id="imgPerfil" class="form-control">
+										
+									</div>
+										
+									</div>
 
-											  <div class="modal fade" id="myModal" role="dialog">
-											    <div class="modal-dialog">
-											    
-											      <!-- Modal content-->
-											      <div class="modal-content">
-											        <div class="modal-header">
-											          <button type="button" class="close" data-dismiss="modal">&times;</button>
-											          <h4 class="modal-title">Adicionar uma Foto</h4>
-											        </div>
-											        <div class="modal-body"> 
-											        	<form method="post" action="../controle/control.php" id="formulario">
-											        		<input type="hidden" name="nomeClasse" value="InternoControle">
-											        		<input type="hidden" name="metodo" value="incluir">
-											        	<div class="form-group">
-															<label class="col-md-4 control-label" for="imgPerfil" id="label-perfil">Carregue uma imagem de perfil:</label>
-															<div class="col-md-8">
-																<input type="file" name="imgPerfil" size="60" id="imgPerfil" class="form-control">
-															</div>
+									<div class="widget-toggle-expand mb-md">
+										<div class="widget-header">
+											
+											<div class="widget-content-expanded">
+											<ul class="simple-todo-list">
+											
+											</ul>
+										</div>
+										</div>
+									</div>
+
+								
+
+									<h6 class="text-muted"></h6>
+									
+									
+
+									
+								</div>
+							</section>
+						</div>
+						<div class="col-md-8 col-lg-8">
+
+							<div class="tabs">
+								<ul class="nav nav-tabs tabs-primary">
+									<li class="active">
+										<a href="#overview" data-toggle="tab">Cadastro de Interno</a>
+									</li>
+								</ul>
+								<div class="tab-content">
+									<div id="overview" class="tab-pane active">
+
+											<h4 class="mb-xlg">Informações Pessoais</h4>
+											<form id="formulario" action="../controle/control.php">
+											<fieldset>
+												<div class="form-group">
+													<label class="col-md-3 control-label">Nome completo</label>
+													<div class="col-md-8">
+														<input type="text" class="form-control" name="nome" id="nome" id="profileFirstName" onkeypress="return Onlychars(event)" >
+													</div>
+												</div>
+												<div class="form-group">
+													<label class="col-md-3 control-label">Sexo</label>
+													<div class="col-md-8">
+														<input type="radio" name="sexo" id="radio1" value="m" style="margin-top: 10px margin-left: 15px;" required><i class="fa fa-male" style="font-size: 20px;" required></i>
+														<input type="radio" name="sexo" id="radio2"  value="f" style="margin-top: 10px; margin-left: 15px;"><i class="fa fa-female" style="font-size: 20px;"></i> 
+													</div>
+												</div>
+												<div class="form-group">
+													<label class="col-md-3 control-label" >Nome Contato</label>
+													<div class="col-md-8">
+														<input type="text" class="form-control" name="nomeContato" id="nomeContato" id="profileFirstName" onkeypress="return Onlychars(event)">
+													</div>
+												</div>
+												<div class="form-group">
+													<label class="col-md-3 control-label" for="profileCompany">Telefone contato 1</label>
+													<div class="col-md-8">
+														<input type="text" name="telefone1" class="form-control" minlength="11" id="profileCompany" id="telefone1" maxlength="13" placeholder="(##)#########" onkeypress="return Onlynumbers(event)" onkeyup="mascara('(##)#########',this,event)" >
+													</div>
+												</div>
+												<div class="form-group">
+													<label class="col-md-3 control-label" for="profileCompany">Telefone contato 2</label>
+													<div class="col-md-8">
+														<input type="text" name="telefone2" class="form-control" minlength="11" id="profileCompany" id="telefone2" maxlength="13" placeholder="(##)#########" onkeypress="return Onlynumbers(event)" onkeyup="mascara('(##)#########',this,event)" >
+													</div>
+												</div>
+												<div class="form-group">
+													<label class="col-md-3 control-label" for="profileCompany">Telefone contato 3</label>
+													<div class="col-md-8">
+														<input type="text" name="telefone3" class="form-control" minlength="11" id="profileCompany" id="telefone3" maxlength="13" placeholder="(##)#########" onkeypress="return Onlynumbers(event)" onkeyup="mascara('(##)#########',this,event)" >
+													</div>
+												</div>
+												<div class="form-group">
+													<label class="col-md-3 control-label" for="profileCompany">Nascimento</label>
+													<div class="col-md-8">
+														<input type="text" name="nascimento" class="form-control" id="profileCompany" id="nascimento" placeholder="dd/mm/aaaa" maxlength="10" onkeypress="return Onlynumbers(event)" onkeyup="mascara('##/##/####',this,event)" >
+													</div>
+												</div>
+												<div class="form-group">
+													<label class="col-md-3 control-label" for="profileName">Nome do Pai</label>
+													<div class="col-md-8">
+														<input type="text" name="pai" class="form-control"  onkeypress="return Onlychars(event)" id="pai" >
+													</div>
+												</div>
+												<div class="form-group">
+													<label class="col-md-3 control-label" for="profileFirstName">Nome da Mãe</label>
+													<div class="col-md-8">
+														<input type="text" name="nomeMae" class="form-control" id="mae" id="profileFirstName" onkeypress="return Onlychars(event)" >
+													</div>
+												</div>
+												<div class="form-group">
+													<label class="col-md-3 control-label" for="inputSuccess">Tipo Sanguíneo</label>
+													<div class="col-md-6">
+													<select name="sangue" id="sangue" class="form-control input-lg mb-md">
+														<option selected disabled value="blank">Selecionar</option>
+														<option value="A+">A+</option>
+														<option value="A-">A-</option>
+														<option value="B+">B+</option>
+														<option value="B-">B-</option>
+														<option value="O+">O+</option>
+														<option value="O-">O-</option>
+														<option value="AB+">AB+</option>
+														<option value="AB-">AB-</option>
+													</select>
+													</div>	
+												</div>
+												<br/>
+
+											<hr class="dotted short">
+											<h4 class="mb-xlg doch4">Documentação</h4>
+
+												<div class="form-group">
+													<label class="col-md-3 control-label" for="profileCompany">Número do RG</label>
+													<div class="col-md-6">
+														<input type="text" name="rg" class="form-control" id="rg" maxlength="12" placeholder="##.###.###-#" onkeypress="return Onlynumbers(event)" onkeyup="mascara('##.###.###-#',this,event)" >
+													</div>
+												</div>
+												
+												<div class="form-group">
+													<label class="col-md-3 control-label" for="profileCompany">Órgão Emissor</label>
+													<div class="col-md-6">
+														<input type="text" name="orgaoEmissor" class="form-control" id="orgao" onkeypress="return Onlychars(event)">
+													</div>
+												</div>
+												
+												<div class="form-group">
+													<label class="col-md-3 control-label" for="profileCompany">Data de Expedição</label>
+													<div class="col-md-6">
+														<input type="text" name="dataExpedicao" class="form-control"  id="dataExpedicao" placeholder="dd/mm/aaaa" maxlength="10" onkeypress="return Onlynumbers(event)" onkeyup="mascara('##/##/####',this,event)" >
+													</div>
+												</div>
+												
+												<div class="form-group">
+													<label class="col-md-3 control-label" for="profileCompany">Número do CPF</label>
+													<div class="col-md-6">
+														<input type="text" name="numeroCPF" class="form-control" id="cpf" maxlength="14" placeholder="###.###.###-##" onkeypress="return Onlynumbers(event)" onkeyup="mascara('###.###.###-##',this,event)" >
+													</div>
+												</div>
+												
+												<hr class="dotted short">
+												<div class="form-group">
+												<label class="col-md-3 control-label">Benefícios</label>
+		
+													<div class="col-md-8">
+														<div class="checkbox">
+															<label for="beneficio">
+																<input type="checkbox" name="certidao" value="Possui" id="certidao-checkbox" >Certidão de Nascimento			
+															</label><br>
+															<label for="beneficio">
+																<input type="checkbox" name="curatela" value="Possui" id="curatela-checkbox" >Curatela
+															</label><br>
+															<label for="beneficio">
+																<input type="checkbox" name="inss" value="Possui" id="inss-checkbox" >INSS
+															</label><br>
+														
+															<label for="beneficio">
+																<input type="checkbox" name="loas" value="Possui" id="loas-checkbox" >LOAS
+															</label><br>
+														
+															<label for="beneficio">
+																<input type="checkbox" name="funrural" value="Possui" id="funrural-checkbox" >FUNRURAL
+															</label><br>
+														
+															<label for="beneficio">
+																<input type="checkbox" name="rg" value="Possui" id="rg-checkbox" >RG
+															</label><br>
+														
+															<label for="beneficio">
+																<input type="checkbox" name="cpf" value="Possui" id="cpf-checkbox" >CPF
+															</label><br>
+														
+															<label for="beneficio">
+																<input type="checkbox" name="tituloEleitor" value="Possui" id="tituloEleitor-checkbox" >Título de Eleitor
+																<input type="hidden" name="nomeClasse" value="InternoControle">
+																<input type="hidden" name="metodo" value="incluir">
+															</label><br>
+														
+															<label for="beneficio">
+																<input type="checkbox" name="ctps" value="Possui" id="ctps-checkbox" >CTPS
+															</label><br>
+														
+															<label for="beneficio">
+																<input type="checkbox" name="saf" value="Possui" id="saf-checkbox" >SAF
+															</label><br>
+														
+															<label for="beneficio">
+																<input type="checkbox" name="sus" value="Possui" id="sus-checkbox" >SUS
+															</label><br>
+
+															<label for="beneficio">
+																<input type="checkbox" name="bpc" value="Possui" id="bpc-checkbox" >BPC
+															</label><br>
 														</div>
-														<div class="form-group" >
-															<label class="col-md-4 control-label" id="label-rg" for="imgRg" >Carregue a imagem do RG:</label>
+													</div>
+													<br>
+													<hr class="dotted short">
+													<h4 class="mb-xlg doch4" id="label-imagens">Imagens</h4> 
+													<div class="form-group" >
+
+															<label class="col-md-4 control-label" id="label-rg" for="imgRg" >RG:</label>
 															<div class="col-md-8">
 																<input type="file" name="imgRg" size="60" id="imgRg" class="form-control" >
 															</div>
@@ -559,215 +487,6 @@
 																<input type="file" name="imgBpc" size="60" id="imgBpc" class="form-control">
 															</div>
 														</div>
-														
-											        	
-											        </div>
-											        <div class="modal-footer">
-
-											        </div>
-											      </div>
-											      
-											    </div>
-											  </div>
-											  
-											</div>
-									</div>
-
-									<div class="widget-toggle-expand mb-md">
-										<div class="widget-header">
-											
-											<div class="widget-content-expanded">
-											<ul class="simple-todo-list">
-											
-											</ul>
-										</div>
-										</div>
-									</div>
-
-									<hr class="dotted short">
-
-									<h6 class="text-muted"></h6>
-									
-									<div class="clearfix">
-										<a class="text-uppercase text-muted pull-right" href="#">(Ver tudo)</a>
-									</div>
-
-
-									
-								</div>
-							</section>
-						</div>
-						<div class="col-md-8 col-lg-8">
-
-							<div class="tabs">
-								<ul class="nav nav-tabs tabs-primary">
-									<li class="active">
-										<a href="#overview" data-toggle="tab">Cadastro de Interno</a>
-									</li>
-								</ul>
-								<div class="tab-content">
-									<div id="overview" class="tab-pane active">
-
-											<h4 class="mb-xlg">Informações Pessoais</h4>
-											<fieldset>
-												<div class="form-group">
-													<label class="col-md-3 control-label">Nome completo</label>
-													<div class="col-md-8">
-														<input type="text" class="form-control" name="nome" id="nome" id="profileFirstName" onkeypress="return Onlychars(event)" required>
-													</div>
-												</div>
-												<div class="form-group">
-													<label class="col-md-3 control-label">Sexo</label>
-													<div class="col-md-8">
-														<input type="radio" name="sexo" id="radio" id="M" value="m" style="margin-top: 10px margin-left: 15px;" required><i class="fa fa-male" style="font-size: 20px;" ></i>
-														<input type="radio" name="sexo" id="radio" id="F" value="f" style="margin-top: 10px; margin-left: 15px;"><i class="fa fa-female" style="font-size: 20px;"></i> 
-													</div>
-												</div>
-												<div class="form-group">
-													<label class="col-md-3 control-label" >Nome Contato</label>
-													<div class="col-md-8">
-														<input type="text" class="form-control" name="nomeContato" id="nomeContato" id="profileFirstName" onkeypress="return Onlychars(event)" required>
-													</div>
-												</div>
-												<div class="form-group">
-													<label class="col-md-3 control-label" for="profileCompany">Telefone contato 1</label>
-													<div class="col-md-8">
-														<input type="text" name="telefone1" class="form-control" minlength="11" id="profileCompany" id="telefone1" maxlength="13" placeholder="(##)#########" onkeypress="return Onlynumbers(event)" onkeyup="mascara('(##)#########',this,event)" >
-													</div>
-												</div>
-												<div class="form-group">
-													<label class="col-md-3 control-label" for="profileCompany">Telefone contato 2</label>
-													<div class="col-md-8">
-														<input type="text" name="telefone2" class="form-control" minlength="11" id="profileCompany" id="telefone2" maxlength="13" placeholder="(##)#########" onkeypress="return Onlynumbers(event)" onkeyup="mascara('(##)#########',this,event)" >
-													</div>
-												</div>
-												<div class="form-group">
-													<label class="col-md-3 control-label" for="profileCompany">Telefone contato 3</label>
-													<div class="col-md-8">
-														<input type="text" name="telefone3" class="form-control" minlength="11" id="profileCompany" id="telefone3" maxlength="13" placeholder="(##)#########" onkeypress="return Onlynumbers(event)" onkeyup="mascara('(##)#########',this,event)" >
-													</div>
-												</div>
-												<div class="form-group">
-													<label class="col-md-3 control-label" for="profileCompany">Nascimento</label>
-													<div class="col-md-8">
-														<input type="text" name="nascimento" class="form-control" id="profileCompany" id="nascimento" placeholder="dd/mm/aaaa" maxlength="10" onkeypress="return Onlynumbers(event)" onkeyup="mascara('##/##/####',this,event)" required>
-													</div>
-												</div>
-												<div class="form-group">
-													<label class="col-md-3 control-label" for="profileName">Nome do Pai</label>
-													<div class="col-md-8">
-														<input type="text" name="pai" class="form-control"  onkeypress="return Onlychars(event)" id="pai" required>
-													</div>
-												</div>
-												<div class="form-group">
-													<label class="col-md-3 control-label" for="profileFirstName">Nome da Mãe</label>
-													<div class="col-md-8">
-														<input type="text" name="nomeMae" class="form-control" id="mae" id="profileFirstName" onkeypress="return Onlychars(event)" required>
-													</div>
-												</div>
-												<div class="form-group">
-													<label class="col-md-3 control-label" for="inputSuccess">Tipo Sanguíneo</label>
-													<div class="col-md-6">
-													<select name="sangue" id="sangue" class="form-control input-lg mb-md">
-														<option selected disabled value="blank">Selecionar</option>
-														<option value="A+">A+</option>
-														<option value="A-">A-</option>
-														<option value="B+">B+</option>
-														<option value="B-">B-</option>
-														<option value="O+">O+</option>
-														<option value="O-">O-</option>
-														<option value="AB+">AB+</option>
-														<option value="AB-">AB-</option>
-													</select>
-													</div>	
-												</div>
-												<br/>
-
-											<hr class="dotted short">
-											<h4 class="mb-xlg doch4">Documentação</h4>
-
-												<div class="form-group">
-													<label class="col-md-3 control-label" for="profileCompany">Número do RG</label>
-													<div class="col-md-6">
-														<input type="text" name="rg" class="form-control" id="rg" id="profileCompany" maxlength="12" placeholder="##.###.###-#" onkeypress="return Onlynumbers(event)" onkeyup="mascara('##.###.###-#',this,event)" required>
-													</div>
-												</div>
-												
-												<div class="form-group">
-													<label class="col-md-3 control-label" for="profileCompany">Órgão Emissor</label>
-													<div class="col-md-6">
-														<input type="text" name="orgaoEmissor" class="form-control" id="profileCompany" id="orgao_emissor" onkeypress="return Onlychars(event)" required>
-													</div>
-												</div>
-												
-												<div class="form-group">
-													<label class="col-md-3 control-label" for="profileCompany">Data de Expedição</label>
-													<div class="col-md-6">
-														<input type="text" name="dataExpedicao" class="form-control" id="profileCompany" id="data_expedicao" placeholder="dd/mm/aaaa" maxlength="10" onkeypress="return Onlynumbers(event)" onkeyup="mascara('##/##/####',this,event)" required>
-													</div>
-												</div>
-												
-												<div class="form-group">
-													<label class="col-md-3 control-label" for="profileCompany">Número do CPF</label>
-													<div class="col-md-6">
-														<input type="text" name="numeroCPF" class="form-control" id="profileCompany" id="cpf" maxlength="14" placeholder="###.###.###-##" onkeypress="return Onlynumbers(event)" onkeyup="mascara('###.###.###-##',this,event)" required>
-													</div>
-												</div>
-												
-												<hr class="dotted short">
-												<div class="form-group">
-												<label class="col-md-3 control-label">Benefícios</label>
-		
-													<div class="col-md-8">
-														<div class="checkbox">
-															<label for="beneficio">
-																<input type="checkbox" name="certidao" value="certidao" id="certidao-checkbox" >Certidão de Nascimento			
-															</label><br>
-															<label for="beneficio">
-																<input type="checkbox" name="curatela" value="curatela" id="curatela-checkbox" >Curatela
-															</label><br>
-															<label for="beneficio">
-																<input type="checkbox" name="inss" value="inss" id="inss-checkbox" >INSS
-															</label><br>
-														
-															<label for="beneficio">
-																<input type="checkbox" name="loas" value="loas" id="loas-checkbox" >LOAS
-															</label><br>
-														
-															<label for="beneficio">
-																<input type="checkbox" name="funrural" value="funrural" id="funrural-checkbox" >FUNRURAL
-															</label><br>
-														
-															<label for="beneficio">
-																<input type="checkbox" name="rg" value="rg" id="rg-checkbox" >RG
-															</label><br>
-														
-															<label for="beneficio">
-																<input type="checkbox" name="cpf" value="cpf" id="cpf-checkbox" >CPF
-															</label><br>
-														
-															<label for="beneficio">
-																<input type="checkbox" name="tituloEleitor" value="tituloEleitor" id="tituloEleitor-checkbox" >Título de Eleitor
-															</label><br>
-														
-															<label for="beneficio">
-																<input type="checkbox" name="ctps" value="ctps" id="ctps-checkbox" >CTPS
-															</label><br>
-														
-															<label for="beneficio">
-																<input type="checkbox" name="saf" value="saf" id="saf-checkbox" >SAF
-															</label><br>
-														
-															<label for="beneficio">
-																<input type="checkbox" name="sus" value="sus" id="sus-checkbox" >SUS
-															</label><br>
-
-															<label for="beneficio">
-																<input type="checkbox" name="bpc" value="bpc" id="bpc-checkbox" >BPC
-															</label><br>
-														</div>
-													</div>
-												
 												</div>
 
 											<br/>
@@ -788,16 +507,16 @@
 												</div>
 											</section>
 										</fieldset>
+										</form>
 											<div class="panel-footer">
 												<div class="row">
 													<div class="col-md-9 col-md-offset-3">
-														<button id="enviar" type="button" class="btn btn-primary" onclick="return enviar_dados()">Enviar</button> 
-														<input type="reset" class="btn btn-default">
+														<button id="enviar" class="btn btn-primary"  type="submit" >Enviar</button>  
 													</div>
 												</div>
 											</div>
 
-										</form>
+										
 									</div>
 								</div>
 							</div>

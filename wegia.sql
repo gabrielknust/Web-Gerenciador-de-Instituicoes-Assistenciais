@@ -1,17 +1,19 @@
 create schema wegia default charset utf8;
 
 use wegia;
+
 /*--------------------------- Cadastro -------------------------------- */
 create table pessoa (
 	id_pessoa int not null primary key auto_increment,
     cpf varchar(20),
     senha varchar(70),
     nome varchar(100),
-    sexo char(1),
+    sexo char,
     telefone varchar(25),
     data_nascimento date,
     imagem longtext,
     cep varchar(10),
+    estado varchar(5),
     cidade varchar(40),
     bairro varchar(40),
     logradouro varchar(40),
@@ -62,35 +64,17 @@ create table interno(
     telefone_contato_urgente_1 varchar(33),
     telefone_contato_urgente_2 varchar(33),
     telefone_contato_urgente_3 varchar(33),
-    observacao varchar(20000),
-    
-    foreign key(id_pessoa) references pessoa(id_pessoa)
-    
-)engine = InnoDB;
-
-create table beneficios(
-	id_beneficio int not null primary key auto_increment,
-    curatela char(1),
+    observacao varchar(2000),
+	certidao_nascimento varchar(60),
+    curatela varchar(60),
     inss varchar(60),
     loas varchar(60),
     bpc varchar(60),
     funrural varchar(60),
-    rg varchar(60),
-    cpf varchar(60),
-    titulo_de_eleitor varchar(60),
-    ctps varchar(60),
     saf varchar(60),
-    sus varchar(60)
+    sus varchar(60),
     
-)engine = InnoDB;
-
-create table beneficio_interno(
-	id_interno int not null,
-    id_beneficio int not null,
-    
-    primary key(id_interno,id_beneficio),
-    foreign key(id_interno) references interno(id_interno),
-    foreign key(id_beneficio) references beneficios(id_beneficio)
+    foreign key(id_pessoa) references pessoa(id_pessoa)
     
 )engine = InnoDB;
 
@@ -143,23 +127,23 @@ create table funcionario(
     id_pessoa int,
     /*id_quadro_horario int,*/
     
-    vale_transporte varchar(16),
+    vale_transporte varchar(160),
     data_admissao date not null,
-	pis varchar(14),
-    ctps varchar(15) not null,
-    uf_ctps varchar(2),
-    numero_titulo varchar(15),
-    zona varchar(3),
-    secao varchar(4),
-    certificado_reservista_numero int,
-	certificado_reservista_serie varchar(10),
-    calcado varchar(2),
-    calca varchar(2),
-    jaleco varchar(2),
-    camisa varchar(2),
-    usa_vtp varchar(3),
-    cesta_basica varchar(3),
-    situacao varchar(10),
+	pis varchar(140),
+    ctps varchar(150) not null,
+    uf_ctps varchar(20),
+    numero_titulo varchar(150),
+    zona varchar(30),
+    secao varchar(40),
+    certificado_reservista_numero varchar(100),
+	certificado_reservista_serie varchar(100),
+    calcado varchar(20),
+    calca varchar(20),
+    jaleco varchar(20),
+    camisa varchar(20),
+    usa_vtp varchar(30),
+    cesta_basica varchar(30),
+    situacao varchar(100),
 	
     foreign key(id_pessoa) references pessoa(id_pessoa)
     /*foreign key(id_quadro_horario) references quadro_horario(id_quadro_horario)*/
@@ -267,39 +251,42 @@ select * from pessoa;
 DELIMITER &&
 
 CREATE  PROCEDURE cadinterno (in $nome varchar(100),in $cpf varchar(40),in $senha varchar(70), in $sexo char(1), in $telefone varchar(25),in $data_nascimento date, 
-in $imagem longtext, in $cep varchar(20), in $cidade varchar(40), in $bairro varchar(40), in $logradouro varchar(40), in $numero_endereco varchar(11),
+in $imagem longtext, in $cep varchar(20),in $estado varchar(5), in $cidade varchar(40), in $bairro varchar(40), in $logradouro varchar(40), in $numero_endereco varchar(11),
 in $complemento varchar(50), in $ibge varchar(20), in $registro_geral varchar(20), in $orgao_emissor varchar(20), in $data_expedicao date,in $nome_pai varchar(100),
-in $nome_mae varchar(100), in $tipo_sanguineo varchar(5), in $nome_contato_urgente varchar(60),in $telefone_contato_urgente_1 varchar(33),in $telefone_contato_urgente_2 varchar(33),in $telefone_contato_urgente_3 varchar(33))
+in $nome_mae varchar(100), in $tipo_sanguineo varchar(5), in $nome_contato_urgente varchar(60),in $telefone_contato_urgente_1 varchar(33),in $telefone_contato_urgente_2 varchar(33),
+in $telefone_contato_urgente_3 varchar(33),in $certidao_nascimento varchar(60), in $curatela varchar(60),in $inss varchar(60),in $loas varchar(60),in $bpc varchar(60),in $funrural varchar(60),
+in $saf varchar(60),in $sus varchar(60))
 
 begin
 
 declare idP int;
+declare idB int;
 
-insert into pessoa(nome,cpf,senha,sexo,telefone,data_nascimento,imagem,cep ,cidade, bairro, logradouro, numero_endereco,
+insert into pessoa(nome,cpf,senha,sexo,telefone,data_nascimento,imagem,cep,estado,cidade, bairro, logradouro, numero_endereco,
 complemento,ibge,registro_geral,orgao_emissor,data_expedicao, nome_pai, nome_mae, tipo_sanguineo)
-values($nome,$cpf, $senha, $sexo, $telefone,$data_nascimento,$imagem,$cep,$cidade,$bairro,$logradouro,$numero_endereco,$complemento,$ibge,$registro_geral,$orgao_emissor,$data_expedicao,$nome_pai,$nome_mae,$tipo_sanguineo);
+values($nome,$cpf, $senha, $sexo, $telefone,$data_nascimento,$imagem,$cep,$estado,$cidade,$bairro,$logradouro,$numero_endereco,$complemento,$ibge,$registro_geral,$orgao_emissor,$data_expedicao,$nome_pai,$nome_mae,$tipo_sanguineo);
 select max(id_pessoa) into idP FROM pessoa;
 
-
-insert into interno(id_pessoa,nome_contato_urgente,telefone_contato_urgente_1,telefone_contato_urgente_2,telefone_contato_urgente_3) values(idP,$nome_contato_urgente,$telefone_contato_urgente_1,$telefone_contato_urgente_2,$telefone_contato_urgente_3);
+insert into interno(id_pessoa,nome_contato_urgente,telefone_contato_urgente_1,telefone_contato_urgente_2,telefone_contato_urgente_3,certidao_nascimento,curatela,inss,loas,bpc,funrural,saf,sus) 
+values(idP,$nome_contato_urgente,$telefone_contato_urgente_1,$telefone_contato_urgente_2,$telefone_contato_urgente_3,$certidao_nascimento,$curatela,$inss,$loas,$bpc,$funrural,$saf,$sus);
 
 end &&
 
-CREATE  PROCEDURE cadfuncionario(in nome varchar(100),in cpf varchar(40),in senha varchar(70), in sexo char(1), in telefone int(11),in data_nascimento date, 
-in imagem longtext, in cep int(11), in cidade varchar(40), in bairro varchar(40), in logradouro varchar(40), in numero_endereco int(11),
+CREATE  PROCEDURE cadfuncionario(in nome varchar(100),in cpf varchar(40),in senha varchar(70), in sexo char(1), in telefone varchar(100),in data_nascimento date, 
+in imagem longtext, in cep varchar(100), in estado varchar(50), in cidade varchar(40), in bairro varchar(40), in logradouro varchar(40), in numero_endereco varchar(100),
 in complemento varchar(50),in ibge varchar(20), in registro_geral varchar(20), in orgao_emissor varchar(20), in data_expedicao date,in nome_pai varchar(100),
-in nome_mae varchar(100), in tipo_sanguineo varchar(5),/*in escala varchar(15),in tipo varchar(15), in carga_horaria decimal(5,2),
+in nome_mae varchar(100), in tipo_sanguineo varchar(50),/*in escala varchar(15),in tipo varchar(15), in carga_horaria decimal(5,2),
 in entrada1 varchar(5),in saida1 varchar(5),in entrada2 varchar(5),in saida2 varchar(5),in total varchar(5),in dias_trabalhados varchar(100),
-in folga varchar(30),in observacoes varchar(240),*/in vale_transporte varchar(16),in data_admissao date,in pis varchar(14),in ctps varchar(15),
-in uf_ctps varchar(2),in numero_titulo varchar(15),in zona varchar(3),in secao varchar(4),in certificado_reservista_numero int,in certificado_reservista_serie varchar(10),
-in calcado varchar(2),in calca varchar(2),in jaleco varchar(2),in camisa varchar(2),in usa_vtp varchar(3),in cesta_basica varchar(3),in situacao varchar(10))
+in folga varchar(30),in observacoes varchar(240),*/in vale_transporte varchar(160),in data_admissao date,in pis varchar(140),in ctps varchar(150),
+in uf_ctps varchar(200),in numero_titulo varchar(150),in zona varchar(300),in secao varchar(400),in certificado_reservista_numero varchar(100),in certificado_reservista_serie varchar(100),
+in calcado varchar(200),in calca varchar(200),in jaleco varchar(20),in camisa varchar(200),in usa_vtp varchar(300),in cesta_basica varchar(300),in situacao varchar(100))
 
 begin
 
 declare idP int;
 #declare idQ int;
 
-insert into pessoa(nome, cpf, senha, telefone,data_nascimento,imagem, cep ,cidade, bairro, logradouro, numero_endereco,
+insert into pessoa(nome, cpf, senha, telefone,data_nascimento,imagem, cep ,estado,cidade, bairro, logradouro, numero_endereco,
 complemento,ibge,registro_geral,orgao_emissor,data_expedicao, nome_pai, nome_mae, tipo_sanguineo)
 values(nome,cpf, senha, sexo, telefone,data_nascimento,imagem,cep ,cidade, bairro, logradouro, numero_endereco,
 complemento,ibge,registro_geral,orgao_emissor,data_expedicao, nome_pai, nome_mae, tipo_sanguineo);
@@ -311,10 +298,10 @@ values(escala, tipo, carga_horaria, entrada1, saida1, entrada2, saida2,total, di
 
 select max(id_quadro_horario) into idQ FROM quadro_horario;*/
 
-insert into funcionario(id_pessoa,id_quadro_horario,id_pessoa,id_quadro_horario,vale_transporte,data_admissao,pis,ctps,
+insert into funcionario(id_pessoa,/*id_quadro_horario,*/id_pessoa,id_quadro_horario,vale_transporte,data_admissao,pis,ctps,
 uf_ctps,numero_titulo,zona,secao,certificado_reservista_numero,certificado_reservista_serie,calcado,calca,jaleco,camisa,
 usa_vtp,cesta_basica,situacao)
-values(idP,idQ,    id_pessoa,id_quadro_horario,vale_transporte,data_admissao,pis,ctps,uf_ctps,numero_titulo,zona,secao,
+values(idP,/*idQ,*/id_pessoa,/*id_quadro_horario,*/vale_transporte,data_admissao,pis,ctps,uf_ctps,numero_titulo,zona,secao,
 certificado_reservista_numero,certificado_reservista_serie,calcado,calca,jaleco,camisa,usa_vtp,cesta_basica,situacao);
 
 end &&

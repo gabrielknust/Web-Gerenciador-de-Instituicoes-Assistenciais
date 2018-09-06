@@ -54,42 +54,70 @@ class InternoControle
             header('Location: ../html/interno.php?msg='.$msg);
         }
         if((!isset($certidao)) || (empty($certidao))){
-            $msg .= "Existência da certidão do interno não informada. Por favor, informe a existência!";
-            header('Location: ../html/interno.php?msg='.$msg);
+            $certidao="Não possui Certidão";
         }
         if((!isset($curatela)) || (empty($curatela))){
-            $msg .= "Existência da curatela do interno não informada. Por favor, informe a existência!";
-            header('Location: ../html/interno.php?msg='.$msg);
+            $curatela="Não possui CURATELA";
+        }
+        if((!isset($inss)) || (empty($inss))){
+            $inss="Não possui INSS";
+        }
+        if((!isset($loas)) || (empty($loas))){
+            $loas="Não possui LOAS";
+        }
+        if((!isset($bpc)) || (empty($bpc))){
+            $bpc="Não possui BPC";
+        }
+        if((!isset($funrural)) || (empty($funrural))){
+            $funrural="Não possui FUNRURAL";
+        }
+        if((!isset($saf)) || (empty($saf))){
+            $saf="Não possui SAF";
+        }
+        if((!isset($sus)) || (empty($sus))){
+            $sus="Não possui SUS";
         }
         if((!isset($observacoes)) || (empty($observacoes))){
-            $observacoes='NULL';
+            $observacoes="Descrição não informada";
         }
         if((!isset($telefone1)) || (empty($telefone1))){
-            $telefone1='null';
+            $telefone1='Não informado';
         }
         if((!isset($telefone2)) || (empty($telefone2))){
-            $telefone2='null';
+            $telefone2='Não informado';
         }
         if((!isset($telefone3)) || (empty($telefone3))){
-            $telefone3='null';
+            $telefone3='Não informado';
         }
-        if((!isset($contatoUrgente)) || (empty($contatoUrgente))){
-            $contatoUrgente='null';
+        if((!isset($nomeContato)) || (empty($nomeContato))){
+            $nomeContato='Não informado';
         }   
-            $telefone='null';
+            $dataExpedicao=$this->formatoDataYMD($dataExpedicao);
+            $nascimento=$this->formatoDataYMD($nascimento);
+            $telefone='(22) 2522-5130';
             $senha='null';
             $imagem='null';
-            $cep='null';
-            $cidade='null';
-            $bairro='null';
-            $logradouro='null';
-            $numeroEndereco='null';
-            $complemento='null';
-            $interno = new Interno($numeroCPF,$nome,$sexo,$nascimento,$rg,$orgaoEmissor,$dataExpedicao,$nomeMae,$pai,$sangue,$senha,$telefone,$imagem,$cep,$cidade,$bairro,$logradouro,$numeroEndereco,$complemento);
-            $interno->setNomeContatoUrgente($contatoUrgente);
+            $cep='28625-520';
+            $estado="RJ";
+            $cidade='Nova Friburgo';
+            $bairro='Centro';
+            $logradouro='Rua Souza Cardoso';
+            $numeroEndereco='403';
+            $complemento='Mora no LAJE';
+            $ibge="3303401";
+            $interno = new Interno($numeroCPF,$nome,$sexo,$nascimento,$rg,$orgaoEmissor,$dataExpedicao,$nomeMae,$pai,$sangue,$senha,$telefone,$imagem,$cep,$cidade,$bairro,$logradouro,$numeroEndereco,$complemento,$ibge);
+            $interno->setNomeContatoUrgente($nomeContato);
             $interno->setTelefoneContatoUrgente1($telefone1);
             $interno->setTelefoneContatoUrgente2($telefone2);
             $interno->setTelefoneContatoUrgente3($telefone3);
+            $interno->setCertidaoNascimento($certidao);
+            $interno->setCuratela($curatela);
+            $interno->setInss($inss);
+            $interno->setLoas($loas);
+            $interno->setBpc($bpc);
+            $interno->setFunrural($funrural);
+            $interno->setSaf($saf);
+            $interno->setSus($sus);
             return $interno;
         }
     
@@ -99,7 +127,7 @@ class InternoControle
         $internos = $internoDAO->listarTodos();
         session_start();
         $_SESSION['internos']=$internos;
-        header('Location: ../html/tabela.php');
+        header('Location: '.$nextPage);
     }
 
     public function listarUm($cpf)

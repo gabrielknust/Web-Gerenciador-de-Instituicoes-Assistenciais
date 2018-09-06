@@ -16,6 +16,22 @@ class Interno extends Pessoa
 
     private $telefoneContatoUrgente3;
 
+    private $certidaoNascimento;
+
+    private $curatela;
+
+    private $inss;
+
+    private $loas;
+
+    private $bpc;
+
+    private $funrural;
+
+    private $saf;
+
+    private $sus;
+    
     public function getIdInterno()
     {
         return $this->idInterno;
@@ -24,16 +40,6 @@ class Interno extends Pessoa
     public function getIdSituacaoInterno()
     {
         return $this->idSituacaoInterno;
-    }
-
-    public function setIdInterno($idInterno)
-    {
-        $this->idInterno = $idInterno;
-    }
-
-    public function setIdSituacaoInterno($idSituacaoInterno)
-    {
-        $this->idSituacaoInterno = $idSituacaoInterno;
     }
 
     public function getNomeContatoUrgente()
@@ -56,6 +62,56 @@ class Interno extends Pessoa
         return $this->telefoneContatoUrgente3;
     }
 
+    public function getCertidaoNascimento()
+    {
+        return $this->certidao_nascimento;
+    }
+
+    public function getCuratela()
+    {
+        return $this->curatela;
+    }
+
+    public function getInss()
+    {
+        return $this->inss;
+    }
+
+    public function getLoas()
+    {
+        return $this->loas;
+    }
+
+    public function getBpc()
+    {
+        return $this->bpc;
+    }
+
+    public function getFunrural()
+    {
+        return $this->funrural;
+    }
+
+    public function getSaf()
+    {
+        return $this->saf;
+    }
+
+    public function getSus()
+    {
+        return $this->sus;
+    }
+
+    public function setIdInterno($idInterno)
+    {
+        $this->idInterno = $idInterno;
+    }
+
+    public function setIdSituacaoInterno($idSituacaoInterno)
+    {
+        $this->idSituacaoInterno = $idSituacaoInterno;
+    }
+
     public function setNomeContatoUrgente($nomeContatoUrgente)
     {
         $this->nomeContatoUrgente = $nomeContatoUrgente;
@@ -74,6 +130,46 @@ class Interno extends Pessoa
     public function setTelefoneContatoUrgente3($telefoneContatoUrgente3)
     {
         $this->telefoneContatoUrgente3 = $telefoneContatoUrgente3;
+    }
+
+    public function setCertidaoNascimento($certidao_nascimento)
+    {
+        $this->certidao_nascimento = $certidao_nascimento;
+    }
+
+    public function setCuratela($curatela)
+    {
+        $this->curatela = $curatela;
+    }
+
+    public function setInss($inss)
+    {
+        $this->inss = $inss;
+    }
+
+    public function setLoas($loas)
+    {
+        $this->loas = $loas;
+    }
+
+    public function setBpc($bpc)
+    {
+        $this->bpc = $bpc;
+    }
+
+    public function setFunrural($funrural)
+    {
+        $this->funrural = $funrural;
+    }
+
+    public function setSaf($saf)
+    {
+        $this->saf = $saf;
+    }
+
+    public function setSus($sus)
+    {
+        $this->sus = $sus;
     }
 }
 

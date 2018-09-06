@@ -7,7 +7,7 @@ class InternoDAO
 	public function incluir($interno)
     {        
         try {
-            $sql = 'call cadinterno(:nome,:cpf,:senha,:sexo,:telefone,:data_nascimento,:imagem,:cep,:cidade,:bairro,:logradouro,:numero_endereco,:complemento,:ibge,:registro_geral,:orgao_emissor,:data_expedicao,:nome_pai,:nome_mae,:tipo_sanguineo,:nome_contato_urgente,:telefone_contato_urgente_1,:telefone_contato_urgente_2,:telefone_contato_urgente_3)';
+            $sql = 'call cadinterno(:nome,:cpf,:senha,:sexo,:telefone,:data_nascimento,:imagem,:cep,:estado,:cidade,:bairro,:logradouro,:numero_endereco,:complemento,:ibge,:registro_geral,:orgao_emissor,:data_expedicao,:nome_pai,:nome_mae,:tipo_sanguineo,:nome_contato_urgente,:telefone_contato_urgente_1,:telefone_contato_urgente_2,:telefone_contato_urgente_3,:certidao,:curatela,:inss,:loas,:bpc,:funrural,:saf,:sus)';
             $sql = str_replace("'", "\'", $sql);            
             $pdo = Conexao::connect();
             $stmt = $pdo->prepare($sql);
@@ -33,8 +33,16 @@ class InternoDAO
             $telefone1=$interno->getTelefoneContatoUrgente1();
             $telefone2=$interno->getTelefoneContatoUrgente2();
             $telefone3=$interno->getTelefoneContatoUrgente3();
-            $ibge="null";
+            $ibge=$interno->getIbge();
             $dataExpedicao=$interno->getDataExpedicao();
+            $certidao=$interno->getCertidaoNascimento();
+            $curatela=$interno->getCuratela();
+            $inss=$interno->getInss();
+            $loas=$interno->getLoas();
+            $bpc=$interno->getBpc();
+            $funrural=$interno->getFunrural();
+            $saf=$interno->getSaf();
+            $sus=$interno->getSus();
             $stmt->bindParam(':senha',$senha);
             $stmt->bindParam(':nome',$nome);
             $stmt->bindParam(':cpf',$cpf);
@@ -43,6 +51,7 @@ class InternoDAO
             $stmt->bindParam(':data_nascimento',$nascimento);
             $stmt->bindParam(':imagem',$imagem);        
             $stmt->bindParam(':cep',$cep);
+            $stmt->bindParam(':estado',$estado);
             $stmt->bindParam(':cidade',$cidade);
             $stmt->bindParam(':bairro',$bairro);
             $stmt->bindParam(':logradouro',$logradouro);
@@ -59,6 +68,15 @@ class InternoDAO
             $stmt->bindParam(':telefone_contato_urgente_2',$telefone2);
             $stmt->bindParam(':telefone_contato_urgente_3',$telefone3);
             $stmt->bindParam(':ibge',$ibge);
+            $stmt->bindParam(':certidao',$certidao);
+            $stmt->bindParam(':curatela',$curatela);
+            $stmt->bindParam(':inss',$inss);
+            $stmt->bindParam(':loas',$loas);
+            $stmt->bindParam(':bpc',$bpc);
+            $stmt->bindParam(':funrural',$funrural);
+            $stmt->bindParam(':saf',$saf);
+            $stmt->bindParam(':sus',$sus);
+
             $stmt->execute();
         }catch (PDOExeption $e) {
             echo 'Error: <b>  na tabela interno = ' . $sql . '</b> <br /><br />' . $e->getMessage();
@@ -126,11 +144,11 @@ class InternoDAO
         try{
             $internos=array();
             $pdo = Conexao::connect();
-            $consulta = $pdo->query("SELECT p.nome,p.cpf, p.senha, p.sexo, p.telefone,p.data_nascimento,p.imagem, p.cep,p.cidade,p.bairro,p.logradouro,p.numero_endereco,p.complemento,p.ibge,p.registro_geral,p.orgao_emissor,p.data_expedicao,p.nome_pai,p.nome_mae,p.tipo_sanguineo,i.nome_contato_urgente,i.telefone_contato_urgente_1,i.telefone_contato_urgente_2,i.telefone_contato_urgente_3 FROM pessoa p INNER JOIN interno i ON p.id_pessoa = i.id_pessoa");
+            $consulta = $pdo->query("SELECT p.nome,p.cpf, p.senha, p.sexo, p.telefone,p.data_nascimento,p.imagem, p.cep,p.cidade,p.bairro,p.logradouro,p.numero_endereco,p.complemento,p.ibge,p.registro_geral,p.orgao_emissor,p.data_expedicao,p.nome_pai,p.nome_mae,p.tipo_sanguineo,i.nome_contato_urgente,i.telefone_contato_urgente_1,i.telefone_contato_urgente_2,i.telefone_contato_urgente_3,i.certidao_nascimento,i.curatela,i.inss,i.loas,i.bpc,i.funrural,i.saf,i.sus FROM pessoa p INNER JOIN interno i ON p.id_pessoa = i.id_pessoa");
             $produtos = Array();
             $x=0;
             while($linha = $consulta->fetch(PDO::FETCH_ASSOC)){
-                $internos[$x]=array('cpf'=>$linha['cpf'],'nome'=>$linha['nome'],'sexo'=>$linha['sexo'],'data_nascimento'=>$linha['data_nascimento'],'registro_geral'=>$linha['registro_geral'],'orgao_emissor'=>$linha['orgao_emissor'],'data_expedicao'=>$linha['data_expedicao'],'nome_mae'=>$linha['nome_mae'],'nome_pai'=>$linha['nome_pai'],'tipo_sanguineo'=>$linha['tipo_sanguineo'],'senha'=>$linha['senha'],'telefone'=>$linha['telefone'],'imagem'=>$linha['imagem'],'cep'=>$linha['cep'],'cidade'=>$linha['cidade'],'bairro'=>$linha['bairro'],'logradouro'=>$linha['logradouro'],'numero_endereco'=>$linha['numero_endereco'],'complemento'=>$linha['complemento'],'nome_contato_urgente'=>$linha['nome_contato_urgente'],'telefone_contato_urgente_1'=>$linha['telefone_contato_urgente_1'],'telefone_contato_urgente_2'=>$linha['telefone_contato_urgente_2'],'telefone_contato_urgente_2'=>$linha['telefone_contato_urgente_2']);
+                $internos[$x]=array('cpf'=>$linha['cpf'],'nome'=>$linha['nome'],'sexo'=>$linha['sexo'],'data_nascimento'=>$linha['data_nascimento'],'registro_geral'=>$linha['registro_geral'],'orgao_emissor'=>$linha['orgao_emissor'],'data_expedicao'=>$linha['data_expedicao'],'nome_mae'=>$linha['nome_mae'],'nome_pai'=>$linha['nome_pai'],'tipo_sanguineo'=>$linha['tipo_sanguineo'],'senha'=>$linha['senha'],'telefone'=>$linha['telefone'],'imagem'=>$linha['imagem'],'cep'=>$linha['cep'],'cidade'=>$linha['cidade'],'bairro'=>$linha['bairro'],'logradouro'=>$linha['logradouro'],'numero_endereco'=>$linha['numero_endereco'],'complemento'=>$linha['complemento'],'nome_contato_urgente'=>$linha['nome_contato_urgente'],'telefone_contato_urgente_1'=>$linha['telefone_contato_urgente_1'],'telefone_contato_urgente_2'=>$linha['telefone_contato_urgente_2'],'telefone_contato_urgente_3'=>$linha['telefone_contato_urgente_3'],'certidao_nascimento'=>$linha['certidao_nascimento'],'curatela'=>$linha['curatela'],'inss'=>$linha['inss'],'loas'=>$linha['loas'],'bpc'=>$linha['bpc'],'funrural'=>$linha['funrural'],'saf'=>$linha['saf'],'sus'=>$linha['sus']);
                 $x++;
             }
             } catch (PDOExeption $e){
