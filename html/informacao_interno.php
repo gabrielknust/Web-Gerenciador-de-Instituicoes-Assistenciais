@@ -65,7 +65,7 @@
 		<script src="../Functions/mascara.js"></script>
 		
 	   <!-- jquery functions -->
-	   <<script>
+	   <script>
 	   		function clicar(id)
 	   		{
 	   			window.location.href = "http://localhost/Web-Gerenciador-de-Instituicoes-Assistenciais/html/profile_interno.php?id="+id;
