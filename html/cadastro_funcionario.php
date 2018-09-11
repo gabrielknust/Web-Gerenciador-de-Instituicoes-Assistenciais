@@ -36,7 +36,7 @@
 		<link rel="stylesheet" href="../assets/vendor/magnific-popup/magnific-popup.css" />
 		<link rel="stylesheet" href="../assets/vendor/bootstrap-datepicker/css/datepicker3.css" />
 		<link rel="icon" href="../img/logofinal.png" type="image/x-icon">
-		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
 		<!-- Theme CSS -->
 		<link rel="stylesheet" href="../assets/stylesheets/theme.css" />
 
@@ -465,7 +465,7 @@
 												<div class="form-group">
 													<label class="col-md-3 control-label" for="profileCompany">Telefone</label>
 													<div class="col-md-8">
-														<input type="text" class="form-control" maxlength="14" minlength="14" name="telefone" id="telefone" placeholder="Ex: (22)99999-9999" onkeypress="return Onlynumbers(event)" onkeyup="mascara('(##)#####-####',this,event)" required>
+														<input type="text" class="form-control" maxlength="14" minlength="14" name="telefone" id="telefone" id="profileCompany" placeholder="Ex: (22)99999-9999" onkeypress="return Onlynumbers(event)" onkeyup="mascara('(##)#####-####',this,event)" required>
 													</div>
 												</div>
 												<div class="form-group">
@@ -799,7 +799,7 @@
 											<div class="panel-footer">
 												<div class="row">
 													<div class="col-md-9 col-md-offset-3">
-														<input type="submit" class="btn btn-primary" disabled="true" id="enviar">
+														<input type="submit" class="btn btn-primary" >
 														<input type="reset" class="btn btn-default">
 													</div>
 												</div>
