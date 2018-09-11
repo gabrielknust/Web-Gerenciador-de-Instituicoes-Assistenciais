@@ -163,6 +163,8 @@ class FuncionarioControle
             $cesta_basica='null';
         }
         $imgperfil="";
+        $cpf=str_replace(".", '', $cpf);
+        $cpf=str_replace("-", "", $cpf);
         $data_admissao=$this->formatoDataYMD($data_admissao);
         $data_expedicao=$this->formatoDataYMD($data_expedicao);
         $nascimento=$this->formatoDataYMD($nascimento);
@@ -209,7 +211,8 @@ class FuncionarioControle
         $funcionarioDAO = new FuncionarioDAO();
         try{
             $funcionarioDAO->incluir($funcionario);
-            $msg= "O funcion·rio ".$funcionario->getNome()." foi adicionado!";
+            echo $funcionario->getData_admissao();
+            header("Location: ../html/cadastro_sucesso_funcionario.php");
         } catch (PDOException $e){
             $msg= "N√£o foi poss√≠vel registrar o funcion·rio"."<br>".$e->getMessage();
             echo $msg;

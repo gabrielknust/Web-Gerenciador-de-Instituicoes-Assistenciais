@@ -100,7 +100,7 @@
 									<a role="menuitem" tabindex="-1" href="#" data-lock-screen="true"><i class="fa fa-lock"></i> Lock Screen</a>
 								</li>
 								<li>
-									<a role="menuitem" tabindex="-1" href="logout.php"><i class="fa fa-power-off"></i> Logout</a>
+									<a role="menuitem" tabindex="-1" href="pages-signin.html"><i class="fa fa-power-off"></i> Logout</a>
 								</li>
 							</ul>
 						</div>
@@ -191,206 +191,40 @@
 				</aside>
 				<!-- end: sidebar -->
 
-				<section role="main" class="content-body">
-					<header class="page-header">
-						<h2>Home</h2>
-					
-						<div class="right-wrapper pull-right">
-							<ol class="breadcrumbs">
-								<li>
-									<a href="index.html">
-										<i class="fa fa-home"></i>
-									</a>
-								</li>
-								<li><span>Início</span></li>
-							</ol>
-					
-							<a class="sidebar-right-toggle"><i class="fa fa-chevron-left"></i></a>
-						</div>
-					</header>
 
-					<!-- start: page -->
-
-					
-					<div class="row">
-						<a href="../html/cadastro_funcionario.html">
-						<div class="col-lg-2 col-md-8 i">
-						<form>
-							<i  class="far fa-address-book"></i>
-							<h4>Cadastrar Funcionário</h4>
-						</form>
-						</div>
-						</a>
-
-						<a href="../html/cadastro_interno.html">
-						<div class="col-lg-2 col-lg-offset-1 col-md-8 i" >
-							<i class="far fa-address-book"></i>
-							<h4>Cadastrar Interno</h4>
-						</div>
-						</a>
-
-						<a href="../html/cadastro_voluntario.html">
-						<div class="col-lg-2 col-md-8 i">
-						<form>
-							<i  class="far fa-address-book"></i>
-							<h4>Cadastrar Voluntario</h4>
-						</form>
-						</div>
-						</a>
-
-						<a href="../html/cadastro_voluntario_judicial.html">
-						<div class="col-lg-2 col-md-8 i">
-						<form>
-							<i  class="far fa-address-book"></i>
-							<h4>Cadastrar Voluntario Judicial</h4>
-						</form>
-						</div>
-						</a>
-					</div>
-
-
-					<div class="row">
-
-						<div onclick="listarFuncionario()" style="color: #0088cc;">
-							<div class="col-lg-2 col-md-8 i">
-								<form id="listarFuncionario" method="POST" action="../controle/control.php">
-									<i  class="far fa-clipboard" id="listarFuncionario"></i>
-									<h4>Informação funcionarios</h4>
-									<input type="hidden" name="nomeClasse" value="FuncionarioControle">
-									<input type="hidden" name="metodo" value="listartodos">
-									<input type="hidden" name="nextPage" value="../html/informacao_funcionario.php">
-								</form>
-							</div>
-						</div>
-
-						<div onclick="listarInterno()" style="color: #0088cc;">
-						<div class="col-lg-2 col-md-8 i">
-						<form id="listarInterno" method="POST" action="../controle/control.php">
-							<i  class="far fa-clipboard" id="listarInterno"></i>
-							<h4>Informação internos</h4>
-							<input type="hidden" name="nomeClasse" value="InternoControle">
-							<input type="hidden" name="metodo" value="listartodos">
-							<input type="hidden" name="nextPage" value="../html/informacao_interno.php">
-						</form>
-						</div>
-						</div>
-						
-						<div class="col-lg-2 col-md-8 i">
-						<form>
-							<i  class="fa fa-barcode"></i>
-							<h4>Estoque</h4>
-						</form>
-						</div>
-						</a>
-
-						
-						<div class="col-lg-2 col-md-8 i">
-						<form>
-							<i  class="far fa-address-card"></i>
-							<h4>Cadastrar cargo</h4>
-						</form>
-						</a>
-						</div>
-						
-						
-
-						
-
-					</div>
-
-
-					<div class="row">
-						<div class="col-lg-2 col-md-8 i">
-							<i class="fas fa-dollar-sign"></i>
-							<h4>Cadastrar Funcionário</h4>
-						</div>
-
-						<div class="col-lg-2 col-lg-offset-1 col-md-8 i" >
-							<i class="far fa-clipboard"></i>
-							<h4>Cadastrar Funcionário</h4>
-						</div>
-
-						<div class="col-lg-2 col-md-8 i">
-							<i class="far fa-calendar-alt"></i>
-							<h4>Cadastrar Eventos</h4>
-						</div>
-
-						<div class="col-lg-2 col-lg-offset-1 col-md-8 i">
-							<i class="far fa-folder-open"></i>
-							<h4>Gerenciar Documentação</h4>
-						</div>
-					</div>
-					<!-- end: page -->
-				</section>
-			</div>
-
-			<aside id="sidebar-right" class="sidebar-right">
-				<div class="nano">
-					<div class="nano-content">
-						<a href="#" class="mobile-close visible-xs">
-							Collapse <i class="fa fa-chevron-right"></i>
-						</a>
+		<section role="main" class="content-body">
+		
+			<header class="page-header">
+				<h2>ERRO!</h2>
 			
-						<div class="sidebar-right-wrapper">
+				<div class="right-wrapper pull-right">
+					<ol class="breadcrumbs">
+						<li>
+							<a href="index.html">
+								<i class="fa fa-home"></i>
+							</a>
+						</li>
+						<li><span>ERRO</span></li>
+					</ol>
 			
-							<div class="sidebar-widget widget-calendar">
-								<h6>Upcoming Tasks</h6>
-								<div data-plugin-datepicker data-plugin-skin="dark" ></div>
-			
-								<ul>
-									<li>
-										<time datetime="2014-04-19T00:00+00:00">04/19/2014</time>
-										<span>Company Meeting</span>
-									</li>
-								</ul>
-							</div>
-			
-							<div class="sidebar-widget widget-friends">
-								<h6>Friends</h6>
-								<ul>
-									<li class="status-online">
-										<figure class="profile-picture">
-											<img src="assets/images/!sample-user.jpg" alt="Joseph Doe" class="img-circle">
-										</figure>
-										<div class="profile-info">
-											<span class="name">Joseph Doe Junior</span>
-											<span class="title">Hey, how are you?</span>
-										</div>
-									</li>
-									<li class="status-online">
-										<figure class="profile-picture">
-											<img src="assets/images/!sample-user.jpg" alt="Joseph Doe" class="img-circle">
-										</figure>
-										<div class="profile-info">
-											<span class="name">Joseph Doe Junior</span>
-											<span class="title">Hey, how are you?</span>
-										</div>
-									</li>
-									<li class="status-offline">
-										<figure class="profile-picture">
-											<img src="assets/images/!sample-user.jpg" alt="Joseph Doe" class="img-circle">
-										</figure>
-										<div class="profile-info">
-											<span class="name">Joseph Doe Junior</span>
-											<span class="title">Hey, how are you?</span>
-										</div>
-									</li>
-									<li class="status-offline">
-										<figure class="profile-picture">
-											<img src="assets/images/!sample-user.jpg" alt="Joseph Doe" class="img-circle">
-										</figure>
-										<div class="profile-info">
-											<span class="name">Joseph Doe Junior</span>
-											<span class="title">Hey, how are you?</span>
-										</div>
-									</li>
-								</ul>
-							</div>
-			
+					<a class="sidebar-right-toggle"><i class="fa fa-chevron-left"></i></a>
+				</div>
+			</header>
+
+
+		<section class="body-error error-outside">
+			<div class="center-error">
+
+				<div class="row">
+					<div class="col-sm-8">
+						<div class="main-error mb-xlg">
+							<h2 class="error-code text-dark text-center text-semibold m-none">ERRO <i class="fa fa-cogs"></i></h2>
+							<a href="javascript:history.back()" style="font-size:25px;">voltar</a>
 						</div>
 					</div>
 				</div>
-			</aside>
+			</div>
+	
 		</section>
 
 		<!-- Vendor -->

@@ -1,7 +1,16 @@
 <?php
 require_once '../classes/Funcionario.php';
+require_once'../Functions/funcoes.php';
 class FuncionarioDAO
 {
+    public function formatoDataDMY($data)
+    {
+        $data_arr = explode("-", $data);
+        
+        $datad = $data_arr[2] . '/' . $data_arr[1] . '/' . $data_arr[0];
+        
+        return $datad;
+    }
     public function incluir($funcionario)
     {
         try {
@@ -91,7 +100,6 @@ class FuncionarioDAO
             $stmt->bindParam(':cesta_basica', $cestaBasica);
             $stmt->bindParam(':situacao', $situacao);
             $stmt->bindParam(':data_expedicao',$dataExpedicao);
-            
             $stmt->execute();
         } catch (PDOException $e) {
             echo 'Error: <b>  na tabela pessoas = ' . $sql . '</b> <br /><br />' . $e->getMessage();
@@ -167,7 +175,7 @@ class FuncionarioDAO
             $produtos = Array();
             $x=0;
             while($linha = $consulta->fetch(PDO::FETCH_ASSOC)){
-                $internos[$x]=array('cpf'=>$linha['cpf'],'nome'=>$linha['nome'],'sexo'=>$linha['sexo'],'data_nascimento'=>$linha['data_nascimento'],'registro_geral'=>$linha['registro_geral'],'orgao_emissor'=>$linha['orgao_emissor'],'data_expedicao'=>$linha['data_expedicao'],'nome_mae'=>$linha['nome_mae'],'nome_pai'=>$linha['nome_pai'],'tipo_sanguineo'=>$linha['tipo_sanguineo'],'senha'=>$linha['senha'],'telefone'=>$linha['telefone'],'imagem'=>$linha['imagem'],'cep'=>$linha['cep'],'cidade'=>$linha['cidade'],'bairro'=>$linha['bairro'],'logradouro'=>$linha['logradouro'],'numero_endereco'=>$linha['numero_endereco'],'complemento'=>$linha['complemento'],'vale_transporte'=>$linha['vale_transporte'],'data_admissao'=>$linha['data_admissao'],'pis'=>$linha['pis'],'ctps'=>$linha['ctps'],'uf_ctps'=>$linha['uf_ctps'],'numero_titulo'=>$linha['numero_titulo'],'zona'=>$linha['zona'],'secao'=>$linha['secao'],'certificado_reservista_numero'=>$linha['certificado_reservista_numero'],'certificado_reservista_serie'=>$linha['certificado_reservista_serie'],'calcado'=>$linha['calcado'],'calca'=>$linha['calca'],'jaleco'=>$linha['jaleco'],'camisa'=>$linha['camisa'],'usa_vtp'=>$linha['usa_vtp'],'cesta_basica'=>$linha['cesta_basica'],'situacao'=>$linha['situacao']);
+                $internos[$x]=array('cpf'=>mask($linha['cpf'],'###.###.###-##'),'nome'=>$linha['nome'],'sexo'=>$linha['sexo'],'data_nascimento'=>$this->formatoDataDMY($linha['data_nascimento']),'registro_geral'=>$linha['registro_geral'],'orgao_emissor'=>$linha['orgao_emissor'],'data_expedicao'=>$this->formatoDataDMY($linha['data_expedicao']),'nome_mae'=>$linha['nome_mae'],'nome_pai'=>$linha['nome_pai'],'tipo_sanguineo'=>$linha['tipo_sanguineo'],'senha'=>$linha['senha'],'telefone'=>$linha['telefone'],'imagem'=>$linha['imagem'],'cep'=>$linha['cep'],'cidade'=>$linha['cidade'],'bairro'=>$linha['bairro'],'logradouro'=>$linha['logradouro'],'numero_endereco'=>$linha['numero_endereco'],'complemento'=>$linha['complemento'],'vale_transporte'=>$linha['vale_transporte'],'data_admissao'=>$this->formatoDataDMY($linha['data_admissao']),'pis'=>$linha['pis'],'ctps'=>$linha['ctps'],'uf_ctps'=>$linha['uf_ctps'],'numero_titulo'=>$linha['numero_titulo'],'zona'=>$linha['zona'],'secao'=>$linha['secao'],'certificado_reservista_numero'=>$linha['certificado_reservista_numero'],'certificado_reservista_serie'=>$linha['certificado_reservista_serie'],'calcado'=>$linha['calcado'],'calca'=>$linha['calca'],'jaleco'=>$linha['jaleco'],'camisa'=>$linha['camisa'],'usa_vtp'=>$linha['usa_vtp'],'cesta_basica'=>$linha['cesta_basica'],'situacao'=>$linha['situacao']);
                 $x++;
             }
             } catch (PDOExeption $e){

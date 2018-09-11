@@ -105,6 +105,8 @@ class InternoControle
             $numeroEndereco='403';
             $complemento='Mora no LAJE';
             $ibge="3303401";
+            $numeroCPF=str_replace(".", '', $numeroCPF);
+            $numeroCPF=str_replace("-", "", $numeroCPF);
             $interno = new Interno($numeroCPF,$nome,$sexo,$nascimento,$rg,$orgaoEmissor,$dataExpedicao,$nomeMae,$pai,$sangue,$senha,$telefone,$imagem,$cep,$cidade,$bairro,$logradouro,$numeroEndereco,$complemento,$ibge);
             $interno->setNomeContatoUrgente($nomeContato);
             $interno->setTelefoneContatoUrgente1($telefone1);

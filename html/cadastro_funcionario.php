@@ -1,3 +1,15 @@
+<?php
+	$usuario = "root";
+  	$senha = "";
+  	$servidor = "localhost";
+  	$bddnome = "wegia";
+  	$conexao = mysqli_connect($servidor,$usuario,$senha,$bddnome);
+  	$calcado= mysqli_query ($conexao,'SELECT * FROM calcado');
+  	$calca = mysqli_query ($conexao,'SELECT * FROM calca');
+	$camisa = mysqli_query ($conexao,'SELECT * FROM camisa');
+	$situacao = mysqli_query ($conexao,'SELECT * FROM situacao');
+	$jaleco = mysqli_query ($conexao,'SELECT * FROM jaleco');
+?>
 <!doctype html>
 <html class="fixed">
 	<head>
@@ -24,7 +36,7 @@
 		<link rel="stylesheet" href="../assets/vendor/magnific-popup/magnific-popup.css" />
 		<link rel="stylesheet" href="../assets/vendor/bootstrap-datepicker/css/datepicker3.css" />
 		<link rel="icon" href="../img/logofinal.png" type="image/x-icon">
-
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 		<!-- Theme CSS -->
 		<link rel="stylesheet" href="../assets/stylesheets/theme.css" />
 
@@ -45,14 +57,30 @@
 		<script src="../Functions/validar_senha.js"></script>
 		<script type="text/javascript" >
 
+	function numero_residencial(){
+		if($("#numResidencial").prop('checked')){
+
+			document.getElementById("numero_residencia").disabled = true;
+
+		}else {
+
+			document.getElementById("numero_residencia").disabled = false;
+
+		}
+	}
+
+
 	function exibir_vale_transporte() {
 
 		$("#esconder_exibir").show();
+
 	}
 
 	function esconder_vale_transporte() {
-
+		
+		document.getElementById('num_transporte').value=("");
 		$("#esconder_exibir").hide();
+
 	}
 
 	function exibir_reservista() {
@@ -136,7 +164,45 @@
             //cep sem valor, limpa formulário.
             limpa_formulário_cep();
         }
+
     };
+
+    function testaCPF(strCPF) { //strCPF é o cpf que será validado. Ele deve vir em formato string e sem nenhum tipo de pontuação.
+            var strCPF = strCPF.replace(/[^\d]+/g,''); // Limpa a string do CPF removendo espaços em branco e caracteres especiais. 
+                                                        // PODE SER QUE NÃO ESTEJA LIMPANDO COMPLETAMENTE. FAVOR FAZER O TESTE!!!!
+            var Soma;
+            var Resto;
+            Soma = 0;
+            if (strCPF == "00000000000") return false;
+            
+            for (i=1; i<=9; i++) Soma = Soma + parseInt(strCPF.substring(i-1, i)) * (11 - i);
+            Resto = (Soma * 10) % 11;
+            
+            if ((Resto == 10) || (Resto == 11))  Resto = 0;
+            if (Resto != parseInt(strCPF.substring(9, 10)) ) return false;
+            
+            Soma = 0;
+            for (i = 1; i <= 10; i++) Soma = Soma + parseInt(strCPF.substring(i-1, i)) * (12 - i);
+            Resto = (Soma * 10) % 11;
+            
+            if ((Resto == 10) || (Resto == 11))  Resto = 0;
+            if (Resto != parseInt(strCPF.substring(10, 11) ) ) return false;
+            return true;
+    }
+
+    function validarCPF(strCPF){
+
+    	if (!testaCPF(strCPF)){
+    		$('#cpfInvalido').show();
+    		document.getElementById("enviar").disabled = true;
+
+    	}else{
+    		$('#cpfInvalido').hide();
+
+    		document.getElementById("enviar").disabled = false;
+    	}
+
+    }
 
     </script>
 		<script language="JavaScript">
@@ -172,7 +238,7 @@
 			<!-- start: header -->
 			<header class="header">
 				<div class="logo-container">
-					<a href="home.html" class="logo">
+					<a href="home.php" class="logo">
 						<img src="../img/logofinal.png" height="35" alt="Porto Admin" />
 					</a>
 					<div class="visible-xs toggle-sidebar-left" data-toggle-class="sidebar-left-opened" data-target="html" data-fire-event="sidebar-left-opened">
@@ -245,7 +311,7 @@
 							<nav id="menu" class="nav-main" role="navigation">
 								<ul class="nav nav-main">
 									<li>
-										<a href="home.html">
+										<a href="home.php">
 											<i class="fa fa-home" aria-hidden="true"></i>
 											<span>Início</span>
 										</a>
@@ -399,13 +465,13 @@
 												<div class="form-group">
 													<label class="col-md-3 control-label" for="profileCompany">Telefone</label>
 													<div class="col-md-8">
-														<input type="text" class="form-control" minlength="12" name="telefone" id="telefone" id="profileCompany" placeholder="Ex: (22)999999999" onkeypress="return Onlynumbers(event)" onkeyup="mascara('(##)############',this,event)" required>
+														<input type="text" class="form-control" maxlength="14" minlength="14" name="telefone" id="telefone" placeholder="Ex: (22)99999-9999" onkeypress="return Onlynumbers(event)" onkeyup="mascara('(##)#####-####',this,event)" required>
 													</div>
 												</div>
 												<div class="form-group">
 													<label class="col-md-3 control-label" for="profileCompany">Nascimento</label>
 													<div class="col-md-8">
-														<input type="text" placeholder="dd/mm/aaaa" maxlength="10" class="form-control" name="nascimento" id="profileCompany" id="nascimento" onkeypress="return Onlynumbers(event)" onkeyup="mascara('##/##/####',this,event)" required>
+														<input type="date" placeholder="dd/mm/aaaa" maxlength="10" class="form-control" name="nascimento" id="profileCompany" id="nascimento" required>
 													</div>
 												</div>
 												<div class="form-group">
@@ -471,11 +537,19 @@
 														<input type="text" name="rua" size="2" class="form-control" id="rua" required>
 													</div>
 												</div>
+
 												<div class="form-group">
-													<label class="col-md-3 control-label" for="profileCompany">Número</label>
-													<div class="col-md-8">
-														<input type="number" class="form-control" id="profileCompany" name="numero_residencia"  id="numero_residencia" required>
+													<label class="col-md-3 control-label" for="profileCompany">Número residencial</label>
+													<div class="col-md-4">
+														<input type="number" min="0" oninput="this.value = Math.abs(this.value)" class="form-control" name="numero_residencia"  id="numero_residencia">
 													</div>
+
+													<div class="col-md-3"> 
+														<label>Não possuo número</label>
+														<input type="checkbox" id="numResidencial" name="naoPossuiNumeroResidencial"  style="margin-left: 4px" onclick="return numero_residencial()">
+
+													</div>
+												
 												</div>
 												<div class="form-group">
 													<label class="col-md-3 control-label" for="profileCompany">Complemento</label>
@@ -498,7 +572,7 @@
 													<div class="form-group">
 														<label class="col-md-3 control-label" for="profileCompany">Número do RG</label>
 														<div class="col-md-6">
-															<input type="text" class="form-control" name="rg" id="rg" id="profileCompany" placeholder="Ex: 22.222.222-2" maxlength="12" onkeypress="return Onlynumbers(event)" onkeyup="mascara('##.###.###-#',this,event)" required>
+															<input type="text" class="form-control" name="rg" id="rg" onkeypress="return Onlynumbers(event)" placeholder="Ex: 22.222.222-2" required>
 														</div>
 														
 													</div>
@@ -511,20 +585,30 @@
 													<div class="form-group">
 														<label class="col-md-3 control-label" for="profileCompany">Data de expedição</label>
 														<div class="col-md-6">
-															<input type="text" class="form-control" maxlength="10" placeholder="dd/mm/aaaa" id="profileCompany" name="data_expedicao" id="data_expedicao" onkeypress="return Onlynumbers(event)" onkeyup="mascara('##/##/####',this,event)" required>
+															<input type="date" class="form-control" maxlength="10" placeholder="dd/mm/aaaa" id="profileCompany" name="data_expedicao" id="data_expedicao" required>
 														</div>
 													</div>
 													<div class="form-group">
 														<label class="col-md-3 control-label" for="profileCompany">Número do CPF</label>
 														<div class="col-md-6">
-															<input type="text" class="form-control" id="profileCompany" id="cpf" name="cpf" placeholder="Ex: 222.222.222-22" maxlength="14" onkeypress="return Onlynumbers(event)" onkeyup="mascara('###.###.###-##',this,event)" required>
+															<input type="text" class="form-control" id="profileCompany" id="cpf" name="cpf" placeholder="Ex: 222.222.222-22" maxlength="14" onblur="validarCPF(this.value)"" onkeypress="return Onlynumbers(event)" onkeyup="mascara('###.###.###-##',this,event)" required>
 														</div>														
 													</div>
+
+
+													<div class="form-group">
+														<label class="col-md-3 control-label" for="profileCompany"></label>
+														<div class="col-md-6">
+															<p id="cpfInvalido" style="display: none; color: #b30000">CPF INVÁLIDO!</p>
+														</div>														
+													</div>
+
+													
 
 													<div class="form-group">
 														<label class="col-md-3 control-label" for="profileCompany">Data de admissão</label>
 														<div class="col-md-8">
-															<input type="text" placeholder="dd/mm/aaaa" maxlength="10" class="form-control" name="data_admissao" id="profileCompany" id="data_admissao" onkeypress="return Onlynumbers(event)" onkeyup="mascara('##/##/####',this,event)" required>
+															<input type="date" placeholder="dd/mm/aaaa" maxlength="10" class="form-control" name="data_admissao" id="profileCompany" id="data_admissao"  required>
 														</div>
 													</div>
 
@@ -536,30 +620,6 @@
 															<input type="radio" name="certidao" id="radio" id="nao" value="certidaonao" style="margin-top: 15px; margin-left: 15px;"><i class="fa fa-times" style="font-size: 20px;"></i>
 														</div>
 													</div>
-													<br/>
-
-											<hr class="dotted short">
-											<h4 class="mb-xlg doch4">Senha</h4>
-
-												<div class="form-group">
-													<label class="col-md-3 control-label" >Senha</label>
-													<div class="col-md-6">
-														<input type="password" name="senha" class="form-control" id="senha" required>	
-													</div><br>
-												</div>
-												<div class="form-group
-												,">
-													<label class="col-md-3 control-label" >Confirmação de senha</label>
-													<div class="col-md-6">
-														<input type="password" name="c_senha" class="form-control" id="c_senha" required>
-													</div>														
-												</div>	
-
-												<hr class="dotted short">
-
-
-
-
 
 												<h4 class="mb-xlg doch4">Outros</h4>
 
@@ -577,7 +637,7 @@
 												<div class="form-group" id="esconder_exibir" style="display: none;">
 													<label class="col-md-3 control-label" >Número vale transporte</label>
 													<div class="col-md-6">
-														<input type="text" name="num_vale_transporte" class="form-control">
+														<input type="text" id="num_transporte" name="num_vale_transporte" class="form-control">
 													</div>														
 												</div>
 
@@ -652,88 +712,86 @@
 
 												<div class="form-group">
 													<label class="col-md-3 control-label" for="inputSuccess">Calçado</label>
+													<a href="adicionar_calcado.php"><i class="fas fa-plus w3-xlarge" style="margin-top: 0.75vw"></i></a>
 													<div class="col-md-6">
 													<select class="form-control input-lg mb-md" name="calcado" id="calcado">
 														<option selected disabled>Selecionar</option>
 														<option value="Não utiliza">Não utiliza</option>
-														<option value="30">30</option>
-														<option value="31">31</option>
-														<option value="32">32</option>
-														<option value="33">33</option>
-														<option value="34">34</option>
-														<option value="35">35</option>
-														<option value="36">36</option>
-														<option value="37">37</option>
-														<option value="38">38</option>
-														<option value="39">39</option>
-														<option value="40">40</option>
-														<option value="41">41</option>
-														<option value="43">42</option>
-														<option value="30">43</option>
-														<option value="30">44</option>
-														<option value="30">45</option>
+														<?php 
+															while($linha=mysqli_fetch_array($calcado))
+															{
+																echo "<option>".$linha['tamanhos']."</option>";
+															}
+														?>
 													</select>
 													</div>	
 												</div>
 
 												<div class="form-group">
 													<label class="col-md-3 control-label" for="inputSuccess">Calça</label>
+													<a href="adicionar_calca.php"><i class="fas fa-plus w3-xlarge" style="margin-top: 0.75vw"></i></a>
 													<div class="col-md-6">
 													<select class="form-control input-lg mb-md" name="calca" id="calca">
 														<option selected disabled>Selecionar</option>
 														<option value="Não utiliza">Não utiliza</option>
-														<option value="36">36</option>
-														<option value="38">38</option>
-														<option value="40">40</option>
-														<option value="42">42</option>
-														<option value="44">44</option>
-														<option value="46">46</option>
-														<option value="48">48</option>
-														<option value="50">50</option>
-														<option value="52">52</option>
-														<option value="54">54</option>
-														<option value="56">56</option>
-														<option value="58">58</option>
+														<?php 
+															while($linha=mysqli_fetch_array($calca))
+															{
+																echo "<option>".$linha['tamanhos']."</option>";
+															}
+														?>
 													</select>
 													</div>	
 												</div>
 
 												<div class="form-group">
 													<label class="col-md-3 control-label" for="inputSuccess">Jaleco</label>
+													<a href="adicionar_jaleco.php"><i class="fas fa-plus w3-xlarge" style="margin-top: 0.75vw"></i></a>
 													<div class="col-md-6">
 													<select class="form-control input-lg mb-md" name="jaleco" id="jaleco">
 														<option selected disabled>Selecionar</option>
 														<option value="Não utiliza">Não utiliza</option>
-														<option value="PP">PP</option>
-														<option value="P">P</option>
-														<option value="M">M</option>
-														<option value="G">G</option>
-														<option value="GG">GG</option>
-														<option value="XG">XG</option>
+														<?php 
+															while($linha=mysqli_fetch_array($jaleco))
+															{
+																echo "<option>".$linha['tamanhos']."</option>";
+															}
+														?>
 													</select>
 													</div>	
 												</div>
 
 												<div class="form-group">
 													<label class="col-md-3 control-label" for="inputSuccess">Camisa</label>
+													<a href="adicionar_camisa.php"><i class="fas fa-plus w3-xlarge" style="margin-top: 0.75vw"></i></a>
 													<div class="col-md-6">
 													<select class="form-control input-lg mb-md" name="camisa" id="camisa">
 														<option selected disabled>Selecionar</option>
 														<option value="Não utiliza">Não utiliza</option>
-														<option value="PP">PP</option>
-														<option value="P">P</option>
-														<option value="M">M</option>
-														<option value="G">G</option>
-														<option value="GG">GG</option>
-														<option value="XG">XG</option>
+														<?php 
+															while($linha=mysqli_fetch_array($camisa))
+															{
+																echo "<option>".$linha['tamanhos']."</option>";
+															}
+														?>
 													</select>
 													</div>	
 												</div>
 
 												<div class="form-group">
 													<label class="col-md-3 control-label" >Situação</label>
+													<a href="adicionar_situacao.php"><i class="fas fa-plus w3-xlarge" style="margin-top: 0.75vw"></i></a>
 													<div class="col-md-6">
-														<input type="text" name="situacao" class="form-control" required>
+														<select class="form-control input-lg mb-md" name="situacao" id="situacao">
+															<option selected disabled>Selecionar</option>
+															<option value="Não informada">Não informada</option>
+															<?php 
+															while($linha=mysqli_fetch_array($situacao))
+															{
+																echo "<option>".$linha['situacoes']."</option>";
+															}
+														?>
+														</select>
 													</div>														
 												</div>
 
@@ -741,7 +799,7 @@
 											<div class="panel-footer">
 												<div class="row">
 													<div class="col-md-9 col-md-offset-3">
-														<input type="submit" class="btn btn-primary" >
+														<input type="submit" class="btn btn-primary" disabled="true" id="enviar">
 														<input type="reset" class="btn btn-default">
 													</div>
 												</div>
