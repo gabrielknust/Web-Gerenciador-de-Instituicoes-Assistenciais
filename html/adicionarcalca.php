@@ -6,7 +6,9 @@
   	$conexao = mysqli_connect($servidor,$usuario,$senha,$bddnome);
   	$tamanho=$_POST['tamanho'];
   	mysqli_query ($conexao,'INSERT INTO calca (tamanhos) values ('.$tamanho.')');
-  	$_GET['msg']="Tamanho de calca adicionado com sucesso";
-  	echo $_GET['msg'];
+  	session_start();
+  	$_SESSION['msg']="Tamanho de calça adicionado com sucesso";
+    $_SESSION['proxima']="Cadastrar outro tamanho";
+    $_SESSION['link']="../html/adicionar_calca.php";
   	//header("Location: sucesso.php");
 ?>

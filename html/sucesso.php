@@ -1,5 +1,6 @@
 <?php 
 	extract($_REQUEST);
+	session_start();
 ?>
 <!doctype html>
 <html class="fixed">
@@ -220,8 +221,8 @@
 				<div class="row">
 					<div class="col-sm-8">
 						<div class="main-error mb-xlg">
-							<h2 class="cadastro-sucesso text-dark text-center text-semibold m-none"><?php echo $msg; ?><i class="far fa-thumbs-up"></i></h2>
-							<a href="./cadastro_funcionario.html" style="font-size:25px;">Cadastrar novo funcionário</a>
+							<h2 class="cadastro-sucesso text-dark text-center text-semibold m-none"><?php echo $_SESSION['msg']; ?><i class="far fa-thumbs-up"></i></h2>
+							<a href=<?php echo "'".$_SESSION['link']."'"; ?> style="font-size:25px;"><?php echo $_SESSION['proxima']; ?></a>
 						</div>
 					</div>
 				</div>

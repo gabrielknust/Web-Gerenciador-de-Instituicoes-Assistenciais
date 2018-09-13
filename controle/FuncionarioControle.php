@@ -176,7 +176,6 @@ class FuncionarioControle
         $cpf=str_replace(".", '', $cpf);
         $cpf=str_replace("-", "", $cpf);
         $senha=$this->geraSenha(8);
-        echo $senha."<br>";
         $funcionario = new Funcionario($cpf,$nome,$gender,$nascimento,$rg,$orgao_emissor,$data_expedicao,$nome_mae,$nome_pai,$sangue,$senha,$telefone,$imgperfil,$cep,$cidade,$bairro,$rua,$numero_residencia,$complemento,$ibge);
         $funcionario->setVale_transporte($num_vale_transporte);
         $funcionario->setData_admissao($data_admissao);
@@ -220,8 +219,10 @@ class FuncionarioControle
         try{
             $funcionarioDAO->incluir($funcionario);
             echo $funcionario->getData_admissao();
-            session_start()
+            session_start();
             $_SESSION['msg']="Funcionario cadastrado com sucesso";
+            $_SESSION['proxima']="Cadastrar outro funcionario";
+            $_SESSION['link']="../html/cadastrar_funcionario.php";
             header("Location: ../html/sucesso.php");
         } catch (PDOException $e){
             $msg= "Não foi possível registrar o funcion�rio"."<br>".$e->getMessage();
