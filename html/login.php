@@ -34,7 +34,7 @@
 					else{
 						session_start();
 						$_SESSION['funcionario'] = $id;
-						header ("Location: home.html");
+						header ("Location: home.php");
 					}
 				}
 				else{

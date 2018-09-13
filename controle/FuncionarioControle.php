@@ -204,7 +204,7 @@ class FuncionarioControle
         $funcionarios = $funcionarioDAO->listarTodos();
         session_start();
         $_SESSION['funcionarios']=$funcionarios;
-        //header('Location: '.$nextPage);
+        header('Location: '.$nextPage);
     }
     
     public function listarUm($cpf)

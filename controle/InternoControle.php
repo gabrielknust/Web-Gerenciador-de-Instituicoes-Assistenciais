@@ -92,8 +92,6 @@ class InternoControle
         if((!isset($nomeContato)) || (empty($nomeContato))){
             $nomeContato='Não informado';
         }   
-            $dataExpedicao=$this->formatoDataYMD($dataExpedicao);
-            $nascimento=$this->formatoDataYMD($nascimento);
             $telefone='(22) 2522-5130';
             $senha='null';
             $imagem='null';
@@ -143,7 +141,11 @@ class InternoControle
         $intDAO= new InternoDAO();
         try{
             $intDAO->incluir($interno);
-            $msg= "O interno ".$interno->getNome()." foi adicionado!";
+            session_start();
+            $_SESSION['msg']="Interno cadastrado com sucesso";
+            $_SESSION['proxima']="Cadastrar outro interno";
+            $_SESSION['link']="../html/cadastrar_interno.php";
+            header("Location: ../html/sucesso.php");
         } catch (PDOException $e){
             $msg= "Não foi possível registrar o interno"."<br>".$e->getMessage();
             echo $msg;

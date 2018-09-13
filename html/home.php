@@ -64,7 +64,7 @@
 			<!-- start: header -->
 			<header class="header">
 				<div class="logo-container">
-					<a href="home.html" class="logo">
+					<a href="home.php" class="logo">
 						<img src="../img/logofinal.png" height="35" alt="Porto Admin" />
 					</a>
 					<div class="visible-xs toggle-sidebar-left" data-toggle-class="sidebar-left-opened" data-target="html" data-fire-event="sidebar-left-opened">
@@ -74,17 +74,26 @@
 			
 				<!-- start: search & user box -->
 				<div class="header-right">
-				
+			
+					<form action="pages-search-results.html" class="search nav-form">
+						<div class="input-group input-search">
+							<input type="text" class="form-control" name="q" id="q" placeholder="Search...">
+							<span class="input-group-btn">
+								<button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
+							</span>
+						</div>
+					</form>	
+					
 					<span class="separator"></span>
 			
 					<div id="userbox" class="userbox">
 						<a href="#" data-toggle="dropdown">
 							<figure class="profile-picture">
-								<img src="../img/koala.jpg" class="img-circle" />
+								<img src="../img/semfoto.jpg" alt="Joseph Doe" class="img-circle" data-lock-picture="../assets/images/!logged-user.jpg" />
 							</figure>
-							<div class="profile-info">
-								<span class="name">John Doe Junior</span>
-								<span class="role">administrator</span>
+							<div class="profile-info" data-lock-name="John Doe" data-lock-email="johndoe@okler.com">
+								<span class="name">Usuário</span>
+								<span class="role">Funcionário</span>
 							</div>
 			
 							<i class="fa custom-caret"></i>
@@ -94,21 +103,16 @@
 							<ul class="list-unstyled">
 								<li class="divider"></li>
 								<li>
-									<a role="menuitem" tabindex="-1" href="profile.html"><i class="fa fa-user"></i> My Profile</a>
+									<a role="menuitem" tabindex="-1" href="../html/profile.php"><i class="fa fa-user"></i> Meu perfil</a>
 								</li>
 								<li>
-									<a role="menuitem" tabindex="-1" href="#" data-lock-screen="true"><i class="fa fa-lock"></i> Lock Screen</a>
-								</li>
-								<li>
-									<a role="menuitem" tabindex="-1" href="logout.php"><i class="fa fa-power-off"></i> Logout</a>
+									<a role="menuitem" tabindex="-1" href="../index.html"><i class="fa fa-power-off"></i> Sair da sessão</a>
 								</li>
 							</ul>
 						</div>
 					</div>
 				</div>
-			
-				
-			
+				<!-- end: search & user box -->
 			</header>
 
 
@@ -130,7 +134,7 @@
 							<nav id="menu" class="nav-main" role="navigation">
 								<ul class="nav nav-main">
 									<li>
-										<a href="home.html">
+										<a href="home.php">
 											<i class="fa fa-home" aria-hidden="true"></i>
 											<span>Início</span>
 										</a>
@@ -147,17 +151,17 @@
 												</a>
 											</li>
 											<li>
-												<a href="cadastro_interno.html">
+												<a href="cadastro_interno.php">
 													 Cadastrar interno
 												</a>
 											</li>
 											<li>
-												<a href="cadastro_voluntario.html">
+												<a href="cadastro_voluntario.php">
 													 Cadastrar voluntário
 												</a>
 											</li>
 											<li>
-												<a href="cadastro_voluntario_judicial.html">
+												<a href="cadastro_voluntario_judicial.php">
 													 Cadastrar voluntário judicial
 												</a>
 											</li>
@@ -198,7 +202,7 @@
 						<div class="right-wrapper pull-right">
 							<ol class="breadcrumbs">
 								<li>
-									<a href="index.html">
+									<a href="./home.php">
 										<i class="fa fa-home"></i>
 									</a>
 								</li>
@@ -222,14 +226,14 @@
 						</div>
 						</a>
 
-						<a href="../html/cadastro_interno.html">
+						<a href="../html/cadastro_interno.php">
 						<div class="col-lg-2 col-lg-offset-1 col-md-8 i" >
 							<i class="far fa-address-book"></i>
 							<h4>Cadastrar Interno</h4>
 						</div>
 						</a>
 
-						<a href="../html/cadastro_voluntario.html">
+						<a href="../html/cadastro_voluntario.php">
 						<div class="col-lg-2 col-md-8 i">
 						<form>
 							<i  class="far fa-address-book"></i>
@@ -238,7 +242,7 @@
 						</div>
 						</a>
 
-						<a href="../html/cadastro_voluntario_judicial.html">
+						<a href="../html/cadastro_voluntario_judicial.php">
 						<div class="col-lg-2 col-md-8 i">
 						<form>
 							<i  class="far fa-address-book"></i>
@@ -324,73 +328,6 @@
 				</section>
 			</div>
 
-			<aside id="sidebar-right" class="sidebar-right">
-				<div class="nano">
-					<div class="nano-content">
-						<a href="#" class="mobile-close visible-xs">
-							Collapse <i class="fa fa-chevron-right"></i>
-						</a>
-			
-						<div class="sidebar-right-wrapper">
-			
-							<div class="sidebar-widget widget-calendar">
-								<h6>Upcoming Tasks</h6>
-								<div data-plugin-datepicker data-plugin-skin="dark" ></div>
-			
-								<ul>
-									<li>
-										<time datetime="2014-04-19T00:00+00:00">04/19/2014</time>
-										<span>Company Meeting</span>
-									</li>
-								</ul>
-							</div>
-			
-							<div class="sidebar-widget widget-friends">
-								<h6>Friends</h6>
-								<ul>
-									<li class="status-online">
-										<figure class="profile-picture">
-											<img src="assets/images/!sample-user.jpg" alt="Joseph Doe" class="img-circle">
-										</figure>
-										<div class="profile-info">
-											<span class="name">Joseph Doe Junior</span>
-											<span class="title">Hey, how are you?</span>
-										</div>
-									</li>
-									<li class="status-online">
-										<figure class="profile-picture">
-											<img src="assets/images/!sample-user.jpg" alt="Joseph Doe" class="img-circle">
-										</figure>
-										<div class="profile-info">
-											<span class="name">Joseph Doe Junior</span>
-											<span class="title">Hey, how are you?</span>
-										</div>
-									</li>
-									<li class="status-offline">
-										<figure class="profile-picture">
-											<img src="assets/images/!sample-user.jpg" alt="Joseph Doe" class="img-circle">
-										</figure>
-										<div class="profile-info">
-											<span class="name">Joseph Doe Junior</span>
-											<span class="title">Hey, how are you?</span>
-										</div>
-									</li>
-									<li class="status-offline">
-										<figure class="profile-picture">
-											<img src="assets/images/!sample-user.jpg" alt="Joseph Doe" class="img-circle">
-										</figure>
-										<div class="profile-info">
-											<span class="name">Joseph Doe Junior</span>
-											<span class="title">Hey, how are you?</span>
-										</div>
-									</li>
-								</ul>
-							</div>
-			
-						</div>
-					</div>
-				</div>
-			</aside>
 		</section>
 
 		<!-- Vendor -->

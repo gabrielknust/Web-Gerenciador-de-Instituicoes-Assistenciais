@@ -206,7 +206,7 @@
 										</a>
 										<ul class="nav nav-children">
 											<li>
-												<a href="cadastro_funcionario.html">
+												<a href="cadastro_funcionario.php">
 													 Cadastrar funcionário
 												</a>
 											</li>
@@ -227,10 +227,29 @@
 											</li>
 										</ul>
 									</li>
+
+									<li class="nav-parent nav-expanded nav-active">
+										<a>
+											<i class="fa fa-copy" aria-hidden="true"></i>
+											<span>Informação</span>
+										</a>
+										<ul class="nav nav-children">
+											<li>
+												<a href="informacao_funcionario.php">
+													 Informações funcionarios
+												</a>
+											</li>
+										</ul>
+										<ul class="nav nav-children">
+											<li>
+												<a href="informacao_interno.php">
+													 Informações interno
+												</a>
+											</li>
+										</ul>
+									</li>
 							</nav>
-				
 						</div>
-				
 					</div>
 				
 				</aside>

@@ -233,7 +233,6 @@
 
 	</head>
 	<body>
-		<section class="body">
 
 			<!-- start: header -->
 			<header class="header">
@@ -263,11 +262,11 @@
 					<div id="userbox" class="userbox">
 						<a href="#" data-toggle="dropdown">
 							<figure class="profile-picture">
-								<img src="../img/koala.jpg" alt="Joseph Doe" class="img-circle" data-lock-picture="../assets/images/!logged-user.jpg" />
+								<img src="../img/semfoto.jpg" alt="Joseph Doe" class="img-circle" data-lock-picture="../assets/images/!logged-user.jpg" />
 							</figure>
 							<div class="profile-info" data-lock-name="John Doe" data-lock-email="johndoe@okler.com">
-								<span class="name">John Doe Junior</span>
-								<span class="role">administrator</span>
+								<span class="name">Usuário</span>
+								<span class="role">Funcionário</span>
 							</div>
 			
 							<i class="fa custom-caret"></i>
@@ -277,13 +276,10 @@
 							<ul class="list-unstyled">
 								<li class="divider"></li>
 								<li>
-									<a role="menuitem" tabindex="-1" href="../html/profile.html"><i class="fa fa-user"></i> My Profile</a>
+									<a role="menuitem" tabindex="-1" href="../html/profile.php"><i class="fa fa-user"></i> Meu perfil</a>
 								</li>
 								<li>
-									<a role="menuitem" tabindex="-1" href="#" data-lock-screen="true"><i class="fa fa-lock"></i> Lock Screen</a>
-								</li>
-								<li>
-									<a role="menuitem" tabindex="-1" href="../index.html"><i class="fa fa-power-off"></i> Logout</a>
+									<a role="menuitem" tabindex="-1" href="../index.html"><i class="fa fa-power-off"></i> Sair da sessão</a>
 								</li>
 							</ul>
 						</div>
@@ -323,31 +319,50 @@
 										</a>
 										<ul class="nav nav-children">
 											<li>
-												<a href="cadastro_funcionario.html">
+												<a href="cadastro_funcionario.php">
 													 Cadastrar funcionário
 												</a>
 											</li>
 											<li>
-												<a href="cadastro_interno.html">
+												<a href="cadastro_interno.php">
 													 Cadastrar interno
 												</a>
 											</li>
 											<li>
-												<a href="cadastro_voluntario.html">
+												<a href="cadastro_voluntario.php">
 													 Cadastrar voluntário
 												</a>
 											</li>
 											<li>
-												<a href="cadastro_voluntario_judicial.html">
+												<a href="cadastro_voluntario_judicial.php">
 													 Cadastrar voluntário judicial
 												</a>
 											</li>
 										</ul>
 									</li>
+
+									<li class="nav-parent nav-expanded nav-active">
+										<a>
+											<i class="fa fa-copy" aria-hidden="true"></i>
+											<span>Informação</span>
+										</a>
+										<ul class="nav nav-children">
+											<li>
+												<a href="informacao_funcionario.php">
+													 Informações funcionarios
+												</a>
+											</li>
+										</ul>
+										<ul class="nav nav-children">
+											<li>
+												<a href="informacao_interno.php">
+													 Informações interno
+												</a>
+											</li>
+										</ul>
+									</li>
 							</nav>
-				
 						</div>
-				
 					</div>
 				
 				</aside>
@@ -359,12 +374,12 @@
 						<div class="right-wrapper pull-right">
 							<ol class="breadcrumbs">
 								<li>
-									<a href="index.html">
+									<a href="./home.php">
 										<i class="fa fa-home"></i>
 									</a>
 								</li>
-								<li><span>Páginas</span></li>
-								<li><span>Perfil</span></li>
+								<li><span>Cadastros</span></li>
+								<li><span>Funcionário</span></li>
 							</ol>
 					
 							<a class="sidebar-right-toggle"><i class="fa fa-chevron-left"></i></a>
@@ -471,7 +486,7 @@
 												<div class="form-group">
 													<label class="col-md-3 control-label" for="profileCompany">Nascimento</label>
 													<div class="col-md-8">
-														<input type="date" placeholder="dd/mm/aaaa" maxlength="10" class="form-control" name="nascimento" id="profileCompany" id="nascimento" required>
+														<input type="date" placeholder="dd/mm/aaaa" maxlength="10" class="form-control" name="nascimento" id="nascimento" required>
 													</div>
 												</div>
 												<div class="form-group">
@@ -720,7 +735,7 @@
 														<?php 
 															while($linha=mysqli_fetch_array($calcado))
 															{
-																echo "<option>".$linha['tamanhos']."</option>";
+																echo "<option value=".$linha['tamanhos'].">".$linha['tamanhos']."</option>";
 															}
 														?>
 													</select>
@@ -788,7 +803,7 @@
 															<?php 
 															while($linha=mysqli_fetch_array($situacao))
 															{
-																echo "<option value=''>".$linha['situacoes']."</option>";
+																echo "<option>".$linha['situacoes']."</option>";
 															}
 														?>
 														</select>
@@ -799,7 +814,7 @@
 											<div class="panel-footer">
 												<div class="row">
 													<div class="col-md-9 col-md-offset-3">
-														<input type="submit" class="btn btn-primary" >
+														<input id="enviar" type="submit" class="btn btn-primary" disabled="true" >
 														<input type="reset" class="btn btn-default">
 													</div>
 												</div>
@@ -821,74 +836,6 @@
 					<!-- end: page -->
 				</section>
 			</div>
-
-			<aside id="sidebar-right" class="sidebar-right">
-				<div class="nano">
-					<div class="nano-content">
-						<a href="#" class="mobile-close visible-xs">
-							Collapse <i class="fa fa-chevron-right"></i>
-						</a>
-			
-						<div class="sidebar-right-wrapper">
-			
-							<div class="sidebar-widget widget-calendar">
-								<h6>Upcoming Tasks</h6>
-								<div data-plugin-datepicker data-plugin-skin="dark" ></div>
-			
-								<ul>
-									<li>
-										<time datetime="2014-04-19T00:00+00:00">04/19/2014</time>
-										<span>Company Meeting</span>
-									</li>
-								</ul>
-							</div>
-			
-							<div class="sidebar-widget widget-friends">
-								<h6>Friends</h6>
-								<ul>
-									<li class="status-online">
-										<figure class="profile-picture">
-											<img src="../assets/images/!sample-user.jpg" alt="Joseph Doe" class="img-circle">
-										</figure>
-										<div class="profile-info">
-											<span class="name">Joseph Doe Junior</span>
-											<span class="title">Hey, how are you?</span>
-										</div>
-									</li>
-									<li class="status-online">
-										<figure class="profile-picture">
-											<img src="../assets/images/!sample-user.jpg" alt="Joseph Doe" class="img-circle">
-										</figure>
-										<div class="profile-info">
-											<span class="name">Joseph Doe Junior</span>
-											<span class="title">Hey, how are you?</span>
-										</div>
-									</li>
-									<li class="status-offline">
-										<figure class="profile-picture">
-											<img src="../assets/images/!sample-user.jpg" alt="Joseph Doe" class="img-circle">
-										</figure>
-										<div class="profile-info">
-											<span class="name">Joseph Doe Junior</span>
-											<span class="title">Hey, how are you?</span>
-										</div>
-									</li>
-									<li class="status-offline">
-										<figure class="profile-picture">
-											<img src="../assets/images/!sample-user.jpg" alt="Joseph Doe" class="img-circle">
-										</figure>
-										<div class="profile-info">
-											<span class="name">Joseph Doe Junior</span>
-											<span class="title">Hey, how are you?</span>
-										</div>
-									</li>
-								</ul>
-							</div>
-			
-						</div>
-					</div>
-				</idv>
-			</aside>
 		</section>
 
 		<!-- Vendor -->
