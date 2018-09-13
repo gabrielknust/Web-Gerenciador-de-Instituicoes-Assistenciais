@@ -323,12 +323,10 @@
 								</ul>
 								<div class="tab-content">
 									<div id="overview" class="tab-pane active">
-										<form class="form-horizontal" method="post" action="../controle/control.php">
-											<input type="hidden" name="nomeClasse" value="FuncionarioControle">
-											<input type="hidden" name="metodo" value="incluir">
-											Tamanho:<input type="text" name="tamanho"></input>
+										<form class="form-horizontal" method="post" action="adicionarcalcado.php">
+											Tamanho:<input type="text" name="tamanho"></input><br/>
 											<input type="submit" name="enviar" value="Cadastrar">
-											<br/>
+											
 										</form>
 									</div>
 								</div>

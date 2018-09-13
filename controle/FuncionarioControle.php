@@ -11,7 +11,25 @@ class FuncionarioControle
         
         return $datac;
     }
-    
+    function geraSenha($tamanho = 8, $maiusculas = true, $numeros = true, $simbolos = false)
+    {
+        $lmin = 'abcdefghijklmnopqrstuvwxyz';
+        $lmai = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $num = '1234567890';
+        $simb = '!@#$%*-';
+        $retorno = '';
+        $caracteres = '';
+        $caracteres .= $lmin;
+        if ($maiusculas) $caracteres .= $lmai;
+        if ($numeros) $caracteres .= $num;
+        if ($simbolos) $caracteres .= $simb;
+        $len = strlen($caracteres);
+        for ($n = 1; $n <= $tamanho; $n++) {
+            $rand = mt_rand(1, $len);
+            $retorno .= $caracteres[$rand-1];
+        }
+        return $retorno;
+    }
     public function verificar(){
         extract($_REQUEST);
         if((!isset($nome)) || (empty($nome))){
@@ -91,14 +109,6 @@ class FuncionarioControle
             $msg .= "Cerdidao de nascimento do funcionario n√£o informada. Por favor, informe a persenÁa de certid„o de nascimento!";
             header('Location: ../html/funcionario.html?msg='.$msg);
         }
-        if((!isset($senha)) || (empty($senha))){
-            $msg .= "Senha do funcionario n√£o informada. Por favor, informe a senha!";
-            header('Location: ../html/funcionario.html?msg='.$msg);
-        }
-        if((!isset($c_senha)) || (empty($c_senha))){
-            $msg .= "Cerdidao de nascimento do funcionario n√£o informada. Por favor, informe a persenÁa de certid„o de nascimento!";
-            header('Location: ../html/funcionario.html?msg='.$msg);
-        }
         if((!isset($vale_transporte)) || (empty($vale_transporte))){
             $msg .= "Usa Vale Transporte do funcionario n√£o informada. Por favor, informe se usa ou n„o vale transporte!";
             header('Location: ../html/funcionario.html?msg='.$msg);
@@ -165,10 +175,8 @@ class FuncionarioControle
         $imgperfil="";
         $cpf=str_replace(".", '', $cpf);
         $cpf=str_replace("-", "", $cpf);
-        $data_admissao=$this->formatoDataYMD($data_admissao);
-        $data_expedicao=$this->formatoDataYMD($data_expedicao);
-        $nascimento=$this->formatoDataYMD($nascimento);
-        
+        $senha=$this->geraSenha(8);
+        echo $senha."<br>";
         $funcionario = new Funcionario($cpf,$nome,$gender,$nascimento,$rg,$orgao_emissor,$data_expedicao,$nome_mae,$nome_pai,$sangue,$senha,$telefone,$imgperfil,$cep,$cidade,$bairro,$rua,$numero_residencia,$complemento,$ibge);
         $funcionario->setVale_transporte($num_vale_transporte);
         $funcionario->setData_admissao($data_admissao);
@@ -197,7 +205,7 @@ class FuncionarioControle
         $funcionarios = $funcionarioDAO->listarTodos();
         session_start();
         $_SESSION['funcionarios']=$funcionarios;
-        header('Location: '.$nextPage);
+        //header('Location: '.$nextPage);
     }
     
     public function listarUm($cpf)
@@ -212,7 +220,8 @@ class FuncionarioControle
         try{
             $funcionarioDAO->incluir($funcionario);
             echo $funcionario->getData_admissao();
-            header("Location: ../html/cadastro_sucesso_funcionario.php");
+            $_GET['msg']="Funcionario cadastrado com sucesso";
+            //header("Location: ../html/sucesso.php");
         } catch (PDOException $e){
             $msg= "N√£o foi poss√≠vel registrar o funcion·rio"."<br>".$e->getMessage();
             echo $msg;

@@ -788,7 +788,7 @@
 															<?php 
 															while($linha=mysqli_fetch_array($situacao))
 															{
-																echo "<option>".$linha['situacoes']."</option>";
+																echo "<option value=''>".$linha['situacoes']."</option>";
 															}
 														?>
 														</select>

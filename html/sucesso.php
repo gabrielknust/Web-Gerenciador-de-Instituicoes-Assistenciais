@@ -1,3 +1,6 @@
+<?php 
+	extract($_REQUEST);
+?>
 <!doctype html>
 <html class="fixed">
 	<head>
@@ -217,7 +220,7 @@
 				<div class="row">
 					<div class="col-sm-8">
 						<div class="main-error mb-xlg">
-							<h2 class="cadastro-sucesso text-dark text-center text-semibold m-none">Funcionário cadastrado com sucesso <i class="far fa-thumbs-up"></i></h2>
+							<h2 class="cadastro-sucesso text-dark text-center text-semibold m-none"><?php echo $msg; ?><i class="far fa-thumbs-up"></i></h2>
 							<a href="./cadastro_funcionario.html" style="font-size:25px;">Cadastrar novo funcionário</a>
 						</div>
 					</div>
