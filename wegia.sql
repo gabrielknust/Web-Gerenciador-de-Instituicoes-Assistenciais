@@ -1,19 +1,34 @@
 create schema wegia default charset utf8;
 
 use wegia;
-
+select * from funcionario;
 /*--------------------------- Cadastro -------------------------------- */
+create table calcado (
+	tamanhos int primary key
+    );
+create table calca(
+	tamanhos int primary key
+    );
+create table jaleco(
+    tamanhos int primary key
+    );
+create table camisa(
+	tamanhos int primary key
+    );
+create table situacao(
+    situacoes varchar(100) primary key
+    );
 create table pessoa (
 	id_pessoa int not null primary key auto_increment,
     cpf varchar(20),
     senha varchar(70),
     nome varchar(100),
     sexo char,
-    telefone varchar(25),
+    telefone varchar(100),
     data_nascimento date,
     imagem longtext,
     cep varchar(10),
-    estado varchar(5),
+    estado varchar(50),
     cidade varchar(40),
     bairro varchar(40),
     logradouro varchar(40),
@@ -25,7 +40,7 @@ create table pessoa (
     data_expedicao date,
     nome_mae varchar(100),
     nome_pai varchar(100),
-    tipo_sanguineo varchar(5)
+    tipo_sanguineo varchar(50)
     
 )engine = InnoDB;
 
@@ -127,12 +142,12 @@ create table funcionario(
     id_pessoa int,
     /*id_quadro_horario int,*/
     
-    vale_transporte varchar(160),
+    vale_transporte varchar(16),
     data_admissao date not null,
-	pis varchar(140),
-    ctps varchar(150) not null,
+	pis varchar(14),
+    ctps varchar(15) not null,
     uf_ctps varchar(20),
-    numero_titulo varchar(150),
+    numero_titulo varchar(15),
     zona varchar(30),
     secao varchar(40),
     certificado_reservista_numero varchar(100),
@@ -142,7 +157,7 @@ create table funcionario(
     jaleco varchar(20),
     camisa varchar(20),
     usa_vtp varchar(30),
-    cesta_basica varchar(30),
+    cesta_basica varchar(300),
     situacao varchar(100),
 	
     foreign key(id_pessoa) references pessoa(id_pessoa)
@@ -247,7 +262,7 @@ create table voluntario_judicial_cargo(
 )engine = InnoDB;
 
 select * from pessoa;
-
+select * from interno;
 DELIMITER &&
 
 CREATE  PROCEDURE cadinterno (in $nome varchar(100),in $cpf varchar(40),in $senha varchar(70), in $sexo char(1), in $telefone varchar(25),in $data_nascimento date, 
@@ -272,24 +287,24 @@ values(idP,$nome_contato_urgente,$telefone_contato_urgente_1,$telefone_contato_u
 
 end &&
 
-CREATE  PROCEDURE cadfuncionario(in nome varchar(100),in cpf varchar(40),in senha varchar(70), in sexo char(1), in telefone varchar(100),in data_nascimento date, 
-in imagem longtext, in cep varchar(100), in estado varchar(50), in cidade varchar(40), in bairro varchar(40), in logradouro varchar(40), in numero_endereco varchar(100),
-in complemento varchar(50),in ibge varchar(20), in registro_geral varchar(20), in orgao_emissor varchar(20), in data_expedicao date,in nome_pai varchar(100),
-in nome_mae varchar(100), in tipo_sanguineo varchar(50),/*in escala varchar(15),in tipo varchar(15), in carga_horaria decimal(5,2),
+CREATE  PROCEDURE cadfuncionario(in $nome varchar(100),in $cpf varchar(40),in $senha varchar(70), in $sexo char(1), in $telefone varchar(100),in $data_nascimento date, 
+in $imagem longtext, in $cep varchar(100), in $estado varchar(5), in $cidade varchar(40), in $bairro varchar(40), in $logradouro varchar(40), in $numero_endereco varchar(100),
+in $complemento varchar(50),in $ibge varchar(20), in $registro_geral varchar(20), in $orgao_emissor varchar(20), in $data_expedicao date,in $nome_pai varchar(100),
+in $nome_mae varchar(100), in $tipo_sanguineo varchar(5),/*in escala varchar(15),in tipo varchar(15), in carga_horaria decimal(5,2),
 in entrada1 varchar(5),in saida1 varchar(5),in entrada2 varchar(5),in saida2 varchar(5),in total varchar(5),in dias_trabalhados varchar(100),
-in folga varchar(30),in observacoes varchar(240),*/in vale_transporte varchar(160),in data_admissao date,in pis varchar(140),in ctps varchar(150),
-in uf_ctps varchar(200),in numero_titulo varchar(150),in zona varchar(300),in secao varchar(400),in certificado_reservista_numero varchar(100),in certificado_reservista_serie varchar(100),
-in calcado varchar(200),in calca varchar(200),in jaleco varchar(20),in camisa varchar(200),in usa_vtp varchar(300),in cesta_basica varchar(300),in situacao varchar(100))
+in folga varchar(30),in observacoes varchar(240),*/in $vale_transporte varchar(100),in $data_admissao date,in $pis varchar(100),in $ctps varchar(100),
+in $uf_ctps varchar(20),in $numero_titulo varchar(15),in $zona varchar(30),in $secao varchar(40),in $certificado_reservista_numero varchar(100),in $certificado_reservista_serie varchar(10),
+in $calcado varchar(20),in $calca varchar(20),in $jaleco varchar(20),in $camisa varchar(20),in $usa_vtp varchar(30),in $cesta_basica varchar(30),in $situacao varchar(10))
 
 begin
 
 declare idP int;
 #declare idQ int;
 
-insert into pessoa(nome, cpf, senha, telefone,data_nascimento,imagem, cep ,estado,cidade, bairro, logradouro, numero_endereco,
+insert into pessoa(nome, cpf, senha,sexo, telefone,data_nascimento,imagem, cep ,estado,cidade, bairro, logradouro, numero_endereco,
 complemento,ibge,registro_geral,orgao_emissor,data_expedicao, nome_pai, nome_mae, tipo_sanguineo)
-values(nome,cpf, senha, sexo, telefone,data_nascimento,imagem,cep ,cidade, bairro, logradouro, numero_endereco,
-complemento,ibge,registro_geral,orgao_emissor,data_expedicao, nome_pai, nome_mae, tipo_sanguineo);
+values($nome,$cpf,$senha,$sexo,$telefone,$data_nascimento,$imagem,$cep,$estado,$cidade, $bairro, $logradouro, $numero_endereco,
+$complemento,$ibge,$registro_geral,$orgao_emissor,$data_expedicao, $nome_pai, $nome_mae, $tipo_sanguineo);
 
 select max(id_pessoa) into idP FROM pessoa;
 
@@ -298,18 +313,19 @@ values(escala, tipo, carga_horaria, entrada1, saida1, entrada2, saida2,total, di
 
 select max(id_quadro_horario) into idQ FROM quadro_horario;*/
 
-insert into funcionario(id_pessoa,/*id_quadro_horario,*/id_pessoa,id_quadro_horario,vale_transporte,data_admissao,pis,ctps,
+insert into funcionario(id_pessoa,/*id_quadro_horario,*/vale_transporte,data_admissao,pis,ctps,
 uf_ctps,numero_titulo,zona,secao,certificado_reservista_numero,certificado_reservista_serie,calcado,calca,jaleco,camisa,
 usa_vtp,cesta_basica,situacao)
-values(idP,/*idQ,*/id_pessoa,/*id_quadro_horario,*/vale_transporte,data_admissao,pis,ctps,uf_ctps,numero_titulo,zona,secao,
-certificado_reservista_numero,certificado_reservista_serie,calcado,calca,jaleco,camisa,usa_vtp,cesta_basica,situacao);
+values(idP,/*idQ,*//*id_quadro_horario,*/$vale_transporte,$data_admissao,$pis,$ctps,$uf_ctps,$numero_titulo,$zona,$secao,
+$certificado_reservista_numero,$certificado_reservista_serie,$calcado,$calca,$jaleco,$camisa,$usa_vtp,$cesta_basica,$situacao);
 
 end &&
 
 DELIMITER ;
 
 /*------------------------------------------- Estoque ---------------------------------------------------*/
-
+select * from pessoa;
+select * from funcionario;
 create table categoria_produto(
 	id_categoria_produto int not null primary key,
     descricao varchar(240)
@@ -401,6 +417,6 @@ create table isaida(
     foreign key(id_saida) references saida(id_saida),
     foreign key(id_produto) references produto(id_produto)
 )engine = InnoDB;
-
-select * from interno;
+insert into calcado(tamanhos) values ("22");
+select * from funcionario;
 select * from pessoa;

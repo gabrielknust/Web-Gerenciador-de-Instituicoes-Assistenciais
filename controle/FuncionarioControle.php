@@ -220,8 +220,9 @@ class FuncionarioControle
         try{
             $funcionarioDAO->incluir($funcionario);
             echo $funcionario->getData_admissao();
-            $_GET['msg']="Funcionario cadastrado com sucesso";
-            //header("Location: ../html/sucesso.php");
+            session_start()
+            $_SESSION['msg']="Funcionario cadastrado com sucesso";
+            header("Location: ../html/sucesso.php");
         } catch (PDOException $e){
             $msg= "Não foi possível registrar o funcion�rio"."<br>".$e->getMessage();
             echo $msg;
