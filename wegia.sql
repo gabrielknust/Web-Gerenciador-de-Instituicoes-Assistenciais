@@ -1,7 +1,7 @@
 create schema wegia default charset utf8;
 
 use wegia;
-select * from funcionario;
+
 /*--------------------------- Cadastro -------------------------------- */
 create table calcado (
 	tamanhos int primary key
