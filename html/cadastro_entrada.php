@@ -34,10 +34,10 @@
 	<script src="../assets/vendor/modernizr/modernizr.js"></script>
 
 	<!-- Javascript functions -->
-	<style type="text/css">
+	<script >
+	</script>
+
 		
-	</style>
-	
 </head>
 <body>
 	<section class="body">
@@ -157,11 +157,27 @@
 							</ul>
 							<div class="tab-content">
 								<div id="overview" class="tab-pane active">
-									<form class="form-horizontal" method="post" action="../controle/control.php">
+									<form class="form-horizontal" method="post" >
 										<input type="hidden" name="nomeClasse" value="FuncionarioControle">
 										<input type="hidden" name="metodo" value="incluir">
 										<fieldset>
 											<div class="info-entrada" >
+												<div class="form-group">
+													<label class="col-md-3 control-label" >Origem</label>
+													<div class="col-md-8">
+														<input type="text" class="form-control" name="origem" id="origem">
+													</div>
+													<a href="cadastro_doador.php"><i class="fas fa-plus w3-xlarge"></i></a>
+												</div>
+
+												<div class="form-group">
+													<label class="col-md-3 control-label" >Almoxarifado</label>
+													<div class="col-md-8">
+														<input type="text" class="form-control" name="almox" id="almox">
+													</div>
+													<a href="adicionar_almozarifado.php"><i class="fas fa-plus w3-xlarge"></i></a>
+												</div>
+
 												<div class="form-group">
 													<label class="col-md-3 control-label" >Tipo</label>
 													<div class="col-md-6">
@@ -172,27 +188,41 @@
 															<option value="troca">troca</option>
 														</select>
 													</div>
-													<a href=""><i class="fas fa-plus w3-xlarge"></i></a>
-												</div>
-												
-												<div class="form-group">
-													<label class="col-md-3 control-label" >Origem</label>
-													<div class="col-md-8">
-														<input type="text" class="form-control" name="origem" id="origem">
-													</div>
-													<a href=""><i class="fas fa-plus w3-xlarge"></i></a>
-												</div>
-
-												<div class="form-group">
-													<label class="col-md-3 control-label" >Almoxarifado</label>
-													<div class="col-md-8">
-														<input type="text" class="form-control" name="almox" id="almox">
-													</div>
-													<a href=""><i class="fas fa-plus w3-xlarge"></i></a>
+													<a href="adicionar_tipoEntrada.php"><i class="fas fa-plus w3-xlarge"></i></a>
 												</div>
 												
 											</div>
 											<div class="panel-body" >
+												<form>
+													<div class="table-responsive">
+													<table class="table table-bordered mb-none">
+
+														<thead>
+															<tr>
+																<th>Produto<a href="" class="fas fa-plus w3-xlarge" style="float:right;">
+																</a></th>
+																<th>Qtd<a href="" class="fas fa-plus w3-xlarge" style="float:right;"></a></th>
+																<th>valor total</th>
+																<th>incluir</th>
+															</tr>
+														</thead>
+															<td>
+																<input type="search" name="prod" size="20" class="form-control">
+															</td>
+															<td>
+																<input type="number" name="qtd" size="20" class="form-control">
+															</td>
+															<td> 
+															
+															</td>
+															<td >
+																<button id="AddProduto" type="button">incluir</button>
+															</td>
+														</tbody>
+													</table>
+												</div>
+												</form><br>
+
 												<div class="table-responsive">
 													<table class="table table-bordered mb-none">
 														<thead>
@@ -207,20 +237,23 @@
 															</tr>
 														</thead>
 														<tbody>
+															
 															<tr>
 																<th>1</th>
 																<th>arroz 5kg 5,00</th>
 																<th>2</th>
 																<th>10</th>
-																<td class="actions">
-																	<a href=""><i class="fas fa-plus"></i></a>
-																	<a href=""><i class="fa fa-trash" style=""></i></a>
-																</td>
-															</tr>
-															<tr>
-																<th>total:</th>
+																<td>
+																	<button type="button">remover</button></td>
 															</tr>
 														</tbody>
+														<tfoot>
+															<tr >
+																<td>valor total:</td>
+																<td id="valor-total"></td>
+
+															</tr>
+														</tfoot>
 													</table>
 												</div>
 											</div>

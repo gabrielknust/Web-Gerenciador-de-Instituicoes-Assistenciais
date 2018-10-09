@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html class="fixed">
 	<head>
@@ -210,7 +211,7 @@
 							<div class="tabs">
 								<ul class="nav nav-tabs tabs-primary">
 									<li class="active">
-										<a href="#overview" data-toggle="tab">Adicionar Categoria</a>
+										<a href="#overview" data-toggle="tab">Adicionar tipo saida</a>
 									</li>
 								</ul>
 								<div class="tab-content">
@@ -219,7 +220,7 @@
 												<form id="formulario" action="#">
 												<div class="form-group">
 													<br>
-													<label class="col-md-3 control-label">Categoria</label>
+													<label class="col-md-3 control-label">saida</label>
 													<div class="col-md-8">
 														<input type="text" class="form-control" name="categoria" id="categoria" >
 													</div>

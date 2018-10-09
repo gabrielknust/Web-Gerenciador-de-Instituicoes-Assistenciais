@@ -199,7 +199,7 @@
 												<div class="col-md-9 col-md-offset-3">
 													<input type="submit" class="btn btn-primary" onclick="return enviar_dados()">
 													<input type="reset" class="btn btn-default">
-													<a href="cadastro_entrada.php" color: white; text-decoration: none;>
+													<a href="doacao.php" color: white; text-decoration: none;>
 														<button type="button" class="btn btn-info">voltar</button>
 													</a>
 												</div>

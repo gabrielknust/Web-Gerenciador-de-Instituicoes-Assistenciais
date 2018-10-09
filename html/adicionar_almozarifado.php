@@ -5,7 +5,7 @@
 		<!-- Basic -->
 		<meta charset="UTF-8">
 
-		<title>Adicionar Categoria</title>
+		<title>Adicionar Almoxarifado</title>
 		<meta name="keywords" content="HTML5 Admin Template" />
 		<meta name="description" content="Porto Admin - Responsive HTML5 Template">
 		<meta name="author" content="okler.net">
@@ -210,7 +210,7 @@
 							<div class="tabs">
 								<ul class="nav nav-tabs tabs-primary">
 									<li class="active">
-										<a href="#overview" data-toggle="tab">Adicionar Categoria</a>
+										<a href="#overview" data-toggle="tab">Inserir almoxarifado</a>
 									</li>
 								</ul>
 								<div class="tab-content">
@@ -219,7 +219,7 @@
 												<form id="formulario" action="#">
 												<div class="form-group">
 													<br>
-													<label class="col-md-3 control-label">Categoria</label>
+													<label class="col-md-3 control-label">almoxarifado</label>
 													<div class="col-md-8">
 														<input type="text" class="form-control" name="categoria" id="categoria" >
 													</div>
@@ -228,7 +228,7 @@
 													<div class="col-md-9 col-md-offset-3">
 														<button id="enviar" class="btn btn-primary" type="submit">Enviar</button>
 														<input type="reset" class="btn btn-default">
-														<a href="cadastro_produto.php" style="color: white; text-decoration: none;"><button class="btn btn-info" type="button">Voltar</button></a>
+														<a href="cadastro_entrada.php" style="color: white; text-decoration: none;"><button class="btn btn-info" type="button">Voltar</button></a>
 													</div>
 												</div>
 												</form>
@@ -237,25 +237,19 @@
 								</div>
 							</div>
 						</div>
-						
-					</div>
-					<!-- end: page -->
-				</section>
-			
-
-			<aside id="sidebar-right" class="sidebar-right">
-				<div class="nano">
-					<div class="nano-content">
-						<a href="#" class="mobile-close visible-xs">
-							Collapse <i class="fa fa-chevron-right"></i>
-						</a>
-			
-						
-					</div>
 				</div>
-			</aside>
-		</section>
-
-		
-	</body>
+				<!-- end: page -->
+			</section>
+			
+		<aside id="sidebar-right" class="sidebar-right">
+			<div class="nano">
+				<div class="nano-content">
+					<a href="#" class="mobile-close visible-xs">
+						Collapse <i class="fa fa-chevron-right"></i>
+					</a>
+				</div>
+			</div>
+		</aside>
+	</section>
+</body>
 </html>
