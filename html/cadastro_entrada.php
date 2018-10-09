@@ -9,9 +9,6 @@
 	<!-- Mobile Metas -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
-	<!-- Web Fonts  -->
-	<link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800|Shadows+Into+Light" rel="stylesheet" type="text/css">
-
 	<!-- Vendor CSS -->
 	<link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.css" />
 	<link rel="stylesheet" href="../assets/vendor/font-awesome/css/font-awesome.css" />
@@ -34,10 +31,7 @@
 	<script src="../assets/vendor/modernizr/modernizr.js"></script>
 
 	<!-- Javascript functions -->
-	<script >
-	</script>
-
-		
+			
 </head>
 <body>
 	<section class="body">
@@ -199,9 +193,11 @@
 
 														<thead>
 															<tr>
-																<th>Produto<a href="" class="fas fa-plus w3-xlarge" style="float:right;">
-																</a></th>
-																<th>Qtd<a href="" class="fas fa-plus w3-xlarge" style="float:right;"></a></th>
+																<th>Produto
+																	<a href="cadastro_produto.php" class="fas fa-plus w3-xlarge" style="float:right;">
+																	</a>
+																</th>
+																<th>Qtd</th>
 																<th>valor total</th>
 																<th>incluir</th>
 															</tr>
@@ -209,6 +205,7 @@
 															<td>
 																<input type="search" name="prod" size="20" class="form-control">
 															</td>
+															
 															<td>
 																<input type="number" name="qtd" size="20" class="form-control">
 															</td>
@@ -269,7 +266,7 @@
 						</div>
 					</div>
 				</div>
-					<!-- end: page -->
+				<!-- end: page -->
 			</section>
 		</div>
 	</section>
