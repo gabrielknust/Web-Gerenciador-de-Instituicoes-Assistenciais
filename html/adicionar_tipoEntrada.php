@@ -4,16 +4,9 @@
 	<!-- Basic -->
 	<meta charset="UTF-8">
 
-	<title>Adicionar Categoria</title>
-	<meta name="keywords" content="HTML5 Admin Template" />
-	<meta name="description" content="Porto Admin - Responsive HTML5 Template">
-	<meta name="author" content="okler.net">
-
+	<title>Adicionar Tipo de Entrada</title>
 	<!-- Mobile Metas -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-
-	<!-- Web Fonts  -->
-	<link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800|Shadows+Into+Light" rel="stylesheet" type="text/css">
 
 	<!-- Vendor CSS -->
 	<link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.css" />
@@ -56,11 +49,6 @@
 		
 	<!-- Theme Initialization Files -->
 	<script src="../assets/javascripts/theme.init.js"></script>
-
-	<!-- jquery functions -->
-	<script>
-   		document.write('<a href="' + document.referrer + '"></a>');
-	</script>
 
 </head>
 <body>
@@ -135,65 +123,56 @@
 										<i class="fa fa-copy" aria-hidden="true"></i>
 										<span>Cadastros</span>
 									</a>
+									<ul class="nav nav-children">
+										<li>
+											<a href="cadastro_funcionario.html">
+												Cadastrar funcionário
+											</a>
+										</li>
+										<li>
+											<a href="cadastro_interno.html">
+												Cadastrar interno
+											</a>
+										</li>
+										<li>
+											<a href="cadastro_voluntario.html">
+												Cadastrar voluntário
+											</a>
+										</li>
+										<li>
+											<a href="cadastro_voluntario_judicial.html">
+												Cadastrar voluntário judicial
+											</a>
+										</li>
+									</ul>
 								</li>
 							</ul>
-							<ul class="nav nav-children">
-								<li>
-									<a href="cadastro_funcionario.html">
-									Cadastrar funcionário
-												</a>
-											</li>
-											<li>
-												<a href="cadastro_interno.html">
-													 Cadastrar interno
-												</a>
-											</li>
-											<li>
-												<a href="cadastro_voluntario.html">
-													 Cadastrar voluntário
-												</a>
-											</li>
-											<li>
-												<a href="cadastro_voluntario_judicial.html">
-													 Cadastrar voluntário judicial
-												</a>
-											</li>
-										</ul>
-									</li>
-							</nav>
-				
-						</div>
-				
+						</nav>
 					</div>
-				
-				</aside>
-				<!-- end: sidebar -->
+				</div>
+			</aside>
+			<!-- end: sidebar -->
 
-				<section role="main" class="content-body">
-					<header class="page-header">
-						<h2>Cadastro</h2>
-					
-						<div class="right-wrapper pull-right">
-							<ol class="breadcrumbs">
-								<li>
-									<a href="home.php">
-										<i class="fa fa-home"></i>
-									</a>
-								</li>
-								<li><span>Páginas</span></li>
-								<li><span>Perfil</span></li>
-							</ol>
-					
-							<a class="sidebar-right-toggle"><i class="fa fa-chevron-left"></i></a>
-						</div>
-					</header>
-
-					<!-- start: page -->
-
+			<section role="main" class="content-body">
+				<header class="page-header">
+					<h2>Cadastro</h2>
+					<div class="right-wrapper pull-right">
+						<ol class="breadcrumbs">
+							<li>
+								<a href="home.php">
+									<i class="fa fa-home"></i>
+								</a>
+							</li>
+							<li><span>Páginas</span></li>
+							<li><span>Perfil</span></li>
+						</ol>
+						<a class="sidebar-right-toggle"><i class="fa fa-chevron-left"></i></a>
+					</div>
+				</header>
+				<!-- start: page -->
 					<div class="row">
 						<div class="col-md-4 col-lg-2" style="visibility: hidden;"></div>
 						<div class="col-md-8 col-lg-8" >
-
 							<div class="tabs">
 								<ul class="nav nav-tabs tabs-primary">
 									<li class="active">
@@ -202,45 +181,61 @@
 								</ul>
 								<div class="tab-content">
 									<div id="overview" class="tab-pane active">
-											<fieldset>
-												<form id="formulario" action="#">
-												<div class="form-group">
-													<br>
+										<fieldset>
+											<form id="formulario" action="#">
+												<div class="form-group"><br>
 													<label class="col-md-3 control-label">entrada</label>
 													<div class="col-md-8">
 														<input type="text" class="form-control" name="categoria" id="categoria" >
 													</div>
 												</div><br/>
-												<div class="row">
-													<div class="col-md-9 col-md-offset-3">
-														<button id="enviar" class="btn btn-primary" type="submit">Enviar</button>
-														<input type="reset" class="btn btn-default">
+												
+												<div class="col-md-9 col-md-offset-3">
+													<button id="enviar" class="btn btn-primary" type="submit">Enviar</button>
+													<input type="reset" class="btn btn-default">
 														<a href="cadastro_entrada.php" style="color: white; text-decoration: none;"><button class="btn btn-info" type="button">Voltar</button></a>
 													</div>
-												</div>
-												</form>
-											</fieldset>	
+											</form>
+										</fieldset>	
 									</div>
 								</div>
 							</div>
 						</div>
-						
 					</div>
 					<!-- end: page -->
-				</section>
+			</section>
 			
-
 			<aside id="sidebar-right" class="sidebar-right">
 				<div class="nano">
 					<div class="nano-content">
 						<a href="#" class="mobile-close visible-xs">
 							Collapse <i class="fa fa-chevron-right"></i>
 						</a>
-			
-						
 					</div>
 				</div>
 			</aside>
-		</section>
-	</body>
+		</div>
+	</section>
+
+	<!-- Vendor -->
+	<script src="../assets/vendor/jquery/jquery.js"></script>
+	<script src="../assets/vendor/jquery-browser-mobile/jquery.browser.mobile.js"></script>
+	<script src="../assets/vendor/bootstrap/js/bootstrap.js"></script>
+	<script src="../assets/vendor/nanoscroller/nanoscroller.js"></script>
+	<script src="../assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+	<script src="../assets/vendor/magnific-popup/magnific-popup.js"></script>
+	<script src="../assets/vendor/jquery-placeholder/jquery.placeholder.js"></script>
+		
+	<!-- Specific Page Vendor -->
+	<script src="../assets/vendor/jquery-autosize/jquery.autosize.js"></script>
+		
+	<!-- Theme Base, Components and Settings -->
+	<script src="../assets/javascripts/theme.js"></script>
+		
+	<!-- Theme Custom -->
+	<script src="../assets/javascripts/theme.custom.js"></script>
+	
+	<!-- Theme Initialization Files -->
+	<script src="../assets/javascripts/theme.init.js"></script>
+</body>
 </html>

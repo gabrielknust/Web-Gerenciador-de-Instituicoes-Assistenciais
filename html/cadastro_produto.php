@@ -112,9 +112,7 @@
 			<!-- start: sidebar -->
 			<aside id="sidebar-left" class="sidebar-left">
 				<div class="sidebar-header">
-					<div class="sidebar-title">
-						Navegação
-					</div>
+					<div class="sidebar-title">Navegação</div>
 					<div class="sidebar-toggle hidden-xs" data-toggle-class="sidebar-left-collapsed" data-target="html" data-fire-event="sidebar-left-toggle">
 						<i class="fa fa-bars" aria-label="Toggle sidebar"></i>
 					</div>
@@ -159,130 +157,140 @@
 									</ul>
 								</li>
 							</ul>
-							</nav>
-				
-						</div>
-				
+						</nav>
 					</div>
-				
-				</aside>
-				<!-- end: sidebar -->
+				</div>
+			</aside>
+			<!-- end: sidebar -->
 
-				<section role="main" class="content-body">
-					<header class="page-header">
-						<h2>Cadastro</h2>
-					
-						<div class="right-wrapper pull-right">
-							<ol class="breadcrumbs">
-								<li>
-									<a href="home.php">
-										<i class="fa fa-home"></i>
-									</a>
-								</li>
-								<li><span>Páginas</span></li>
-								<li><span>Perfil</span></li>
-							</ol>
-					
-							<a class="sidebar-right-toggle"><i class="fa fa-chevron-left"></i></a>
-						</div>
-					</header>
+			<section role="main" class="content-body">
+				<header class="page-header">
+					<h2>Cadastro</h2>
+					<div class="right-wrapper pull-right">
+						<ol class="breadcrumbs">
+							<li>
+								<a href="home.php">
+									<i class="fa fa-home"></i>
+								</a>
+							</li>
+							<li><span>Páginas</span></li>
+							<li><span>Perfil</span></li>
+						</ol>
+						<a class="sidebar-right-toggle"><i class="fa fa-chevron-left"></i></a>
+					</div>
+				</header>
 
-					<!-- start: page -->
-
-					<div class="row">
+				<!-- start: page -->
+				<div class="row">
 					<div class="col-md-4 col-lg-2" style="visibility: hidden;"></div>
-						<div class="col-md-8 col-lg-8" >
-
-							<div class="tabs">
-								<ul class="nav nav-tabs tabs-primary">
-									<li class="active">
-										<a href="#overview" data-toggle="tab">Cadastro de Produto</a>
-									</li>
-								</ul>
-								<div class="tab-content">
-									<div id="overview" class="tab-pane active">
-										<form id="formulario" action="#">
-											<fieldset>
-												<div class="form-group"><br>
-													<label class="col-md-3 control-label">Nome do produto</label>
-													<div class="col-md-8">
-														<input type="text" class="form-control" name="produto" id="produto" >
-													</div>
+					<div class="col-md-8 col-lg-8" >
+						<div class="tabs">
+							<ul class="nav nav-tabs tabs-primary">
+								<li class="active">
+									<a href="#overview" data-toggle="tab">Cadastro de Produto</a>
+								</li>
+							</ul>
+							<div class="tab-content">
+								<div id="overview" class="tab-pane active">
+									<form id="formulario" action="#">
+										<fieldset>
+											<div class="form-group"><br>
+												<label class="col-md-3 control-label">Nome do produto</label>
+												<div class="col-md-8">
+													<input type="text" class="form-control" name="produto" id="produto" >
 												</div>
-												<div class="form-group">
-													<label class="col-md-3 control-label" for="inputSuccess">Categoria</label>
-													<a href="adicionar_categoria.php"><i class="fas fa-plus w3-xlarge" style="margin-top: 0.75vw"></i></a>
-													<div class="col-md-6">
+											</div>
+										
+											<div class="form-group">
+												<label class="col-md-3 control-label" for="inputSuccess">Categoria</label>
+												<a href="adicionar_categoria.php">
+													<i class="fas fa-plus w3-xlarge" style="margin-top: 0.75vw"></i>
+												</a>
+												<div class="col-md-6">
 													<select name="categoria" id="categoria" class="form-control input-lg mb-md">
 														<option selected disabled value="blank">Selecionar</option>
 														<option value="">Mudar...</option>
 													</select>
-													</div>	
-												</div>
-												<div class="form-group">
-													<label class="col-md-3 control-label" >Unidade</label>
-													<a href="adicionar_unidade.php"><i class="fas fa-plus w3-xlarge" style="margin-top: 0.75vw"></i></a>
-													<div class="col-md-6">
+												</div>	
+											</div>
+												
+											<div class="form-group">
+												<label class="col-md-3 control-label" >Unidade</label>
+												<a href="adicionar_unidade.php"><i class="fas fa-plus w3-xlarge" style="margin-top: 0.75vw"></i></a>
+												<div class="col-md-6">
 													<select name="unidade" id="unidade" class="form-control input-lg mb-md">
 														<option selected disabled value="blank">Selecionar</option>
 														<option value="">Mudar...</option>
 													</select>
-													</div>	
-												</div>
-												<div class="form-group">
-													<label class="col-md-3 control-label" for="profileCompany">Código</label>
-													<div class="col-md-8">
-														<input type="text" name="codigo" class="form-control" minlength="11" id="profileCompany" id="codigo" >
-													</div>
-												</div>
-												<div class="form-group">
-													<label class="col-md-3 control-label" for="profileCompany">Valor</label>
-													<div class="col-md-8">
-														<input type="text" name="valor" class="form-control" id="profileCompany" id="valor" maxlength="13" placeholder="Ex: 22.00" onkeypress="return Onlynumbers(event)" >
-													</div>
+												</div>	
+											</div>
+												
+											<div class="form-group">
+												<label class="col-md-3 control-label" for="profileCompany">Código</label>
+												<div class="col-md-8">
+													<input type="text" name="codigo" class="form-control" minlength="11" id="profileCompany" id="codigo" >
 												</div>
 											</div>
 												
-
-											<br/>
-
+											<div class="form-group">
+												<label class="col-md-3 control-label" for="profileCompany">Valor</label>
+												<div class="col-md-8">
+													<input type="text" name="valor" class="form-control" id="profileCompany" id="valor" maxlength="13" placeholder="Ex: 22.00" onkeypress="return Onlynumbers(event)" >
+												</div>
+											</div>
 											
-										</fieldset>
-										<div class="panel-footer">
+											<div class="panel-footer">
 												<div class="row">
 													<div class="col-md-9 col-md-offset-3">
-														<button id="enviar" class="btn btn-primary" type="submit">Enviar</button>
+														<button type="submit" class="btn btn-primary" >Enviar</button>
 														<input type="reset" class="btn btn-default">  
+														<a href="cadastro_entrada.php" style="color: white; text-decoration: none;">
+															<button class="btn btn-info" type="button">Voltar</button>
+														</a>
 													</div>
 												</div>
 											</div>
-										</form>
-											
-
-										
-									</div>
+										</fieldset>
+									</form>
 								</div>
 							</div>
 						</div>
-						
-					</div>
-					<!-- end: page -->
-				</section>
-			
-
-			<aside id="sidebar-right" class="sidebar-right">
-				<div class="nano">
-					<div class="nano-content">
-						<a href="#" class="mobile-close visible-xs">
-							Collapse <i class="fa fa-chevron-right"></i>
-						</a>
-			
-						
 					</div>
 				</div>
-			</aside>
-		</section>
+				<!-- end: page -->
+			</section>
+		</div>
+			
+		<aside id="sidebar-right" class="sidebar-right">
+			<div class="nano">
+				<div class="nano-content">
+					<a href="#" class="mobile-close visible-xs">
+						Collapse <i class="fa fa-chevron-right"></i>
+					</a>
+				</div>
+			</div>
+		</aside>
+	</section>
 
+	<script src="../assets/vendor/jquery/jquery.js"></script>
+	<script src="../assets/vendor/jquery-browser-mobile/jquery.browser.mobile.js"></script>
+	<script src="../assets/vendor/bootstrap/js/bootstrap.js"></script>
+	<script src="../assets/vendor/nanoscroller/nanoscroller.js"></script>
+	<script src="../assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+	<script src="../assets/vendor/magnific-popup/magnific-popup.js"></script>
+	<script src="../assets/vendor/jquery-placeholder/jquery.placeholder.js"></script>
 		
-	</body>
+	<!-- Specific Page Vendor -->
+	<script src="../assets/vendor/jquery-autosize/jquery.autosize.js"></script>
+		
+	<!-- Theme Base, Components and Settings -->
+	<script src="../assets/javascripts/theme.js"></script>
+		
+	<!-- Theme Custom -->
+	<script src="../assets/javascripts/theme.custom.js"></script>
+	
+	<!-- Theme Initialization Files -->
+	<script src="../assets/javascripts/theme.init.js"></script>
+		
+</body>
 </html>
