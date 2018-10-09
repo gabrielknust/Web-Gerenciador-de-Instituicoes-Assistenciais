@@ -1,4 +1,3 @@
-
 <?php
 include_once '../classes/Unidade.php';
 include_once '../dao/UnidadeDAO.php';
@@ -40,6 +39,6 @@ class UnidadeControle
         }
     }
     public function excluir(){
-    	
+
     }
 }

@@ -252,13 +252,11 @@
 						<a href="#" class="mobile-close visible-xs">
 							Collapse <i class="fa fa-chevron-right"></i>
 						</a>
-			
 						
 					</div>
 				</div>
 			</aside>
 		</section>
-
 		
 	</body>
 </html>
