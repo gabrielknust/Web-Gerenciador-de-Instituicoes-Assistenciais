@@ -225,6 +225,8 @@
 														<input type="text" class="form-control" name="unidade" id="unidade" >
 													</div>
 												</div><br/>
+												<input type="hidden" name="nomeClasse" value="UnidadeControle">
+												<input type="hidden" name="metodo" value="incluir">
 												<div class="row">
 													<div class="col-md-9 col-md-offset-3">
 														<button id="enviar" class="btn btn-primary" type="submit">Enviar</button>
