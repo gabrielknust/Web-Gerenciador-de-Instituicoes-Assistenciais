@@ -1,8 +1,8 @@
 <?php
-include_once '../classes/new/produto.php';
-include_once '../dao/new/produtoDAO.php';
-include_once '../classes/new/Categoria.php';
-include_once '../dao/new/CategoriaDAO.php';
+include_once '../classes/produto.php';
+include_once '../daoprodutoDAO.php';
+include_once '../classesCategoria.php';
+include_once '../dao/CategoriaDAO.php';
 class ProdutoControle
 {
     public function verificar(){
