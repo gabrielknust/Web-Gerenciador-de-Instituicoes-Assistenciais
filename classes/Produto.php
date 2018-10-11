@@ -5,13 +5,12 @@ class Produto
    private $id_produto;
    private $id_categoria_produto;
    private $id_unidade;
-   private $preco;
    private $descricao;
+   private $preco;
    private $codigo;
    
-public function __construct($preco,$descricao,$codigo)
+public function __construct($descricao,$codigo,$preco)
     {
-
         $this->preco=$preco;
         $this->descricao=$descricao;
         $this->codigo=$codigo;

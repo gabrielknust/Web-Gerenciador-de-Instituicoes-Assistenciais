@@ -197,7 +197,7 @@
 											<div class="form-group"><br>
 												<label class="col-md-3 control-label">Nome do produto</label>
 												<div class="col-md-8">
-													<input type="text" class="form-control" name="produto" id="produto" >
+													<input type="text" class="form-control" name="descricao" id="produto" >
 												</div>
 											</div>
 										
@@ -209,7 +209,7 @@
 												<div class="col-md-6">
 													<select name="categoria" id="categoria" class="form-control input-lg mb-md">
 														<option selected disabled value="blank">Selecionar</option>
-														<option value="">Mudar...</option>
+														
 													</select>
 												</div>	
 											</div>
@@ -220,7 +220,7 @@
 												<div class="col-md-6">
 													<select name="unidade" id="unidade" class="form-control input-lg mb-md">
 														<option selected disabled value="blank">Selecionar</option>
-														<option value="">Mudar...</option>
+														
 													</select>
 												</div>	
 											</div>
@@ -229,13 +229,17 @@
 												<label class="col-md-3 control-label" for="profileCompany">Código</label>
 												<div class="col-md-8">
 													<input type="text" name="codigo" class="form-control" minlength="11" id="profileCompany" id="codigo" >
+
+													<input type="hidden" name="nomeClasse" value="ProdutoControle">
+														
+													<input type="hidden" name="metodo" value="incluir">
 												</div>
 											</div>
 												
 											<div class="form-group">
 												<label class="col-md-3 control-label" for="profileCompany">Valor</label>
 												<div class="col-md-8">
-													<input type="text" name="valor" class="form-control" id="profileCompany" id="valor" maxlength="13" placeholder="Ex: 22.00" onkeypress="return Onlynumbers(event)" >
+													<input type="text" name="preco" class="form-control" id="profileCompany" id="valor" maxlength="13" placeholder="Ex: 22.00" onkeypress="return Onlynumbers(event)" >
 												</div>
 											</div>
 											

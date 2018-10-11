@@ -1,16 +1,15 @@
 <?php
-include_once '../classes/produto.php';
-include_once '../daoprodutoDAO.php';
-include_once '../classesCategoria.php';
+include_once '../classes/Categoria.php';
 include_once '../dao/CategoriaDAO.php';
+include_once '../classes/Unidade.php';
+include_once '../dao/Unidade DAO.php';
+include_once '../classes/Produto.php';
+include_once '../dao/ProdutoDAO.php';
+
 class ProdutoControle
 {
     public function verificar(){
         extract($_REQUEST);
-        if((!isset($preco)) || empty(($preco))){
-            $msg .= "Preço do produto nÃ£o informado. Por favor, informe um preço!";
-            header('Location: ../html/produto.html?msg='.$msg);
-        }
         if((!isset($descricao)) || empty(($descricao))){
             $msg .= "descricao do produto nÃ£o informado. Por favor, informe um descricao!";
             header('Location: ../html/produto.html?msg='.$msg);
@@ -19,7 +18,11 @@ class ProdutoControle
             $msg .= "Código do produto nÃ£o informado. Por favor, informe o código!";
             header('Location: ../html/produto.html?msg='.$msg);
         }
-        $produto = new produto($preco,$descricao,$codigo);
+        if((!isset($preco)) || empty(($preco))){
+            $msg .= "Preço do produto nÃ£o informado. Por favor, informe um preço!";
+            header('Location: ../html/produto.html?msg='.$msg);
+        }
+        $produto = new produto($descricao,$codigo,$preco);
         return $produto;
     }
     public function listarTodos(){
@@ -74,10 +77,15 @@ class ProdutoControle
 
     public function incluir(){
         $produto = $this->verificar();
-        $produtoDAO = new produtoDAO();
+        $produtoDAO = new ProdutoDAO();
         try{
-            $produtoDAO->incluir($produto);
             
+
+            $produtoDAO->incluir($produto);
+            $catDAO = new CategoriaDAO();
+            $uniDAO = new UnidadeDAO();
+            // continuar a partir daqui
+            //$categoria = $catDao->listarUm($idCategoria);
             session_start();
             $_SESSION['msg']="produto cadastrado com sucesso";
             $_SESSION['proxima']="Cadastrar outro produto";
