@@ -1,6 +1,7 @@
+/*drop schema wegia;*/
 create schema wegia default charset utf8;
 
-use wegia;
+use wegia;	
 
 /*--------------------------- Cadastro -------------------------------- */
 create table calcado (
@@ -265,36 +266,38 @@ select * from pessoa;
 select * from interno;
 DELIMITER &&
 
-CREATE  PROCEDURE cadinterno (in $nome varchar(100),in $cpf varchar(40),in $senha varchar(70), in $sexo char(1), in $telefone varchar(25),in $data_nascimento date, 
-in $imagem longtext, in $cep varchar(20),in $estado varchar(5), in $cidade varchar(40), in $bairro varchar(40), in $logradouro varchar(40), in $numero_endereco varchar(11),
-in $complemento varchar(50), in $ibge varchar(20), in $registro_geral varchar(20), in $orgao_emissor varchar(20), in $data_expedicao date,in $nome_pai varchar(100),
-in $nome_mae varchar(100), in $tipo_sanguineo varchar(5), in $nome_contato_urgente varchar(60),in $telefone_contato_urgente_1 varchar(33),in $telefone_contato_urgente_2 varchar(33),
-in $telefone_contato_urgente_3 varchar(33),in $certidao_nascimento varchar(60), in $curatela varchar(60),in $inss varchar(60),in $loas varchar(60),in $bpc varchar(60),in $funrural varchar(60),
-in $saf varchar(60),in $sus varchar(60))
+CREATE  PROCEDURE cadinterno (in nome varchar(100),in cpf varchar(40),in senha varchar(70), in sexo char(1), in telefone varchar(25),in data_nascimento date, 
+in imagem longtext, in cep varchar(20),in estado varchar(5), in cidade varchar(40), in bairro varchar(40), in logradouro varchar(40), in numero_endereco varchar(11),
+in complemento varchar(50), in ibge varchar(20), in registro_geral varchar(20), in orgao_emissor varchar(20), in data_expedicao date,in nome_pai varchar(100),
+in nome_mae varchar(100), in tipo_sanguineo varchar(5), in nome_contato_urgente varchar(60),in telefone_contato_urgente_1 varchar(33),in telefone_contato_urgente_2 varchar(33),
+in telefone_contato_urgente_3 varchar(33),in certidao_nascimento varchar(60), in curatela varchar(60),in inss varchar(60),in loas varchar(60),in bpc varchar(60),in funrural varchar(60),
+in saf varchar(60),in sus varchar(60))
 
 begin
 
 declare idP int;
-declare idB int;
 
 insert into pessoa(nome,cpf,senha,sexo,telefone,data_nascimento,imagem,cep,estado,cidade, bairro, logradouro, numero_endereco,
 complemento,ibge,registro_geral,orgao_emissor,data_expedicao, nome_pai, nome_mae, tipo_sanguineo)
-values($nome,$cpf, $senha, $sexo, $telefone,$data_nascimento,$imagem,$cep,$estado,$cidade,$bairro,$logradouro,$numero_endereco,$complemento,$ibge,$registro_geral,$orgao_emissor,$data_expedicao,$nome_pai,$nome_mae,$tipo_sanguineo);
-select max(id_pessoa) into idP FROM pessoa;
+values(nome,cpf, senha, sexo, telefone,data_nascimento,imagem,cep,estado,cidade,bairro,logradouro,numero_endereco,complemento,ibge,registro_geral,orgao_emissor,data_expedicao,nome_pai,nome_mae,tipo_sanguineo);
+SELECT 
+    MAX(id_pessoa)
+INTO idP FROM
+    pessoa;
 
 insert into interno(id_pessoa,nome_contato_urgente,telefone_contato_urgente_1,telefone_contato_urgente_2,telefone_contato_urgente_3,certidao_nascimento,curatela,inss,loas,bpc,funrural,saf,sus) 
-values(idP,$nome_contato_urgente,$telefone_contato_urgente_1,$telefone_contato_urgente_2,$telefone_contato_urgente_3,$certidao_nascimento,$curatela,$inss,$loas,$bpc,$funrural,$saf,$sus);
+values(idP,nome_contato_urgente,telefone_contato_urgente_1,telefone_contato_urgente_2,telefone_contato_urgente_3,certidao_nascimento,curatela,inss,loas,bpc,funrural,saf,sus);
 
 end &&
 
-CREATE  PROCEDURE cadfuncionario(in $nome varchar(100),in $cpf varchar(40),in $senha varchar(70), in $sexo char(1), in $telefone varchar(100),in $data_nascimento date, 
-in $imagem longtext, in $cep varchar(100), in $estado varchar(5), in $cidade varchar(40), in $bairro varchar(40), in $logradouro varchar(40), in $numero_endereco varchar(100),
-in $complemento varchar(50),in $ibge varchar(20), in $registro_geral varchar(20), in $orgao_emissor varchar(20), in $data_expedicao date,in $nome_pai varchar(100),
-in $nome_mae varchar(100), in $tipo_sanguineo varchar(5),/*in escala varchar(15),in tipo varchar(15), in carga_horaria decimal(5,2),
+CREATE  PROCEDURE cadfuncionario(in nome varchar(100),in cpf varchar(40),in senha varchar(70), in sexo char(1), in telefone varchar(100),in data_nascimento date, 
+in imagem longtext, in cep varchar(100), in estado varchar(5), in cidade varchar(40), in bairro varchar(40), in logradouro varchar(40), in numero_endereco varchar(100),
+in complemento varchar(50),in ibge varchar(20), in registro_geral varchar(20), in orgao_emissor varchar(20), in data_expedicao date,in nome_pai varchar(100),
+in nome_mae varchar(100), in tipo_sanguineo varchar(5),/*in escala varchar(15),in tipo varchar(15), in carga_horaria decimal(5,2),
 in entrada1 varchar(5),in saida1 varchar(5),in entrada2 varchar(5),in saida2 varchar(5),in total varchar(5),in dias_trabalhados varchar(100),
-in folga varchar(30),in observacoes varchar(240),*/in $vale_transporte varchar(100),in $data_admissao date,in $pis varchar(100),in $ctps varchar(100),
-in $uf_ctps varchar(20),in $numero_titulo varchar(15),in $zona varchar(30),in $secao varchar(40),in $certificado_reservista_numero varchar(100),in $certificado_reservista_serie varchar(10),
-in $calcado varchar(20),in $calca varchar(20),in $jaleco varchar(20),in $camisa varchar(20),in $usa_vtp varchar(30),in $cesta_basica varchar(30),in $situacao varchar(10))
+in folga varchar(30),in observacoes varchar(240),*/in vale_transporte varchar(100),in data_admissao date,in pis varchar(100),in ctps varchar(100),
+in uf_ctps varchar(20),in numero_titulo varchar(15),in zona varchar(30),in secao varchar(40),in certificado_reservista_numero varchar(100),in certificado_reservista_serie varchar(10),
+in calcado varchar(20),in calca varchar(20),in jaleco varchar(20),in camisa varchar(20),in usa_vtp varchar(30),in cesta_basica varchar(30),in situacao varchar(10))
 
 begin
 
@@ -303,8 +306,8 @@ declare idP int;
 
 insert into pessoa(nome, cpf, senha,sexo, telefone,data_nascimento,imagem, cep ,estado,cidade, bairro, logradouro, numero_endereco,
 complemento,ibge,registro_geral,orgao_emissor,data_expedicao, nome_pai, nome_mae, tipo_sanguineo)
-values($nome,$cpf,$senha,$sexo,$telefone,$data_nascimento,$imagem,$cep,$estado,$cidade, $bairro, $logradouro, $numero_endereco,
-$complemento,$ibge,$registro_geral,$orgao_emissor,$data_expedicao, $nome_pai, $nome_mae, $tipo_sanguineo);
+values(nome,cpf,senha,sexo,telefone,data_nascimento,imagem,cep,estado,cidade, bairro, logradouro, numero_endereco,
+complemento,ibge,registro_geral,orgao_emissor,data_expedicao, nome_pai, nome_mae, tipo_sanguineo);
 
 select max(id_pessoa) into idP FROM pessoa;
 
@@ -316,48 +319,48 @@ select max(id_quadro_horario) into idQ FROM quadro_horario;*/
 insert into funcionario(id_pessoa,/*id_quadro_horario,*/vale_transporte,data_admissao,pis,ctps,
 uf_ctps,numero_titulo,zona,secao,certificado_reservista_numero,certificado_reservista_serie,calcado,calca,jaleco,camisa,
 usa_vtp,cesta_basica,situacao)
-values(idP,/*idQ,*//*id_quadro_horario,*/$vale_transporte,$data_admissao,$pis,$ctps,$uf_ctps,$numero_titulo,$zona,$secao,
-$certificado_reservista_numero,$certificado_reservista_serie,$calcado,$calca,$jaleco,$camisa,$usa_vtp,$cesta_basica,$situacao);
+values(idP,/*idQ,*//*id_quadro_horario,*/vale_transporte,data_admissao,pis,ctps,uf_ctps,numero_titulo,zona,secao,
+certificado_reservista_numero,certificado_reservista_serie,calcado,calca,jaleco,camisa,usa_vtp,cesta_basica,situacao);
 
 end &&
 
 DELIMITER ;
 
 /*------------------------------------------- Estoque ---------------------------------------------------*/
-select * from pessoa;
-select * from funcionario;
+
 create table categoria_produto(
-	id_categoria_produto int not null primary key,
-    descricao varchar(240)
+    id_categoria_produto int not null primary key auto_increment,
+    descricao_categoria varchar(240)
 )engine = InnoDB;
 
 create table unidade(
-	id_unidade int not null primary key,
-    descricao varchar(240)
+    id_unidade int not null primary key auto_increment,
+    descricao_unidade varchar(240)
 )engine = InnoDB;
 
 create table produto(
-	id_produto int not null primary key auto_increment,
+    id_produto int not null primary key auto_increment,
     id_categoria_produto int not null,
     id_unidade int not null,
     
     preco decimal(10,2),
     descricao varchar(240),
     codigo varchar(15) unique,
+    valor decimal(10,2),
     
     foreign key(id_categoria_produto) references categoria_produto(id_categoria_produto),
     foreign key(id_unidade) references unidade(id_unidade)
 )engine = InnoDB;
 
 create table almoxarifado(
-	id_almoxarifado int not null primary key,
+    id_almoxarifado int not null primary key auto_increment,
     descricao varchar(240)
 )engine = InnoDB;
 
 create table estoque(
-	id_produto int not null,
+    id_produto int not null,
     id_almoxarifado int not null,
-    qtd decimal(10,3),
+    qtd int,
     
     primary key(id_produto,id_almoxarifado),
     foreign key(id_produto) references produto(id_produto),
@@ -365,58 +368,185 @@ create table estoque(
 )engine = InnoDB;
 
 create table origem(
-	id_origem int not null primary key auto_increment,
+    id_origem int not null primary key auto_increment,
     nome varchar(100),
     cpf_cnpj varchar(20),
     telefone varchar(33)
 )engine = InnoDB;
 
+create table tipo_entrada(
+    id_tipo int not null primary key auto_increment,
+    descricao varchar(120)
+)engine = InnoDB;
+
 create table entrada(
-	id_entrada int not null primary key auto_increment,
+    id_entrada int not null primary key auto_increment,
     id_origem int not null,
+    id_almoxarifado int not null,
+    id_tipo int not null,
+    id_responsavel int not null,
     data date,
-    valor_total decimal(10,3),
+    hora time,
+    valor_total decimal(10,2),
     
-    foreign key(id_origem) references origem(id_origem)
+    foreign key(id_origem) references origem(id_origem),
+    foreign key(id_almoxarifado) references almoxarifado(id_almoxarifado),
+    foreign key(id_tipo) references tipo_entrada(id_tipo),
+    foreign key(id_responsavel) references pessoa(id_pessoa)
 )engine = InnoDB;
 
 create table ientrada(
-	id_ientrada int not null primary key auto_increment,
+    id_ientrada int not null primary key auto_increment,
     id_entrada int not null,
     id_produto int not null,
-    qtd decimal(10,3),
-    voluntário varchar(100),
+    qtd int,
+    valor_unitario decimal(10,2),
     
     foreign key(id_entrada) references entrada(id_entrada),
     foreign key(id_produto) references produto(id_produto)
 )engine = InnoDB;
 
 create table destino(
-	id_destino int not null primary key auto_increment,
+    id_destino int not null primary key auto_increment,
     nome varchar(100),
     cpf_cnpj varchar(20),
     telefone varchar(33)
 )engine = InnoDB;
 
+create table tipo_saida(
+    id_tipo int not null primary key auto_increment,
+    decricao varchar(120)
+)engine = InnoDB;
+
 create table saida(
-	id_saida int not null primary key auto_increment,
+    id_saida int not null primary key auto_increment,
     id_destino int not null,
-    data date,
-    valor_total decimal(10,3),
+    id_almoxarifado int not null,
+    id_tipo int not null,
+    id_responsavel int not null,
     
-    foreign key(id_destino) references destino(id_destino)
+    data date,
+    hora time,
+    valor_total decimal(10,2),
+    
+    foreign key(id_destino) references destino(id_destino),
+    foreign key(id_almoxarifado) references almoxarifado(id_almoxarifado),
+    foreign key(id_tipo) references tipo_saida(id_tipo),
+    foreign key(id_responsavel) references funcionario(id_funcionario)
 )engine = InnoDB;
 
 create table isaida(
-	id_isaida int not null primary key auto_increment,
+    id_isaida int not null primary key auto_increment,
     id_saida int not null,
     id_produto int not null,
-    qtd decimal(10,3),
-    voluntário varchar(100),
+    qtd int,
+    valor_unitario varchar(100),
     
     foreign key(id_saida) references saida(id_saida),
     foreign key(id_produto) references produto(id_produto)
 )engine = InnoDB;
-insert into calcado(tamanhos) values ("22");
-select * from funcionario;
-select * from pessoa;
+
+
+DELIMITER $
+/* Criação da procedure que cadastra na tabela entrada e ientrada */
+CREATE PROCEDURE cadentrada (in id_origem int, in id_almoxarifado int, in id_tipo int, in id_responsavel int, in data date, in hora time, in valor_total DECIMAL(10,2),
+in id_entrada int, in id_produto int, in qtd int, in valor_unitario DECIMAL(10,2))
+begin
+
+declare idE int;
+
+insert into entrada (id_origem, id_almoxarifado, id_tipo, id_responsavel, data, hora, valor_total)
+	values(id_origem, id_almoxarifado, id_tipo, id_responsavel, data, hora, valor_total);
+
+SELECT 
+	MAX(id_entrada)
+INTO idE FROM entrada;
+
+insert into ientrada(id_entrada, id_produto, qtd, valor_unitario)
+	values(idE, id_produto, qtd, valor_unitario);
+end $
+
+/* Criação da procedure que cadastra na tabela saida e isaida */
+CREATE PROCEDURE cadsaida (in id_destino int, in id_almoxarifado int, in id_tipo int, in id_responsavel int, in data date, in hora time, in valor_total DECIMAL(10,2),
+in id_saida int, in id_produto int, in qtd int, in valor_unitario DECIMAL(10,2))
+begin
+
+declare idS int;
+
+insert into saida (id_destino, id_almoxarifado, id_tipo, id_responsavel, data, hora, valor_total)
+	values(id_destino, id_almoxarifado, id_tipo, id_responsavel, data, hora, valor_total);
+
+SELECT 
+	MAX(id_saida)
+INTO idS FROM saida;
+
+insert into isaida(id_saida, id_produto, qtd, valor_unitario)
+	values(idS, id_produto, qtd, valor_unitario);
+end $
+
+/* criação do gatilho que insere na tabela estoque depois de um insert na tabela ientrada */
+CREATE TRIGGER tgr_ientrada_insert
+AFTER INSERT ON ientrada
+FOR EACH ROW
+BEGIN
+
+	INSERT IGNORE INTO estoque(id_produto, id_almoxarifado, qtd) values(NEW.id_produto, (SELECT id_almoxarifado FROM entrada WHERE id_entrada = NEW.id_entrada), 0);
+	
+    UPDATE estoque SET qtd = qtd+NEW.qtd WHERE id_produto = NEW.id_produto AND id_almoxarifado = (SELECT id_almoxarifado FROM entrada WHERE id_entrada = NEW.id_entrada);
+	
+END $
+
+CREATE TRIGGER tgr_ientrada_delete
+AFTER DELETE ON ientrada
+FOR EACH ROW
+BEGIN
+	
+    UPDATE estoque SET qtd = qtd - OLD.qtd WHERE id_produto = OLD.id_produto AND id_almoxarifado = (SELECT id_almoxarifado FROM entrada WHERE id_entrada = OLD.id_entrada);
+	
+END $
+
+CREATE TRIGGER tgr_isaida_delete
+AFTER DELETE ON isaida
+FOR EACH ROW
+BEGIN
+	
+    UPDATE estoque SET qtd = qtd+OLD.qtd WHERE id_produto = OLD.id_produto AND id_almoxarifado = (SELECT id_almoxarifado FROM saida WHERE id_saida = OLD.id_saida);
+	
+END $
+
+CREATE TRIGGER tgr_isaida_insert
+AFTER INSERT ON isaida
+FOR EACH ROW
+BEGIN
+	
+    UPDATE estoque SET qtd = qtd-NEW.qtd WHERE id_produto = NEW.id_produto AND id_almoxarifado = (SELECT id_almoxarifado FROM saida WHERE id_saida = NEW.id_saida);
+	
+END $
+
+DELIMITER ;
+
+INSERT INTO unidade (descricao_unidade)
+	value("lkj");
+INSERT INTO categoria_produto(descricao_categoria)
+	value("seila");
+INSERT INTO produto (id_categoria_produto,id_unidade,descricao,codigo,valor)
+	value(1,1,"legal","329478",10.00);
+
+INSERT INTO tipo_entrada(descricao)
+	value("DOAÇÂO");
+INSERT INTO origem(nome, cpf_cnpj, telefone)
+	value("MERCADO",22222222,222222);
+INSERT INTO almoxarifado(descricao)
+	values("COZINHA");
+insert into pessoa(nome, cpf, senha,sexo, telefone,data_nascimento,imagem, cep ,estado,cidade, bairro, logradouro, numero_endereco,
+complemento,ibge,registro_geral,orgao_emissor,data_expedicao, nome_pai, nome_mae, tipo_sanguineo)
+values("kk","11","11","m","222",'2000-01-01',"sgf",22,"RJ","new friburgo", "braunes", "rua", "99",
+"sldijgfslkvhfsio","23974","384327","kjhkjsh",'2000-01-01', "çtgj", "çogj", "O+");
+
+INSERT INTO entrada (id_origem, id_almoxarifado, id_tipo, id_responsavel, data, valor_total)
+	values(1,1,1,1,'2000-01-01', 22.22);
+    
+INSERT INTO ientrada (id_entrada, id_produto, qtd, valor_unitario)
+	values(1,1,4,22.00);
+    
+SELECT * FROM estoque;
