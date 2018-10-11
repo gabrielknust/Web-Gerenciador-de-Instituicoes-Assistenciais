@@ -335,7 +335,7 @@ create table categoria_produto(
 
 create table unidade(
     id_unidade int not null primary key auto_increment,
-    descricao_unidade varchar(240)
+    descricao_unidade varchar(240) not null
 )engine = InnoDB;
 
 create table produto(
@@ -354,7 +354,7 @@ create table produto(
 
 create table almoxarifado(
     id_almoxarifado int not null primary key auto_increment,
-    descricao varchar(240)
+    descricao_almoxarifado varchar(240)
 )engine = InnoDB;
 
 create table estoque(
@@ -550,3 +550,5 @@ INSERT INTO ientrada (id_entrada, id_produto, qtd, valor_unitario)
 	values(1,1,4,22.00);
     
 SELECT * FROM estoque;
+
+SELECT * FROM almoxarifado;

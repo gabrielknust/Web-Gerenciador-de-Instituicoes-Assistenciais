@@ -216,14 +216,16 @@
 								<div class="tab-content">
 									<div id="overview" class="tab-pane active">
 											<fieldset>
-												<form id="formulario" action="#">
+												<form method="post" id="formulario" action="../controle/Control.php">
 												<div class="form-group">
 													<br>
 													<label class="col-md-3 control-label">almoxarifado</label>
 													<div class="col-md-8">
-														<input type="text" class="form-control" name="categoria" id="categoria" >
+														<input type="text" class="form-control" name="descricao_almoxarifado" id="descricao_almoxarifado" >
 													</div>
 												</div><br/>
+												<input type="hidden" name="nomeClasse" value="AlmoxarifadoControle">
+												<input type="hidden" name="metodo" value="incluir">
 												<div class="row">
 													<div class="col-md-9 col-md-offset-3">
 														<button id="enviar" class="btn btn-primary" type="submit">Enviar</button>

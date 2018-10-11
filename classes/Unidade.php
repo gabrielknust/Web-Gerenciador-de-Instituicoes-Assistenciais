@@ -17,9 +17,9 @@ class Unidade
         return $this->id_unidade;
     }
 
-    public function getDescricao_categoria()
+    public function getDescricao_unidade()
     {
-        return $this->descricao_categoria;
+        return $this->descricao_unidade;
     }
 
     public function setId_unidade($id_unidade)
@@ -27,8 +27,8 @@ class Unidade
         $this->id_unidade = $id_unidade;
     }
 
-    public function setDescricao_categoria($descricao_categoria)
+    public function setDescricao_unidade($descricao_unidade)
     {
-        $this->descricao_categoria = $descricao_categoria;
+        $this->descricao_unidade = $descricao_unidade;
     }
 }

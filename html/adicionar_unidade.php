@@ -217,12 +217,12 @@
 								<div class="tab-content">
 									<div id="overview" class="tab-pane active">
 											<fieldset>
-												<form id="formulario" action="#">
+												<form method="post" id="formulario" action="../controle/Control.php">
 												<div class="form-group">
 													<br>
 													<label class="col-md-3 control-label">Unidade</label>
 													<div class="col-md-8">
-														<input type="text" class="form-control" name="unidade" id="unidade" >
+														<input type="text" class="form-control" name="descricao_unidade" id="unidade" >
 													</div>
 												</div><br/>
 												<input type="hidden" name="nomeClasse" value="UnidadeControle">
