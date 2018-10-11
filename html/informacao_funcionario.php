@@ -84,7 +84,7 @@
 			<!-- start: header -->
 			<header class="header">
 				<div class="logo-container">
-					<a href="home.php" class="logo">
+					<a href="home.html" class="logo">
 						<img src="../img/logofinal.png" height="35" alt="Porto Admin" />
 					</a>
 					<div class="visible-xs toggle-sidebar-left" data-toggle-class="sidebar-left-opened" data-target="html" data-fire-event="sidebar-left-opened">
@@ -157,22 +157,22 @@
 										</a>
 										<ul class="nav nav-children">
 											<li>
-												<a href="cadastro_funcionario.php">
+												<a href="cadastro_funcionario.html">
 													 Cadastrar funcionário
 												</a>
 											</li>
 											<li>
-												<a href="cadastro_interno.php">
+												<a href="cadastro_interno.html">
 													 Cadastrar interno
 												</a>
 											</li>
 											<li>
-												<a href="cadastro_voluntario.php">
+												<a href="cadastro_voluntario.html">
 													 Cadastrar voluntário
 												</a>
 											</li>
 											<li>
-												<a href="cadastro_voluntario_judicial.php">
+												<a href="cadastro_voluntario_judicial.html">
 													 Cadastrar voluntário judicial
 												</a>
 											</li>
@@ -182,19 +182,19 @@
 									<li class="nav-parent nav-expanded nav-active">
 										<a>
 											<i class="fa fa-copy" aria-hidden="true"></i>
-											<span>Informação</span>
+											<span>informação</span>
 										</a>
 										<ul class="nav nav-children">
 											<li>
 												<a href="informacao_funcionario.php">
-													 Informações Funcionarios
+													 informações funcionarios
 												</a>
 											</li>
 										</ul>
 										<ul class="nav nav-children">
 											<li>
 												<a href="informacao_interno.php">
-													 Informações Interno
+													 informações interno
 												</a>
 											</li>
 										</ul>
@@ -223,9 +223,6 @@
 						</div>
 					</header>
 
-					<!-- start: page -->
-					
-					</header>
 
 					<!-- start: page -->
 						<section class="panel">
