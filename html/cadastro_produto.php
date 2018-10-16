@@ -192,12 +192,12 @@
 							</ul>
 							<div class="tab-content">
 								<div id="overview" class="tab-pane active">
-									<form id="formulario" action="#">
+									<form id="formulario" action="../controle/Control.php">
 										<fieldset>
 											<div class="form-group"><br>
 												<label class="col-md-3 control-label">Nome do produto</label>
 												<div class="col-md-8">
-													<input type="text" class="form-control" name="produto" id="produto" >
+													<input type="text" class="form-control" name="descricao" id="produto" >
 												</div>
 											</div>
 										
@@ -207,9 +207,9 @@
 													<i class="fas fa-plus w3-xlarge" style="margin-top: 0.75vw"></i>
 												</a>
 												<div class="col-md-6">
-													<select name="categoria" id="categoria" class="form-control input-lg mb-md">
+													<select name="id_categoria" id="id_categoria" class="form-control input-lg mb-md">
 														<option selected disabled value="blank">Selecionar</option>
-														<option value="">Mudar...</option>
+														<option value="1">primeiro</option>
 													</select>
 												</div>	
 											</div>
@@ -218,9 +218,11 @@
 												<label class="col-md-3 control-label" >Unidade</label>
 												<a href="adicionar_unidade.php"><i class="fas fa-plus w3-xlarge" style="margin-top: 0.75vw"></i></a>
 												<div class="col-md-6">
-													<select name="unidade" id="unidade" class="form-control input-lg mb-md">
+													<select name="id_unidade" id="id_unidade" class="form-control input-lg mb-md">
 														<option selected disabled value="blank">Selecionar</option>
-														<option value="">Mudar...</option>
+														<option value="1">Primeiro</option>
+
+														
 													</select>
 												</div>	
 											</div>
@@ -229,13 +231,22 @@
 												<label class="col-md-3 control-label" for="profileCompany">Código</label>
 												<div class="col-md-8">
 													<input type="text" name="codigo" class="form-control" minlength="11" id="profileCompany" id="codigo" >
+
+													<input type="hidden" name="nomeClasse" value="ProdutoControle">
+														
+													<input type="hidden" name="metodo" value="incluir">
 												</div>
 											</div>
 												
 											<div class="form-group">
 												<label class="col-md-3 control-label" for="profileCompany">Valor</label>
 												<div class="col-md-8">
-													<input type="text" name="valor" class="form-control" id="profileCompany" id="valor" maxlength="13" placeholder="Ex: 22.00" onkeypress="return Onlynumbers(event)" >
+													<input type="text" name="preco" class="form-control" id="profileCompany" id="valor" maxlength="13" placeholder="Ex: 22.00" onkeypress="return Onlynumbers(event)" >
+
+													<input type="hidden" name="nomeClasse" value="ProdutoControle">
+														
+													<input type="hidden" name="metodo" value="incluir">
+
 												</div>
 											</div>
 											

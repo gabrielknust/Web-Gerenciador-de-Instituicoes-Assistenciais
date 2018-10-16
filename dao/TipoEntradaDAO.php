@@ -1,53 +1,51 @@
 <?php
-require_once'../classes/Unidade.php';
+require_once'../classes/TipoEntrada.php';
 require_once'Conexao.php';
 require_once'../Functions/funcoes.php';
 
-class UnidadeDAO
+class TipoEntradaDAO
 {
-    public function incluir($unidade_produto)
+    public function incluir($tipo_entrada)
     {        
         try {
         	$pdo = Conexao::connect();
 
-            $sql = 'INSERT unidade(descricao_unidade) VALUES(:descricao_unidade)';
+            $sql = 'INSERT tipo_entrada(descricao) VALUES(:descricao)';
             $sql = str_replace("'", "\'", $sql);            
  
             $stmt = $pdo->prepare($sql);
 
-            $descricao_unidade=$unidade_produto->getDescricao_unidade();
+            $descricao=$tipo_entrada->getDescricao();
 
-            $stmt->bindParam(':descricao_unidade',$descricao_unidade);
+            $stmt->bindParam(':descricao',$descricao);
 
             $stmt->execute();
         }catch (PDOExeption $e) {
-            echo 'Error: <b>  na tabela unidade_produto = ' . $sql . '</b> <br /><br />' . $e->getMessage();
+            echo 'Error: <b>  na tabela tipo_entrada = ' . $sql . '</b> <br /><br />' . $e->getMessage();
         }
     }
-
-    public function listarUm($id_unidade)
+    public function listarUm($id_tipo)
     {
         try{
             $pdo = Conexao::connect();
-            $sql = "SELECT id_unidade, descricao_unidade  FROM unidade WHERE id_unidade = :id_unidade";
+            $sql = "SELECT id_tipo,descricao  FROM tipo_entrada WHERE id_tipo = :id_tipo";
             $consulta = $pdo->prepare($sql);
             $consulta->execute(array(
-                'id_unidade' => $id_unidade,
+                'id_tipo' => $id_tipo,
             ));
             while($linha = $consulta->fetch(PDO::FETCH_ASSOC)){
-                $unidade = new Unidade($linha['descricao_unidade']);
-                $unidade->setId_unidade($linha['id_unidade']);
+                $tipo_entrada = new TipoEntrada($linha['descricao']);
+                $tipo_entrada->setId_tipo($linha['id_tipo']);
             }
         }catch(PDOExeption $e){
             throw $e;
         }
-        return $unidade;
+        return $tipo_entrada;
     }
-
-        public function excluir($id_unidade)
+        public function excluir($id_tipo)
 	    {
 	        try {
-	            $sql = 'DELETE from unidade WHERE id_unidade = :id_unidade';
+	            $sql = 'DELETE from tipo_entrada WHERE id_tipo = :id_tipo';
 	            $sql = str_replace("'", "\'", $sql);
 	            $acesso = new Acesso();
 	            
@@ -56,28 +54,28 @@ class UnidadeDAO
 	            
 	            $stmt = $pdo->prepare($sql);
 	            
-	            $stmt->bindParam(':id_unidade', $id_unidade);
+	            $stmt->bindParam(':id_tipo', $id_tipo);
 	            
 	            $stmt->execute();
 	        } catch (PDOException $e) {
-	            echo 'Error: <b>  na tabela unidade_produto = ' . $sql . '</b> <br /><br />' . $e->getMessage();
+	            echo 'Error: <b>  na tabela tipo_entrada = ' . $sql . '</b> <br /><br />' . $e->getMessage();
 	        }
 	    }
 	    public function listarTodos(){
 
         try{
-            $unidades=array();
+            $tipoentradas=array();
             $pdo = Conexao::connect();
-            $consulta = $pdo->query("SELECT id_unidade, descricao_unidade FROM unidade");
+            $consulta = $pdo->query("SELECT id_tipo, descricao FROM tipo_entrada");
             $x=0;
             while($linha = $consulta->fetch(PDO::FETCH_ASSOC)){
-                $unidades[$x]=array('id_unidade'=>$linha['id_unidade'],'descricao_unidade'=>$linha['descricao_unidade']);
+                $tipoentradas[$x]=array('id_tipo'=>$linha['id_tipo'],'descricao'=>$linha['descricao']);
                 $x++;
             }
             } catch (PDOExeption $e){
                 echo 'Error:' . $e->getMessage;
             }
-            return json_encode($unidades);
+            return json_encode($tipoentradas);
         }
 }
 ?>

@@ -1,4 +1,3 @@
-/*drop schema wegia;*/
 create schema wegia default charset utf8;
 
 use wegia;	
@@ -262,8 +261,6 @@ create table voluntario_judicial_cargo(
     foreign key(id_voluntarioJ) references voluntario_judicial(id_voluntario_judicial)
 )engine = InnoDB;
 
-select * from pessoa;
-select * from interno;
 DELIMITER &&
 
 CREATE  PROCEDURE cadinterno (in nome varchar(100),in cpf varchar(40),in senha varchar(70), in sexo char(1), in telefone varchar(25),in data_nascimento date, 
@@ -330,7 +327,7 @@ DELIMITER ;
 
 create table categoria_produto(
     id_categoria_produto int not null primary key auto_increment,
-    descricao_categoria varchar(240)
+    descricao_categoria varchar(240) not null
 )engine = InnoDB;
 
 create table unidade(
@@ -343,10 +340,9 @@ create table produto(
     id_categoria_produto int not null,
     id_unidade int not null,
     
-    preco decimal(10,2),
     descricao varchar(240),
     codigo varchar(15) unique,
-    valor decimal(10,2),
+    preco decimal(10,2),
     
     foreign key(id_categoria_produto) references categoria_produto(id_categoria_produto),
     foreign key(id_unidade) references unidade(id_unidade)
@@ -354,7 +350,7 @@ create table produto(
 
 create table almoxarifado(
     id_almoxarifado int not null primary key auto_increment,
-    descricao_almoxarifado varchar(240)
+    descricao_almoxarifado varchar(240) not null
 )engine = InnoDB;
 
 create table estoque(
@@ -369,14 +365,15 @@ create table estoque(
 
 create table origem(
     id_origem int not null primary key auto_increment,
-    nome varchar(100),
-    cpf_cnpj varchar(20),
+    nome varchar(100) not null,
+    cnpj varchar(20),
+	cpf varchar(20),
     telefone varchar(33)
 )engine = InnoDB;
 
 create table tipo_entrada(
     id_tipo int not null primary key auto_increment,
-    descricao varchar(120)
+    descricao varchar(120) not null
 )engine = InnoDB;
 
 create table entrada(
@@ -408,14 +405,15 @@ create table ientrada(
 
 create table destino(
     id_destino int not null primary key auto_increment,
-    nome varchar(100),
-    cpf_cnpj varchar(20),
+    nome varchar(100) not null,
+    cnpj varchar(20),
+    cpf varchar(20),
     telefone varchar(33)
 )engine = InnoDB;
 
 create table tipo_saida(
     id_tipo int not null primary key auto_increment,
-    decricao varchar(120)
+    descricao varchar(120) not null
 )engine = InnoDB;
 
 create table saida(
@@ -524,31 +522,5 @@ BEGIN
 END $
 
 DELIMITER ;
-
-INSERT INTO unidade (descricao_unidade)
-	value("lkj");
-INSERT INTO categoria_produto(descricao_categoria)
-	value("seila");
-INSERT INTO produto (id_categoria_produto,id_unidade,descricao,codigo,valor)
-	value(1,1,"legal","329478",10.00);
-
-INSERT INTO tipo_entrada(descricao)
-	value("DOAÇÂO");
-INSERT INTO origem(nome, cpf_cnpj, telefone)
-	value("MERCADO",22222222,222222);
-INSERT INTO almoxarifado(descricao)
-	values("COZINHA");
-insert into pessoa(nome, cpf, senha,sexo, telefone,data_nascimento,imagem, cep ,estado,cidade, bairro, logradouro, numero_endereco,
-complemento,ibge,registro_geral,orgao_emissor,data_expedicao, nome_pai, nome_mae, tipo_sanguineo)
-values("kk","11","11","m","222",'2000-01-01',"sgf",22,"RJ","new friburgo", "braunes", "rua", "99",
-"sldijgfslkvhfsio","23974","384327","kjhkjsh",'2000-01-01', "çtgj", "çogj", "O+");
-
-INSERT INTO entrada (id_origem, id_almoxarifado, id_tipo, id_responsavel, data, valor_total)
-	values(1,1,1,1,'2000-01-01', 22.22);
-    
-INSERT INTO ientrada (id_entrada, id_produto, qtd, valor_unitario)
-	values(1,1,4,22.00);
     
 SELECT * FROM estoque;
-
-SELECT * FROM almoxarifado;

@@ -1,16 +1,15 @@
 <?php
-include_once '../classes/produto.php';
-include_once '../daoprodutoDAO.php';
-include_once '../classesCategoria.php';
+include_once '../classes/Categoria.php';
 include_once '../dao/CategoriaDAO.php';
+include_once '../classes/Unidade.php';
+include_once '../dao/UnidadeDAO.php';
+include_once '../classes/Produto.php';
+include_once '../dao/ProdutoDAO.php';
+
 class ProdutoControle
 {
     public function verificar(){
         extract($_REQUEST);
-        if((!isset($preco)) || empty(($preco))){
-            $msg .= "Preço do produto nÃ£o informado. Por favor, informe um preço!";
-            header('Location: ../html/produto.html?msg='.$msg);
-        }
         if((!isset($descricao)) || empty(($descricao))){
             $msg .= "descricao do produto nÃ£o informado. Por favor, informe um descricao!";
             header('Location: ../html/produto.html?msg='.$msg);
@@ -19,8 +18,14 @@ class ProdutoControle
             $msg .= "Código do produto nÃ£o informado. Por favor, informe o código!";
             header('Location: ../html/produto.html?msg='.$msg);
         }
-        $produto = new produto($preco,$descricao,$codigo);
+        if((!isset($preco)) || empty(($preco))){
+            $msg .= "Preço do produto nÃ£o informado. Por favor, informe um preço!";
+            header('Location: ../html/produto.html?msg='.$msg);
+        }else{
+        $produto = new produto($descricao,$codigo,$preco);
+
         return $produto;
+        }
     }
     public function listarTodos(){
         extract($_REQUEST);
@@ -74,17 +79,27 @@ class ProdutoControle
 
     public function incluir(){
         $produto = $this->verificar();
-        $produtoDAO = new produtoDAO();
+        extract($_REQUEST);
+        $produtoDAO = new ProdutoDAO();
+        $catDAO = new CategoriaDAO();
+        $uniDAO = new UnidadeDAO();
+
+        $categoria = $catDAO->listarUm($id_categoria);
+        $unidade = $uniDAO->listarUm($id_unidade);
         try{
-            $produtoDAO->incluir($produto);
             
+            $produto->set_categoria_produto($categoria);
+            $produto->set_unidade($unidade);
+
+            $produtoDAO->incluir($produto);
+
             session_start();
             $_SESSION['msg']="produto cadastrado com sucesso";
             $_SESSION['proxima']="Cadastrar outro produto";
-            $_SESSION['link']="../html/cadastrar_produto.php";
+            $_SESSION['link']="../html/cadastro_produto.php";
             header("Location: ../html/sucesso.php");
         } catch (PDOException $e){
-            $msg= "NÃ£o foi possÃ­vel registrar o funcionário"."<br>".$e->getMessage();
+            $msg= "Não foi possível registrar o funcionário"."<br>".$e->getMessage();
             echo $msg;
         }
     }

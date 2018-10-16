@@ -1,40 +1,40 @@
 <?php
 include_once '../classes/Categoria.php';
 include_once '../dao/CategoriaDAO.php';
-class UnidadeControle
+class CategoriaControle
 {
     public function verificar(){
         extract($_REQUEST);
-        
         if((!isset($descricao_categoria)) || (empty($descricao_categoria))){
-            $msg .= "Descricao da Unidade não informada. Por favor, informe uma descricao!";
-            header('Location: ../html/unidade.html?msg='.$msg);
+            $msg = "Descricao da Categoria não informada. Por favor, informe uma descricao!";
+            //header('Location: ../html/unidade.html?msg='.$msg);
         }
-        $Unidade = new Unidade($descricao_unidade);
-        return $unidade;
+        else{
+            $categoria = new Categoria($descricao_categoria);
+        }
+        return $categoria;
     }
     public function listarTodos(){
         extract($_REQUEST);
-        $unidadeDAO= new UnidadeDAO();
-        $unidades = $unidadeDAO->listarTodos();
+        $categoriaDAO= new CategoriaDAO();
+        $categorias = $categoriaDAO->listarTodos();
         session_start();
-        $_SESSION['unidades']=$unidades;
+        $_SESSION['categorias']=$categorias;
         header('Location: '.$nextPage);
     }
     
     public function incluir(){
-        $unidade = $this->verificar();
-        $unidadeDAO = new UnidadeDAO();
+        $categoria = $this->verificar();
+        $categoriaDAO = new CategoriaDAO();
         try{
-            $UnidadeDAO->incluir($unidade);
-            echo $unidade->getData_admissao();
+            $categoriaDAO->incluir($categoria);
             session_start();
-            $_SESSION['msg']="Unidade cadastrado com sucesso";
-            $_SESSION['proxima']="Cadastrar outra unidade";
-            $_SESSION['link']="../html/cadastrar_unidade.php";
-            header("Location: ../html/sucesso.php");
+            $_SESSION['msg']="categoria cadastrada com sucesso";
+            $_SESSION['proxima']="Cadastrar outra categoria";
+            $_SESSION['link']="../html/cadastrar_categoria.php";
+            header("Location: ../html/cadastro_produto.php");
         } catch (PDOException $e){
-            $msg= "NÃ£o foi possÃ­vel registrar o funcionário"."<br>".$e->getMessage();
+            $msg= "Não foi possível registrar o funcionário"."<br>".$e->getMessage();
             echo $msg;
         }
     }

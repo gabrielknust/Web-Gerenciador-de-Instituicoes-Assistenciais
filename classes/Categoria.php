@@ -6,19 +6,15 @@ class Categoria
     private $id_categoria_produto;
     private $descricao_categoria;
     
-    public function __construct($descricao_unidade)
-    {
-
+    public function __construct($descricao_categoria){
         $this->descricao_categoria=$descricao_categoria;
-
     }
-
     public function getId_categoria_produto()
     {
         return $this->id_categoria_produto;
     }
 
-    public function getDescricao_categoria()
+    public function getDescricaoCategoria()
     {
         return $this->descricao_categoria;
     }

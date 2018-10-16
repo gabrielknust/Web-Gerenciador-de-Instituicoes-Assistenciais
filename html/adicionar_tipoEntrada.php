@@ -56,7 +56,7 @@
 		<!-- start: header -->
 		<header class="header">
 			<div class="logo-container">
-				<a href="home.html" class="logo">
+				<a href="home.php" class="logo">
 					<img src="../img/logofinal.png" height="35" alt="Porto Admin" />
 				</a>
 				<div class="visible-xs toggle-sidebar-left" data-toggle-class="sidebar-left-opened" data-target="html" data-fire-event="sidebar-left-opened">
@@ -113,7 +113,7 @@
 						<nav id="menu" class="nav-main" role="navigation">
 							<ul class="nav nav-main">
 								<li>
-									<a href="home.html">
+									<a href="home.php">
 										<i class="fa fa-home" aria-hidden="true"></i>
 										<span>Início</span>
 									</a>
@@ -151,8 +151,8 @@
 					</div>
 				</div>
 			</aside>
+			
 			<!-- end: sidebar -->
-
 			<section role="main" class="content-body">
 				<header class="page-header">
 					<h2>Cadastro</h2>
@@ -182,14 +182,15 @@
 								<div class="tab-content">
 									<div id="overview" class="tab-pane active">
 										<fieldset>
-											<form id="formulario" action="#">
+											<form method="post" id="formulario" action="../controle/Control.php">
 												<div class="form-group"><br>
 													<label class="col-md-3 control-label">entrada</label>
 													<div class="col-md-8">
-														<input type="text" class="form-control" name="categoria" id="categoria" >
+														<input type="text" class="form-control" name="descricao" id="tipoentrada" >
 													</div>
 												</div><br/>
-												
+												<input type="hidden" name="nomeClasse" value="TipoEntradaControle">
+												<input type="hidden" name="metodo" value="incluir">
 												<div class="col-md-9 col-md-offset-3">
 													<button id="enviar" class="btn btn-primary" type="submit">Enviar</button>
 													<input type="reset" class="btn btn-default">
