@@ -327,7 +327,7 @@ DELIMITER ;
 
 create table categoria_produto(
     id_categoria_produto int not null primary key auto_increment,
-    descricao_categoria varchar(240)
+    descricao_categoria varchar(240) not null
 )engine = InnoDB;
 
 create table unidade(
@@ -340,10 +340,9 @@ create table produto(
     id_categoria_produto int not null,
     id_unidade int not null,
     
-    preco decimal(10,2),
     descricao varchar(240),
     codigo varchar(15) unique,
-    valor decimal(10,2),
+    preco decimal(10,2),
     
     foreign key(id_categoria_produto) references categoria_produto(id_categoria_produto),
     foreign key(id_unidade) references unidade(id_unidade)
@@ -351,7 +350,7 @@ create table produto(
 
 create table almoxarifado(
     id_almoxarifado int not null primary key auto_increment,
-    descricao_almoxarifado varchar(240)
+    descricao_almoxarifado varchar(240) not null
 )engine = InnoDB;
 
 create table estoque(
@@ -366,7 +365,7 @@ create table estoque(
 
 create table origem(
     id_origem int not null primary key auto_increment,
-    nome varchar(100),
+    nome varchar(100) not null,
     cnpj varchar(20),
 	cpf varchar(20),
     telefone varchar(33)
@@ -374,7 +373,7 @@ create table origem(
 
 create table tipo_entrada(
     id_tipo int not null primary key auto_increment,
-    descricao varchar(120)
+    descricao varchar(120) not null
 )engine = InnoDB;
 
 create table entrada(
@@ -406,7 +405,7 @@ create table ientrada(
 
 create table destino(
     id_destino int not null primary key auto_increment,
-    nome varchar(100),
+    nome varchar(100) not null,
     cnpj varchar(20),
     cpf varchar(20),
     telefone varchar(33)
@@ -414,7 +413,7 @@ create table destino(
 
 create table tipo_saida(
     id_tipo int not null primary key auto_increment,
-    descricao varchar(120)
+    descricao varchar(120) not null
 )engine = InnoDB;
 
 create table saida(
