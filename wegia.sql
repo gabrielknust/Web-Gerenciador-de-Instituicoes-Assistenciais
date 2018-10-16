@@ -1,4 +1,3 @@
-/*drop schema wegia;*/
 create schema wegia default charset utf8;
 
 use wegia;	
@@ -262,8 +261,6 @@ create table voluntario_judicial_cargo(
     foreign key(id_voluntarioJ) references voluntario_judicial(id_voluntario_judicial)
 )engine = InnoDB;
 
-select * from pessoa;
-select * from interno;
 DELIMITER &&
 
 CREATE  PROCEDURE cadinterno (in nome varchar(100),in cpf varchar(40),in senha varchar(70), in sexo char(1), in telefone varchar(25),in data_nascimento date, 
@@ -370,7 +367,8 @@ create table estoque(
 create table origem(
     id_origem int not null primary key auto_increment,
     nome varchar(100),
-    cpf_cnpj varchar(20),
+    cnpj varchar(20),
+	cpf varchar(20),
     telefone varchar(33)
 )engine = InnoDB;
 
@@ -409,13 +407,14 @@ create table ientrada(
 create table destino(
     id_destino int not null primary key auto_increment,
     nome varchar(100),
-    cpf_cnpj varchar(20),
+    cnpj varchar(20),
+    cpf varchar(20),
     telefone varchar(33)
 )engine = InnoDB;
 
 create table tipo_saida(
     id_tipo int not null primary key auto_increment,
-    decricao varchar(120)
+    descricao varchar(120)
 )engine = InnoDB;
 
 create table saida(
@@ -534,9 +533,9 @@ INSERT INTO produto (id_categoria_produto,id_unidade,descricao,codigo,valor)
 
 INSERT INTO tipo_entrada(descricao)
 	value("DOAÇÂO");
-INSERT INTO origem(nome, cpf_cnpj, telefone)
-	value("MERCADO",22222222,222222);
-INSERT INTO almoxarifado(descricao)
+INSERT INTO origem(nome,cnpj,cpf, telefone)
+	value("MERCADO",22222222,2222222222,222222);
+INSERT INTO almoxarifado(descricao_almoxarifado)
 	values("COZINHA");
 insert into pessoa(nome, cpf, senha,sexo, telefone,data_nascimento,imagem, cep ,estado,cidade, bairro, logradouro, numero_endereco,
 complemento,ibge,registro_geral,orgao_emissor,data_expedicao, nome_pai, nome_mae, tipo_sanguineo)
@@ -550,5 +549,3 @@ INSERT INTO ientrada (id_entrada, id_produto, qtd, valor_unitario)
 	values(1,1,4,22.00);
     
 SELECT * FROM estoque;
-
-SELECT * FROM almoxarifado;
