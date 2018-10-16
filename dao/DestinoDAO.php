@@ -30,6 +30,25 @@ class DestinoDAO
             echo 'Error: <b>  na tabela destino = ' . $sql . '</b> <br /><br />' . $e->getMessage();
         }
     }
+    public function listarUm($id_destino)
+    {
+        try{
+            $pdo = Conexao::connect();
+            $sql = "SELECT id_destino, nome, cnpj, cpf, telefone FROM destino WHERE id_destino = :id_destino";
+            $consulta = $pdo->prepare($sql);
+            $consulta->execute(array(
+                'id_destino' => $id_destino,
+            ));
+            while($linha = $consulta->fetch(PDO::FETCH_ASSOC)){
+                $destino new Destino($linha['nome'], $linha['cnpj'], $linha['cpf'],$linha['telefone']);
+                $destino->setId_destino($linha['id_destino']);
+            }
+        }catch(PDOExeption $e){
+            throw $e;
+        }
+        return $destino;
+    }
+
         public function excluir($id_destino)
 	    {
 	        try {

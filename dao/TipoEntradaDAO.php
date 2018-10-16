@@ -24,6 +24,24 @@ class TipoEntradaDAO
             echo 'Error: <b>  na tabela tipo_entrada = ' . $sql . '</b> <br /><br />' . $e->getMessage();
         }
     }
+    public function listarUm($id_tipo)
+    {
+        try{
+            $pdo = Conexao::connect();
+            $sql = "SELECT id_tipo,descricao  FROM tipo_entrada WHERE id_tipo = :id_tipo";
+            $consulta = $pdo->prepare($sql);
+            $consulta->execute(array(
+                'id_tipo' => $id_tipo,
+            ));
+            while($linha = $consulta->fetch(PDO::FETCH_ASSOC)){
+                $tipo_entrada new TipoEntrada($linha['descricao']);
+                $tipo_entrada->setId_tipo($linha['id_tipo']);
+            }
+        }catch(PDOExeption $e){
+            throw $e;
+        }
+        return $tipo_entrada;
+    }
         public function excluir($id_tipo)
 	    {
 	        try {

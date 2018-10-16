@@ -24,6 +24,24 @@ class UnidadeDAO
             echo 'Error: <b>  na tabela unidade_produto = ' . $sql . '</b> <br /><br />' . $e->getMessage();
         }
     }
+    public function listarUm($id_unidade)
+    {
+        try{
+            $pdo = Conexao::connect();
+            $sql = "SELECT id_unidade, descricao_unidade  FROM unidade WHERE id_unidade = :id_unidade";
+            $consulta = $pdo->prepare($sql);
+            $consulta->execute(array(
+                'id_unidade' => $id_unidade,
+            ));
+            while($linha = $consulta->fetch(PDO::FETCH_ASSOC)){
+                $unidade new Unidade($linha['descricao_unidade']);
+                $unidade->setId_unidade($linha['id_unidade']);
+            }
+        }catch(PDOExeption $e){
+            throw $e;
+        }
+        return $unidade;
+    }
         public function excluir($id_unidade)
 	    {
 	        try {

@@ -522,29 +522,5 @@ BEGIN
 END $
 
 DELIMITER ;
-
-INSERT INTO unidade (descricao_unidade)
-	value("lkj");
-INSERT INTO categoria_produto(descricao_categoria)
-	value("seila");
-INSERT INTO produto (id_categoria_produto,id_unidade,descricao,codigo,valor)
-	value(1,1,"legal","329478",10.00);
-
-INSERT INTO tipo_entrada(descricao)
-	value("DOAÇÂO");
-INSERT INTO origem(nome,cnpj,cpf, telefone)
-	value("MERCADO",22222222,2222222222,222222);
-INSERT INTO almoxarifado(descricao_almoxarifado)
-	values("COZINHA");
-insert into pessoa(nome, cpf, senha,sexo, telefone,data_nascimento,imagem, cep ,estado,cidade, bairro, logradouro, numero_endereco,
-complemento,ibge,registro_geral,orgao_emissor,data_expedicao, nome_pai, nome_mae, tipo_sanguineo)
-values("kk","11","11","m","222",'2000-01-01',"sgf",22,"RJ","new friburgo", "braunes", "rua", "99",
-"sldijgfslkvhfsio","23974","384327","kjhkjsh",'2000-01-01', "çtgj", "çogj", "O+");
-
-INSERT INTO entrada (id_origem, id_almoxarifado, id_tipo, id_responsavel, data, valor_total)
-	values(1,1,1,1,'2000-01-01', 22.22);
-    
-INSERT INTO ientrada (id_entrada, id_produto, qtd, valor_unitario)
-	values(1,1,4,22.00);
     
 SELECT * FROM estoque;
