@@ -84,7 +84,7 @@
 			<!-- start: header -->
 			<header class="header">
 				<div class="logo-container">
-					<a href="home.html" class="logo">
+					<a href="home.php" class="logo">
 						<img src="../img/logofinal.png" height="35" alt="Porto Admin" />
 					</a>
 					<div class="visible-xs toggle-sidebar-left" data-toggle-class="sidebar-left-opened" data-target="html" data-fire-event="sidebar-left-opened">
@@ -157,22 +157,22 @@
 										</a>
 										<ul class="nav nav-children">
 											<li>
-												<a href="cadastro_funcionario.html">
+												<a href="cadastro_funcionario.php">
 													 Cadastrar funcionário
 												</a>
 											</li>
 											<li>
-												<a href="cadastro_interno.html">
+												<a href="cadastro_interno.php">
 													 Cadastrar interno
 												</a>
 											</li>
 											<li>
-												<a href="cadastro_voluntario.html">
+												<a href="cadastro_voluntario.php">
 													 Cadastrar voluntário
 												</a>
 											</li>
 											<li>
-												<a href="cadastro_voluntario_judicial.html">
+												<a href="cadastro_voluntario_judicial.php">
 													 Cadastrar voluntário judicial
 												</a>
 											</li>
@@ -182,19 +182,19 @@
 									<li class="nav-parent nav-expanded nav-active">
 										<a>
 											<i class="fa fa-copy" aria-hidden="true"></i>
-											<span>informação</span>
+											<span>Informação</span>
 										</a>
 										<ul class="nav nav-children">
 											<li>
 												<a href="informacao_funcionario.php">
-													 informações funcionarios
+													 Informações Funcionarios
 												</a>
 											</li>
 										</ul>
 										<ul class="nav nav-children">
 											<li>
 												<a href="informacao_interno.php">
-													 informações interno
+													 Informações Interno
 												</a>
 											</li>
 										</ul>
@@ -223,8 +223,8 @@
 						</div>
 					</header>
 
-
 					<!-- start: page -->
+					
 						<section class="panel">
 							<header class="panel-heading">
 								<div class="panel-actions">
