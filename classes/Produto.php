@@ -22,12 +22,12 @@ public function getId_produto()
         return $this->id_produto;
     }
 
-public function getId_categoria_produto()
+public function get_categoria_produto()
     {
         return $this->id_categoria_produto;
     }
 
-public function getId_unidade()
+public function get_unidade()
     {
         return $this->id_unidade;
     }
@@ -52,12 +52,12 @@ public function setId_produto($id_produto)
         $this->id_produto = $id_produto;
     }
 
-public function setId_categoria_produto($id_categoria_produto)
+public function set_categoria_produto($id_categoria_produto)
     {
         $this->id_categoria_produto = $id_categoria_produto;
     }
 
-public function setId_unidade($id_unidade)
+public function set_unidade($id_unidade)
     {
         $this->id_unidade = $id_unidade;
     }

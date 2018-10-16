@@ -23,6 +23,26 @@ class CategoriaDAO
             }
         }
 
+        public function listarUm($id)
+        {
+             try {
+                $pdo = Conexao::connect();
+                $sql = "SELECT id_categoria_produto, descricao_categoria  FROM categoria_produto where id_categoria_produto = :id";
+                $consulta = $pdo->prepare($sql);
+                $consulta->execute(array(
+                ':id' => $id,
+            ));
+            while ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) {
+                $categoria = new Categoria($linha['descricao_categoria']);
+                $categoria->setId_categoria_produto($linha['id_categoria_produto']);
+
+            }
+            } catch (PDOException $e) {
+                throw $e;
+            }
+            return $categoria;
+        }
+
         public function excluir($id_categoria)
     	    {
     	        try {

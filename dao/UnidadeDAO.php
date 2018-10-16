@@ -24,6 +24,7 @@ class UnidadeDAO
             echo 'Error: <b>  na tabela unidade_produto = ' . $sql . '</b> <br /><br />' . $e->getMessage();
         }
     }
+
     public function listarUm($id_unidade)
     {
         try{
@@ -42,6 +43,7 @@ class UnidadeDAO
         }
         return $unidade;
     }
+
         public function excluir($id_unidade)
 	    {
 	        try {

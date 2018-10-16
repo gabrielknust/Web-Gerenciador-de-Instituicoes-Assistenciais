@@ -14,11 +14,11 @@ class ProdutoDAO
 	            
 	            $stmt = $pdo->prepare($sql);
 
-	            $id_categoria_produto=$id_categoria_produto->getId_categoria_produto()->getId_categoria_produto();
-	            $id_unidade=$id_unidade->getId_unidade()->getId_unidade();
-	            $descricao=$descricao->getDescricao();
-	            $codigo=$codigo->getCodigo();
-	            $preco=$preco->getPreco();
+	            $id_categoria_produto = $produto->get_categoria_produto()->getId_categoria_produto();
+	            $id_unidade=$produto->get_unidade()->getId_unidade();
+	            $descricao=$produto->getDescricao();
+	            $codigo=$produto->getCodigo();
+	            $preco=$produto->getPreco();
 
 	            $stmt->bindParam(':id_categoria_produto',$id_categoria_produto);
 	            $stmt->bindParam(':id_unidade',$id_unidade);	            
