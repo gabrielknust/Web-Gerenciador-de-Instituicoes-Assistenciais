@@ -40,7 +40,7 @@ class OrigemDAO
                 'id_origem' => $id_origem,
             ));
             while($linha = $consulta->fetch(PDO::FETCH_ASSOC)){
-                $origem new Origem($linha['nome'], $linha['cnpj'], $linha['cpf'],$linha['telefone']);
+                $origem = new Origem($linha['nome'], $linha['cnpj'], $linha['cpf'],$linha['telefone']);
                 $origem->setId_origem($linha['id_origem']);
             }
         }catch(PDOExeption $e){

@@ -34,7 +34,7 @@ class TipoSaidaDAO
                 'id_tipo' => $id_tipo,
             ));
             while($linha = $consulta->fetch(PDO::FETCH_ASSOC)){
-                $tipo_saida new TipoSaida($linha['descricao']);
+                $tipo_saida = new TipoSaida($linha['descricao']);
                 $tipo_saida->setId_tipo($linha['id_tipo']);
             }
         }catch(PDOExeption $e){

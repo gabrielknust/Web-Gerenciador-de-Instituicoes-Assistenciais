@@ -40,7 +40,7 @@ class DestinoDAO
                 'id_destino' => $id_destino,
             ));
             while($linha = $consulta->fetch(PDO::FETCH_ASSOC)){
-                $destino new Destino($linha['nome'], $linha['cnpj'], $linha['cpf'],$linha['telefone']);
+                $destino = new Destino($linha['nome'], $linha['cnpj'], $linha['cpf'],$linha['telefone']);
                 $destino->setId_destino($linha['id_destino']);
             }
         }catch(PDOExeption $e){

@@ -34,7 +34,7 @@ class AlmoxarifadoDAO
                 'id_almoxarifado' => $id_almoxarifado,
             ));
             while($linha = $consulta->fetch(PDO::FETCH_ASSOC)){
-                $almoxarifado new Almoxarifado($linha['descricao_almoxarifado']);
+                $almoxarifado = new Almoxarifado($linha['descricao_almoxarifado']);
                 $almoxarifado->setId_almoxarifado($linha['id_almoxarifado']);
             }
         }catch(PDOExeption $e){

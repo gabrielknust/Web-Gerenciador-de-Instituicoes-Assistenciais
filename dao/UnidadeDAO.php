@@ -34,7 +34,7 @@ class UnidadeDAO
                 'id_unidade' => $id_unidade,
             ));
             while($linha = $consulta->fetch(PDO::FETCH_ASSOC)){
-                $unidade new Unidade($linha['descricao_unidade']);
+                $unidade = new Unidade($linha['descricao_unidade']);
                 $unidade->setId_unidade($linha['id_unidade']);
             }
         }catch(PDOExeption $e){
