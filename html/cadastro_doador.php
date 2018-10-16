@@ -37,7 +37,7 @@
 			<!-- start: header -->
 		<header class="header">
 			<div class="logo-container">
-				<a href="home.html" class="logo">
+				<a href="home.php" class="logo">
 						<img src="../img/logofinal.png" height="35" alt="Porto Admin" />
 				</a>
 				<div class="visible-xs toggle-sidebar-left" data-toggle-class="sidebar-left-opened" data-target="html" data-fire-event="sidebar-left-opened">
@@ -95,7 +95,7 @@
 						<nav id="menu" class="nav-main" role="navigation">
 							<ul class="nav nav-main">
 								<li>
-									<a href="home.html">
+									<a href="home.php">
 										<i class="fa fa-home" aria-hidden="true"></i>
 										<span>Início</span>
 									</a>
@@ -142,7 +142,7 @@
 					<div class="right-wrapper pull-right">
 						<ol class="breadcrumbs">
 							<li>
-								<a href="home.html">
+								<a href="home.php">
 									<i class="fa fa-home"></i>
 								</a>
 							</li>
@@ -167,7 +167,7 @@
 							<div class="tab-content">
 								<div id="overview" class="tab-pane active">
 									<form class="form-horizontal" method="post" action="../controle/control.php">
-										<input type="hidden" name="nomeClasse" value="FuncionarioControle">
+										<input type="hidden" name="nomeClasse" value="OrigemControle">
 										<input type="hidden" name="metodo" value="incluir">
 										<fieldset>
 											<h4 class="mb-xlg">Doador</h4>
@@ -178,15 +178,15 @@
 												</div>
 											</div>
 											<div class="form-group">
-												<label class="col-md-3 control-label" for="profileCompany">Número do CPF</label>
+												<label class="col-md-3 control-label" for="profileCompany">Número do CNPJ</label>
 												<div class="col-md-6">
-													<input type="text" class="form-control" id="cpf" name="cpf" placeholder="Ex: 222.222.222-22" maxlength="14" onkeypress="return Onlynumbers(event)" onkeyup="mascara('###.###.###-##',this,event)" required>
+													<input type="text" class="form-control" id="cnpj" name="cnpj" placeholder="Ex: 14.732.231/0001-02" maxlength="18" onkeypress="return Onlynumbers(event)" onkeyup="mascara('##.###.###/####-##',this,event)">
 												</div>														
 											</div>
 											<div class="form-group">
-												<label class="col-md-3 control-label" for="profileCompany">Número do CNPJ</label>
+												<label class="col-md-3 control-label" for="profileCompany">Número do CPF</label>
 												<div class="col-md-6">
-													<input type="text" class="form-control" id="cnpj" name="cnpj" placeholder="Ex: 14.732.231/0001-02" maxlength="18" onkeypress="return Onlynumbers(event)" onkeyup="mascara('##.###.###/####-##',this,event)" required>
+													<input type="text" class="form-control" id="cpf" name="cpf" placeholder="Ex: 222.222.222-22" maxlength="14" onkeypress="return Onlynumbers(event)" onkeyup="mascara('###.###.###-##',this,event)">
 												</div>														
 											</div>
 											<div class="form-group">
@@ -195,6 +195,8 @@
 													<input type="text" class="form-control" minlength="12" name="telefone" id="telefone" id="profileCompany" placeholder="Ex: (22)999999999" onkeypress="return Onlynumbers(event)" onkeyup="mascara('(##)############',this,event)" required>
 												</div>
 											</div>
+												<input type="hidden" name="nomeClasse" value="OrigemControle">
+												<input type="hidden" name="metodo" value="incluir">
 											<div class="row">
 												<div class="col-md-9 col-md-offset-3">
 													<input type="submit" class="btn btn-primary" onclick="return enviar_dados()">
@@ -216,7 +218,6 @@
 					<!-- end: page -->
 			</section>
 		</div>
-
 		<aside id="sidebar-right" class="sidebar-right">
 			<div class="nano">
 				<div class="nano-content">
