@@ -87,11 +87,7 @@
 
 				return {
 					init: function() {
-						var inputs = document.getElementsByClassName('light-table-filter');
 						var selects = document.getElementsByClassName('select-table-filter');
-						Arr.forEach.call(inputs, function(input) {
-							input.oninput = _onInputEvent;
-						});
 						Arr.forEach.call(selects, function(select) {
 		        			select.onchange  = _onSelectEvent;
 						});
@@ -105,16 +101,26 @@
 				}
 			});
 		})(document);
-
-		/*imprimir*/
-		      function printDiv() {
-         window.frames["print_frame"].document.body.innerHTML = document.getElementById("datatable-default").innerHTML;
-         window.frames["print_frame"].window.focus();
-         window.frames["print_frame"].window.print();
-       }
-		
 	</script>
-	
+	<style type="text/css">
+		.table{
+			z-index: 0;
+		}
+		.text-right{
+			z-index: 1;
+		}
+		.select{
+			z-index: 2;
+			float: left;
+			position: absolute;
+			width: 235px;
+		}
+		.select-table-filter{
+			width: 140px;
+			float: left;
+		}
+
+	</style>
 </head>
 <body>
 	<section class="body">
@@ -162,7 +168,6 @@
 			<!-- end: search & user box -->
 		</header>
 		<!-- end: header -->
-
 		<div class="inner-wrapper">
 			<!-- start: sidebar -->
 			<aside id="sidebar-left" class="sidebar-left">
@@ -240,7 +245,6 @@
 					</div>
 				</div>
 			</aside>
-				
 			<!-- end: sidebar -->
 			<section role="main" class="content-body">
 				<header class="page-header">
@@ -258,21 +262,21 @@
 					</div>
 				</header>
 				<!-- start: page -->
-				<section class="panel">
+				<section class="panel" >
 					<header class="panel-heading">
-						<div class="panel-actions">
-							<a href="#" class="fa fa-caret-down"></a>
-						</div>
 						<h2 class="panel-title">Estoque</h2>
 					</header>
-					<div class="panel-body">
-						<select type="search" class="select-table-filter  form-group" data-table="order-table">
-							<option value="">mostrar tudo</option>  
-							<option value="cozinha">cozinha</option>  
-							<option value="farmacia">farmacia</option>  
-  						<select><br><br>
-  						<button class="Button Button--outline" onclick="printDiv()">Print</button>
-						<table class="table order-table" id="datatable-default"  >
+					<div class="panel-body" >
+						<div class="select" >
+							<select class="select-table-filter form-control mb-md" data-table="order-table">
+								<option value="">mostrar tudo</option>  
+								<option value="cozinha">cozinha</option>  
+								<option value="farmacia">farmacia</option>  
+		  					</select>
+		  					<h5 style="float: right;">Almoxarifado</h5>
+	  					</div>
+		  				
+  						<table class="table order-table" id="datatable-tabletools"  >
 							<thead>
 								<tr>
 									<th>codigo</th>
@@ -301,14 +305,13 @@
 									<th>farmacia</th>
 								</tr>
 							</tbody>
-							 <iframe name="print_frame" width="0" height="0" frameborder="0" src="about:blank"></iframe>
 						</table>
 					</div>
-				
-
-					
 				</section>
-				<!-- end: page -->
+			</section>
+		</div>
+	</section>
+	<!-- end: page -->
 
 	<!-- Vendor -->
 	<script src="../assets/vendor/jquery/jquery.js"></script>
@@ -334,12 +337,9 @@
 	<!-- Theme Initialization Files -->
 	<script src="../assets/javascripts/theme.init.js"></script>
 
-	<!-- Examples -->
+	<!-- Examples no remove-->
 	<script src="../assets/javascripts/tables/examples.datatables.default.js"></script>
 	<script src="../assets/javascripts/tables/examples.datatables.row.with.details.js"></script>
 	<script src="../assets/javascripts/tables/examples.datatables.tabletools.js"></script>
 </body>
 </html>
-
-
-										
