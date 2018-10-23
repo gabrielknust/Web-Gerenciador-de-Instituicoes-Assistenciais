@@ -19,7 +19,7 @@ class UnidadeControle
         $unidadeDAO= new UnidadeDAO();
         $unidades = $unidadeDAO->listarTodos();
         session_start();
-        $_SESSION['unidades']=$unidades;
+        $_SESSION['unidade']=$unidades;
         header('Location: '.$nextPage);
     }
     

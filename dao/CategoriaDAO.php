@@ -67,10 +67,10 @@ class CategoriaDAO
             try{
                 $categorias=array();
                 $pdo = Conexao::connect();
-                $consulta = $pdo->query("SELECT id_categoria, descricao_categoria FROM categoria_produto");
+                $consulta = $pdo->query("SELECT id_categoria_produto, descricao_categoria FROM categoria_produto");
                 $x=0;
                 while($linha = $consulta->fetch(PDO::FETCH_ASSOC)){
-                    $categorias[$x]=array('id_categoria'=>$linha['id_categoria'],'descricao_categoria'=>$linha['descricao_categoria']);
+                    $categorias[$x]=array('id_categoria_produto'=>$linha['id_categoria_produto'],'descricao_categoria'=>$linha['descricao_categoria']);
                     $x++;
                 }
                 } catch (PDOExeption $e){

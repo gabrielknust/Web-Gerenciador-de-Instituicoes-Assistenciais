@@ -19,7 +19,7 @@ class CategoriaControle
         $categoriaDAO= new CategoriaDAO();
         $categorias = $categoriaDAO->listarTodos();
         session_start();
-        $_SESSION['categorias']=$categorias;
+        $_SESSION['categoria']=$categorias;
         header('Location: '.$nextPage);
     }
     

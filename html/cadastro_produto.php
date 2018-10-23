@@ -1,5 +1,31 @@
 <!doctype html>
 <html class="fixed">
+<?php session_start(); 
+	include_once '../dao/Conexao.php';
+	include_once '../dao/CategoriaDAO.php';
+	include_once '../dao/UnidadeDAO.php';
+	
+
+	if (!isset($_SESSION['unidade'])) {
+		header('Location: ../controle/control.php?metodo=listarTodos&nomeClasse=UnidadeControle&nextPage=../html/cadastro_produto.php');
+		//header('Location: ../controle/control.php?metodo=listarTodos&nomeClasse=CategoriaControle&nextPage=../html/cadastro_produto.php&unidade=');
+	}
+	if(!isset($_SESSION['categoria'])){
+		header('Location: ../controle/control.php?metodo=listarTodos&nomeClasse=CategoriaControle&nextPage=../html/cadastro_produto.php');	
+	}
+	if(isset($_SESSION['categoria']) && isset($_SESSION['unidade'])){
+		$unidade = $_SESSION['unidade'];
+		$categoria = $_SESSION['categoria'];
+		session_destroy();
+		echo '<br>' . $unidade;
+	}
+	/*if (!isset($_SESSION['unidade'])) {
+		header('Location: ../controle/control.php?metodo=listarTodos&nomeClasse=UnidadeControle&nextPage=../html/cadastro_produto.php');
+	}
+	else {
+
+	}*/
+?>
 <head>
 	<!-- Basic -->
 	<meta charset="UTF-8">
@@ -42,11 +68,9 @@
 	<script src="../assets/vendor/jquery-placeholder/jquery.placeholder.js"></script>
 		
 	<!-- Specific Page Vendor -->
-	<script src="../assets/vendor/jquery-autosize/jquery.autosize.js"></script>
-		
+	<script src="../assets/vendor/jquery-autosize/jquery.autosize.js"></script>	
 	<!-- Theme Base, Components and Settings -->
-	<script src="../assets/javascripts/theme.js"></script>
-		
+	<script src="../assets/javascripts/theme.js"></script>	
 	<!-- Theme Custom -->
 	<script src="../assets/javascripts/theme.custom.js"></script>
 	
@@ -59,7 +83,30 @@
 	<script	src="../Functions/mascara.js"></script>
 
 	<!-- jquery functions -->
-		
+	<script>
+		$(function(){
+			console.log(<?php echo $categoria; ?>);
+			var categoria = <?php 
+				echo $categoria;
+			?>;
+			var unidade = <?php 
+				echo $unidade; 
+			?>;
+
+			$.each(categoria,function(i,item){
+
+				$('#id_categoria').append('<option value="' + item.id_categoria_produto + '">' + item.descricao_categoria + '</option>');
+
+			})
+
+			$.each(unidade,function(i,item){
+
+				$('#id_unidade').append('<option value="' + item.id_unidade + '">' + item.descricao_unidade + '</option>');
+
+			})
+
+		});
+	</script>
 </head>
 <body>
 	<section class="body">
@@ -209,7 +256,6 @@
 												<div class="col-md-6">
 													<select name="id_categoria" id="id_categoria" class="form-control input-lg mb-md">
 														<option selected disabled value="blank">Selecionar</option>
-														<option value="1">primeiro</option>
 													</select>
 												</div>	
 											</div>
@@ -220,7 +266,6 @@
 												<div class="col-md-6">
 													<select name="id_unidade" id="id_unidade" class="form-control input-lg mb-md">
 														<option selected disabled value="blank">Selecionar</option>
-														<option value="1">Primeiro</option>
 
 														
 													</select>
@@ -302,6 +347,7 @@
 	
 	<!-- Theme Initialization Files -->
 	<script src="../assets/javascripts/theme.init.js"></script>
-		
+
+
 </body>
 </html>
