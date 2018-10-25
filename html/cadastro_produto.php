@@ -8,7 +8,6 @@
 
 	if (!isset($_SESSION['unidade'])) {
 		header('Location: ../controle/control.php?metodo=listarTodos&nomeClasse=UnidadeControle&nextPage=../html/cadastro_produto.php');
-		//header('Location: ../controle/control.php?metodo=listarTodos&nomeClasse=CategoriaControle&nextPage=../html/cadastro_produto.php&unidade=');
 	}
 	if(!isset($_SESSION['categoria'])){
 		header('Location: ../controle/control.php?metodo=listarTodos&nomeClasse=CategoriaControle&nextPage=../html/cadastro_produto.php');	
@@ -17,14 +16,7 @@
 		$unidade = $_SESSION['unidade'];
 		$categoria = $_SESSION['categoria'];
 		session_destroy();
-		echo '<br>' . $unidade;
 	}
-	/*if (!isset($_SESSION['unidade'])) {
-		header('Location: ../controle/control.php?metodo=listarTodos&nomeClasse=UnidadeControle&nextPage=../html/cadastro_produto.php');
-	}
-	else {
-
-	}*/
 ?>
 <head>
 	<!-- Basic -->
@@ -85,7 +77,6 @@
 	<!-- jquery functions -->
 	<script>
 		$(function(){
-			console.log(<?php echo $categoria; ?>);
 			var categoria = <?php 
 				echo $categoria;
 			?>;

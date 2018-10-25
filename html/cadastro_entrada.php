@@ -1,6 +1,25 @@
 <!doctype html>
 <html class="fixed">
 <head>
+<?php session_start(); 
+
+	include_once '../dao/Conexao.php';
+	include_once '../dao/AlmoxarifadoDAO.php';
+	include_once '../dao/TipoEntradaDAO.php';
+	
+
+	if (!isset($_SESSION['almoxarifado'])) {
+		header('Location: ../controle/control.php?metodo=listarTodos&nomeClasse=AlmoxarifadoControle&nextPage=../html/cadastro_entrada.php');
+	}
+	if(!isset($_SESSION['tipo_entrada'])){
+		header('Location: ../controle/control.php?metodo=listarTodos&nomeClasse=TipoEntradaControle&nextPage=../html/cadastro_entrada.php');	
+	}
+	if(isset($_SESSION['almoxarifado']) /*&& isset($_SESSION['tipo_entrada'])*/){
+		$almoxarifado = $_SESSION['almoxarifado'];
+		$tipo_entrada = $_SESSION['tipo_entrada'];
+		session_destroy();
+	}
+?>
 	<!-- Basic -->
 	<meta charset="UTF-8">
 
@@ -12,7 +31,6 @@
 	<!-- Vendor CSS -->
 	<link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.css" />
 	<link rel="stylesheet" href="../assets/vendor/font-awesome/css/font-awesome.css" />
-	<link rel="stylesheet" href="../assets/vendor/fontawesome/svg-with-js/css/fa-svg-with-js.css" />
 	<link rel="stylesheet" href="../assets/vendor/magnific-popup/magnific-popup.css" />
 	<link rel="stylesheet" href="../assets/vendor/bootstrap-datepicker/css/datepicker3.css" />
 	<link rel="icon" href="../img/logofinal.png" type="image/x-icon">
@@ -30,8 +48,33 @@
 	<!-- Head Libs -->
 	<script src="../assets/vendor/modernizr/modernizr.js"></script>
 
-	<!-- Javascript functions -->
-			
+	<!-- Jquery functions -->
+	<script src="../assets/vendor/jquery/jquery.js"></script>
+	<script src="../assets/vendor/jquery/jquery.min.js"></script>
+	<script>
+		$(function(){
+
+			var almoxarifado = <?php 
+				echo $almoxarifado;
+			?>;
+			var tipo_entrada = <?php 
+				echo $tipo_entrada; 
+			?>;
+
+			$.each(almoxarifado,function(i,item){
+
+				$('#almoxarifado').append('<option value="' + item.id_almoxarifado + '">' + item.descricao_almoxarifado + '</option>');
+
+			})
+
+			$.each(tipo_entrada,function(i,item){
+
+				$('#tipo_entrada').append('<option value="' + item.id_tipo + '">' + item.descricao + '</option>');
+
+			})
+
+		});
+	</script>
 </head>
 <body>
 	<section class="body">
@@ -166,20 +209,19 @@
 
 												<div class="form-group">
 													<label class="col-md-3 control-label" >Almoxarifado</label>
-													<div class="col-md-8">
-														<input type="text" class="form-control" name="almox" id="almox">
+													<div class="col-md-6">
+														<select class="form-control " name="almoxarifado" id="almoxarifado">
+															<option selected disabled>Selecionar</option>
+														</select>
 													</div>
-													<a href="adicionar_almozarifado.php"><i class="fas fa-plus w3-xlarge"></i></a>
+													<a href="adicionar_almoxarifado.php"><i class="fas fa-plus w3-xlarge"></i></a>
 												</div>
 
 												<div class="form-group">
 													<label class="col-md-3 control-label" >Tipo</label>
 													<div class="col-md-6">
-														<select class="form-control " name="tipo" id="tipo">
+														<select class="form-control " name="tipo_entrada" id="tipo_entrada">
 															<option selected disabled>Selecionar</option>
-															<option value="doacao">doacao</option>
-															<option value="compra">compra</option>
-															<option value="troca">troca</option>
 														</select>
 													</div>
 													<a href="adicionar_tipoEntrada.php"><i class="fas fa-plus w3-xlarge"></i></a>
@@ -272,7 +314,6 @@
 	</section>
 
 	<!-- Vendor -->
-	<script src="../assets/vendor/jquery/jquery.js"></script>
 	<script src="../assets/vendor/jquery-browser-mobile/jquery.browser.mobile.js"></script>
 	<script src="../assets/vendor/bootstrap/js/bootstrap.js"></script>
 	<script src="../assets/vendor/nanoscroller/nanoscroller.js"></script>

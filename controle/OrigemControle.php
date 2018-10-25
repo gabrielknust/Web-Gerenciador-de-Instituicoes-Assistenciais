@@ -35,8 +35,8 @@ class OrigemControle
         $origemDAO= new OrigemDAO();
         $origens = $origemDAO->listarTodos();
         session_start();
-        $_SESSION['origens']=$origens;
-        header('Location: '.$nextPage);
+        $_SESSION['origem']=$origens;
+        header('Location: ../html/cadastro_entrada.php');
     }
     
     public function incluir(){

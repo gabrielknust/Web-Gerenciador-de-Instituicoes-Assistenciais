@@ -19,7 +19,7 @@ class AlmoxarifadoControle
         $almoxarifadoDAO= new AlmoxarifadoDAO();
         $almoxarifados = $almoxarifadoDAO->listarTodos();
         session_start();
-        $_SESSION['almoxarifados']=$almoxarifados;
+        $_SESSION['almoxarifado']=$almoxarifados;
         header('Location: '.$nextPage);
     }
     
@@ -32,7 +32,7 @@ class AlmoxarifadoControle
             $_SESSION['msg']="Almoxarifado cadastrado com sucesso";
             $_SESSION['proxima']="Cadastrar outro almoxarifado";
             $_SESSION['link']="../html/adicionar_almoxarifado.php";
-            header("Location: ../html/cadastro_produto.php");
+            header("Location: ../html/cadastro_entrada.php");
         } catch (PDOException $e){
             $msg= "NÃ£o foi possÃ­vel registrar o funcionário"."<br>".$e->getMessage();
             echo $msg;

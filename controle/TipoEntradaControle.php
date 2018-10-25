@@ -20,8 +20,8 @@ class TipoEntradaControle
         $tipoentradaDAO= new TipoEntradaDAO();
         $tipoentradas = $tipoentradaDAO->listarTodos();
         session_start();
-        $_SESSION['tipoentradas']=$esntradas;
-        header('Location: '.$nextPage);
+        $_SESSION['tipo_entrada']=$tipoentradas;
+        header('Location: ../html/cadastro_entrada.php');
     }
     
     public function incluir(){
@@ -33,7 +33,7 @@ class TipoEntradaControle
             $_SESSION['msg']="TipoEntrada cadastrado com sucesso";
             $_SESSION['proxima']="Cadastrar outro TipoEntrada";
             $_SESSION['link']="../html/adicionar_tipoEntrada.php";
-            header("Location: ../html/cadastro_produto.php");
+            header("Location: ../html/cadastro_entrada.php");
         } catch (PDOException $e){
             $msg= "NÃ£o foi possÃ­vel registrar o tipo"."<br>".$e->getMessage();
             echo $msg;
