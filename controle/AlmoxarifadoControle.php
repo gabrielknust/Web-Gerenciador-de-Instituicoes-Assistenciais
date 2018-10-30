@@ -34,7 +34,7 @@ class AlmoxarifadoControle
             $_SESSION['link']="../html/adicionar_almoxarifado.php";
             header("Location: ../html/cadastro_entrada.php");
         } catch (PDOException $e){
-            $msg= "NÃ£o foi possÃ­vel registrar o funcionário"."<br>".$e->getMessage();
+            $msg= "NÃ£o foi possÃ­vel registrar o almoxarifado"."<br>".$e->getMessage();
             echo $msg;
         }
     }
