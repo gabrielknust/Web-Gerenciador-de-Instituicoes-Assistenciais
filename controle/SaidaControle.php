@@ -5,52 +5,39 @@ class SaidaControle
 {
     public function verificar(){
         extract($_REQUEST);
-        
-        if((!isset($destino)) || (empty($destino))){
-            $msg .= "Descricao da destino nÃ£o informada. Por favor, informe uma destino!";
-            header('Location: ../html/saida.html?msg='.$msg);
-        }
-        if((!isset($almoxarifado)) || (empty($almoxarifado))){
-            $msg .= "Descricao da almoxarifado nÃ£o informada. Por favor, informe uma almoxarifado!";
-            header('Location: ../html/saida.html?msg='.$msg);
-        }
-        if((!isset($tipo)) || (empty($tipo))){
-            $msg .= "Descricao da tipo nÃ£o informada. Por favor, informe uma tipo!";
-            header('Location: ../html/saida.html?msg='.$msg);
-        }
-        if((!isset($responsavel)) || (empty($responsavel))){
-            $msg .= "Descricao da responsavel nÃ£o informada. Por favor, informe uma responsavel!";
-            header('Location: ../html/saida.html?msg='.$msg);
-        }
-        if((!isset($data)) || (empty($data))){
-            $msg .= "Descricao da data nÃ£o informada. Por favor, informe uma data!";
-            header('Location: ../html/saida.html?msg='.$msg);
-        }
-        if((!isset($hora)) || (empty($hora))){
-            $msg .= "Descricao da hora nÃ£o informada. Por favor, informe uma hora!";
-            header('Location: ../html/saida.html?msg='.$msg);
-        }
-        if((!isset($valor_total)) || (empty($valor_total))){
-            $msg .= "Descricao da valor_total nÃ£o informada. Por favor, informe uma valor_total!";
-            header('Location: ../html/saida.html?msg='.$msg);
-        }
-        else{
-            $saida = new Saida($data,$hora,$valor_total);
-            $saida->setId_destino($destino);
-            $saida->setId_almoxarifado($almoxarifado);
-            $saida->setId_tipo($tipo);
-            $saida->setId_responsavel($responsavel);
 
+        if((!isset($nome)) || (empty($nome))){
+            $msg = "Nome do saida nÃ£o informado. Por favor, informe um nome!";
+            header('Location: ../html/saida.html?msg='.$msg);
         }
+        if((!isset($cnpj)) || (empty($cnpj))){
+            $calcado='null';
+        }
+        if((!isset($cpf)) || (empty($cpf))){
+            $calca='null';
+        }
+        if((!isset($telefone)) || (empty($telefone))){
+            $msg .= "Telefone do saida nÃ£o informado. Por favor, informe um telefone!";
+            header('Location: ../html/saida.html?msg='.$msg);
+        }
+
+        $saida = new Saida($data,$hora,$valor_total);
+        $saida->setId_saida($linha['id_saida']);
+        $saida->setId_origem($linha['id_origem']);
+        $saida->setId_almoxarifado($linha['id_almoxarifado']);
+        $saida->setId_tipo($linha['id_tipo']);
+        $saida->setId_respondavel($linha['id_responsavel']);
+        
         return $saida;
     }
+    
     public function listarTodos(){
         extract($_REQUEST);
         $saidaDAO= new SaidaDAO();
-        $saidas = $saidaDAO->listarTodos();
+        $origens = $saidaDAO->listarTodos();
         session_start();
-        $_SESSION['saida']=$saidas;
-        header('Location: '.$nextPage);
+        $_SESSION['saida']=$origens;
+        header('Location: ../html/cadastro_saida.php');
     }
     
     public function incluir(){
@@ -60,11 +47,11 @@ class SaidaControle
             $saidaDAO->incluir($saida);
             session_start();
             $_SESSION['msg']="saida cadastrado com sucesso";
-            $_SESSION['proxima']="Cadastrar outro saida";
-            $_SESSION['link']="../html/adicionar_saida.php";
-            header("Location: ../html/cadastro_saida.php");
+            $_SESSION['proxima']="Cadastrar outra saida";
+            $_SESSION['link']="../html/cadastro_doador.php";
+            header("Location: ../html/cadastro_produto.php");
         } catch (PDOException $e){
-            $msg= "NÃ£o foi possÃ­vel registrar a saida"."<br>".$e->getMessage();
+            $msg= "NÃ£o foi possÃ­vel registrar o tipo"."<br>".$e->getMessage();
             echo $msg;
         }
     }

@@ -1,8 +1,23 @@
-
 <!doctype html>
 <html class="fixed">
 	<head>
-
+<?php session_start(); 
+	include_once '../dao/Conexao.php';
+	include_once '../dao/AlmoxarifadoDAO.php';
+	include_once '../dao/TipoSaidaDAO.php';
+	
+	if (!isset($_SESSION['almoxarifado'])) {
+		header('Location: ../controle/control.php?metodo=listarTodos&nomeClasse=AlmoxarifadoControle&nextPage=../html/cadastro_saida.php');
+	}
+	if(!isset($_SESSION['tipo_saida'])){
+		header('Location: ../controle/control.php?metodo=listarTodos&nomeClasse=TiposaidaControle&nextPage=../html/cadastro_saida.php');	
+	}
+	if(isset($_SESSION['almoxarifado']) /*&& isset($_SESSION['tipo_saida'])*/){
+		$almoxarifado = $_SESSION['almoxarifado'];
+		$tipo_saida = $_SESSION['tipo_saida'];
+		session_destroy();
+	}
+?>
 		<!-- Basic -->
 		<meta charset="UTF-8">
 
@@ -68,8 +83,22 @@
 		<!-- jquery functions -->
 		<script>
     		document.write('<a href="' + document.referrer + '"></a>');
+
+		$(function(){
+			var almoxarifado = <?php 
+				echo $almoxarifado;
+			?>;
+			var tipo_saida = <?php 
+				echo $tipo_saida; 
+			?>;
+			$.each(almoxarifado,function(i,item){
+				$('#almoxarifado').append('<option value="' + item.id_almoxarifado + '">' + item.descricao_almoxarifado + '</option>');
+			})
+			$.each(tipo_saida,function(i,item){
+				$('#tipo_saida').append('<option value="' + item.id_tipo + '">' + item.descricao + '</option>');
+			})
+		});
 		</script>
-		
 
 	</head>
 		<body>
@@ -225,6 +254,8 @@
 														<input type="text" class="form-control" name="categoria" id="categoria" >
 													</div>
 												</div><br/>
+												<input type="hidden" name="nomeClasse" value="SaidaControle">
+												<input type="hidden" name="metodo" value="incluir">			
 												<div class="row">
 													<div class="col-md-9 col-md-offset-3">
 														<button id="enviar" class="btn btn-primary" type="submit">Enviar</button>

@@ -281,6 +281,6 @@
 		<script src="../assets/javascripts/tables/examples.datatables.tabletools.js"></script>
 	</body>
 </html>
-<div style=" float: left;height: 35px;">
+
 
 										

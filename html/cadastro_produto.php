@@ -5,7 +5,6 @@
 	include_once '../dao/CategoriaDAO.php';
 	include_once '../dao/UnidadeDAO.php';
 	
-
 	if (!isset($_SESSION['unidade'])) {
 		header('Location: ../controle/control.php?metodo=listarTodos&nomeClasse=UnidadeControle&nextPage=../html/cadastro_produto.php');
 	}
@@ -83,19 +82,12 @@
 			var unidade = <?php 
 				echo $unidade; 
 			?>;
-
 			$.each(categoria,function(i,item){
-
 				$('#id_categoria').append('<option value="' + item.id_categoria_produto + '">' + item.descricao_categoria + '</option>');
-
 			})
-
 			$.each(unidade,function(i,item){
-
 				$('#id_unidade').append('<option value="' + item.id_unidade + '">' + item.descricao_unidade + '</option>');
-
 			})
-
 		});
 	</script>
 </head>
