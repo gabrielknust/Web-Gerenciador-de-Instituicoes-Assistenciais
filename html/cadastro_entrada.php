@@ -1,25 +1,6 @@
 <!doctype html>
 <html class="fixed">
 <head>
-<?php session_start(); 
-
-	include_once '../dao/Conexao.php';
-	include_once '../dao/AlmoxarifadoDAO.php';
-	include_once '../dao/TipoEntradaDAO.php';
-	
-
-	if (!isset($_SESSION['almoxarifado'])) {
-		header('Location: ../controle/control.php?metodo=listarTodos&nomeClasse=AlmoxarifadoControle&nextPage=../html/cadastro_entrada.php');
-	}
-	if(!isset($_SESSION['tipo_entrada'])){
-		header('Location: ../controle/control.php?metodo=listarTodos&nomeClasse=TipoEntradaControle&nextPage=../html/cadastro_entrada.php');	
-	}
-	if(isset($_SESSION['almoxarifado']) /*&& isset($_SESSION['tipo_entrada'])*/){
-		$almoxarifado = $_SESSION['almoxarifado'];
-		$tipo_entrada = $_SESSION['tipo_entrada'];
-		session_destroy();
-	}
-?>
 	<!-- Basic -->
 	<meta charset="UTF-8">
 
@@ -48,32 +29,36 @@
 	<!-- Head Libs -->
 	<script src="../assets/vendor/modernizr/modernizr.js"></script>
 
-	<!-- Jquery functions -->
+	<!-- Javascript functions -->
 	<script src="../assets/vendor/jquery/jquery.js"></script>
 	<script src="../assets/vendor/jquery/jquery.min.js"></script>
-	<script>
-		$(function(){
-
-			var almoxarifado = <?php 
-				echo $almoxarifado;
-			?>;
-			var tipo_entrada = <?php 
-				echo $tipo_entrada; 
-			?>;
-
-			$.each(almoxarifado,function(i,item){
-
-				$('#almoxarifado').append('<option value="' + item.id_almoxarifado + '">' + item.descricao_almoxarifado + '</option>');
-
+	<script type="text/javascript">
+		$(document).ready(function(){
+			//adicionar tabela
+			$(".add-row").click(function(){
+				var produto = $("#produto").val();
+				var qtd = $("#qtd").val();
+				var markup = "<tr class='produtoRow'><td></td><td class='prod'>" + produto + "</td><td class='quant'>" + qtd + "</td><td></td><td><button type='button' class='delete-row'>remover</button></td></tr>";
+				$("table tbody ").append(markup);
+			});
+			//remover tabela
+			$("table tbody").on('click','.delete-row',function(){
+				$(this).closest('tr').remove();
+			});
+			//array
+			$("#array").click(function(){
+				var produtoData=[];
+				$(".produtoRow").each(function(i){
+					var pData = {
+						Prod: $(this).find("#prod").text(),
+						Qtd: $(this).find("#quant").text()
+					}
+					produtoData.push(pData);
+				});
+				$("#resultado").html(JSON.stringify(produtoData));
 			})
-
-			$.each(tipo_entrada,function(i,item){
-
-				$('#tipo_entrada').append('<option value="' + item.id_tipo + '">' + item.descricao + '</option>');
-
-			})
-
 		});
+
 	</script>
 </head>
 <body>
@@ -186,134 +171,123 @@
 				<div class="row">
 					<div class="col-md-4 col-lg-2" style=" visibility: hidden;"></div>
 					<div class="col-md-8 col-lg-8" >
-						<div class="tabs">
-							<ul class="nav nav-tabs tabs-primary">
-								<li class="active">
-									<a href="#overview" data-toggle="tab">Cadastro de Doação</a>
-								</li>
-							</ul>
-							<div class="tab-content">
-								<div id="overview" class="tab-pane active">
-									<form class="form-horizontal" method="post" >
-										<input type="hidden" name="nomeClasse" value="FuncionarioControle">
-										<input type="hidden" name="metodo" value="incluir">
-										<fieldset>
-											<div class="info-entrada" >
-												<div class="form-group">
-													<label class="col-md-3 control-label" >Origem</label>
-													<div class="col-md-8">
-														<input type="text" class="form-control" name="origem" id="origem">
-													</div>
-													<a href="cadastro_doador.php"><i class="fas fa-plus w3-xlarge"></i></a>
+						<ul class="nav nav-tabs tabs-primary">
+							<li class="active">
+								<a href="#overview" data-toggle="tab">Cadastro de Doação</a>
+							</li>
+						</ul>
+						<div class="tab-content">
+							<div id="overview" class="tab-pane active">
+								<form class="form-horizontal" method="get" action="#">
+									<fieldset>
+										<div class="info-entrada" >
+											<div class="form-group">
+												<label class="col-md-3 control-label" >Origem</label>
+												<div class="col-md-8">
+													<input type="text" class="form-control" name="origem" id="origem">
 												</div>
+												<a href="cadastro_doador.php"><i class="fas fa-plus w3-xlarge"></i></a>
+											</div>
 
-												<div class="form-group">
-													<label class="col-md-3 control-label" >Almoxarifado</label>
-													<div class="col-md-6">
-														<select class="form-control " name="almoxarifado" id="almoxarifado">
-															<option selected disabled>Selecionar</option>
-														</select>
-													</div>
-													<a href="adicionar_almoxarifado.php"><i class="fas fa-plus w3-xlarge"></i></a>
+											<div class="form-group">
+												<label class="col-md-3 control-label" >Almoxarifado</label>
+												<div class="col-md-8">
+													<input type="text" class="form-control" name="almox" id="almox">
 												</div>
+												<a href="adicionar_almozarifado.php"><i class="fas fa-plus w3-xlarge"></i></a>
+											</div>
 
-												<div class="form-group">
-													<label class="col-md-3 control-label" >Tipo</label>
-													<div class="col-md-6">
-														<select class="form-control " name="tipo_entrada" id="tipo_entrada">
-															<option selected disabled>Selecionar</option>
-														</select>
-													</div>
-													<a href="adicionar_tipoEntrada.php"><i class="fas fa-plus w3-xlarge"></i></a>
+											<div class="form-group">
+												<label class="col-md-3 control-label" >Tipo</label>
+												<div class="col-md-6">
+													<select class="form-control " name="tipo" id="tipo">
+														<option selected disabled>Selecionar</option>
+														<option value="doacao">doacao</option>
+														<option value="compra">compra</option>
+														<option value="troca">troca</option>
+													</select>
 												</div>
+												<a href="adicionar_tipoEntrada.php"><i class="fas fa-plus w3-xlarge"></i></a>
+											</div>
 												
-											</div>
-											<div class="panel-body" >
-												<form>
-													<div class="table-responsive">
-													<table class="table table-bordered mb-none">
+										</div>
+										
+										<div class="panel-body" >
+											<table class="table table-bordered mb-none">
+												<thead>
+													<tr>
+														<th>Produto
+															<a href="cadastro_produto.php" class="fas fa-plus w3-xlarge" style="float:right;">
+															</a>
+														</th>
+														<th>Qtd</th>
+														<th>valor total</th>
+														<th>incluir</th>
+													</tr>
+													<tr>
+														<td>
+															<input type="text" id="produto" size="20" class="form-control">
+														</td>
+														<td>
+															<input type="number" id="qtd" size="20" class="form-control">
+														</td>
+														<td> 
+														</td>
+														<td >
+															<button id="add-row" type="button" class="add-row">incluir</button>
+														</td>
+													</tr>
+												</thead>
+											</table><br>
 
-														<thead>
-															<tr>
-																<th>Produto
-																	<a href="cadastro_produto.php" class="fas fa-plus w3-xlarge" style="float:right;">
-																	</a>
-																</th>
-																<th>Qtd</th>
-																<th>valor total</th>
-																<th>incluir</th>
-															</tr>
-														</thead>
-															<td>
-																<input type="search" name="prod" size="20" class="form-control">
-															</td>
-															
-															<td>
-																<input type="number" name="qtd" size="20" class="form-control">
-															</td>
-															<td> 
-															
-															</td>
-															<td >
-																<button id="AddProduto" type="button">incluir</button>
-															</td>
-														</tbody>
-													</table>
-												</div>
-												</form><br>
-
-												<div class="table-responsive">
-													<table class="table table-bordered mb-none">
-														<thead>
-															<tr>
-																<th>Codigo</th>
-																<th>Produto<a href="" class="fas fa-plus w3-xlarge" style="float: right; ">
-																</a></th>
-																<th>Quantidade<a href="" class="fas fa-plus w3-xlarge" style="float: right;">
-																</a></th>
-																<th>valor</th>
-																<th>ação</th>
-															</tr>
-														</thead>
-														<tbody>
-															
-															<tr>
-																<th>1</th>
-																<th>arroz 5kg 5,00</th>
-																<th>2</th>
-																<th>10</th>
-																<td>
-																	<button type="button">remover</button></td>
-															</tr>
-														</tbody>
-														<tfoot>
-															<tr >
-																<td>valor total:</td>
-																<td id="valor-total"></td>
-
-															</tr>
-														</tfoot>
-													</table>
-												</div>
-											</div>
-										</fieldset><br>
-										<div class="row">
-											<div class="col-md-9 col-md-offset-3">
-												<input type="submit" class="btn btn-primary" >
+											<div class="table-responsive">
+												<table class="table table-bordered mb-none table">
+													<thead>
+														<tr>
+															<th>Codigo</th>
+															<th>Produto
+																<a href="" class="fas fa-plus w3-xlarge" style="float: right;"></a>
+															</th>
+															<th>Quantidade
+																<a href="" class="fas fa-plus w3-xlarge" style="float: right;"></a>
+															</th>
+															<th>valor</th>
+															<th>ação</th>
+														</tr>
+													</thead>
+													<tbody>
+													</tbody>
+													<tfoot>
+														<tr >
+															<td>valor total:</td>
+															<td id="valor-total"></td>
+														</tr>
+													</tfoot>
+												</table>
 											</div>
 										</div>
-									</form>
-								</div>
+										<button id="array">Pegar valores da tabela</button>
+										<div id="resultado"></div>
+									</fieldset><br>
+									<div class="row">
+										<div class="col-md-9 col-md-offset-3">
+											<input type="submit" class="btn btn-primary" >
+										</div>
+									</div>
+								</form>
 							</div>
 						</div>
 					</div>
 				</div>
-				<!-- end: page -->
 			</section>
 		</div>
+
+		<!-- end: page -->
 	</section>
 
+
 	<!-- Vendor -->
+	<script src="../assets/vendor/jquery/jquery.js"></script>
 	<script src="../assets/vendor/jquery-browser-mobile/jquery.browser.mobile.js"></script>
 	<script src="../assets/vendor/bootstrap/js/bootstrap.js"></script>
 	<script src="../assets/vendor/nanoscroller/nanoscroller.js"></script>
