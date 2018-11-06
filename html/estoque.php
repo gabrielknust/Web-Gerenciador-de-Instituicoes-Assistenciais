@@ -101,24 +101,27 @@
 				}
 			});
 		})(document);
+		
+	
 	</script>
+	
 	<style type="text/css">
-		.table{
+		/*.table{
 			z-index: 0;
 		}
 		.text-right{
 			z-index: 1;
-		}
+		}*/
 		.select{
-			z-index: 2;
-			float: left;
+			/*z-index: 2;*/
+			/*float: left;*/
 			position: absolute;
 			width: 235px;
-		}
+		}*/
 		.select-table-filter{
 			width: 140px;
 			float: left;
-		}
+		}-->
 
 	</style>
 </head>
@@ -269,14 +272,16 @@
 					<div class="panel-body" >
 						<div class="select" >
 							<select class="select-table-filter form-control mb-md" data-table="order-table">
+								<option selected disabled>Almoxarifado</option>
 								<option value="">mostrar tudo</option>  
 								<option value="cozinha">cozinha</option>  
 								<option value="farmacia">farmacia</option>  
-		  					</select>
-		  					<h5 style="float: right;">Almoxarifado</h5>
+		  					</select>float:right;"></h5>
 	  					</div>
-		  				
-  						<table class="table order-table" id="datatable-tabletools"  >
+	  					<button style="float: right;" class="mb-xs mt-xs mr-xs btn btn-default">Imprimir</button>
+	  					<br><br>
+		  					
+						<table class="table table-bordered table-striped mb-none" id="datatable-default">
 							<thead>
 								<tr>
 									<th>codigo</th>
@@ -337,9 +342,22 @@
 	<!-- Theme Initialization Files -->
 	<script src="../assets/javascripts/theme.init.js"></script>
 
-	<!-- Examples no remove-->
+	<!-- Examples -->
 	<script src="../assets/javascripts/tables/examples.datatables.default.js"></script>
 	<script src="../assets/javascripts/tables/examples.datatables.row.with.details.js"></script>
 	<script src="../assets/javascripts/tables/examples.datatables.tabletools.js"></script>
 </body>
+<script type="text/javascript">
+		function printData()
+		{
+			var divToPrint=document.getElementById("datatable-default");
+			newWin= window.open("");
+			newWin.document.write(divToPrint.outerHTML);
+			newWin.print();
+			newWin.close();
+		}
+		$('button').on('click',function(){
+		printData();
+		})
+</script>
 </html>
