@@ -6,17 +6,23 @@
 	include_once '../dao/Conexao.php';
 	include_once '../dao/AlmoxarifadoDAO.php';
 	include_once '../dao/TipoEntradaDAO.php';
+	include_once '../dao/ProdutoDAO.php';
 	
-
 	if (!isset($_SESSION['almoxarifado'])) {
 		header('Location: ../controle/control.php?metodo=listarTodos&nomeClasse=AlmoxarifadoControle&nextPage=../html/cadastro_entrada.php');
 	}
 	if(!isset($_SESSION['tipo_entrada'])){
 		header('Location: ../controle/control.php?metodo=listarTodos&nomeClasse=TipoEntradaControle&nextPage=../html/cadastro_entrada.php');	
 	}
-	if(isset($_SESSION['almoxarifado']) && isset($_SESSION['tipo_entrada'])){
+	if(!isset($_SESSION['autocomplete'])) {
+		header('Location: ../controle/control.php?metodo=listarDescricao&nomeClasse=ProdutoControle&nextPage=../html/cadastro_entrada.php');
+		//header('Location: search_cad_entrada.php');
+	}
+	if(isset($_SESSION['almoxarifado']) && isset($_SESSION['tipo_entrada']) && isset($_SESSION['autocomplete'])){
 		$almoxarifado = $_SESSION['almoxarifado'];
 		$tipo_entrada = $_SESSION['tipo_entrada'];
+		$autocomplete = $_SESSION['autocomplete'];
+		echo $autocomplete;
 		session_destroy();
 	}
 ?>
@@ -49,10 +55,26 @@
 	<script src="../assets/vendor/modernizr/modernizr.js"></script>
 
 	<!-- Javascript functions -->
-	<script src="../assets/vendor/jquery/jquery.js"></script>
+
 	<script src="../assets/vendor/jquery/jquery.min.js"></script>
+
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>    
+  	    <script>
+
+  $(function() {
+  	<?php $autocomplete = (object) $autocomplete; ?>				
+  	var gg = <?php echo $autocomplete->descricao; ?>;
+  	console.log(gg);
+    $( "#produto" ).autocomplete({
+      source: gg
+    });
+  });
+  </script>
 	<script type="text/javascript">
-		$(document).ready(function(){
+	$(function() {
+	
 			//adicionar tabela
 			$(".add-row").click(function(){
 				var produto = $("#produto").val();
@@ -102,6 +124,7 @@
 			})
 
 		});
+
 	</script>
 </head>
 <body>
@@ -109,7 +132,7 @@
 		<!-- start: header -->
 		<header class="header">
 			<div class="logo-container">
-				<a href="home.html" class="logo">
+				<a href="home.php" class="logo">
 					<img src="../img/logofinal.png" height="35" alt="Porto Admin" />
 				</a>
 				<div class="visible-xs toggle-sidebar-left" data-toggle-class="sidebar-left-opened" data-target="html" data-fire-event="sidebar-left-opened">
@@ -164,7 +187,7 @@
 						<nav id="menu" class="nav-main" role="navigation">
 							<ul class="nav nav-main">
 								<li>
-									<a href="home.html">
+									<a href="home.php">
 										<i class="fa fa-home" aria-hidden="true"></i>
 										<span>Início</span>
 									</a>
@@ -199,7 +222,7 @@
 					<div class="right-wrapper pull-right">
 						<ol class="breadcrumbs">
 							<li>
-								<a href="home.html">
+								<a href="home.php">
 									<i class="fa fa-home"></i>
 								</a>
 							</li>
@@ -331,7 +354,7 @@
 
 
 	<!-- Vendor -->
-	<script src="../assets/vendor/jquery/jquery.js"></script>
+	
 	<script src="../assets/vendor/jquery-browser-mobile/jquery.browser.mobile.js"></script>
 	<script src="../assets/vendor/bootstrap/js/bootstrap.js"></script>
 	<script src="../assets/vendor/nanoscroller/nanoscroller.js"></script>

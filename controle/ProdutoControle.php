@@ -77,6 +77,15 @@ class ProdutoControle
         
     }
 
+    public function listarDescricao(){
+        extract($_REQUEST);
+        $produtoDAO= new ProdutoDAO();
+        $produtos = $produtoDAO->listarDescricao();
+        session_start();
+        $_SESSION['autocomplete']=$produtos;
+        header('Location: '.$_REQUEST['nextPage']);
+    }
+
     public function incluir(){
         $produto = $this->verificar();
         extract($_REQUEST);

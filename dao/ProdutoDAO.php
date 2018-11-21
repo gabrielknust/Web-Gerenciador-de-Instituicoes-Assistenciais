@@ -127,7 +127,7 @@ class ProdutoDAO
 		                ':descricao' => $descricao
 		            ));
 		            $produtos = Array();
-		            while ($linha = $consulta-fetch(PDO::FETCH_ASSOC)) {
+		            while ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) {
 		                $produto = new Produto($preco,$descricao,$codigo);
 		                $produtos[] = $produto;
 		            }
@@ -136,6 +136,25 @@ class ProdutoDAO
 		        }
 		        return $produtos;
 		    }
+
+		    public function listarDescricao(){
+
+	        try{
+	            $produtos=array();
+	            $pdo = Conexao::connect();
+	            $consulta = $pdo->query("SELECT descricao FROM produto ORDER BY descricao ASC");
+	            $x=0;
+	            while($linha = $consulta->fetch(PDO::FETCH_ASSOC)){
+	            	$produtos[$x]=array('descricao'=>$linha['descricao']);
+	                $x++;
+	            }
+	            } catch (PDOExeption $e){
+	                echo 'Error:' . $e->getMessage();
+	            }
+				$produtos = json_encode($produtos);
+
+	            }
+
 }
 
 ?>
