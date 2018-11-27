@@ -18,11 +18,11 @@
 		header('Location: ../controle/control.php?metodo=listarDescricao&nomeClasse=ProdutoControle&nextPage=../html/cadastro_entrada.php');
 		//header('Location: search_cad_entrada.php');
 	}
-	if(isset($_SESSION['almoxarifado']) && isset($_SESSION['tipo_entrada']) && isset($_SESSION['autocomplete'])){
+	if(isset($_SESSION['almoxarifado']) && isset($_SESSION['tipo_entrada']) &&  isset($_SESSION['autocomplete'])){
 		$almoxarifado = $_SESSION['almoxarifado'];
 		$tipo_entrada = $_SESSION['tipo_entrada'];
 		$autocomplete = $_SESSION['autocomplete'];
-		echo $autocomplete;
+		$at = array();
 		session_destroy();
 	}
 ?>
@@ -63,14 +63,14 @@
   	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>    
   	    <script>
 
-  $(function() {
-  	<?php $autocomplete = (object) $autocomplete; ?>				
-  	var gg = <?php echo $autocomplete->descricao; ?>;
-  	console.log(gg);
-    $( "#produto" ).autocomplete({
-      source: gg
-    });
-  });
+ // $(function() {
+  //	<?php $autocomplete = $autocomplete; ?>				
+  	//var gg = <?php echo $autocomplete; ?>;
+  	//console.log(gg);
+    //$( "#produto" ).autocomplete({
+      //source: gg
+    //});
+  //});
   </script>
 	<script type="text/javascript">
 	$(function() {
@@ -110,6 +110,9 @@
 			var tipo_entrada = <?php 
 				echo $tipo_entrada; 
 			?>;
+			var autocomplete = <?php
+				echo $autocomplete;
+			?>;
 
 			$.each(almoxarifado,function(i,item){
 
@@ -123,7 +126,16 @@
 
 			})
 
+			$.each(tipo_entrada,function(i,item){
+				<?php $i =  document.write(i);  
+				$at[$i] =  document.write(item.id_produto + "-" + item.descricao); 
+				?>
+
+
+			})
+
 		});
+
 
 	</script>
 </head>

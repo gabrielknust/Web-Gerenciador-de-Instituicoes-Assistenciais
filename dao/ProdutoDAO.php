@@ -138,21 +138,20 @@ class ProdutoDAO
 		    }
 
 		    public function listarDescricao(){
-
 	        try{
 	            $produtos=array();
+	            $x = array();
 	            $pdo = Conexao::connect();
-	            $consulta = $pdo->query("SELECT descricao FROM produto ORDER BY descricao ASC");
+	            $consulta = $pdo->query("SELECT id_produto, descricao FROM produto");
 	            $x=0;
 	            while($linha = $consulta->fetch(PDO::FETCH_ASSOC)){
-	            	$produtos[$x]=array('descricao'=>$linha['descricao']);
+	            	$produtos[$x]=array('id_produto'=>$linha['id_produto'],'descricao'=>$linha['descricao']);
 	                $x++;
 	            }
 	            } catch (PDOExeption $e){
 	                echo 'Error:' . $e->getMessage();
 	            }
-				$produtos = json_encode($produtos);
-
+				return json_encode($produtos);
 	            }
 
 }

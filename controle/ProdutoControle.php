@@ -78,8 +78,7 @@ class ProdutoControle
     }
 
     public function listarDescricao(){
-        extract($_REQUEST);
-        $produtoDAO= new ProdutoDAO();
+        $produtoDAO = new ProdutoDAO();
         $produtos = $produtoDAO->listarDescricao();
         session_start();
         $_SESSION['autocomplete']=$produtos;
