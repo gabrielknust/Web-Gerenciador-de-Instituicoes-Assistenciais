@@ -60,28 +60,37 @@
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   	<script type="text/javascript">
-  	var inputs = document.querySelectorAll('input[list]');
-	for (var i = 0; i < inputs.length; i++) {
-	  // When the value of the input changes...
-	  inputs[i].addEventListener('change', function() {
-	    var optionFound = false,
-	      datalist = this.list;
-	    // Determine whether an option exists with the current value of the input.
-	    for (var j = 0; j < datalist.options.length; j++) {
-	        if (this.value == datalist.options[j].value) {
-	            optionFound = true;
-	            break;
-	        }
-	    }
-	    // use the setCustomValidity function of the Validation API
-	    // to provide an user feedback if the value does not exist in the datalist
-	    if (optionFound) {
-	      this.setCustomValidity('');
-	    } else {
-	      this.setCustomValidity('Please select a valid value.');
-	    }
-	  });
+  	// http://stackoverflow.com/a/24936814/4779449
+	function datalistValidator(modelname) {
+			var obj = $("#produtos_autocomplete").find("option[value='" + modelname + "']");
+			if (obj != null && obj.length > 0) {
+					//alert("valid"); // allow form submission
+					return true
+			}
+			//alert("invalid"); // don't allow form submission
+			return false;
 	}
+
+	$(document).ready(function() {
+			$('#incluir').click(function() {
+					var modelname = $("#produtos_autocomplete").val();
+					var existingModelName = $('h2').text();
+					//alert("Submitted: " + modelname);
+					if (datalistValidator(modelname)) {
+							$("#button").attr('type','button');
+							$("#button").click();
+							$("#button").attr('type','disabled');
+							return true;
+					}
+					alert(modelname + " não é um produto válido");
+					$("#input_produtos").val(existingModelName).focus().select().animate({
+							right: '25px'
+					}).animate({
+							left: '25px'
+					});
+					return false;
+			});
+	});
   	</script>    
 	<script type="text/javascript">
 	$(function() {
@@ -90,7 +99,7 @@
 			$(".add-row").click(function(){
 				var produto = $("#produto").val();
 				var qtd = $("#qtd").val();
-				var markup = "<tr class='produtoRow'><td></td><td class='prod'>" + produto + "</td><td class='quant'>" + qtd + "</td><td></td><td><button type='button' class='delete-row'>remover</button></td></tr>";
+				var markup = "<tr class='produtoRow'><td></td><td class='prod'>" + produto + "</td><td class='quant'><input type='number' id='qtd' size='20' class='form-control'></td><td></td><td><button type='button' class='delete-row'>remover</button></td></tr>";
 				$("table tbody ").append(markup);
 			});
 			//remover tabela
@@ -308,23 +317,18 @@
 															<a href="cadastro_produto.php" class="fas fa-plus w3-xlarge" style="float:right;">
 															</a>
 														</th>
-														<th>Qtd</th>
 														<th>valor total</th>
 														<th>incluir</th>
 													</tr>
 													<tr>
 														<td>
-															<input type="search" list="produtos_autocomplete" autocomplete="off" id="produto" size="20" class="form-control">
+															<input type="search" list="produtos_autocomplete" id="input_produtos" name="produtos_autocomplete" autocomplete="off" id="produto" size="20" class="form-control">
 															<datalist id="produtos_autocomplete">
 															</datalist>
 														</td>
-														<td>
-															<input type="number" id="qtd" size="20" class="form-control">
-														</td>
-														<td> 
-														</td>
+														<td></td>
 														<td >
-															<button id="add-row" type="button" class="add-row">incluir</button>
+															<button id="add-row incluir" type="button" class="add-row">incluir</button>
 														</td>
 													</tr>
 												</thead>
