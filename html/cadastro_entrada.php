@@ -16,13 +16,11 @@
 	}
 	if(!isset($_SESSION['autocomplete'])) {
 		header('Location: ../controle/control.php?metodo=listarDescricao&nomeClasse=ProdutoControle&nextPage=../html/cadastro_entrada.php');
-		//header('Location: search_cad_entrada.php');
-	}
+		}
 	if(isset($_SESSION['almoxarifado']) && isset($_SESSION['tipo_entrada']) &&  isset($_SESSION['autocomplete'])){
 		$almoxarifado = $_SESSION['almoxarifado'];
 		$tipo_entrada = $_SESSION['tipo_entrada'];
 		$autocomplete = $_SESSION['autocomplete'];
-		$at = array();
 		session_destroy();
 	}
 ?>
@@ -60,18 +58,31 @@
 
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>    
-  	    <script>
-
- // $(function() {
-  //	<?php $autocomplete = $autocomplete; ?>				
-  	//var gg = <?php echo $autocomplete; ?>;
-  	//console.log(gg);
-    //$( "#produto" ).autocomplete({
-      //source: gg
-    //});
-  //});
-  </script>
+  	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  	<script type="text/javascript">
+  	var inputs = document.querySelectorAll('input[list]');
+	for (var i = 0; i < inputs.length; i++) {
+	  // When the value of the input changes...
+	  inputs[i].addEventListener('change', function() {
+	    var optionFound = false,
+	      datalist = this.list;
+	    // Determine whether an option exists with the current value of the input.
+	    for (var j = 0; j < datalist.options.length; j++) {
+	        if (this.value == datalist.options[j].value) {
+	            optionFound = true;
+	            break;
+	        }
+	    }
+	    // use the setCustomValidity function of the Validation API
+	    // to provide an user feedback if the value does not exist in the datalist
+	    if (optionFound) {
+	      this.setCustomValidity('');
+	    } else {
+	      this.setCustomValidity('Please select a valid value.');
+	    }
+	  });
+	}
+  	</script>    
 	<script type="text/javascript">
 	$(function() {
 	
@@ -110,7 +121,7 @@
 			var tipo_entrada = <?php 
 				echo $tipo_entrada; 
 			?>;
-			var autocomplete = <?php
+			var produtos_autocomplete = <?php
 				echo $autocomplete;
 			?>;
 
@@ -126,11 +137,9 @@
 
 			})
 
-			$.each(tipo_entrada,function(i,item){
-				<?php $i =  document.write(i);  
-				$at[$i] =  document.write(item.id_produto + "-" + item.descricao); 
-				?>
+			$.each(produtos_autocomplete,function(i,item){
 
+				$('#produtos_autocomplete').append('<option value="' + item.id_produto + '-' + item.descricao + '">');
 
 			})
 
@@ -305,7 +314,9 @@
 													</tr>
 													<tr>
 														<td>
-															<input type="text" id="produto" size="20" class="form-control">
+															<input type="search" list="produtos_autocomplete" autocomplete="off" id="produto" size="20" class="form-control">
+															<datalist id="produtos_autocomplete">
+															</datalist>
 														</td>
 														<td>
 															<input type="number" id="qtd" size="20" class="form-control">
