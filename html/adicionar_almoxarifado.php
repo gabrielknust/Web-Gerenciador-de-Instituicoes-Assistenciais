@@ -231,6 +231,7 @@
 														<button id="enviar" class="btn btn-primary" type="submit">Enviar</button>
 														<input type="reset" class="btn btn-default">
 														<a href="cadastro_entrada.php" style="color: white; text-decoration: none;"><button class="btn btn-info" type="button">Voltar</button></a>
+														<a href="listar_almox.php" style="color: white; text-decoration: none;"><button class="btn btn-success" type="button">Listar almoxarifado</button></a>
 													</div>
 												</div>
 												</form>

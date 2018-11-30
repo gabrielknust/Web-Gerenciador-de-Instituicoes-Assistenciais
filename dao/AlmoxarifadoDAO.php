@@ -8,7 +8,7 @@ class AlmoxarifadoDAO
     public function incluir($almoxarifado)
     {        
         try {
-        	$pdo = Conexao::connect();
+            $pdo = Conexao::connect();
 
             $sql = 'INSERT almoxarifado(descricao_almoxarifado) VALUES(:descricao_almoxarifado)';
             $sql = str_replace("'", "\'", $sql);            
@@ -42,26 +42,20 @@ class AlmoxarifadoDAO
         }
         return $almoxarifado;
     }
-        public function excluir($id_almoxarifado)
-	    {
-	        try {
-	            $sql = 'DELETE from almoxarifado WHERE id_almoxarifado = :id_almoxarifado';
-	            $sql = str_replace("'", "\'", $sql);
-	            $acesso = new Acesso();
-	            
-	            $pdo = $acesso->conexao();
-	            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	            
-	            $stmt = $pdo->prepare($sql);
-	            
-	            $stmt->bindParam(':id_almoxarifado', $id_almoxarifado);
-	            
-	            $stmt->execute();
-	        } catch (PDOException $e) {
-	            echo 'Error: <b>  na tabela almoxarifado = ' . $sql . '</b> <br /><br />' . $e->getMessage();
-	        }
-	    }
-	    public function listarTodos(){
+    public function excluir($id_almoxarifado){
+        try{
+            $pdo = Conexao::connect();
+            $sql = 'DELETE FROM almoxarifado WHERE id_almoxarifado = :id_almoxarifado';
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindParam(':id_almoxarifado',$id_almoxarifado);
+            $stmt->execute();
+            
+        }catch (PDOException $e) {
+                echo 'Error: <b>  na tabela almoxarifado = ' . $sql . '</b> <br /><br />' . $e->getMessage();
+        }
+    }
+    
+        public function listarTodos(){
 
         try{
             $almoxarifados=array();

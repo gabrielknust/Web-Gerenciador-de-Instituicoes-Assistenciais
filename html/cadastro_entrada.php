@@ -94,31 +94,38 @@
   	</script>    
 	<script type="text/javascript">
 	$(function() {
-	
-			//adicionar tabela
-			$(".add-row").click(function(){
-				var produto = $("#produto").val();
-				var qtd = $("#qtd").val();
-				var markup = "<tr class='produtoRow'><td></td><td class='prod'>" + produto + "</td><td class='quant'><input type='number' id='qtd' size='20' class='form-control'></td><td></td><td><button type='button' class='delete-row'>remover</button></td></tr>";
-				$("table tbody ").append(markup);
+		/*$(".alert").click(function(){
+			var valProd = $("#produto");
+			valProd.focusout(function(){
+				alert(valProd.val());
 			});
-			//remover tabela
-			$("table tbody").on('click','.delete-row',function(){
-				$(this).closest('tr').remove();
-			});
-			//array
-			$("#array").click(function(){
-				var produtoData=[];
-				$(".produtoRow").each(function(i){
-					var pData = {
-						Prod: $(this).find("#prod").text(),
-						Qtd: $(this).find("#quant").text()
-					}
-					produtoData.push(pData);
-				});
-				$("#resultado").html(JSON.stringify(produtoData));
-			})
+		});*/
+			
+		//adicionar tabela
+		$(".add-row").click(function(){
+			var produto = $("#input_produtos").val();
+			var qtd = $("#qtd").val();
+			var markup = "<tr class='produtoRow'><td></td><td class='prod'><input type='text' value='" + produto + "' disabled></td><td class='quant'><input type='number' id='qtd' size='20' class='form-control' min='1' placeholder='1'></td><td></td><td><button type='button' class='delete-row'>remover</button></td></tr>";
+			$("table tbody ").append(markup);
 		});
+		//remover tabela
+		$("table tbody").on('click','.delete-row',function(){
+			$(this).closest('tr').remove();
+		});
+
+		/*array
+		$("#array").click(function(){
+			var produtoData=[];
+			$(".produtoRow").each(function(i){
+				var pData = {
+					Prod: $(this).find("#prod").text(),
+					Qtd: $(this).find("#quant").text()
+				}
+				produtoData.push(pData);
+			});
+			$("#resultado").html(JSON.stringify(produtoData));
+		})*/
+	});
 
 	</script>
 	<script>
@@ -314,7 +321,7 @@
 												<thead>
 													<tr>
 														<th>Produto
-															<a href="cadastro_produto.php" class="fas fa-plus w3-xlarge" style="float:right;">
+															<a href="cadastro_produto.php" class="fas fa-plus w3-xlarge" style="float:right;" id="produto" class="produto">
 															</a>
 														</th>
 														<th>valor total</th>
@@ -322,7 +329,7 @@
 													</tr>
 													<tr>
 														<td>
-															<input type="search" list="produtos_autocomplete" id="input_produtos" name="produtos_autocomplete" autocomplete="off" id="produto" size="20" class="form-control">
+															<input type="search" list="produtos_autocomplete" id="input_produtos" name="produtos_autocomplete" autocomplete="off" size="20" class="form-control">
 															<datalist id="produtos_autocomplete">
 															</datalist>
 														</td>
@@ -360,8 +367,9 @@
 												</table>
 											</div>
 										</div>
-										<button id="array">Pegar valores da tabela</button>
-										<div id="resultado"></div>
+										<!--<button id="array">Pegar valores da tabela</button>
+										<div id="resultado"></div>-->
+
 									</fieldset><br>
 									<div class="row">
 										<div class="col-md-9 col-md-offset-3">
@@ -400,6 +408,8 @@
 	
 	<!-- Theme Initialization Files -->
 	<script src="../assets/javascripts/theme.init.js"></script>
-
+	<script type="text/javascript">
+		
+	</script>
 </body>
 </html>

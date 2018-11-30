@@ -10,7 +10,7 @@ class AlmoxarifadoControle
             $msg .= "Descricao da Almoxarifado nÃ£o informada. Por favor, informe uma descricao!";
             header('Location: ../html/almoxarifado.html?msg='.$msg);
         }else{
-        	$almoxarifado = new Almoxarifado($descricao_almoxarifado);
+            $almoxarifado = new Almoxarifado($descricao_almoxarifado);
         }
         return $almoxarifado;
     }
@@ -39,6 +39,14 @@ class AlmoxarifadoControle
         }
     }
     public function excluir(){
-
+        extract($_REQUEST);
+        try {
+            $almoxarifadoDAO=new AlmoxarifadoDAO();
+            $almoxarifadoDAO->excluir($id_almoxarifado);
+            header('Location:../html/listar_almox.php');
+        } catch (PDOException $e) {
+            echo "ERROR";
+        }
     }
 }
+    
