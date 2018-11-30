@@ -93,6 +93,20 @@
   	</script>    
 	<script type="text/javascript">
 	$(function() {
+
+
+		$("#click").click(function(){
+			var val=$("#input_produtos").val();
+
+			var obj=$("#produtos_autocomplete").find("option[value='"+val+"']")
+
+ 			if(obj !=null && obj.length>0)
+     			  $("#incluir").click();
+    		else
+     			alert("Produto inválido"); // don't allow form submission
+			
+
+
 		/*$(".alert").click(function(){
 			var valProd = $("#produto");
 			valProd.focusout(function(){
@@ -102,10 +116,23 @@
 			
 		//adicionar tabela
 		$(".add-row").click(function(){
-			var produto = $("#input_produtos").val();
-			var qtd = $("#qtd").val();
-			var markup = "<tr class='produtoRow'><td></td><td class='prod'><input type='text' value='" + produto + "' disabled></td><td class='quant'><input type='number' id='qtd' size='20' class='form-control' min='1' placeholder='1'></td><td></td><td><button type='button' class='delete-row'>remover</button></td></tr>";
-			$("table tbody ").append(markup);
+			var val=$("#txt").val();
+
+			var obj=$("#colours").find("option[value='"+val+"']")
+
+
+
+ 			if(obj !=null && obj.length>0){
+     		
+     			var produto = $("#input_produtos").val();
+				var qtd = $("#qtd").val();
+				var markup = "<tr class='produtoRow'><td></td><td class='prod'><input type='text' value='" + produto + "' disabled></td><td class='quant'><input type='number' id='qtd' size='20' class='form-control' min='1' value='1'></td><td></td><td><button type='button' class='delete-row'>remover</button></td></tr>";
+				$("table tbody ").append(markup);	
+ 			}
+    		else{
+    		 alert("invalid"); // don't allow form submission
+    		}
+			
 		});
 		//remover tabela
 		$("table tbody").on('click','.delete-row',function(){
@@ -333,8 +360,8 @@
 															</datalist>
 														</td>
 														<td></td>
-														<td >
-															<button id="add-row incluir" type="button" class="add-row">incluir</button>
+														<td >	
+															<button id="add-row incluir" type="button" class="add-row" >incluir</button>
 														</td>
 													</tr>
 												</thead>
