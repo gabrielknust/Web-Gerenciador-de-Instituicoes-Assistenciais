@@ -70,7 +70,6 @@
 			//alert("invalid"); // don't allow form submission
 			return false;
 	}
-
 	$(document).ready(function() {
 			$('#incluir').click(function() {
 					var modelname = $("#produtos_autocomplete").val();

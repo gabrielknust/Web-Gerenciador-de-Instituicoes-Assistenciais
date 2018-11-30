@@ -54,7 +54,6 @@ class AlmoxarifadoDAO
                 echo 'Error: <b>  na tabela almoxarifado = ' . $sql . '</b> <br /><br />' . $e->getMessage();
         }
     }
-    
         public function listarTodos(){
 
         try{

@@ -69,7 +69,6 @@
     		document.write('<a href="' + document.referrer + '"></a>');
 		</script>
 		
-
 	</head>
 		<body>
 		<section class="body">

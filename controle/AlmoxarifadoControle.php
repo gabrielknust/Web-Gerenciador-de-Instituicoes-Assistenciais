@@ -22,7 +22,6 @@ class AlmoxarifadoControle
         $_SESSION['almoxarifado']=$almoxarifados;
         header('Location: '.$nextPage);
     }
-    
     public function incluir(){
         $almoxarifado = $this->verificar();
         $almoxarifadoDAO = new AlmoxarifadoDAO();
