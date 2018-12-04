@@ -1,138 +1,133 @@
 <!doctype html>
 <html class="fixed">
-	<head>
+<head>
+	<!-- Basic -->
+	<meta charset="UTF-8">
 
-		<!-- Basic -->
-		<meta charset="UTF-8">
+	<title>Adicionar Almoxarifado</title>
+	<meta name="keywords" content="HTML5 Admin Template" />
+	<meta name="description" content="Porto Admin - Responsive HTML5 Template">
+	<meta name="author" content="okler.net">
 
-		<title>Adicionar Almoxarifado</title>
-		<meta name="keywords" content="HTML5 Admin Template" />
-		<meta name="description" content="Porto Admin - Responsive HTML5 Template">
-		<meta name="author" content="okler.net">
+	<!-- Mobile Metas -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
-		<!-- Mobile Metas -->
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<!-- Web Fonts  -->
+	<link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800|Shadows+Into+Light" rel="stylesheet" type="text/css">
 
-		<!-- Web Fonts  -->
-		<link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800|Shadows+Into+Light" rel="stylesheet" type="text/css">
+	<!-- Vendor CSS -->
+	<link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.css" />
+	<link rel="stylesheet" href="../assets/vendor/font-awesome/css/font-awesome.css" />
+	<link rel="stylesheet" href="../assets/vendor/fontawesome/svg-with-js/css/fa-svg-with-js.css" />
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	<link rel="stylesheet" href="../assets/vendor/magnific-popup/magnific-popup.css" />
+	<link rel="stylesheet" href="../assets/vendor/bootstrap-datepicker/css/datepicker3.css" />
+	<link rel="icon" href="../img/logofinal.png" type="image/x-icon">
 
-		<!-- Vendor CSS -->
-		<link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.css" />
-		<link rel="stylesheet" href="../assets/vendor/font-awesome/css/font-awesome.css" />
-		<link rel="stylesheet" href="../assets/vendor/fontawesome/svg-with-js/css/fa-svg-with-js.css" />
-		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
-		<link rel="stylesheet" href="../assets/vendor/magnific-popup/magnific-popup.css" />
-		<link rel="stylesheet" href="../assets/vendor/bootstrap-datepicker/css/datepicker3.css" />
-		<link rel="icon" href="../img/logofinal.png" type="image/x-icon">
+	<!-- Theme CSS -->
+	<link rel="stylesheet" href="../assets/stylesheets/theme.css" />
 
-		<!-- Theme CSS -->
-		<link rel="stylesheet" href="../assets/stylesheets/theme.css" />
+	<!-- Skin CSS -->
+	<link rel="stylesheet" href="../assets/stylesheets/skins/default.css" />
 
-		<!-- Skin CSS -->
-		<link rel="stylesheet" href="../assets/stylesheets/skins/default.css" />
+	<!-- Theme Custom CSS -->
+	<link rel="stylesheet" href="../assets/stylesheets/theme-custom.css">
 
-		<!-- Theme Custom CSS -->
-		<link rel="stylesheet" href="../assets/stylesheets/theme-custom.css">
+	<!-- Head Libs -->
+	<script src="../assets/vendor/modernizr/modernizr.js"></script>
 
-		<!-- Head Libs -->
-		<script src="../assets/vendor/modernizr/modernizr.js"></script>
-
-		<!-- Vendor -->
-		<script src="../assets/vendor/jquery/jquery.min.js"></script>
-		<script src="../assets/vendor/jquery-browser-mobile/jquery.browser.mobile.js"></script>
-		<script src="../assets/vendor/bootstrap/js/bootstrap.js"></script>
-		<script src="../assets/vendor/nanoscroller/nanoscroller.js"></script>
-		<script src="../assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-		<script src="../assets/vendor/magnific-popup/magnific-popup.js"></script>
-		<script src="../assets/vendor/jquery-placeholder/jquery.placeholder.js"></script>
+	<!-- Vendor -->
+	<script src="../assets/vendor/jquery/jquery.min.js"></script>
+	<script src="../assets/vendor/jquery-browser-mobile/jquery.browser.mobile.js"></script>
+	<script src="../assets/vendor/bootstrap/js/bootstrap.js"></script>
+	<script src="../assets/vendor/nanoscroller/nanoscroller.js"></script>
+	<script src="../assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+	<script src="../assets/vendor/magnific-popup/magnific-popup.js"></script>
+	<script src="../assets/vendor/jquery-placeholder/jquery.placeholder.js"></script>
 		
-		<!-- Specific Page Vendor -->
-		<script src="../assets/vendor/jquery-autosize/jquery.autosize.js"></script>
+	<!-- Specific Page Vendor -->
+	<script src="../assets/vendor/jquery-autosize/jquery.autosize.js"></script>
 		
-		<!-- Theme Base, Components and Settings -->
-		<script src="../assets/javascripts/theme.js"></script>
+	<!-- Theme Base, Components and Settings -->
+	<script src="../assets/javascripts/theme.js"></script>
 		
-		<!-- Theme Custom -->
-		<script src="../assets/javascripts/theme.custom.js"></script>
+	<!-- Theme Custom -->
+	<script src="../assets/javascripts/theme.custom.js"></script>
 		
-		<!-- Theme Initialization Files -->
-		<script src="../assets/javascripts/theme.init.js"></script>
+	<!-- Theme Initialization Files -->
+	<script src="../assets/javascripts/theme.init.js"></script>
 
+	<!-- javascript functions --> <script
+	src="../Functions/onlyNumbers.js"></script> <script
+	src="../Functions/onlyChars.js"></script> <script
+	src="../Functions/mascara.js"></script>
 
-		<!-- javascript functions --> <script
-		src="../Functions/onlyNumbers.js"></script> <script
-		src="../Functions/onlyChars.js"></script> <script
-		src="../Functions/mascara.js"></script>
-
-		<!-- jquery functions -->
-		<script>
-    		document.write('<a href="' + document.referrer + '"></a>');
-		</script>
+	<!-- jquery functions -->
+	<script>
+   		document.write('<a href="' + document.referrer + '"></a>');
+	</script>
 		
-	</head>
-		<body>
-		<section class="body">
+</head>
+<body>
+	<section class="body">
 
-			<!-- start: header -->
-			<header class="header">
-				<div class="logo-container">
-					<a href="home.html" class="logo">
-						<img src="../img/logofinal.png" height="35" alt="Porto Admin" />
+		<!-- start: header -->
+		<header class="header">
+			<div class="logo-container">
+				<a href="home.html" class="logo">
+					<img src="../img/logofinal.png" height="35" alt="Porto Admin" />
+				</a>
+				<div class="visible-xs toggle-sidebar-left" data-toggle-class="sidebar-left-opened" data-target="html" data-fire-event="sidebar-left-opened">
+					<i class="fa fa-bars" aria-label="Toggle sidebar"></i>
+				</div>
+			</div>
+			
+			<!-- start: search & user box -->
+			<div class="header-right">
+				<span class="separator"></span>
+				<div id="userbox" class="userbox">
+					<a href="#" data-toggle="dropdown">
+						<figure class="profile-picture">
+							<img src="../img/koala.jpg" alt="Joseph Doe" class="img-circle" data-lock-picture="../assets/images/!logged-user.jpg" />
+						</figure>
+						<div class="profile-info" data-lock-name="John Doe" data-lock-email="johndoe@okler.com">
+							<span class="name">John Doe Junior</span>
+							<span class="role">administrator</span>
+						</div>
+						<i class="fa custom-caret"></i>
 					</a>
-					<div class="visible-xs toggle-sidebar-left" data-toggle-class="sidebar-left-opened" data-target="html" data-fire-event="sidebar-left-opened">
+			
+					<div class="dropdown-menu">
+						<ul class="list-unstyled">
+							<li class="divider"></li>
+							<li>
+								<a role="menuitem" tabindex="-1" href="../html/profile.html"><i class="fa fa-user"></i>My Profile</a>
+							</li>
+							<li>
+								<a role="menuitem" tabindex="-1" href="#" data-lock-screen="true"><i class="fa fa-lock"></i>Lock Screen </a>
+							</li>
+							<li>
+								<a role="menuitem" tabindex="-1" href="../index.html"><i class="fa fa-power-off"></i> Logout</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+				<!-- end: search & user box -->
+		</header>
+		<!-- end: header -->
+		<div class="inner-wrapper">
+			<!-- start: sidebar -->
+			<aside id="sidebar-left" class="sidebar-left">
+				
+				<div class="sidebar-header">
+					<div class="sidebar-title">
+						Navegação
+					</div>
+					<div class="sidebar-toggle hidden-xs" data-toggle-class="sidebar-left-collapsed" data-target="html" data-fire-event="sidebar-left-toggle">
 						<i class="fa fa-bars" aria-label="Toggle sidebar"></i>
 					</div>
 				</div>
-			
-				<!-- start: search & user box -->
-				<div class="header-right">
-					<span class="separator"></span>
-			
-					<div id="userbox" class="userbox">
-						<a href="#" data-toggle="dropdown">
-							<figure class="profile-picture">
-								<img src="../img/koala.jpg" alt="Joseph Doe" class="img-circle" data-lock-picture="../assets/images/!logged-user.jpg" />
-							</figure>
-							<div class="profile-info" data-lock-name="John Doe" data-lock-email="johndoe@okler.com">
-								<span class="name">John Doe Junior</span>
-								<span class="role">administrator</span>
-							</div>
-			
-							<i class="fa custom-caret"></i>
-						</a>
-			
-						<div class="dropdown-menu">
-							<ul class="list-unstyled">
-								<li class="divider"></li>
-								<li>
-									<a role="menuitem" tabindex="-1" href="../html/profile.html"><i class="fa fa-user"></i> My Profile</a>
-								</li>
-								<li>
-									<a role="menuitem" tabindex="-1" href="#" data-lock-screen="true"><i class="fa fa-lock"></i> Lock Screen</a>
-								</li>
-								<li>
-									<a role="menuitem" tabindex="-1" href="../index.html"><i class="fa fa-power-off"></i> Logout</a>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-				<!-- end: search & user box -->
-			</header>
-			<!-- end: header -->
-
-			<div class="inner-wrapper">
-				<!-- start: sidebar -->
-				<aside id="sidebar-left" class="sidebar-left">
-				
-					<div class="sidebar-header">
-						<div class="sidebar-title">
-							Navegação
-						</div>
-						<div class="sidebar-toggle hidden-xs" data-toggle-class="sidebar-left-collapsed" data-target="html" data-fire-event="sidebar-left-toggle">
-							<i class="fa fa-bars" aria-label="Toggle sidebar"></i>
-						</div>
-					</div>
 				
 					<div class="nano">
 						<div class="nano-content">
@@ -229,8 +224,9 @@
 													<div class="col-md-9 col-md-offset-3">
 														<button id="enviar" class="btn btn-primary" type="submit">Enviar</button>
 														<input type="reset" class="btn btn-default">
-														<a href="cadastro_entrada.php" style="color: white; text-decoration: none;"><button class="btn btn-info" type="button">Voltar</button></a>
-														<a href="listar_almox.php" style="color: white; text-decoration: none;"><button class="btn btn-success" type="button">Listar almoxarifado</button></a>
+														<a href="cadastro_entrada.php" style="color: white; text-decoration: none;">
+															<button class="btn btn-info" type="button">Voltar</button></a>
+														<a href="listar_almox.php" style="color: white; text-decoration:none;">				<button class="btn btn-success" type="button">Listar almoxarifado</button></a>
 													</div>
 												</div>
 												</form>

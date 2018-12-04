@@ -286,6 +286,7 @@
 														<a href="cadastro_entrada.php" style="color: white; text-decoration: none;">
 															<button class="btn btn-info" type="button">Voltar</button>
 														</a>
+														<a href="listar_produto.php" style="color: white; text-decoration:none;">				<button class="btn btn-success" type="button">Listar Produto</button></a>
 													</div>
 												</div>
 											</div>

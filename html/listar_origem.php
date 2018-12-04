@@ -3,14 +3,14 @@
 <head>
 <?php
   include_once '../dao/Conexao.php';
-  include_once '../dao/AlmoxarifadoDAO.php';
+  include_once '../dao/OrigemDAO.php';
   
   session_start();
-  if(!isset($_SESSION['almoxarifado'])){
-    header('Location: ../controle/Control.php?metodo=listarTodos&nomeClasse=AlmoxarifadoControle&nextPage=../html/listar_almox.php');
+  if(!isset($_SESSION['origem'])){
+    header('Location: ../controle/Control.php?metodo=listarTodos&nomeClasse=OrigemControle&nextPage=../html/listar_origem.php');
   }
-  if(isset($_SESSION['almoxarifado'])){
-    $almoxarifado = $_SESSION['almoxarifado'];
+  if(isset($_SESSION['origem'])){
+    $origem = $_SESSION['origem'];
     session_destroy();  
   }
 ?>
@@ -74,24 +74,31 @@
 	<!-- jquery functions -->
 	<script>
 		function excluir(id){
-			window.location.replace('../controle/Control.php?metodo=excluir&nomeClasse=AlmoxarifadoControle&id_almoxarifado='+id);
+			window.location.replace('../controle/Control.php?metodo=excluir&nomeClasse=origemControle&id_origem='+id);
 		}
 	</script>
 	<script>
 		$(function(){
-			var almoxarifado= <?php 
-				echo $almoxarifado; 
+			var origem= <?php 
+				echo $origem; 
 				?>;
 
-			$.each(almoxarifado, function(i,item){
+			$.each(origem, function(i,item){
 
 				$('#tabela')
 					.append($('<tr />')
 						.append($('<td />')
-							.text(item.descricao_almoxarifado))
+							.text(item.descricao_origem))
 						.append($('<td />')
-							.attr('onclick','excluir("'+item.id_almoxarifado+'")')
-							.html('<i class="fas fa-trash-alt"></i>')));
+							.append($('<button />')
+								.html('<i class="fas fa-trash-alt"></i>')
+								.attr('onclick','excluir("'+item.id_origem+'")')
+								)
+							.append($('<button/>')
+								.html('<i class="fas fa-pencil-alt"</i>')
+								.attr('onclick','alterar("'+item.id_origem+'")')
+							
+							)));
 			});
 		});
 	</script>
@@ -234,8 +241,8 @@
 										<i class="fa fa-home"></i>
 									</a>
 								</li>
-								<li><span>Informações Almoxarifado</span></li>
-							</ol>
+								<li><span>Informações origem</span></li>
+						´ca	</ol>
 					
 							<a class="sidebar-right-toggle"><i class="fa fa-chevron-left"></i></a>
 						</div>
@@ -245,15 +252,18 @@
 					
 						<section class="panel">
 							<header class="panel-heading">
-														
-								<h2 class="panel-title">Almoxarifado</h2>
+								<div class="panel-actions">
+									<a href="#" class="fa fa-caret-down"></a>
+								</div>
+						
+								<h2 class="panel-title">origem</h2>
 							</header>
 							<div class="panel-body">
 								<table class="table table-bordered table-striped mb-none" id="datatable-default">
 									<thead>
 										<tr>
 											<th>nome</th>
-											<th>acão</th>
+											<th>ação</th>
 										</tr>
 									</thead>
 									<tbody id="tabela">	

@@ -204,6 +204,7 @@
 													<a href="cadastro_entrada.php" color: white; text-decoration: none;>
 														<button type="button" class="btn btn-info">voltar</button>
 													</a>
+													<a href="listar_origem.php" style="color: white; text-decoration:none;">				<button class="btn btn-success" type="button">Listar doadores</button></a>
 												</div>
 											</div>
 												
