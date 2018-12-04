@@ -36,7 +36,16 @@ class OrigemControle
         $origens = $origemDAO->listarTodos();
         session_start();
         $_SESSION['origem']=$origens;
-        header('Location: ../html/cadastro_entrada.php');
+        //header('Location: ../html/cadastro_entrada.php');
+    }
+
+    public function listarId_Nome(){
+        extract($_REQUEST);
+        $origemDAO= new OrigemDAO();
+        $origens = $origemDAO->listarId_Nome();
+        session_start();
+        $_SESSION['origem']=$origens;
+        header('Location: ' . $nextPage);
     }
     
     public function incluir(){

@@ -83,5 +83,22 @@ class OrigemDAO
             }
             return json_encode($origens);
         }
+
+        public function listarId_Nome(){
+
+            try{
+            $origens=array();
+            $pdo = Conexao::connect();
+            $consulta = $pdo->query("SELECT id_origem,nome FROM origem");
+            $x=0;
+            while($linha = $consulta->fetch(PDO::FETCH_ASSOC)){
+                $origens[$x]=array('id_origem'=>$linha['id_origem'],'nome'=>$linha['nome']);
+                $x++;
+            }
+            } catch (PDOExeption $e){
+                echo 'Error:' . $e->getMessage;
+            }
+            return json_encode($origens);
+        }
 }
 ?>

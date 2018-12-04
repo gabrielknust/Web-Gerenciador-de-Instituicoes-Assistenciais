@@ -17,11 +17,20 @@
 	if(!isset($_SESSION['autocomplete'])) {
 		header('Location: ../controle/control.php?metodo=listarDescricao&nomeClasse=ProdutoControle&nextPage=../html/cadastro_entrada.php');
 		}
-	if(isset($_SESSION['almoxarifado']) && isset($_SESSION['tipo_entrada']) &&  isset($_SESSION['autocomplete'])){
+	if(!isset($_SESSION['origem'])) {
+		header('Location: ../controle/control.php?metodo=listarId_Nome&nomeClasse=OrigemControle&nextPage=../html/cadastro_entrada.php');
+	}
+	if(isset($_SESSION['almoxarifado']) && isset($_SESSION['tipo_entrada']) &&  isset($_SESSION['autocomplete']) && isset($_SESSION['origem'])){
+
 		$almoxarifado = $_SESSION['almoxarifado'];
 		$tipo_entrada = $_SESSION['tipo_entrada'];
 		$autocomplete = $_SESSION['autocomplete'];
-		session_destroy();
+		$origem = $_SESSION['origem'];
+		echo $autocomplete;
+		unset($_SESSION['almoxarifado']);
+		unset($_SESSION['tipo_entrada']);
+		unset($_SESSION['autocomplete']);
+		unset($_SESSION['origem']);
 	}
 ?>
 	<!-- Basic -->
@@ -59,66 +68,15 @@
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  	<script type="text/javascript">
-  	// http://stackoverflow.com/a/24936814/4779449
-	function datalistValidator(modelname) {
-			var obj = $("#produtos_autocomplete").find("option[value='" + modelname + "']");
-			if (obj != null && obj.length > 0) {
-					//alert("valid"); // allow form submission
-					return true
-			}
-			//alert("invalid"); // don't allow form submission
-			return false;
-	}
-	$(document).ready(function() {
-			$('#incluir').click(function() {
-					var modelname = $("#produtos_autocomplete").val();
-					var existingModelName = $('h2').text();
-					//alert("Submitted: " + modelname);
-					if (datalistValidator(modelname)) {
-							$("#button").attr('type','button');
-							$("#button").click();
-							$("#button").attr('type','disabled');
-							return true;
-					}
-					alert(modelname + " não é um produto válido");
-					$("#input_produtos").val(existingModelName).focus().select().animate({
-							right: '25px'
-					}).animate({
-							left: '25px'
-					});
-					return false;
-			});
-	});
-  	</script>    
 	<script type="text/javascript">
 	$(function() {
 
-
-		$("#click").click(function(){
+		//adicionar tabela
+		$(".add-row").click(function(){
 			var val=$("#input_produtos").val();
 
 			var obj=$("#produtos_autocomplete").find("option[value='"+val+"']")
 
- 			if(obj !=null && obj.length>0)
-     			  $("#incluir").click();
-    		else
-     			alert("Produto inválido"); // don't allow form submission
-			
-
-
-		/*$(".alert").click(function(){
-			var valProd = $("#produto");
-			valProd.focusout(function(){
-				alert(valProd.val());
-			});
-		});*/
-			
-		//adicionar tabela
-		$(".add-row").click(function(){
-			var val=$("#txt").val();
-
-			var obj=$("#colours").find("option[value='"+val+"']")
 
 
 
@@ -126,11 +84,13 @@
      		
      			var produto = $("#input_produtos").val();
 				var qtd = $("#qtd").val();
-				var markup = "<tr class='produtoRow'><td></td><td class='prod'><input type='text' value='" + produto + "' disabled></td><td class='quant'><input type='number' id='qtd' size='20' class='form-control' min='1' value='1'></td><td></td><td><button type='button' class='delete-row'>remover</button></td></tr>";
+				var markup = "<tr class='produtoRow'><td></td><td class='prod'><input type='text' value='" + produto + "' disabled></td><td class='quant'><input type='number' onchange='bla()' id='qtd' size='20' class='form-control' min='1' value='1'></td><td></td><td><button type='button' class='delete-row'>remover</button></td></tr>";
 				$("table tbody ").append(markup);	
  			}
     		else{
-    		 alert("invalid"); // don't allow form submission
+    		 alert("Produto inválido!");
+    		 $("#input_produtos").val("");
+    		 $("#input_produtos").focus();
     		}
 			
 		});
@@ -139,24 +99,11 @@
 			$(this).closest('tr').remove();
 		});
 
-		/*array
-		$("#array").click(function(){
-			var produtoData=[];
-			$(".produtoRow").each(function(i){
-				var pData = {
-					Prod: $(this).find("#prod").text(),
-					Qtd: $(this).find("#quant").text()
-				}
-				produtoData.push(pData);
-			});
-			$("#resultado").html(JSON.stringify(produtoData));
-		})*/
 	});
 
 	</script>
 	<script>
 		$(function(){
-
 			var almoxarifado = <?php 
 				echo $almoxarifado;
 			?>;
@@ -165,6 +112,9 @@
 			?>;
 			var produtos_autocomplete = <?php
 				echo $autocomplete;
+			?>;
+			var origem = <?php
+				echo $origem;
 			?>;
 
 			$.each(almoxarifado,function(i,item){
@@ -184,6 +134,24 @@
 				$('#produtos_autocomplete').append('<option value="' + item.id_produto + '-' + item.descricao + '">');
 
 			})
+
+			$.each(origem,function(i,item){
+
+				$('#origens').append('<option value="' + item.id_origem + '-' + item.nome + '">');
+
+			})
+			$('#input_produtos').on('input',function(){
+				var teste=this.value.split('-');
+				$.each(produtos_autocomplete,function(i,item){
+					if(teste[0]==item.id_produto && teste[1]==item.descricao)
+					{
+						$("#valor_unitario").text(item.preco);
+					}
+					//else if(teste[0]!=item.id_produto && teste[1]!=item.descricao){
+						//$("#valor_unitario").empty();
+					//}
+				})
+			});
 
 		});
 
@@ -307,7 +275,7 @@
 						</ul>
 						<div class="tab-content">
 							<div id="overview" class="tab-pane active">
-								<form class="form-horizontal" method="get" action="#">
+								<form class="form-horizontal" method="get" action="#" autocomplete="off">
 									<input type="hidden" name="nomeClasse" value="FuncionarioControle">
 										<input type="hidden" name="metodo" value="incluir">
 									<fieldset>
@@ -315,7 +283,9 @@
 											<div class="form-group">
 													<label class="col-md-3 control-label" >Origem</label>
 													<div class="col-md-8">
-														<input type="text" class="form-control" name="origem" id="origem">
+														<input type="search" list="origens" id="origem" name="origem" class="form-control" autocomplete="off">
+														<datalist id="origens">
+														</datalist>
 													</div>
 													<a href="cadastro_doador.php"><i class="fas fa-plus w3-xlarge"></i></a>
 												</div>
@@ -359,7 +329,7 @@
 															<datalist id="produtos_autocomplete">
 															</datalist>
 														</td>
-														<td></td>
+														<td id="valor_unitario"></td>
 														<td >	
 															<button id="add-row incluir" type="button" class="add-row" >incluir</button>
 														</td>
