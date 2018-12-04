@@ -27,7 +27,7 @@ class CategoriaDAO
         {
              try {
                 $pdo = Conexao::connect();
-                $sql = "SELECT id_categoria_produto, descricao_categoria  FROM categoria_produto where id_categoria_produto = :id";
+                $sql = "SELECT id_categoria_produto, descricao_categoria  FROM categoria_produto where id_categoria_produto = :id_categoria_produto";
                 $consulta = $pdo->prepare($sql);
                 $consulta->execute(array(
                 ':id' => $id,
@@ -43,25 +43,18 @@ class CategoriaDAO
             return $categoria;
         }
 
-        public function excluir($id_categoria)
-    	    {
-    	        try {
-    	            $sql = 'DELETE from categoria_produto WHERE id_categoria = :id_categoria';
-    	            $sql = str_replace("'", "\'", $sql);
-    	            $acesso = new Acesso();
-    	            
-    	            $pdo = $acesso->conexao();
-    	            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    	            
-    	            $stmt = $pdo->prepare($sql);
-    	            
-    	            $stmt->bindParam(':id_categoria', $id_categoria);
-    	            
-    	            $stmt->execute();
-    	        } catch (PDOException $e) {
-    	            echo 'Error: <b>  na tabela categoria_produto = ' . $sql . '</b> <br /><br />' . $e->getMessage();
-    	        }
-    	    }
+        public function excluir($id_categoria_produto){
+    	    try{
+                $pdo = Conexao::connect();
+                $sql = 'DELETE FROM categoria_produto WHERE id_categoria_produto = :id_categoria_produto';
+                $stmt = $pdo->prepare($sql);
+                $stmt->bindParam(':id_categoria_produto',$id_categoria_produto);
+                $stmt->execute();
+                
+            }catch (PDOException $e) {
+                    echo 'Error: <b>  na tabela categoria_produto = ' . $sql . '</b> <br /><br />' . $e->getMessage();
+            }
+        }
     	public function listarTodos(){
 
             try{
@@ -75,6 +68,7 @@ class CategoriaDAO
                 }
                 } catch (PDOExeption $e){
                     echo 'Error:' . $e->getMessage;
+
                 }
                 return json_encode($categorias);
             }

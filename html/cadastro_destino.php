@@ -205,6 +205,7 @@
 													<a href="doacao.php" color: white; text-decoration: none;>
 														<button type="button" class="btn btn-info">voltar</button>
 													</a>
+													<a href="listar_destino.php" style="color: white; text-decoration: none;"><button class="btn btn-success" type="button">Listar Destino</button></a>
 												</div>
 											</div>
 												

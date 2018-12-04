@@ -1,7 +1,7 @@
 <?php
 include_once '../classes/TipoSaida.php';
 include_once '../dao/DestinoDAO.php';
-class TipoDestino
+class DestinoControle
 {
     public function verificar(){
         extract($_REQUEST);
@@ -17,7 +17,7 @@ class TipoDestino
         }
         if((!isset($telefone)) || (empty($telefone))){
             $msg .= "Telefone do destino nÃ£o informado. Por favor, informe um telefone!";
-            header('Location: ../html/funcionario.html?msg='.$msg);
+            header('Location: ../html/destino.html?msg='.$msg);
         }
         $cpf=str_replace(".", '', $cpf);
         $cpf=str_replace("-", "", $cpf);
@@ -55,6 +55,13 @@ class TipoDestino
         }
     }
     public function excluir(){
-
+        extract($_REQUEST);
+        try {
+            $destinoDAO=new DestinoDAO();
+            $destinoDAO->excluir($id_destino);
+            header('Location:../html/listar_destino.php');
+        } catch (PDOException $e) {
+            echo "ERROR";
+        }
     }
 }

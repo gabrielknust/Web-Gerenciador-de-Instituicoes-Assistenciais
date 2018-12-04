@@ -51,29 +51,23 @@ class DestinoDAO
 
         public function excluir($id_destino)
 	    {
-	        try {
-	            $sql = 'DELETE from destino WHERE id_destino = :id_destino';
-	            $sql = str_replace("'", "\'", $sql);
-	            $acesso = new Acesso();
-	            
-	            $pdo = $acesso->conexao();
-	            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	            
-	            $stmt = $pdo->prepare($sql);
-	            
-	            $stmt->bindParam(':id_destino', $id_destino);
-	            
-	            $stmt->execute();
-	        } catch (PDOException $e) {
-	            echo 'Error: <b>  na tabela destino = ' . $sql . '</b> <br /><br />' . $e->getMessage();
-	        }
+            try{
+                $pdo = Conexao::connect();
+                $sql = 'DELETE FROM destino WHERE id_destino = :id_destino';
+                $stmt = $pdo->prepare($sql);
+                $stmt->bindParam(':id_destino',$id_destino);
+                $stmt->execute();
+                
+            }catch (PDOException $e) {
+                    echo 'Error: <b>  na tabela destino = ' . $sql . '</b> <br /><br />' . $e->getMessage();
+            }
 	    }
 	    public function listarTodos(){
 
         try{
             $destinos=array();
             $pdo = Conexao::connect();
-            $consulta = $pdo->query("SELECT id_destino,nome,cnpj,cpf,telefone FROM tipo_saida");
+            $consulta = $pdo->query("SELECT id_destino,nome,cnpj,cpf,telefone FROM destino");
             $x=0;
             while($linha = $consulta->fetch(PDO::FETCH_ASSOC)){
                 $destinos[$x]=array('id_destino'=>$linha['id_destino'],'nome'=>$linha['nome'],'cnpj'=>$linha['cnpj'],'cpf'=>$linha['cpf'],'telefone'=>$linha['telefone']);

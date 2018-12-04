@@ -7,7 +7,7 @@ class CategoriaControle
         extract($_REQUEST);
         if((!isset($descricao_categoria)) || (empty($descricao_categoria))){
             $msg = "Descricao da Categoria não informada. Por favor, informe uma descricao!";
-            //header('Location: ../html/unidade.html?msg='.$msg);
+            //header('Location: ../html/categoria.html?msg='.$msg);
         }
         else{
             $categoria = new Categoria($descricao_categoria);
@@ -39,6 +39,14 @@ class CategoriaControle
         }
     }
     public function excluir(){
-    	
+    	extract($_REQUEST);
+        try {
+            $categoriaDAO=new CategoriaDAO();
+            $categoriaDAO->excluir($id_categoria_produto);
+            header('Location:../html/listar_categoria.php');
+        } catch (PDOException $e) {
+            $msg = "Não foi possível excluir essa categoria, pois ela já deve existir um produto cadastrado com essa categoria"."<br>".$e->getMessage();
+            echo $msg;
+        }
     }
 }
