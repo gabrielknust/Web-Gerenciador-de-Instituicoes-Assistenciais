@@ -14,7 +14,8 @@
 	if(isset($_SESSION['categoria']) && isset($_SESSION['unidade'])){
 		$unidade = $_SESSION['unidade'];
 		$categoria = $_SESSION['categoria'];
-		session_destroy();
+		unset($_SESSION['unidade']);
+		unset($_SESSION['categoria']);	
 	}
 ?>
 <head>

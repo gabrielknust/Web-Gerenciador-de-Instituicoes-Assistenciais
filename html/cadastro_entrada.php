@@ -71,40 +71,7 @@
 	<script type="text/javascript">
 	$(function() {
 
-		//adicionar tabela
-		$(".add-row").click(function(){
-			var val=$("#input_produtos").val();
-
-			var obj=$("#produtos_autocomplete").find("option[value='"+val+"']")
-
-
-
-
- 			if(obj !=null && obj.length>0){
-     		
-     			var produto = $("#input_produtos").val();
-				var qtd = $("#qtd").val();
-				var markup = "<tr class='produtoRow'><td></td><td class='prod'><input type='text' value='" + produto + "' disabled></td><td class='quant'><input type='number' onchange='bla()' id='qtd' size='20' class='form-control' min='1' value='1'></td><td></td><td><button type='button' class='delete-row'>remover</button></td></tr>";
-				$("table tbody ").append(markup);	
- 			}
-    		else{
-    		 alert("Produto inválido!");
-    		 $("#input_produtos").val("");
-    		 $("#input_produtos").focus();
-    		}
-			
-		});
-		//remover tabela
-		$("table tbody").on('click','.delete-row',function(){
-			$(this).closest('tr').remove();
-		});
-
-	});
-
-	</script>
-	<script>
-		$(function(){
-			var almoxarifado = <?php 
+				var almoxarifado = <?php 
 				echo $almoxarifado;
 			?>;
 			var tipo_entrada = <?php 
@@ -147,14 +114,52 @@
 					{
 						$("#valor_unitario").text(item.preco);
 					}
-					//else if(teste[0]!=item.id_produto && teste[1]!=item.descricao){
-						//$("#valor_unitario").empty();
-					//}
 				})
 			});
 
+
+
+
+		//adicionar tabela
+		$(".add-row").click(function(){
+			var val=$("#input_produtos").val();
+
+			var obj=$("#produtos_autocomplete").find("option[value='"+val+"']")
+
+			var produto = $("#input_produtos").val();
+			produto = produto.split("-");
+
+ 			if(obj !=null && obj.length>0){
+
+ 				$.each(produtos_autocomplete,function(i,item){
+					if(produto[0]==item.id_produto && produto[1]==item.descricao)
+					{
+						var preco = item.preco;
+						var qtd = $("#qtd").val();
+						var markup = "<tr class='produtoRow' id='" + item.id_produto +"'><td class='prod'><input type='text' value='" + val + "' size='15' disabled></td><td class='quant'><input type='number' class='number'  id='qtd' maxlength='2' size='2' class='form-control' min='1' value='1'></td><td><input type='text' class='preco' value='" + preco +"'  size='10' disabled></td><td><input type='text' size='10' id='total' class='total' value='" + preco +"' disabled></td><td><button type='button' class='delete-row'>remover</button></td></tr>";
+						$("table tbody ").append(markup);
+						$("#valor_unitario").empty();
+						$("#input_produtos").val("");					
+					}
+				})
+				
+ 			}
+    		else{
+    		 alert("Produto inválido!");
+    		 $("#input_produtos").val("");
+    		 $("#input_produtos").focus();
+    		 $("#valor_unitario").empty();
+    		}
+			
 		});
 
+
+		//remover tabela
+		$("table tbody").on('click','.delete-row',function(){
+			$(this).closest('tr').remove();
+		});
+
+	});
 
 	</script>
 </head>
@@ -320,7 +325,7 @@
 															<a href="cadastro_produto.php" class="fas fa-plus w3-xlarge" style="float:right;" id="produto" class="produto">
 															</a>
 														</th>
-														<th>valor total</th>
+														<th>valor unitário</th>
 														<th>incluir</th>
 													</tr>
 													<tr>
@@ -341,22 +346,23 @@
 												<table class="table table-bordered mb-none table">
 													<thead>
 														<tr>
-															<th>Codigo</th>
+															
 															<th>Produto
 																<a href="" class="fas fa-plus w3-xlarge" style="float: right;"></a>
 															</th>
 															<th>Quantidade
 																<a href="" class="fas fa-plus w3-xlarge" style="float: right;"></a>
 															</th>
-															<th>valor</th>
-															<th>ação</th>
+															<th>Preço</th>
+															<th>Total</th>
+															<th>Ação</th>
 														</tr>
 													</thead>
 													<tbody>
 													</tbody>
 													<tfoot>
 														<tr >
-															<td>valor total:</td>
+															<td>Valor total:</td>
 															<td id="valor-total"></td>
 														</tr>
 													</tfoot>

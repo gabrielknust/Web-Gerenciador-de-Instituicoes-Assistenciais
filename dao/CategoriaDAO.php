@@ -30,7 +30,7 @@ class CategoriaDAO
                 $sql = "SELECT id_categoria_produto, descricao_categoria  FROM categoria_produto where id_categoria_produto = :id_categoria_produto";
                 $consulta = $pdo->prepare($sql);
                 $consulta->execute(array(
-                ':id' => $id,
+                ':id_categoria_produto' => $id,
             ));
             while ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) {
                 $categoria = new Categoria($linha['descricao_categoria']);
