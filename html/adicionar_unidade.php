@@ -232,6 +232,7 @@
 														<button id="enviar" class="btn btn-primary" type="submit">Enviar</button>
 														<input type="reset" class="btn btn-default">
 														<a href="cadastro_produto.php" style="color: white; text-decoration: none;"><button class="btn btn-info" type="button">Voltar</button></a>
+														<a href="listar_unidade.php" style="color: white; text-decoration:none;">				<button class="btn btn-success" type="button">Listar Unidade</button></a>
 													</div>
 												</div>
 												</form>

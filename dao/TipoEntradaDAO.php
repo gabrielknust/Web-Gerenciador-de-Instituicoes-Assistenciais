@@ -28,7 +28,7 @@ class TipoEntradaDAO
     {
         try{
             $pdo = Conexao::connect();
-            $sql = "SELECT id_tipo,descricao  FROM tipo_entrada WHERE id_tipo = :id_tipo";
+            $sql = "SELECT id_tipo,descricao FROM tipo_entrada WHERE id_tipo = :id_tipo";
             $consulta = $pdo->prepare($sql);
             $consulta->execute(array(
                 'id_tipo' => $id_tipo,
@@ -44,22 +44,16 @@ class TipoEntradaDAO
     }
         public function excluir($id_tipo)
 	    {
-	        try {
-	            $sql = 'DELETE from tipo_entrada WHERE id_tipo = :id_tipo';
-	            $sql = str_replace("'", "\'", $sql);
-	            $acesso = new Acesso();
-	            
-	            $pdo = $acesso->conexao();
-	            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	            
-	            $stmt = $pdo->prepare($sql);
-	            
-	            $stmt->bindParam(':id_tipo', $id_tipo);
-	            
-	            $stmt->execute();
-	        } catch (PDOException $e) {
-	            echo 'Error: <b>  na tabela tipo_entrada = ' . $sql . '</b> <br /><br />' . $e->getMessage();
-	        }
+	        try{
+                $pdo = Conexao::connect();
+                $sql = 'DELETE FROM tipo_entrada WHERE id_tipo = :id_tipo';
+                $stmt = $pdo->prepare($sql);
+                $stmt->bindParam(':id_tipo',$id_tipo);
+                $stmt->execute();
+                
+            }catch (PDOException $e) {
+                    echo 'Error: <b>  na tabela tipo_entrada = ' . $sql . '</b> <br /><br />' . $e->getMessage();
+            }
 	    }
 	    public function listarTodos(){
 

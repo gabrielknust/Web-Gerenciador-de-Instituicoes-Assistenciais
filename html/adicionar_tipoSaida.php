@@ -222,7 +222,7 @@
 													<br>
 													<label class="col-md-3 control-label">saida</label>
 													<div class="col-md-8">
-														<input type="text" class="form-control" name="descricao" id="tiposaida" >
+														<input type="text" class="form-control" name="descricao" id="tiposaida" required>
 													</div>
 												</div><br/>
 												<input type="hidden" name="nomeClasse" value="TipoSaidaControle">
@@ -232,6 +232,8 @@
 														<button id="enviar" class="btn btn-primary" type="submit">Enviar</button>
 														<input type="reset" class="btn btn-default">
 														<a href="cadastro_produto.php" style="color: white; text-decoration: none;"><button class="btn btn-info" type="button">Voltar</button></a>
+														<a href="listar_tipoSaida.php" style="color: white; text-decoration:none;"><button class="btn btn-success" type="button">Listar Saida</button></a>
+												
 													</div>
 												</div>
 												</form>

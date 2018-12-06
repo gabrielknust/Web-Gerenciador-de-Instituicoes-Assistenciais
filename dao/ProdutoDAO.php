@@ -82,7 +82,7 @@ class ProdutoDAO
 	        try{
 	            $produtos=array();
 	            $pdo = Conexao::connect();
-	            $consulta = $pdo->query("SELECT p.preco,p.descricao,p.codigo,c.descricao_categoria,u.descricao_unidade FROM produto p INNER JOIN categoria_produto c ON p.id_categoria_produto = i.id_categoria_produto
+	            $consulta = $pdo->query("SELECT p.preco,p.descricao,p.codigo,c.descricao_categoria,u.descricao_unidade FROM produto p INNER JOIN categoria_produto c ON p.id_categoria_produto = c.id_categoria_produto
 	            	INNER JOIN unidade u ON u.id_unidade = p.id_unidade");
 	            $x=0;
 	            while($linha = $consulta->fetch(PDO::FETCH_ASSOC)){

@@ -16,7 +16,7 @@ class UnidadeControle
     }
     public function listarTodos(){
         extract($_REQUEST);
-        $unidadeDAO= new UnidadeDAO();
+        $unidadeDAO = new UnidadeDAO();
         $unidades = $unidadeDAO->listarTodos();
         session_start();
         $_SESSION['unidade']=$unidades;
@@ -39,6 +39,13 @@ class UnidadeControle
         }
     }
     public function excluir(){
-
+        extract($_REQUEST);
+        try{
+            $unidadeDAO = new UnidadeDAO();
+            $unidadeDAO->excluir($id_unidade);
+            header('Location:../html/listar_unidade.php');
+        }catch (PDOException $e) {
+            echo "ERROR";
+        }
     }
 }

@@ -47,18 +47,11 @@ class UnidadeDAO
         public function excluir($id_unidade)
 	    {
 	        try {
+                $pdo = Conexao::connect();
 	            $sql = 'DELETE from unidade WHERE id_unidade = :id_unidade';
-	            $sql = str_replace("'", "\'", $sql);
-	            $acesso = new Acesso();
-	            
-	            $pdo = $acesso->conexao();
-	            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	            
 	            $stmt = $pdo->prepare($sql);
-	            
-	            $stmt->bindParam(':id_unidade', $id_unidade);
-	            
-	            $stmt->execute();
+	            $stmt->bindParam(':id_unidade',$id_unidade);
+                $stmt->execute();
 	        } catch (PDOException $e) {
 	            echo 'Error: <b>  na tabela unidade_produto = ' . $sql . '</b> <br /><br />' . $e->getMessage();
 	        }

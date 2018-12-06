@@ -44,22 +44,16 @@ class TipoSaidaDAO
     }
         public function excluir($id_tipo)
 	    {
-	        try {
-	            $sql = 'DELETE from tipo_saida WHERE id_tipo = :id_tipo';
-	            $sql = str_replace("'", "\'", $sql);
-	            $acesso = new Acesso();
-	            
-	            $pdo = $acesso->conexao();
-	            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	            
-	            $stmt = $pdo->prepare($sql);
-	            
-	            $stmt->bindParam(':id_tipo', $id_tipo);
-	            
-	            $stmt->execute();
-	        } catch (PDOException $e) {
-	            echo 'Error: <b>  na tabela tipo_saida = ' . $sql . '</b> <br /><br />' . $e->getMessage();
-	        }
+	        try{
+                $pdo = Conexao::connect();
+                $sql = 'DELETE FROM tipo_saida WHERE id_tipo = :id_tipo';
+                $stmt = $pdo->prepare($sql);
+                $stmt->bindParam(':id_tipo',$id_tipo);
+                $stmt->execute();
+                
+            }catch (PDOException $e) {
+                    echo 'Error: <b>  na tabela tipo_saida = ' . $sql . '</b> <br /><br />' . $e->getMessage();
+            }
 	    }
 	    public function listarTodos(){
 

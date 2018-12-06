@@ -36,7 +36,7 @@ class OrigemControle
         $origens = $origemDAO->listarTodos();
         session_start();
         $_SESSION['origem']=$origens;
-        //header('Location: ../html/cadastro_entrada.php');
+        header('Location:' .$nextPage);
     }
 
     public function listarId_Nome(){
@@ -64,6 +64,13 @@ class OrigemControle
         }
     }
     public function excluir(){
-
+        extract($_REQUEST);
+        try {
+            $origemDAO=new OrigemDAO();
+            $origemDAO->excluir($id_origem);
+            header('Location:../html/listar_origem.php');
+        } catch (PDOException $e) {
+            echo "ERROR";
+        }
     }
 }

@@ -18,9 +18,9 @@ class TipoSaidaControle
     public function listarTodos(){
         extract($_REQUEST);
         $tiposaidaDAO= new TipoSaidaDAO();
-        $tiposaidas = $tiposaidaDAO->listarTodos();
+        $tiposaida = $tiposaidaDAO->listarTodos();
         session_start();
-        $_SESSION['tiposaidas']=$tiposaidas;
+        $_SESSION['tiposaida']=$tiposaida;
         header('Location: '.$nextPage);
     }
     
@@ -41,6 +41,13 @@ class TipoSaidaControle
     }
     
     public function excluir(){
-
+        extract($_REQUEST);
+        try {
+            $tiposaidaDAO=new TipoSaidaDAO();
+            $tiposaidaDAO->excluir($id_tipo);
+            header('Location:' .$nextPage);
+        } catch (PDOException $e) {
+            echo "ERROR";
+        }
     }
 }

@@ -21,7 +21,7 @@ class TipoEntradaControle
         $tipoentradas = $tipoentradaDAO->listarTodos();
         session_start();
         $_SESSION['tipo_entrada']=$tipoentradas;
-        header('Location: ../html/cadastro_entrada.php');
+        header('Location:' .$nextPage);
     }
     
     public function incluir(){
@@ -41,6 +41,13 @@ class TipoEntradaControle
     }
     
     public function excluir(){
-
+        extract($_REQUEST);
+        try {
+            $tipoentradaDAO=new TipoEntradaDAO();
+            $tipoentradaDAO->excluir($id_tipo);
+            header('Location:../html/listar_tipoEntrada.php');
+        } catch (PDOException $e) {
+            echo "ERROR";
+        }
     }
 }

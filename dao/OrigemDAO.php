@@ -50,29 +50,23 @@ class OrigemDAO
     }
         public function excluir($id_origem)
 	    {
-	        try {
-	            $sql = 'DELETE from origem WHERE id_origem = :id_origem';
-	            $sql = str_replace("'", "\'", $sql);
-	            $acesso = new Acesso();
-	            
-	            $pdo = $acesso->conexao();
-	            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	            
-	            $stmt = $pdo->prepare($sql);
-	            
-	            $stmt->bindParam(':id_origem', $id_origem);
-	            
-	            $stmt->execute();
-	        } catch (PDOException $e) {
-	            echo 'Error: <b>  na tabela origem = ' . $sql . '</b> <br /><br />' . $e->getMessage();
-	        }
+	        try{
+                $pdo = Conexao::connect();
+                $sql = 'DELETE FROM origem WHERE id_origem = :id_origem';
+                $stmt = $pdo->prepare($sql);
+                $stmt->bindParam(':id_origem',$id_origem);
+                $stmt->execute();
+                
+            }catch (PDOException $e) {
+                    echo 'Error: <b>  na tabela origem = ' . $sql . '</b> <br /><br />' . $e->getMessage();
+            }
 	    }
 	    public function listarTodos(){
 
         try{
             $origens=array();
             $pdo = Conexao::connect();
-            $consulta = $pdo->query("SELECT id_origem,nome,cnpj,cpf,telefone FROM tipo_saida");
+            $consulta = $pdo->query("SELECT id_origem,nome,cnpj,cpf,telefone FROM origem");
             $x=0;
             while($linha = $consulta->fetch(PDO::FETCH_ASSOC)){
                 $origens[$x]=array('id_origem'=>$linha['id_origem'],'nome'=>$linha['nome'],'cnpj'=>$linha['cnpj'],'cpf'=>$linha['cpf'],'telefone'=>$linha['telefone']);
