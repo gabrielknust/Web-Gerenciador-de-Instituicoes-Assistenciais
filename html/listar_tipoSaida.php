@@ -11,7 +11,6 @@
           	}
           	if(isset($_SESSION['tiposaida'])){
             	$tipo = $_SESSION['tiposaida'];
-               echo $tipo;
             	unset($_SESSION['tiposaida']);
             }
       ?>

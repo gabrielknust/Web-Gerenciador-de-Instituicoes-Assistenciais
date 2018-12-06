@@ -69,7 +69,9 @@ class TipoSaidaDAO
             } catch (PDOExeption $e){
                 echo 'Error:' . $e->getMessage;
             }
+            
             return json_encode($tiposaidas);
         }
+
 }
 ?>

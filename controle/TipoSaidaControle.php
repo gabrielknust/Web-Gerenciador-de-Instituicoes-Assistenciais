@@ -21,7 +21,8 @@ class TipoSaidaControle
         $tiposaida = $tiposaidaDAO->listarTodos();
         session_start();
         $_SESSION['tiposaida']=$tiposaida;
-        header('Location: '.$nextPage);
+        //var_dump($_SESSION['tiposaida']);
+        header('Location: ' .$nextPage);
     }
     
     public function incluir(){
@@ -45,7 +46,7 @@ class TipoSaidaControle
         try {
             $tiposaidaDAO=new TipoSaidaDAO();
             $tiposaidaDAO->excluir($id_tipo);
-            header('Location:' .$nextPage);
+            header('Location:../html/listar_tipoSaida.php');
         } catch (PDOException $e) {
             echo "ERROR";
         }
