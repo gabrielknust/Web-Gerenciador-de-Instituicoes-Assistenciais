@@ -186,7 +186,7 @@
 												<div class="form-group"><br>
 													<label class="col-md-3 control-label">entrada</label>
 													<div class="col-md-8">
-														<input type="text" class="form-control" name="descricao" id="tipoentrada" >
+														<input type="text" class="form-control" name="descricao" id="tipoentrada" required>
 													</div>
 												</div><br/>
 												<input type="hidden" name="nomeClasse" value="TipoEntradaControle">

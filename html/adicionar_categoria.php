@@ -221,7 +221,7 @@
 													<br>
 													<label class="col-md-3 control-label">Categoria</label>
 													<div class="col-md-8">
-														<input type="text" class="form-control" name="descricao_categoria" id="categoria" >
+														<input type="text" class="form-control" name="descricao_categoria" id="categoria" required>
 
 														<input type="hidden" name="nomeClasse" value="CategoriaControle">
 														

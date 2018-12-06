@@ -6,11 +6,7 @@
 
 	<title>Cadastro de Doador</title>
 
-	<!-- Mobile Metas -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-
-	<!-- Web Fonts  -->
-	<link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800|Shadows+Into+Light" rel="stylesheet" type="text/css">
 
 	<!-- Vendor CSS -->
 	<link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.css" />
@@ -18,6 +14,7 @@
 	<link rel="stylesheet" href="../assets/vendor/magnific-popup/magnific-popup.css" />
 	<link rel="stylesheet" href="../assets/vendor/bootstrap-datepicker/css/datepicker3.css" />
 	<link rel="icon" href="../img/logofinal.png" type="image/x-icon">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 
 	<!-- Theme CSS -->
 	<link rel="stylesheet" href="../assets/stylesheets/theme.css" />
@@ -30,6 +27,29 @@
 
 	<!-- Head Libs -->
 	<script src="../assets/vendor/modernizr/modernizr.js"></script>
+
+	<!-- Javascript functions -->
+
+	<script src="../assets/vendor/jquery/jquery.min.js"></script>
+
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+	<!-- Functions -->
+	<script src="../Functions/mascara.js"></script>
+	<script src="../Functions/onlyNumbers.js"></script>
+	<script src="../Functions/onlyChars.js"></script>
+	<script>
+		function validar(){
+			var cpf = document.getElementById("NCPF").value;
+			var cnpj = document.getElementById("cnpj").value;
+			if(cpf == "" && cnpj == ""){
+				alert("Preencha o campo CPF ou CNPJ");
+				return false;
+			}
+		}
+	</script>
 
 </head>
 <body>
@@ -166,7 +186,7 @@
 							</ul>
 							<div class="tab-content">
 								<div id="overview" class="tab-pane active">
-									<form class="form-horizontal" method="post" action="../controle/control.php">
+									<form class="form-horizontal" method="post" action="../controle/control.php" onsubmit="return validar()" autocomplete="off">
 										<input type="hidden" name="nomeClasse" value="OrigemControle">
 										<input type="hidden" name="metodo" value="incluir">
 										<fieldset>
@@ -174,19 +194,19 @@
 											<div class="form-group">
 												<label class="col-md-3 control-label" for="profileFirstName">Nome</label>
 												<div class="col-md-6">
-													<input type="text" class="form-control" name="nome" id="nome" onkeypress="return Onlychars(event)" >
+													<input type="text" class="form-control" name="nome" id="nome" onkeypress="return Onlychars(event)" required>
 												</div>
 											</div>
-											<div class="form-group">
+											<div class="form-group" >
 												<label class="col-md-3 control-label" for="profileCompany">Número do CNPJ</label>
 												<div class="col-md-6">
-													<input type="text" class="form-control" id="cnpj" name="cnpj" placeholder="Ex: 14.732.231/0001-02" maxlength="18" onkeypress="return Onlynumbers(event)" onkeyup="mascara('##.###.###/####-##',this,event)">
+													<input type="text" class="form-control" id="cnpj" name="cnpj" placeholder="Ex: 14.732.231/0001-02" maxlength="18" onkeypress="return Onlynumbers(event)" onkeyup="mascara('##.###.###/####-##',this,event)" >
 												</div>														
 											</div>
-											<div class="form-group">
+											<div class="form-group" >
 												<label class="col-md-3 control-label" for="profileCompany">Número do CPF</label>
 												<div class="col-md-6">
-													<input type="text" class="form-control" id="cpf" name="cpf" placeholder="Ex: 222.222.222-22" maxlength="14" onkeypress="return Onlynumbers(event)" onkeyup="mascara('###.###.###-##',this,event)">
+													<input type="text" class="form-control" id="NCPF" name="num_cpf" placeholder="Ex: 222.222.222-22" maxlength="14" onkeypress="return Onlynumbers(event)" onkeyup="mascara('###.###.###-##',this,event)" >
 												</div>														
 											</div>
 											<div class="form-group">
@@ -199,7 +219,7 @@
 												<input type="hidden" name="metodo" value="incluir">
 											<div class="row">
 												<div class="col-md-9 col-md-offset-3">
-													<input type="submit" class="btn btn-primary" onclick="return enviar_dados()">
+													<input type="submit" class="btn btn-primary">
 													<input type="reset" class="btn btn-default">
 													<a href="cadastro_entrada.php" color: white; text-decoration: none;>
 														<button type="button" class="btn btn-info">voltar</button>
@@ -219,75 +239,11 @@
 					<!-- end: page -->
 			</section>
 		</div>
-		<aside id="sidebar-right" class="sidebar-right">
-			<div class="nano">
-				<div class="nano-content">
-					<a href="#" class="mobile-close visible-xs">
-						Collapse <i class="fa fa-chevron-right"></i>
-					</a>
-			
-					<div class="sidebar-right-wrapper">
 		
-						<div class="sidebar-widget widget-calendar">
-							<h6>Upcoming Tasks</h6>
-							<div data-plugin-datepicker data-plugin-skin="dark" ></div>
-							<ul>
-								<li>
-									<time datetime="2014-04-19T00:00+00:00">04/19/2014</time>
-									<span>Company Meeting</span>
-								</li>
-							</ul>
-						</div>
-			
-						<div class="sidebar-widget widget-friends">
-							<h6>Friends</h6>
-							<ul>
-								<li class="status-online">
-									<figure class="profile-picture">
-										<img src="../assets/images/!sample-user.jpg" alt="Joseph Doe" class="img-circle">
-									</figure>
-									<div class="profile-info">
-										<span class="name">Joseph Doe Junior</span>
-										<span class="title">Hey, how are you?</span>
-									</div>
-								</li>
-								<li class="status-online">
-									<figure class="profile-picture">
-										<img src="../assets/images/!sample-user.jpg" alt="Joseph Doe" class="img-circle">
-									</figure>
-									<div class="profile-info">
-										<span class="name">Joseph Doe Junior</span>
-										<span class="title">Hey, how are you?</span>
-									</div>
-								</li>
-								<li class="status-offline">
-									<figure class="profile-picture">
-										<img src="../assets/images/!sample-user.jpg" alt="Joseph Doe" class="img-circle">
-									</figure>
-									<div class="profile-info">
-										<span class="name">Joseph Doe Junior</span>
-										<span class="title">Hey, how are you?</span>
-									</div>
-								</li>
-								<li class="status-offline">
-									<figure class="profile-picture">
-										<img src="../assets/images/!sample-user.jpg" alt="Joseph Doe" class="img-circle">
-									</figure>
-									<div class="profile-info">
-										<span class="name">Joseph Doe Junior</span>
-										<span class="title">Hey, how are you?</span>
-									</div>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</idv>
-		</aside>
 	</section>
 
 	<!-- Vendor -->
-	<script src="../assets/vendor/jquery/jquery.js"></script>
+	
 	<script src="../assets/vendor/jquery-browser-mobile/jquery.browser.mobile.js"></script>
 	<script src="../assets/vendor/bootstrap/js/bootstrap.js"></script>
 	<script src="../assets/vendor/nanoscroller/nanoscroller.js"></script>
@@ -306,6 +262,8 @@
 	
 	<!-- Theme Initialization Files -->
 	<script src="../assets/javascripts/theme.init.js"></script>
+	<script type="text/javascript">
+	</script>
 
 </body>
 </html>

@@ -215,7 +215,7 @@
 													<br>
 													<label class="col-md-3 control-label">almoxarifado</label>
 													<div class="col-md-8">
-														<input type="text" class="form-control" name="descricao_almoxarifado" id="descricao_almoxarifado" >
+														<input type="text" class="form-control" name="descricao_almoxarifado" id="descricao_almoxarifado" required>
 													</div>
 												</div><br/>
 												<input type="hidden" name="nomeClasse" value="AlmoxarifadoControle">

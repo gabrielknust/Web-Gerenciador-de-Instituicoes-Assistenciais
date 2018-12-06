@@ -91,6 +91,22 @@
 			})
 		});
 	</script>
+	<script type="text/javascript">
+		function validar(){
+			var id_categoria = document.getElementyById("id_categoria").value;
+			var id_unidade = document.getElementyById("id_unidade").value;
+			if(id_categoria == "blank"){
+				alert("Selecione uma categoria");
+				document.getElementyById("id_categoria").focus();
+				return false;
+			}
+			else if(id_unidade == "blank"){
+				alert("Selecione uma unidade");
+				document.getElementyById("id_unidade").focus();
+				return false;	
+			}
+		}
+	</script>
 </head>
 <body>
 	<section class="body">
@@ -223,12 +239,12 @@
 							</ul>
 							<div class="tab-content">
 								<div id="overview" class="tab-pane active">
-									<form id="formulario" action="../controle/Control.php">
+									<form id="formulario" action="../controle/Control.php" onsubmit="return validar()" autocomplete="off">
 										<fieldset>
 											<div class="form-group"><br>
 												<label class="col-md-3 control-label">Nome do produto</label>
 												<div class="col-md-8">
-													<input type="text" class="form-control" name="descricao" id="produto" >
+													<input type="text" class="form-control" name="descricao" id="produto" required>
 												</div>
 											</div>
 										
@@ -259,7 +275,7 @@
 											<div class="form-group">
 												<label class="col-md-3 control-label" for="profileCompany">Código</label>
 												<div class="col-md-8">
-													<input type="text" name="codigo" class="form-control" minlength="11" id="profileCompany" id="codigo" >
+													<input type="text" name="codigo" class="form-control" minlength="11" id="profileCompany" id="codigo" required>
 
 													<input type="hidden" name="nomeClasse" value="ProdutoControle">
 														
@@ -270,7 +286,7 @@
 											<div class="form-group">
 												<label class="col-md-3 control-label" for="profileCompany">Valor</label>
 												<div class="col-md-8">
-													<input type="text" name="preco" class="form-control" id="profileCompany" id="valor" maxlength="13" placeholder="Ex: 22.00" onkeypress="return Onlynumbers(event)" >
+													<input type="text" name="preco" class="form-control" id="profileCompany" id="valor" maxlength="13" placeholder="Ex: 22.00" onkeypress="return Onlynumbers(event)" required>
 
 													<input type="hidden" name="nomeClasse" value="ProdutoControle">
 														

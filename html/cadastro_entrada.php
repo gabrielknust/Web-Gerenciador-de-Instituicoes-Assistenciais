@@ -36,7 +36,7 @@
 	<!-- Basic -->
 	<meta charset="UTF-8">
 
-	<title>Cadastro de Doação</title>
+	<title>Cadastro entrada</title>
 
 	<!-- Mobile Metas -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
@@ -68,6 +68,7 @@
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 	<script type="text/javascript">
 	$(function() {
 
@@ -124,7 +125,7 @@
 		$(".add-row").click(function(){
 			var val=$("#input_produtos").val();
 
-			var obj=$("#produtos_autocomplete").find("option[value='"+val+"']")
+			var obj=$("#produtos_autocomplete").find("option[value='"+val+"']");
 
 			var produto = $("#input_produtos").val();
 			produto = produto.split("-");
@@ -159,8 +160,39 @@
 			$(this).closest('tr').remove();
 		});
 
+		// validar origem
+		$("#origem").blur(function(){
+			var val=$("#origem").val();
+			var obj=$("#origens").find("option[value='"+val+"']");
+			if(obj !=null && obj.length>0){
+				return true;
+			}
+			else{
+				alert("Origem inválida, por favor insira uma origem válida");
+				$("#origem").val("");
+			}
+		});
+
 	});
 
+	</script>
+	<!-- Script para validar formulário -->
+	<script>
+		function validar(){
+			
+			var almox = document.getElementById("almoxarifado");
+			var tipo = document.getElementById("tipo_entrada");
+			if(almox.value == "blank"){
+				alert("Selecione um almoxarifado");
+				almox.focus();
+				return false;
+			}
+			else if(tipo.value == "blank"){
+				alert("Selecione o tipo da entrada")
+				tipo.focus();
+				return false;
+			}
+		}
 	</script>
 </head>
 <body>
@@ -280,7 +312,7 @@
 						</ul>
 						<div class="tab-content">
 							<div id="overview" class="tab-pane active">
-								<form class="form-horizontal" method="get" action="#" autocomplete="off">
+								<form class="form-horizontal" method="post" id="formulario" onsubmit="return validar()" action="../controle/Control.php" autocomplete="off">
 									<input type="hidden" name="nomeClasse" value="FuncionarioControle">
 										<input type="hidden" name="metodo" value="incluir">
 									<fieldset>
@@ -288,7 +320,7 @@
 											<div class="form-group">
 													<label class="col-md-3 control-label" >Origem</label>
 													<div class="col-md-8">
-														<input type="search" list="origens" id="origem" name="origem" class="form-control" autocomplete="off">
+														<input type="search" list="origens" id="origem" name="origem" class="form-control" autocomplete="off" required>
 														<datalist id="origens">
 														</datalist>
 													</div>
@@ -299,7 +331,7 @@
 													<label class="col-md-3 control-label" >Almoxarifado</label>
 													<div class="col-md-6">
 														<select class="form-control " name="almoxarifado" id="almoxarifado">
-															<option selected disabled>Selecionar</option>
+															<option selected disabled value="blank">Selecionar</option>
 														</select>
 													</div>
 													<a href="adicionar_almoxarifado.php"><i class="fas fa-plus w3-xlarge"></i></a>
@@ -309,7 +341,7 @@
 													<label class="col-md-3 control-label" >Tipo</label>
 													<div class="col-md-6">
 														<select class="form-control " name="tipo_entrada" id="tipo_entrada">
-															<option selected disabled>Selecionar</option>
+															<option selected disabled value="blank">Selecionar</option>
 														</select>
 													</div>
 													<a href="adicionar_tipoEntrada.php"><i class="fas fa-plus w3-xlarge"></i></a>

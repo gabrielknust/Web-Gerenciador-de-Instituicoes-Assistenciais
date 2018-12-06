@@ -222,7 +222,7 @@
 													<br>
 													<label class="col-md-3 control-label">Unidade</label>
 													<div class="col-md-8">
-														<input type="text" class="form-control" name="descricao_unidade" id="unidade" >
+														<input type="text" class="form-control" name="descricao_unidade" id="unidade" required>
 													</div>
 												</div><br/>
 												<input type="hidden" name="nomeClasse" value="UnidadeControle">
