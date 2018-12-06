@@ -48,7 +48,7 @@
 
 		<!-- jquery functions -->
 		<script>
-			$(function(){
+			/*$(function(){
 
 				var funcionarios=<?php echo $_SESSION['funcionarios'];?>;
 				console.log(funcionarios);
@@ -135,7 +135,7 @@
 						$("#data_admissao").text("Data de admissão: "+item.data_admissao);
 					}
 				})
-			});
+			});*/
 		</script>
 
 

@@ -1,7 +1,7 @@
 <!doctype html>
 <html class="fixed">
 <head>
-<?php
+<?php 
   include_once '../dao/Conexao.php';
   include_once '../dao/ProdutoDAO.php';
   
@@ -72,7 +72,7 @@
 	<script src="../Functions/mascara.js"></script>
 		
 	<!-- jquery functions -->
-	<script>
+	<script>/*
 		function excluir(id){
 			window.location.replace('../controle/Control.php?metodo=excluir&nomeClasse=produtoControle&id_produto='+id);
 		}
@@ -86,19 +86,21 @@
 			$.each(produto, function(i,item){
 
 				$('#tabela')
-					.append($('<tr />')
-						.append($('<td />')
-							.text(item.descricao_produto))
-						.append($('<td />')
-							.append($('<button />')
-								.html('<i class="fas fa-trash-alt"></i>')
-								.attr('onclick','excluir("'+item.id_produto+'")')
-								)
-							.append($('<button/>')
-								.html('<i class="fas fa-pencil-alt"</i>')
-								.attr('onclick','alterar("'+item.id_produto+'")')
-							
-							)));
+				.append($('<tr />')
+					.append($('<td />')
+						.text(item.descricao_produto)
+						)
+					.append($('<td />')
+						.append($('<button />')
+							.html('<i class="fas fa-trash-alt"></i>')
+							.attr('onclick','excluir("'+item.id_produto+'")')
+						)
+						.append($('<button/>')
+							.html('<i class="fas fa-pencil-alt"</i>')
+							.attr('onclick','alterar("'+item.id_produto+'")')
+						)
+					)
+				);
 			});
 		});
 	</script>
@@ -262,6 +264,7 @@
 								<table class="table table-bordered table-striped mb-none" id="datatable-default">
 									<thead>
 										<tr>
+											<th>codigo</th>
 											<th>nome</th>
 											<th>ação</th>
 										</tr>
@@ -269,6 +272,7 @@
 									<tbody id="tabela">	
 									</tbody>
 								</table>
+								
 							</div><br>
 						</section>
 					<!-- end: page -->
@@ -298,6 +302,6 @@
 		<script src="../assets/javascripts/tables/examples.datatables.tabletools.js"></script>
 	</body>
 </html>
-
-
-										
+<!--<a href="#" title="" class="btn btn-primary">
+	<span class="icon"><i class="fas fa-trash-alt"></i></span>  remover
+</a>-->										
