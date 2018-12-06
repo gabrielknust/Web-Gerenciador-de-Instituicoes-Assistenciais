@@ -114,6 +114,7 @@
 					if(teste[0]==item.id_produto && teste[1]==item.descricao)
 					{
 						$("#valor_unitario").text(item.preco);
+						$("#quantidade").focus();
 					}
 				})
 			});
@@ -129,15 +130,15 @@
 
 			var produto = $("#input_produtos").val();
 			produto = produto.split("-");
-
  			if(obj !=null && obj.length>0){
 
  				$.each(produtos_autocomplete,function(i,item){
 					if(produto[0]==item.id_produto && produto[1]==item.descricao)
 					{
+						var quantidade = $("#quantidade").val();
 						var preco = item.preco;
-						var qtd = $("#qtd").val();
-						var markup = "<tr class='produtoRow' id='" + item.id_produto +"'><td class='prod'><input type='text' value='" + val + "' size='15' disabled></td><td class='quant'><input type='number' class='number'  id='qtd' maxlength='2' size='2' class='form-control' min='1' value='1'></td><td><input type='text' class='preco' value='" + preco +"'  size='10' disabled></td><td><input type='text' size='10' id='total' class='total' value='" + preco +"' disabled></td><td><button type='button' class='delete-row'>remover</button></td></tr>";
+						
+						var markup = "<tr class='produtoRow' id='" + item.id_produto +"'><td class='prod' style='width: 160px;'><input type='text' size='25' value='" + val + "' disabled></td><td class='quant'><input type='text' class='number'  id='qtd' maxlength='2' size='2' class='form-control' min='1' value='" + quantidade +"' disabled ></td><td><input type='text' class='preco' value='" + preco +"'  size='5' disabled></td><td><input type='text' size='5' id='total' class='total' value='" + quantidade * preco +"' disabled></td><td><button type='button' class='delete-row'>remover</button></td></tr>";
 						$("table tbody ").append(markup);
 						$("#valor_unitario").empty();
 						$("#input_produtos").val("");					
@@ -310,7 +311,7 @@
 								<a href="#overview" data-toggle="tab">Cadastro de Doação</a>
 							</li>
 						</ul>
-						<div class="tab-content">
+						<div class="tab-content" style="width: 832px;">
 							<div id="overview" class="tab-pane active">
 								<form class="form-horizontal" method="post" id="formulario" onsubmit="return validar()" action="../controle/Control.php" autocomplete="off">
 									<input type="hidden" name="nomeClasse" value="FuncionarioControle">
@@ -357,6 +358,7 @@
 															<a href="cadastro_produto.php" class="fas fa-plus w3-xlarge" style="float:right;" id="produto" class="produto">
 															</a>
 														</th>
+														<th>quantidade<a href="" class="fas fa-plus w3-xlarge" style="float: right;"></a></th>
 														<th>valor unitário</th>
 														<th>incluir</th>
 													</tr>
@@ -366,6 +368,7 @@
 															<datalist id="produtos_autocomplete">
 															</datalist>
 														</td>
+														<td><input type="number" name="quantidade" style="width: 74px;" value="1" min="1" id="quantidade"></td>
 														<td id="valor_unitario"></td>
 														<td >	
 															<button id="add-row incluir" type="button" class="add-row" >incluir</button>
@@ -379,12 +382,8 @@
 													<thead>
 														<tr>
 															
-															<th>Produto
-																<a href="" class="fas fa-plus w3-xlarge" style="float: right;"></a>
-															</th>
-															<th>Quantidade
-																<a href="" class="fas fa-plus w3-xlarge" style="float: right;"></a>
-															</th>
+															<th style="width: 160px;">Produto
+															<th style="width: 85px;">Quantidade</th>
 															<th>Preço</th>
 															<th>Total</th>
 															<th>Ação</th>
@@ -443,7 +442,6 @@
 	<!-- Theme Initialization Files -->
 	<script src="../assets/javascripts/theme.init.js"></script>
 	<script type="text/javascript">
-		
 	</script>
 </body>
 </html>
