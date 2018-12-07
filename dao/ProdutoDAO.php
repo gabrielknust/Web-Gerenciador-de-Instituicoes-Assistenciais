@@ -33,60 +33,33 @@ class ProdutoDAO
 
 	    }
 
-	        public function excluir($idproduto)
+	        public function excluir($id_produto)
 		    {
-		        try {
-		            $sql = 'DELETE from produto WHERE id_produto = :id_produto';
-		            $sql = str_replace("'", "\'", $sql);
-		            $acesso = new Acesso();
-		            
-		            $pdo = $acesso->conexao();
-		            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		            
-		            $stmt = $pdo->prepare($sql);
-		            
-		            $stmt->bindParam(':id_produto', $id_produto);
-		            
-		            $stmt->execute();
-		        } catch (PDOException $e) {
-		            echo 'Error: <b>  na tabela produto = ' . $sql . '</b> <br /><br />' . $e->getMessage();
-		        }
+		        try{
+                $pdo = Conexao::connect();
+                $sql = 'DELETE FROM produto WHERE id_produto = :id_produto';
+                $stmt = $pdo->prepare($sql);
+                $stmt->bindParam(':id_produto',$id_produto);
+                $stmt->execute();
+                
+            }catch (PDOException $e) {
+                    echo 'Error: <b>  na tabela produto = ' . $sql . '</b> <br /><br />' . $e->getMessage();
+            }
 		    }
 		    public function alterar($id_produto,$id_categoria_produto,$id_unidade,$preco,$descricao,$codigo)
 		    {
-		        try {
-		            $sql = 'update produto set id_produto=:id_produto,id_categoria_produto=:id_categoria_produto,
-		            id_unidade=:id_unidade,preco,descricao,codigo';
-		            
-		            $sql = str_replace("'", "\'", $sql);
-		            $acesso = new Acesso();
-		            
-		            $pdo = $acesso->conexao();
-		            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		            
-		            $stmt = $pdo->prepare($sql);
-		            
-		            $stmt->bindParam(':id_categoria_produto',$id_categoria_produto);
-		            $stmt->bindParam(':id_unidade',$id_unidade);
-		            $stmt->bindParam(':preco',$preco);
-		            $stmt->bindParam(':descricao',$descricao);
-		            $stmt->bindParam(':codigo',$codigo);
-
-		            $stmt->execute();
-		        } catch (PDOException $e) {
-		            echo 'Error: <b>  na tabela produto = ' . $sql . '</b> <br /><br />' . $e->getMessage();
-		        }
+		       
 		    }
 		    public function listarTodos(){
 
 	        try{
 	            $produtos=array();
 	            $pdo = Conexao::connect();
-	            $consulta = $pdo->query("SELECT p.preco,p.descricao,p.codigo,c.descricao_categoria,u.descricao_unidade FROM produto p INNER JOIN categoria_produto c ON p.id_categoria_produto = c.id_categoria_produto
+	            $consulta = $pdo->query("SELECT p.id_produto,p.preco,p.descricao,p.codigo,c.descricao_categoria,u.descricao_unidade FROM produto p INNER JOIN categoria_produto c ON p.id_categoria_produto = c.id_categoria_produto
 	            	INNER JOIN unidade u ON u.id_unidade = p.id_unidade");
 	            $x=0;
 	            while($linha = $consulta->fetch(PDO::FETCH_ASSOC)){
-	                $produtos[$x]=array('preco'=>$linha['preco'],'descricao'=>$linha['descricao'],'codigo'=>$linha['codigo'],'descricao_categoria'=>$linha['descricao_categoria'],'descricao_unidade'=>$linha['descricao_unidade']);
+	                $produtos[$x]=array('id_produto'=>$linha['id_produto'],'preco'=>$linha['preco'],'descricao'=>$linha['descricao'],'codigo'=>$linha['codigo'],'descricao_categoria'=>$linha['descricao_categoria'],'descricao_unidade'=>$linha['descricao_unidade']);
 	                $x++;
 	            }
 	            } catch (PDOExeption $e){

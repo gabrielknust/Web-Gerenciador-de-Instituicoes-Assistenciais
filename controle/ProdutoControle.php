@@ -113,16 +113,13 @@ class ProdutoControle
     }
     public function excluir()
     {
-        $produto = new Produto(null,null,null);
-        $produto->setId($_REQUEST['id']);
-       
+        extract($_REQUEST);
         try {
             $produtoDAO = new ProdutoDAO();
-            $produtoDAO->excluir($produto);
-            $msg = "O produto foi excluido com sucesso!";
+            $produtoDAO->excluir($id_produto);
+            header('Location:../html/listar_produto.php');
         } catch (PDOException $e) {
-            $msg = "Não foi possível salvar! Tente novamente";
+            echo "ERROR";
         }
-        header('Location: ../html/msg.php?msg=' . $msg);
     }
 }

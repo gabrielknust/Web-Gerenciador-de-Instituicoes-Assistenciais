@@ -6,12 +6,13 @@
   include_once '../dao/ProdutoDAO.php';
   
   session_start();
-  if(!isset($_SESSION['produto'])){
+  if(!isset($_SESSION['produtos'])){
     header('Location: ../controle/Control.php?metodo=listarTodos&nomeClasse=ProdutoControle&nextPage=../html/listar_produto.php');
   }
-  if(isset($_SESSION['produto'])){
-    $produto = $_SESSION['produto'];
-    session_destroy();  
+  if(isset($_SESSION['produtos'])){
+    $produtos = $_SESSION['produtos'];
+    echo $_SESSION['produtos'];
+    unset($_SESSION['produtos']);
   }
 ?>
 	<!-- Basic -->
@@ -72,33 +73,34 @@
 	<script src="../Functions/mascara.js"></script>
 		
 	<!-- jquery functions -->
-	<script>/*
+	<script>
 		function excluir(id){
-			window.location.replace('../controle/Control.php?metodo=excluir&nomeClasse=produtoControle&id_produto='+id);
+			window.location.replace('../controle/Control.php?metodo=excluir&nomeClasse=ProdutoControle&id_produto='+id);
 		}
 	</script>
 	<script>
 		$(function(){
-			var produto= <?php 
-				echo $produto; 
+			var produtos = <?php 
+				echo $produtos;
 				?>;
 
-			$.each(produto, function(i,item){
+			$.each(produtos, function(i,item){
 
 				$('#tabela')
 				.append($('<tr />')
 					.append($('<td />')
-						.text(item.descricao_produto)
-						)
+						.text(item.codigo))
+					.append($('<td />')
+						.text(item.descricao))
 					.append($('<td />')
 						.append($('<button />')
 							.html('<i class="fas fa-trash-alt"></i>')
 							.attr('onclick','excluir("'+item.id_produto+'")')
 						)
-						.append($('<button/>')
+						/*.append($('<button/>')
 							.html('<i class="fas fa-pencil-alt"</i>')
 							.attr('onclick','alterar("'+item.id_produto+'")')
-						)
+						)*/
 					)
 				);
 			});
@@ -304,4 +306,4 @@
 </html>
 <!--<a href="#" title="" class="btn btn-primary">
 	<span class="icon"><i class="fas fa-trash-alt"></i></span>  remover
-</a>-->										
+</a>-->

@@ -57,7 +57,7 @@ class DestinoControle
     public function excluir(){
         extract($_REQUEST);
         try {
-            $destinoDAO=new DestinoDAO();
+            $destinoDAO = new DestinoDAO();
             $destinoDAO->excluir($id_destino);
             header('Location:../html/listar_destino.php');
         } catch (PDOException $e) {
