@@ -2,40 +2,39 @@
 <html class="fixed">
 <head>
 	<?php session_start(); 
-
-	include_once '../dao/Conexao.php';
-	include_once '../dao/AlmoxarifadoDAO.php';
-	include_once '../dao/TipoEntradaDAO.php';
-	include_once '../dao/ProdutoDAO.php';
+		include_once '../dao/Conexao.php';
+		include_once '../dao/AlmoxarifadoDAO.php';
+		include_once '../dao/TipoEntradaDAO.php';
+		include_once '../dao/ProdutoDAO.php';
 	
-	if (!isset($_SESSION['almoxarifado'])) {
-		header('Location: ../controle/control.php?metodo=listarTodos&nomeClasse=AlmoxarifadoControle&nextPage=../html/cadastro_entrada.php');
-	}
-	if(!isset($_SESSION['tipo_entrada'])){
-		header('Location: ../controle/control.php?metodo=listarTodos&nomeClasse=TipoEntradaControle&nextPage=../html/cadastro_entrada.php');	
-	}
-	if(!isset($_SESSION['autocomplete'])) {
-		header('Location: ../controle/control.php?metodo=listarDescricao&nomeClasse=ProdutoControle&nextPage=../html/cadastro_entrada.php');
+		if (!isset($_SESSION['almoxarifado'])) {
+			header('Location: ../controle/control.php?metodo=listarTodos&nomeClasse=AlmoxarifadoControle&nextPage=../html/cadastro_entrada.php');
 		}
-	if(!isset($_SESSION['origem'])) {
-		header('Location: ../controle/control.php?metodo=listarId_Nome&nomeClasse=OrigemControle&nextPage=../html/cadastro_entrada.php');
-	}
-	if(isset($_SESSION['almoxarifado']) && isset($_SESSION['tipo_entrada']) &&  isset($_SESSION['autocomplete']) && isset($_SESSION['origem'])){
+		if(!isset($_SESSION['tipo_entrada'])){
+			header('Location: ../controle/control.php?metodo=listarTodos&nomeClasse=TipoEntradaControle&nextPage=../html/cadastro_entrada.php');	
+		}
+		if(!isset($_SESSION['autocomplete'])) {
+			header('Location: ../controle/control.php?metodo=listarDescricao&nomeClasse=ProdutoControle&nextPage=../html/cadastro_entrada.php');
+		}
+		if(!isset($_SESSION['origem'])) {
+			header('Location: ../controle/control.php?metodo=listarId_Nome&nomeClasse=OrigemControle&nextPage=../html/cadastro_entrada.php');
+		}
+		if(isset($_SESSION['almoxarifado']) && isset($_SESSION['tipo_entrada']) &&  isset($_SESSION['autocomplete']) && isset($_SESSION['origem'])){
 
-		$almoxarifado = $_SESSION['almoxarifado'];
-		$tipo_entrada = $_SESSION['tipo_entrada'];
-		$autocomplete = $_SESSION['autocomplete'];
-		$origem = $_SESSION['origem'];
-		echo $autocomplete;
-		unset($_SESSION['almoxarifado']);
-		unset($_SESSION['tipo_entrada']);
-		unset($_SESSION['autocomplete']);
-		unset($_SESSION['origem']);
-	}
-?>
+			$almoxarifado = $_SESSION['almoxarifado'];
+			$tipo_entrada = $_SESSION['tipo_entrada'];
+			$autocomplete = $_SESSION['autocomplete'];
+			$origem = $_SESSION['origem'];
+			echo $autocomplete;
+			unset($_SESSION['almoxarifado']);
+			unset($_SESSION['tipo_entrada']);
+			unset($_SESSION['autocomplete']);
+			unset($_SESSION['origem']);
+		}
+	?>
+	
 	<!-- Basic -->
 	<meta charset="UTF-8">
-
 	<title>Cadastro entrada</title>
 
 	<!-- Mobile Metas -->
@@ -62,52 +61,46 @@
 	<script src="../assets/vendor/modernizr/modernizr.js"></script>
 
 	<!-- Javascript functions -->
-
 	<script src="../assets/vendor/jquery/jquery.min.js"></script>
-
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 	<script type="text/javascript">
-	$(function() {
+		$(function() {
 
-				var almoxarifado = <?php 
+			var almoxarifado = <?php 
 				echo $almoxarifado;
 			?>;
+				
 			var tipo_entrada = <?php 
 				echo $tipo_entrada; 
 			?>;
+			
 			var produtos_autocomplete = <?php
 				echo $autocomplete;
 			?>;
+			
 			var origem = <?php
 				echo $origem;
 			?>;
 
 			$.each(almoxarifado,function(i,item){
-
 				$('#almoxarifado').append('<option value="' + item.id_almoxarifado + '">' + item.descricao_almoxarifado + '</option>');
-
 			})
 
 			$.each(tipo_entrada,function(i,item){
-
 				$('#tipo_entrada').append('<option value="' + item.id_tipo + '">' + item.descricao + '</option>');
-
 			})
 
 			$.each(produtos_autocomplete,function(i,item){
-
 				$('#produtos_autocomplete').append('<option value="' + item.id_produto + '-' + item.descricao + '">');
-
 			})
 
 			$.each(origem,function(i,item){
-
 				$('#origens').append('<option value="' + item.id_origem + '-' + item.nome + '">');
-
 			})
+
 			$('#input_produtos').on('input',function(){
 				var teste=this.value.split('-');
 				$.each(produtos_autocomplete,function(i,item){
@@ -117,52 +110,47 @@
 						$("#quantidade").focus();
 					}
 				})
+			
 			});
+			//adicionar tabela
+			$(".add-row").click(function(){
+				var val=$("#input_produtos").val();
 
+				var obj=$("#produtos_autocomplete").find("option[value='"+val+"']");
 
+				var produto = $("#input_produtos").val();
 
+				produto = produto.split("-");
 
-		//adicionar tabela
-		$(".add-row").click(function(){
-			var val=$("#input_produtos").val();
+ 				if(obj !=null && obj.length>0){
 
-			var obj=$("#produtos_autocomplete").find("option[value='"+val+"']");
-
-			var produto = $("#input_produtos").val();
-			produto = produto.split("-");
- 			if(obj !=null && obj.length>0){
-
- 				$.each(produtos_autocomplete,function(i,item){
+ 					$.each(produtos_autocomplete,function(i,item){
 					if(produto[0]==item.id_produto && produto[1]==item.descricao)
 					{
 						var quantidade = $("#quantidade").val();
 						var preco = item.preco;
 						
 						var markup = "<tr class='produtoRow' id='" + item.id_produto +"'><td class='prod' style='width: 160px;'><input type='text' size='25' value='" + val + "' disabled></td><td class='quant'><input type='text' class='number'  id='qtd' maxlength='2' size='2' class='form-control' min='1' value='" + quantidade +"' disabled ></td><td><input type='text' class='preco' value='" + preco +"'  size='5' disabled></td><td><input type='text' size='5' id='total' class='total' value='" + quantidade * preco +"' disabled></td><td><button type='button' class='delete-row'>remover</button></td></tr>";
-						$("table tbody ").append(markup);
-						$("#valor_unitario").empty();
-						$("#input_produtos").val("");					
-					}
-				})
-				
- 			}
-    		else{
-    		 alert("Produto inválido!");
-    		 $("#input_produtos").val("");
-    		 $("#input_produtos").focus();
-    		 $("#valor_unitario").empty();
-    		}
-			
-		});
+							$("table tbody ").append(markup);
+							$("#valor_unitario").empty();
+							$("#input_produtos").val("");					
+						}
+					})
+				}else{
+    		 		alert("Produto inválido!");
+	    		 $("#input_produtos").val("");
+	    		 $("#input_produtos").focus();
+	    		 $("#valor_unitario").empty();
+    			}
+			});
 
+			//remover tabela
+			$("table tbody").on('click','.delete-row',function(){
+				$(this).closest('tr').remove();
+			});
 
-		//remover tabela
-		$("table tbody").on('click','.delete-row',function(){
-			$(this).closest('tr').remove();
-		});
-
-		// validar origem
-		$("#origem").blur(function(){
+			// validar origem
+			$("#origem").blur(function(){
 			var val=$("#origem").val();
 			var obj=$("#origens").find("option[value='"+val+"']");
 			if(obj !=null && obj.length>0){
@@ -173,10 +161,9 @@
 				$("#origem").val("");
 			}
 		});
-
 	});
-
 	</script>
+	
 	<!-- Script para validar formulário -->
 	<script>
 		function validar(){
@@ -195,6 +182,22 @@
 			}
 		}
 	</script>
+
+	<!--CSS-->
+	<style type="text/css">
+		.row{
+			display: flex;
+			flex-direction: row;
+			justify-content: center;
+			align-items: center
+		}
+		.box{		
+			padding-right: 34px;
+			border-right-width: 23px;
+			right: 50px;
+			width: 796px;
+		}
+	</style>
 </head>
 <body>
 	<section class="body">
@@ -304,8 +307,7 @@
 
 				<!-- start: page -->
 				<div class="row">
-					<div class="col-md-4 col-lg-2" style=" visibility: hidden;"></div>
-					<div class="col-md-8 col-lg-8" >
+					<div class="col-md-8 col-lg-8 box">
 						<ul class="nav nav-tabs tabs-primary">
 							<li class="active">
 								<a href="#overview" data-toggle="tab">Cadastro de Doação</a>
