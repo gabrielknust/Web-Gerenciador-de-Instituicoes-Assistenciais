@@ -4,7 +4,7 @@
 	<!-- Basic -->
 	<meta charset="UTF-8">
 
-	<title>Cadastro de Doador</title>
+	<title>Cadastro de Destino</title>
 
 	<!-- Mobile Metas -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
@@ -186,8 +186,8 @@
 											<div class="form-group">
 												<label class="col-md-3 control-label" for="profileCompany">Número do CPF</label>
 												<div class="col-md-6">
-													<input type="text" class="form-control" id="cpf" name="cpf" placeholder="Ex: 222.222.222-22" maxlength="14" onkeypress="return Onlynumbers(event)" onkeyup="mascara('###.###.###-##',this,event)">
-												</div>														
+													<input type="text" class="form-control" id="profileCompany" id="cpf" name="cpf" placeholder="Ex: 222.222.222-22" maxlength="14" onblur="validarCPF(this.value)"" onkeypress="return Onlynumbers(event)" onkeyup="mascara('###.###.###-##',this,event)" required>
+												</div>													
 											</div>
 											
 											<div class="form-group">
@@ -202,7 +202,7 @@
 												<div class="col-md-9 col-md-offset-3">
 													<input type="submit" class="btn btn-primary" onclick="return enviar_dados()">
 													<input type="reset" class="btn btn-default">
-													<a href="doacao.php" color: white; text-decoration: none;>
+													<a href="cadastro_saida.php" color: white; text-decoration: none;>
 														<button type="button" class="btn btn-info">voltar</button>
 													</a>
 													<a href="listar_destino.php" style="color: white; text-decoration: none;"><button class="btn btn-success" type="button">Listar Destino</button></a>

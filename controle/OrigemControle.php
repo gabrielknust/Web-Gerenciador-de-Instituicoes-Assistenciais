@@ -57,7 +57,7 @@ class OrigemControle
             $_SESSION['msg']="origem cadastrado com sucesso";
             $_SESSION['proxima']="Cadastrar outra Origem";
             $_SESSION['link']="../html/cadastro_doador.php";
-            header("Location: ../html/cadastro_produto.php");
+            header("Location: ../html/cadastro_doador.php");
         } catch (PDOException $e){
             $msg= "NÃ£o foi possÃ­vel registrar o tipo"."<br>".$e->getMessage();
             echo $msg;

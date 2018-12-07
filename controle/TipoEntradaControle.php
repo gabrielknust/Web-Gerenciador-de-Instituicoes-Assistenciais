@@ -33,7 +33,7 @@ class TipoEntradaControle
             $_SESSION['msg']="TipoEntrada cadastrado com sucesso";
             $_SESSION['proxima']="Cadastrar outro TipoEntrada";
             $_SESSION['link']="../html/adicionar_tipoEntrada.php";
-            header("Location: ../html/cadastro_entrada.php");
+            header("Location: ../html/adicionar_tipoEntrada.php");
         } catch (PDOException $e){
             $msg= "NÃ£o foi possÃ­vel registrar o tipo"."<br>".$e->getMessage();
             echo $msg;

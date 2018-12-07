@@ -31,7 +31,7 @@ class AlmoxarifadoControle
             $_SESSION['msg']="Almoxarifado cadastrado com sucesso";
             $_SESSION['proxima']="Cadastrar outro almoxarifado";
             $_SESSION['link']="../html/adicionar_almoxarifado.php";
-            header("Location: ../html/cadastro_entrada.php");
+            header("Location: ../html/adicionar_almoxarifado.php");
         } catch (PDOException $e){
             $msg= "NÃ£o foi possÃ­vel registrar o almoxarifado"."<br>".$e->getMessage();
             echo $msg;

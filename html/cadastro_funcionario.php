@@ -12,168 +12,141 @@
 ?>
 <!doctype html>
 <html class="fixed">
-	<head>
+<head>
+	<!-- Basic -->
+	<meta charset="UTF-8">
 
-		<!-- Basic -->
-		<meta charset="UTF-8">
+	<title>Cadastro de Funcionário</title>
+	<meta name="keywords" content="HTML5 Admin Template" />
+	<meta name="description" content="Porto Admin - Responsive HTML5 Template">
+	<meta name="author" content="okler.net">
 
-		<title>Cadastro de Funcionário</title>
-		<meta name="keywords" content="HTML5 Admin Template" />
-		<meta name="description" content="Porto Admin - Responsive HTML5 Template">
-		<meta name="author" content="okler.net">
+	<!-- Mobile Metas -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
-		<!-- Mobile Metas -->
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<!-- Web Fonts  -->
+	<link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800|Shadows+Into+Light" rel="stylesheet" type="text/css">
 
-		<!-- Web Fonts  -->
-		<link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800|Shadows+Into+Light" rel="stylesheet" type="text/css">
+	<!-- Vendor CSS -->
+	<link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.css" />
+	<link rel="stylesheet" href="../assets/vendor/font-awesome/css/font-awesome.css" />
+	<link rel="stylesheet" href="../assets/vendor/fontawesome/svg-with-js/css/fa-svg-with-js.css" />
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	<link rel="stylesheet" href="../assets/vendor/magnific-popup/magnific-popup.css" />
+	<link rel="stylesheet" href="../assets/vendor/bootstrap-datepicker/css/datepicker3.css" />
+	<link rel="icon" href="../img/logofinal.png" type="image/x-icon">
 
-		<!-- Vendor CSS -->
-		<link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.css" />
-		<link rel="stylesheet" href="../assets/vendor/font-awesome/css/font-awesome.css" />
-		<link rel="stylesheet" href="../assets/vendor/fontawesome/svg-with-js/css/fa-svg-with-js.css" />
-		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
-		<link rel="stylesheet" href="../assets/vendor/magnific-popup/magnific-popup.css" />
-		<link rel="stylesheet" href="../assets/vendor/bootstrap-datepicker/css/datepicker3.css" />
-		<link rel="icon" href="../img/logofinal.png" type="image/x-icon">
+	<!-- Theme CSS -->
+	<link rel="stylesheet" href="../assets/stylesheets/theme.css" />
 
-		<!-- Theme CSS -->
-		<link rel="stylesheet" href="../assets/stylesheets/theme.css" />
+	<!-- Skin CSS -->
+	<link rel="stylesheet" href="../assets/stylesheets/skins/default.css" />
 
-		<!-- Skin CSS -->
-		<link rel="stylesheet" href="../assets/stylesheets/skins/default.css" />
+	<!-- Theme Custom CSS -->
+	<link rel="stylesheet" href="../assets/stylesheets/theme-custom.css">
 
-		<!-- Theme Custom CSS -->
-		<link rel="stylesheet" href="../assets/stylesheets/theme-custom.css">
+	<!-- Head Libs -->
+	<script src="../assets/vendor/modernizr/modernizr.js"></script>
 
-		<!-- Head Libs -->
-		<script src="../assets/vendor/modernizr/modernizr.js"></script>
-
-		<!-- Javascript functions -->
-		<script src="../Functions/onlyNumbers.js"></script>
-		<script src="../Functions/onlyChars.js"></script>
-		<script src="../Functions/enviar_dados.js"></script>
-		<script src="../Functions/mascara.js"></script>
-		<script src="../Functions/validar_senha.js"></script>
-		<script type="text/javascript" >
-
-	function numero_residencial(){
-		if($("#numResidencial").prop('checked')){
-
-			document.getElementById("numero_residencia").disabled = true;
-
-		}else {
-
-			document.getElementById("numero_residencia").disabled = false;
-
+	<!-- Javascript functions -->
+	<script src="../Functions/onlyNumbers.js"></script>
+	<script src="../Functions/onlyChars.js"></script>
+	<script src="../Functions/enviar_dados.js"></script>
+	<script src="../Functions/mascara.js"></script>
+	<script src="../Functions/validar_senha.js"></script>
+	
+	<script type="text/javascript" >
+		function numero_residencial(){
+			if($("#numResidencial").prop('checked')){
+				document.getElementById("numero_residencia").disabled = true;
+			}else {
+				document.getElementById("numero_residencia").disabled = false;
+			}
 		}
-	}
 
+		function exibir_vale_transporte() {
+			$("#esconder_exibir").show();
+		}
 
-	function exibir_vale_transporte() {
+		function esconder_vale_transporte() {
+			document.getElementById('num_transporte').value=("");
+			$("#esconder_exibir").hide();
+		}
 
-		$("#esconder_exibir").show();
+		function exibir_reservista() {
+			$("#reservista1").show();
+			$("#reservista2").show();
+		}
 
-	}
-
-	function esconder_vale_transporte() {
-		
-		document.getElementById('num_transporte').value=("");
-		$("#esconder_exibir").hide();
-
-	}
-
-	function exibir_reservista() {
-
-		$("#reservista1").show();
-		$("#reservista2").show();
-	}
-
-	function esconder_reservista() {
-
-		$('.num_reservista').val("");
-		$('.serie_reservista').val("");
-
-		$("#reservista1").hide();
-		$("#reservista2").hide();
-	}
+		function esconder_reservista() {
+			$('.num_reservista').val("");
+			$('.serie_reservista').val("");
+			$("#reservista1").hide();
+			$("#reservista2").hide();
+		}
     
-    function limpa_formulário_cep() {
+    	function limpa_formulário_cep() {
             //Limpa valores do formulário de cep.
             document.getElementById('rua').value=("");
             document.getElementById('bairro').value=("");
             document.getElementById('cidade').value=("");
             document.getElementById('uf').value=("");
             document.getElementById('ibge').value=("");
-    }
+  		}
 
-    function meu_callback(conteudo) {
-        if (!("erro" in conteudo)) {
-            //Atualiza os campos com os valores.
-            document.getElementById('rua').value=(conteudo.logradouro);
-            document.getElementById('bairro').value=(conteudo.bairro);
-            document.getElementById('cidade').value=(conteudo.localidade);
-            document.getElementById('uf').value=(conteudo.uf);
-            document.getElementById('ibge').value=(conteudo.ibge);
-        } //end if.
-        else {
-            //CEP não Encontrado.
-            limpa_formulário_cep();
-            alert("CEP não encontrado.");
-        }
-    }
+    	function meu_callback(conteudo) {
+        	if (!("erro" in conteudo)) {
+				//Atualiza os campos com os valores.
+				document.getElementById('rua').value=(conteudo.logradouro);
+				document.getElementById('bairro').value=(conteudo.bairro);
+				document.getElementById('cidade').value=(conteudo.localidade);
+				document.getElementById('uf').value=(conteudo.uf);
+				document.getElementById('ibge').value=(conteudo.ibge);
+			}else{
+				//CEP não Encontrado.
+				limpa_formulário_cep();
+				alert("CEP não encontrado.");
+			}
+		}
         
-    function pesquisacep(valor) {
-
-        //Nova variável "cep" somente com dígitos.
-        var cep = valor.replace(/\D/g, '');
-
-        //Verifica se campo cep possui valor informado.
-        if (cep != "") {
-
-            //Expressão regular para validar o CEP.
-            var validacep = /^[0-9]{8}$/;
-
-            //Valida o formato do CEP.
-            if(validacep.test(cep)) {
-
-                //Preenche os campos com "..." enquanto consulta webservice.
-                document.getElementById('rua').value="...";
-                document.getElementById('bairro').value="...";
-                document.getElementById('cidade').value="...";
-                document.getElementById('uf').value="...";
-                document.getElementById('ibge').value="...";
-
-                //Cria um elemento javascript.
-                var script = document.createElement('script');
-
-                //Sincroniza com o callback.
-                script.src = 'https://viacep.com.br/ws/'+ cep + '/json/?callback=meu_callback';
-
-                //Insere script no documento e carrega o conteúdo.
-                document.body.appendChild(script);
-
-            } //end if.
-            else {
-                //cep é inválido.
-                limpa_formulário_cep();
-                alert("Formato de CEP inválido.");
-            }
-        } //end if.
-        else {
-            //cep sem valor, limpa formulário.
-            limpa_formulário_cep();
-        }
-
-    };
-
-    function testaCPF(strCPF) { //strCPF é o cpf que será validado. Ele deve vir em formato string e sem nenhum tipo de pontuação.
-            var strCPF = strCPF.replace(/[^\d]+/g,''); // Limpa a string do CPF removendo espaços em branco e caracteres especiais. 
-                                                        // PODE SER QUE NÃO ESTEJA LIMPANDO COMPLETAMENTE. FAVOR FAZER O TESTE!!!!
-            var Soma;
-            var Resto;
-            Soma = 0;
-            if (strCPF == "00000000000") return false;
+		function pesquisacep(valor) {
+			//Nova variável "cep" somente com dígitos.
+			var cep = valor.replace(/\D/g, '');
+			//Verifica se campo cep possui valor informado.
+			if (cep != ""){
+				//Expressão regular para validar o CEP.
+				var validacep = /^[0-9]{8}$/;
+				//Valida o formato do CEP.
+				if(validacep.test(cep)) {
+					//Preenche os campos com "..." enquanto consulta webservice.
+					document.getElementById('rua').value="...";
+					document.getElementById('bairro').value="...";
+					document.getElementById('cidade').value="...";
+					document.getElementById('uf').value="...";
+					document.getElementById('ibge').value="...";
+					//Cria um elemento javascript.
+					var script = document.createElement('script');
+					//Sincroniza com o callback.
+					script.src = 'https://viacep.com.br/ws/'+ cep + '/json/?callback=meu_callback';
+					//Insere script no documento e carrega o conteúdo.
+					document.body.appendChild(script);
+	            }else{
+					//cep é inválido.
+					limpa_formulário_cep();
+					alert("Formato de CEP inválido.");
+				}
+			}else{
+				//cep sem valor, limpa formulário.
+				limpa_formulário_cep();
+			}
+		};
+		function testaCPF(strCPF) { //strCPF é o cpf que será validado. Ele deve vir em formato string e sem nenhum tipo de pontuação.
+			var strCPF = strCPF.replace(/[^\d]+/g,''); // Limpa a string do CPF removendo espaços em branco e caracteres especiais. 
+			// PODE SER QUE NÃO ESTEJA LIMPANDO COMPLETAMENTE. FAVOR FAZER O TESTE!!!!
+			var Soma;
+			var Resto;
+			Soma = 0;
+			if (strCPF == "00000000000") return false;
             
             for (i=1; i<=9; i++) Soma = Soma + parseInt(strCPF.substring(i-1, i)) * (11 - i);
             Resto = (Soma * 10) % 11;

@@ -49,8 +49,86 @@
 				return false;
 			}
 		}
-	</script>
+		function testaCPF(strCPF) { //strCPF é o cpf que será validado. Ele deve vir em formato string e sem nenhum tipo de pontuação.
+			var strCPF = strCPF.replace(/[^\d]+/g,''); // Limpa a string do CPF removendo espaços em branco e caracteres especiais. 
+			// PODE SER QUE NÃO ESTEJA LIMPANDO COMPLETAMENTE. FAVOR FAZER O TESTE!!!!
+			var Soma;
+			var Resto;
+			Soma = 0;
+			if (strCPF == "00000000000") return false;
+            
+            for (i=1; i<=9; i++) Soma = Soma + parseInt(strCPF.substring(i-1, i)) * (11 - i);
+            Resto = (Soma * 10) % 11;
+            
+            if ((Resto == 10) || (Resto == 11))  Resto = 0;
+            if (Resto != parseInt(strCPF.substring(9, 10)) ) return false;
+            
+            Soma = 0;
+            for (i = 1; i <= 10; i++) Soma = Soma + parseInt(strCPF.substring(i-1, i)) * (12 - i);
+            Resto = (Soma * 10) % 11;
+            
+            if ((Resto == 10) || (Resto == 11))  Resto = 0;
+            if (Resto != parseInt(strCPF.substring(10, 11) ) ) return false;
+            return true;
+    	}
 
+		function validarCPF(strCPF){
+			if (!testaCPF(strCPF)){
+				$('#cpfInvalido').show();
+				document.getElementById("enviar").disabled = true;
+			}else{
+				$('#cpfInvalido').hide();
+				document.getElementById("enviar").disabled = false;
+			}
+		}
+		function validarCNPJ(cnpj) {
+			cnpj = cnpj.replace(/[^\d]+/g,'');
+			
+			if(cnpj == '') return false;
+			
+			if (cnpj.length != 14)	return false;
+			// Elimina CNPJs invalidos conhecidos
+			if (cnpj == "00000000000000" || 
+				cnpj == "11111111111111" || 
+				cnpj == "22222222222222" || 
+				cnpj == "33333333333333" || 
+				cnpj == "44444444444444" || 
+				cnpj == "55555555555555" || 
+				cnpj == "66666666666666" || 
+				cnpj == "77777777777777" || 
+				cnpj == "88888888888888" || 
+				cnpj == "99999999999999")
+				return false;
+		    // Valida DVs
+		tamanho = cnpj.length - 2
+		numeros = cnpj.substring(0,tamanho);
+		digitos = cnpj.substring(tamanho);
+		soma = 0;
+		pos = tamanho - 7;
+		for (i = tamanho; i >= 1; i--){
+			soma += numeros.charAt(tamanho - i) * pos--;
+			if (pos < 2)
+				pos = 9;
+		}
+		resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+		if (resultado != digitos.charAt(0))
+		return false;
+	
+		tamanho = tamanho + 1;
+		numeros = cnpj.substring(0,tamanho);
+		soma = 0;
+		pos = tamanho - 7;
+		for (i = tamanho; i >= 1; i--) {
+			soma += numeros.charAt(tamanho - i) * pos--;
+			if (pos < 2)
+				pos = 9;
+		}
+		resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+		if (resultado != digitos.charAt(1))
+			return false;
+			return true;
+		}
+	</script>
 </head>
 <body>
 	<section class="body">
@@ -186,7 +264,7 @@
 							</ul>
 							<div class="tab-content">
 								<div id="overview" class="tab-pane active">
-									<form class="form-horizontal" method="post" action="../controle/control.php" onsubmit="return validar()" autocomplete="off">
+									<form class="doador" method="post" action="../controle/control.php" onsubmit="return validar()" autocomplete="off" >
 										<input type="hidden" name="nomeClasse" value="OrigemControle">
 										<input type="hidden" name="metodo" value="incluir">
 										<fieldset>
@@ -203,12 +281,21 @@
 													<input type="text" class="form-control" id="cnpj" name="cnpj" placeholder="Ex: 14.732.231/0001-02" maxlength="18" onkeypress="return Onlynumbers(event)" onkeyup="mascara('##.###.###/####-##',this,event)" >
 												</div>														
 											</div>
-											<div class="form-group" >
+											
+											<div class="form-group">
 												<label class="col-md-3 control-label" for="profileCompany">Número do CPF</label>
 												<div class="col-md-6">
-													<input type="text" class="form-control" id="NCPF" name="num_cpf" placeholder="Ex: 222.222.222-22" maxlength="14" onkeypress="return Onlynumbers(event)" onkeyup="mascara('###.###.###-##',this,event)" >
+													<input type="text" class="form-control" id="NCPF" name="num_cpf" placeholder="Ex: 222.222.222-22" maxlength="14" onblur="validarCPF(this.value)" onkeypress="return Onlynumbers(event)" onkeyup="mascara('###.###.###-##',this,event)" required>
 												</div>														
 											</div>
+
+											<div class="form-group">
+												<label class="col-md-3 control-label" for="profileCompany"></label>
+												<div class="col-md-6">
+													<p id="cpfInvalido" style="display: none; color: #b30000">CPF INVÁLIDO!</p>
+												</div>														
+											</div>
+	
 											<div class="form-group">
 												<label class="col-md-3 control-label" for="profileCompany">Telefone</label>
 												<div class="col-md-6">
@@ -217,18 +304,17 @@
 											</div>
 												<input type="hidden" name="nomeClasse" value="OrigemControle">
 												<input type="hidden" name="metodo" value="incluir">
+											
 											<div class="row">
 												<div class="col-md-9 col-md-offset-3">
-													<input type="submit" class="btn btn-primary">
+													<button id="enviar" class="btn btn-primary" type="submit">Enviar</button>
 													<input type="reset" class="btn btn-default">
 													<a href="cadastro_entrada.php" color: white; text-decoration: none;>
 														<button type="button" class="btn btn-info">voltar</button>
 													</a>
-													<a href="listar_origem.php" style="color: white; text-decoration:none;">				<button class="btn btn-success" type="button">Listar doadores</button></a>
+													<a href="listar_origem.php" style="color: white; text-decoration:none;"><button class="btn btn-success" type="button">Listar doadores</button></a>
 												</div>
 											</div>
-												
-											
 										</fieldset>
 									</form>
 								</div>
@@ -239,7 +325,6 @@
 					<!-- end: page -->
 			</section>
 		</div>
-		
 	</section>
 
 	<!-- Vendor -->

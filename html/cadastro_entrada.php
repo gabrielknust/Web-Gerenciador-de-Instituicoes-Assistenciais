@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="fixed">
+<html class="js flexbox flexboxlegacy csstransforms csstransforms3d no-overflowscrolling translated-ltr">
 <head>
 	<?php session_start(); 
 		include_once '../dao/Conexao.php';
@@ -25,7 +25,6 @@
 			$tipo_entrada = $_SESSION['tipo_entrada'];
 			$autocomplete = $_SESSION['autocomplete'];
 			$origem = $_SESSION['origem'];
-			echo $autocomplete;
 			unset($_SESSION['almoxarifado']);
 			unset($_SESSION['tipo_entrada']);
 			unset($_SESSION['autocomplete']);
@@ -65,6 +64,7 @@
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  	<link type="text/css" rel="stylesheet" charset="UTF-8" href="https://translate.googleapis.com/translate_static/css/translateelement.css">
 
 	<script type="text/javascript">
 		$(function() {
@@ -130,7 +130,7 @@
 						var quantidade = $("#quantidade").val();
 						var preco = item.preco;
 						
-						var markup = "<tr class='produtoRow' id='" + item.id_produto +"'><td class='prod' style='width: 160px;'><input type='text' size='25' value='" + val + "' disabled></td><td class='quant'><input type='text' class='number'  id='qtd' maxlength='2' size='2' class='form-control' min='1' value='" + quantidade +"' disabled ></td><td><input type='text' class='preco' value='" + preco +"'  size='5' disabled></td><td><input type='text' size='5' id='total' class='total' value='" + quantidade * preco +"' disabled></td><td><button type='button' class='delete-row'>remover</button></td></tr>";
+						var markup = "<tr class='produtoRow' id='" + item.id_produto +"'><td class='prod' style='width: 160px;'><input type='text' size='25' value='" + val + "' disabled></td><td class='quant'><input type='text' class='number'  id='qtd' maxlength='2' size='2' class='form-control' min='1' value='" + quantidade +"' disabled ></td><td><input type='text' class='preco' value='" + preco +"'  size='2' disabled></td><td><input type='text' size='3' id='total' class='total' value='" + quantidade * preco +"' disabled></td><td><button type='button' class='delete-row'>remover</button></td></tr>";
 							$("table tbody ").append(markup);
 							$("#valor_unitario").empty();
 							$("#input_produtos").val("");					
@@ -167,7 +167,6 @@
 	<!-- Script para validar formulário -->
 	<script>
 		function validar(){
-			
 			var almox = document.getElementById("almoxarifado");
 			var tipo = document.getElementById("tipo_entrada");
 			if(almox.value == "blank"){
@@ -181,15 +180,21 @@
 				return false;
 			}
 		}
+		
 	</script>
+
+
 
 	<!--CSS-->
 	<style type="text/css">
+		.body{
+			position: relative;
+		}
 		.row{
 			display: flex;
 			flex-direction: row;
 			justify-content: center;
-			align-items: center
+			align-items: center;
 		}
 		.box{		
 			padding-right: 34px;
@@ -243,6 +248,7 @@
 			<!-- end: search & user box -->
 		</header>
 		<!-- end: header -->
+		
 		<div class="inner-wrapper">
 			<!-- start: sidebar -->
 			<aside id="sidebar-left" class="sidebar-left">
@@ -321,41 +327,40 @@
 									<fieldset>
 										<div class="info-entrada" >
 											<div class="form-group">
-													<label class="col-md-3 control-label" >Origem</label>
-													<div class="col-md-8">
-														<input type="search" list="origens" id="origem" name="origem" class="form-control" autocomplete="off" required>
-														<datalist id="origens">
-														</datalist>
-													</div>
-													<a href="cadastro_doador.php"><i class="fas fa-plus w3-xlarge"></i></a>
+												<label class="col-md-3 control-label" >Origem</label>
+												<div class="col-md-8">
+													<input type="search" list="origens" id="origem" name="origem" class="form-control" autocomplete="off" required>
+													<datalist id="origens">
+													</datalist>
 												</div>
+												<a href="cadastro_doador.php"><i class="fas fa-plus w3-xlarge"></i></a>
+											</div>
+											
+											<div class="form-group">
+												<label class="col-md-3 control-label" >Almoxarifado</label>
+												<div class="col-md-6">
+													<select class="form-control " name="almoxarifado" id="almoxarifado">
+														<option selected disabled value="blank">Selecionar</option>
+													</select>
+												</div>
+												<a href="adicionar_almoxarifado.php"><i class="fas fa-plus w3-xlarge"></i></a>
+											</div>
 
 											<div class="form-group">
-													<label class="col-md-3 control-label" >Almoxarifado</label>
-													<div class="col-md-6">
-														<select class="form-control " name="almoxarifado" id="almoxarifado">
-															<option selected disabled value="blank">Selecionar</option>
-														</select>
-													</div>
-													<a href="adicionar_almoxarifado.php"><i class="fas fa-plus w3-xlarge"></i></a>
+												<label class="col-md-3 control-label" >Tipo</label>
+												<div class="col-md-6">
+													<select class="form-control " name="tipo_entrada" id="tipo_entrada">
+														<option selected disabled value="blank">Selecionar</option>
+													</select>
 												</div>
-
-											<div class="form-group">
-													<label class="col-md-3 control-label" >Tipo</label>
-													<div class="col-md-6">
-														<select class="form-control " name="tipo_entrada" id="tipo_entrada">
-															<option selected disabled value="blank">Selecionar</option>
-														</select>
-													</div>
-													<a href="adicionar_tipoEntrada.php"><i class="fas fa-plus w3-xlarge"></i></a>
-												</div>
-												
+												<a href="adicionar_tipoEntrada.php"><i class="fas fa-plus w3-xlarge"></i></a>
+											</div>
 										</div>
 										
 										<div class="panel-body" >
 											<table class="table table-bordered mb-none">
 												<thead>
-													<tr>
+													<tr style="width: 768px;">
 														<th>Produto
 															<a href="cadastro_produto.php" class="fas fa-plus w3-xlarge" style="float:right;" id="produto" class="produto">
 															</a>
@@ -418,13 +423,11 @@
 				</div>
 			</section>
 		</div>
-
 		<!-- end: page -->
 	</section>
 
 
 	<!-- Vendor -->
-	
 	<script src="../assets/vendor/jquery-browser-mobile/jquery.browser.mobile.js"></script>
 	<script src="../assets/vendor/bootstrap/js/bootstrap.js"></script>
 	<script src="../assets/vendor/nanoscroller/nanoscroller.js"></script>
