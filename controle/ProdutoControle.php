@@ -122,4 +122,17 @@ class ProdutoControle
             echo "ERROR";
         }
     }
+
+    public function listarId(){
+        extract($_REQUEST);
+        try{
+            $produtoDAO = new ProdutoDAO();
+            $produto = $produtoDAO->listarId($id_produto);
+            session_start();
+            $_SESSION['produto'] = $produto;
+            header('Location: ' . $nextPage);
+        } catch (PDOException $e) {
+            echo "ERROR: " . $e->getMessage();
+        }
+    }
 }

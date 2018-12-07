@@ -11,7 +11,6 @@
   }
   if(isset($_SESSION['produtos'])){
     $produtos = $_SESSION['produtos'];
-    echo $_SESSION['produtos'];
     unset($_SESSION['produtos']);
   }
 ?>
@@ -77,6 +76,9 @@
 		function excluir(id){
 			window.location.replace('../controle/Control.php?metodo=excluir&nomeClasse=ProdutoControle&id_produto='+id);
 		}
+		function alterar(id){
+			window.location.replace('../controle/Control.php?metodo=listarId&nomeClasse=ProdutoControle&nextPage= ../html/alterar_produto.php&id_produto='+id);
+		}
 	</script>
 	<script>
 		$(function(){
@@ -97,10 +99,10 @@
 							.html('<i class="fas fa-trash-alt"></i>')
 							.attr('onclick','excluir("'+item.id_produto+'")')
 						)
-						/*.append($('<button/>')
+						.append($('<button/>')
 							.html('<i class="fas fa-pencil-alt"</i>')
 							.attr('onclick','alterar("'+item.id_produto+'")')
-						)*/
+						)
 					)
 				);
 			});

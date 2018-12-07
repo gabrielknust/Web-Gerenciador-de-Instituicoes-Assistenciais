@@ -1,4 +1,29 @@
-<?php session_start(); 
+<?php
+
+session_start();
+include_once '../dao/Conexao.php';
+include_once '../dao/CategoriaDAO.php';
+include_once '../dao/UnidadeDAO.php';
+
+	if (!isset($_SESSION['unidade'])) {
+		header('Location: ../controle/control.php?metodo=listarTodos&nomeClasse=UnidadeControle&nextPage=../html/alterar_produto.php');
+	}
+	if(!isset($_SESSION['categoria'])){
+		header('Location: ../controle/control.php?metodo=listarTodos&nomeClasse=CategoriaControle&nextPage=../html/alterar_produto.php');	
+	}
+	//if(!isset($_SESSION['produto'])){
+	//	header('Location: ');
+	//}
+	if(isset($_SESSION['categoria']) && isset($_SESSION['unidade']) ){
+		$unidade = $_SESSION['unidade'];
+		$categoria = $_SESSION['categoria'];
+		//echo $_SESSION['produto'];
+		$produto = $_SESSION['produto'];
+		unset($_SESSION['unidade']);
+		unset($_SESSION['categoria']);
+		unset($_SESSION['produto']);
+	}
+
 ?>
 <!doctype html>
 <html class="fixed">
@@ -50,9 +75,11 @@
 		<script>
 			$(function(){
 
-				var funcionarios=<?php echo $_SESSION['funcionarios'];?>;
-				console.log(funcionarios);
-				var id=<?php echo $_GET['id']; ?>;
+				var produto = <?php echo $produto;?>;
+				var unidade = <?php echo $unidade;?>;
+				var categoria = <?php echo $categoria;?>;
+
+
 				$.each(funcionarios,function(i,item){
 					if(i==id)
 					{
@@ -80,59 +107,7 @@
 						
 						$("#nascimento").text("Data de nascimento: "+item.data_nascimento);
 
-						$("#cep").text("CEP: "+item.cep);
-
-						$("#cidade").text("Cidade: "+item.cidade);
-
-						$("#bairro").text("Bairro: "+item.bairro);
-
-						$("#logradouro").text("Logradouro: "+item.logradouro);
-
-						$("#numero").text("Numero: "+item.numero_endereco);
-
-						$("#complemento").text("Complemento: "+item.complemento);
-
-						$("#rg").text("Registro geral: "+item.registro_geral);
-
-						$("#data_expedicao").text("Data de expedição: "+item.data_expedicao);
-
-						$("#cpf").text("CPF: "+item.cpf);
-
-						$("#pis").text("PIS: "+item.pis);
-
-						$("#zona").text("Zona Eleitoral: "+item.zona);
-
-						$("#titulo_eleitor").text("Título de eleitor: "+item.numero_titulo);
-
-						$("#tituloEleitor").text("Título de eleitor: "+item.tituloEleitor);
-
-						$("#ctps").text("CTPS: "+item.ctps);
-
-						$("#uf_ctps").text("UF: "+item.uf_ctps);
-
-						$("#jaleco").text("Jaleco: "+item.jaleco);
-
-						$("#camisa").text("Camisa: "+item.camisa);
-
-						$("#calcado").text("Calçado: "+item.calcado);
-
-						$("#calca").text("Calça: "+item.calca);
-
-						$("#certificado_reservista_numero").text("Número: "+item.certificado_reservista_numero);
-
-						$("#certificado_reservista_serie").text("Série: "+item.certificado_reservista_serie);
-
-						if (item.usa_vtp== "Possui") {
-
-							$("#usa_vtp").html("Vale Transporte: <i class='fa fa-check'>");
-							$("#vale_transporte").text("Número do vale transporte: "+item.vale_transporte);
-
-						}else {
-							$("#usa_vtp").html("Vale Transporte: <i class='fa fa-times'>");
-							$("#vale_transporte").hide();
-						}
-
-						$("#data_admissao").text("Data de admissão: "+item.data_admissao);
+						
 					}
 				})
 			});

@@ -11,11 +11,14 @@
 	if(!isset($_SESSION['categoria'])){
 		header('Location: ../controle/control.php?metodo=listarTodos&nomeClasse=CategoriaControle&nextPage=../html/cadastro_produto.php');	
 	}
-	if(isset($_SESSION['categoria']) && isset($_SESSION['unidade'])){
+
+	if(isset($_SESSION['categoria']) && isset($_SESSION['unidade']) && isset($_SESSION['produto'])){
 		$unidade = $_SESSION['unidade'];
 		$categoria = $_SESSION['categoria'];
+		
 		unset($_SESSION['unidade']);
-		unset($_SESSION['categoria']);	
+		unset($_SESSION['categoria']);
+
 	}
 ?>
 <head>
