@@ -112,7 +112,9 @@
 				})
 			
 			});
+
 			//adicionar tabela
+			var conta = 0;
 			$(".add-row").click(function(){
 				var val=$("#input_produtos").val();
 
@@ -128,25 +130,42 @@
 					if(produto[0]==item.id_produto && produto[1]==item.descricao)
 					{
 						var quantidade = $("#quantidade").val();
-						var preco = item.preco;
+						var preco = parseFloat(item.preco);
 						
-						var markup = "<tr class='produtoRow' id='" + item.id_produto +"'><td class='prod' style='width: 160px;'><input type='text' size='25' value='" + val + "' disabled></td><td class='quant'><input type='text' class='number'  id='qtd' maxlength='2' size='2' class='form-control' min='1' value='" + quantidade +"' disabled ></td><td><input type='text' class='preco' value='" + preco +"'  size='2' disabled></td><td><input type='text' size='3' id='total' class='total' value='" + quantidade * preco +"' disabled></td><td><button type='button' class='delete-row'>remover</button></td></tr>";
+						conta = conta + 1;
+
+						$("#conta").val(conta);
+
+						var markup = "<tr class='produtoRow'><td class='prod' style='width: 160px;'><input type='text' value='"+val+"' name='id"+conta+"' disabled></td><td class='quant'><input type='text' class='number'  id='qtd' maxlength='2' size='2' class='form-control' min='1' value='"+quantidade+"' name='qtdd"+conta+"' disabled ></td><td><input type='text' class='preco' value='"+preco+"' name='valor_unitario"+conta+"'  size='2' disabled></td><th><input type='text' size='3' id='total' class='total' value='"+quantidade*preco+"' disabled></th><td><button type='button' class='delete-row'>remover</button></td></tr>";
 							$("table tbody ").append(markup);
 							$("#valor_unitario").empty();
-							$("#input_produtos").val("");					
+							$("#input_produtos").val("");
+							var x=$("#total_total").val();
+							var y=x+preco*quantidade;
+							
+							$("#total_total").val(y);
+							//y = parseFloat(preco) * parseFloat(quantidade) + parseFloat(y);
+							console.log(y);
+							
+												
 						}
 					})
 				}else{
     		 		alert("Produto inválido!");
-	    		 $("#input_produtos").val("");
-	    		 $("#input_produtos").focus();
-	    		 $("#valor_unitario").empty();
+	    		 	$("#input_produtos").val("");
+	    		 	$("#input_produtos").focus();
+	    		 	$("#valor_unitario").empty();
     			}
 			});
 
 			//remover tabela
 			$("table tbody").on('click','.delete-row',function(){
+				var valor_menos = $(this).closest('tr').find('th').find('input').val();
+				var xx = $("#total_total").val();
+				xx = xx - valor_menos;
+				$("#total_total").val(xx);
 				$(this).closest('tr').remove();
+				verificar = verificar - 1;
 			});
 
 			// validar origem
@@ -177,6 +196,10 @@
 			else if(tipo.value == "blank"){
 				alert("Selecione o tipo da entrada")
 				tipo.focus();
+				return false;
+			}
+			else if(verificar == 0){
+				alert("Nenhum produto inserido");
 				return false;
 			}
 		}
@@ -322,8 +345,6 @@
 						<div class="tab-content" style="width: 832px;">
 							<div id="overview" class="tab-pane active">
 								<form class="form-horizontal" method="post" id="formulario" onsubmit="return validar()" action="../controle/Control.php" autocomplete="off">
-									<input type="hidden" name="nomeClasse" value="FuncionarioControle">
-										<input type="hidden" name="metodo" value="incluir">
 									<fieldset>
 										<div class="info-entrada" >
 											<div class="form-group">
@@ -401,7 +422,11 @@
 													<tfoot>
 														<tr >
 															<td>Valor total:</td>
-															<td id="valor-total"></td>
+															<td id="valor-total">
+															<input type="number" id="total_total"  name="total_total">
+															<input type="hidden" id="conta" name="conta" disabled>
+															</td>
+
 														</tr>
 													</tfoot>
 												</table>
@@ -413,6 +438,8 @@
 									</fieldset><br>
 									<div class="row">
 										<div class="col-md-9 col-md-offset-3">
+										    <input type="hidden" name="nomeClasse" value="EntradaControle">			
+											<input type="hidden" name="metodo" value="incluir">
 											<input type="submit" class="btn btn-primary" >
 										</div>
 									</div>
