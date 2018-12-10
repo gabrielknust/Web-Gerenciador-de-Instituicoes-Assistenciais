@@ -1,6 +1,6 @@
 <?php
 
-class Entrada
+class Saida
 {
    private $id_saida;
    private $id_destino;
