@@ -41,14 +41,7 @@
 	<script src="../Functions/onlyNumbers.js"></script>
 	<script src="../Functions/onlyChars.js"></script>
 	<script>
-		function validar(){
-			var cpf = document.getElementById("NCPF").value;
-			var cnpj = document.getElementById("cnpj").value;
-			if(cpf == "" && cnpj == ""){
-				alert("Preencha o campo CPF ou CNPJ");
-				return false;
-			}
-		}
+		
 		function testaCPF(strCPF) { //strCPF é o cpf que será validado. Ele deve vir em formato string e sem nenhum tipo de pontuação.
 			var strCPF = strCPF.replace(/[^\d]+/g,''); // Limpa a string do CPF removendo espaços em branco e caracteres especiais. 
 			// PODE SER QUE NÃO ESTEJA LIMPANDO COMPLETAMENTE. FAVOR FAZER O TESTE!!!!
@@ -71,7 +64,6 @@
             if (Resto != parseInt(strCPF.substring(10, 11) ) ) return false;
             return true;
     	}
-
 		function validarCPF(strCPF){
 			if (!testaCPF(strCPF)){
 				$('#cpfInvalido').show();
@@ -81,52 +73,80 @@
 				document.getElementById("enviar").disabled = false;
 			}
 		}
+		function FormataCnpj(campo, teclapres){
+			var tecla = teclapres.keyCode;
+			var vr = new String(campo.value);
+			vr = vr.replace(".", "");
+			vr = vr.replace("/", "");
+			vr = vr.replace("-", "");
+			tam = vr.length + 1;
+			if (tecla != 14)
+			{
+				if (tam == 3)
+					campo.value = vr.substr(0, 2) + '.';
+				if (tam == 6)
+					campo.value = vr.substr(0, 2) + '.' + vr.substr(2, 5) + '.';
+				if (tam == 10)
+					campo.value = vr.substr(0, 2) + '.' + vr.substr(2, 3) + '.' + vr.substr(6, 3) + '/';
+				if (tam == 15)
+					campo.value = vr.substr(0, 2) + '.' + vr.substr(2, 3) + '.' + vr.substr(6, 3) + '/' + vr.substr(9, 4) + '-' + vr.substr(13, 2);
+			}
+		}
 		function validarCNPJ(cnpj) {
+
 			cnpj = cnpj.replace(/[^\d]+/g,'');
-			
+
 			if(cnpj == '') return false;
-			
-			if (cnpj.length != 14)	return false;
+			if (cnpj.length != 14)
+				return false;
 			// Elimina CNPJs invalidos conhecidos
 			if (cnpj == "00000000000000" || 
-				cnpj == "11111111111111" || 
-				cnpj == "22222222222222" || 
-				cnpj == "33333333333333" || 
-				cnpj == "44444444444444" || 
-				cnpj == "55555555555555" || 
-				cnpj == "66666666666666" || 
-				cnpj == "77777777777777" || 
-				cnpj == "88888888888888" || 
-				cnpj == "99999999999999")
-				return false;
-		    // Valida DVs
-		tamanho = cnpj.length - 2
-		numeros = cnpj.substring(0,tamanho);
-		digitos = cnpj.substring(tamanho);
-		soma = 0;
-		pos = tamanho - 7;
-		for (i = tamanho; i >= 1; i--){
-			soma += numeros.charAt(tamanho - i) * pos--;
-			if (pos < 2)
-				pos = 9;
-		}
-		resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
-		if (resultado != digitos.charAt(0))
-		return false;
-	
-		tamanho = tamanho + 1;
-		numeros = cnpj.substring(0,tamanho);
-		soma = 0;
-		pos = tamanho - 7;
-		for (i = tamanho; i >= 1; i--) {
-			soma += numeros.charAt(tamanho - i) * pos--;
-			if (pos < 2)
-				pos = 9;
-		}
-		resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
-		if (resultado != digitos.charAt(1))
+			cnpj == "11111111111111" || 
+			cnpj == "22222222222222" || 
+			cnpj == "33333333333333" || 
+			cnpj == "44444444444444" || 
+			cnpj == "55555555555555" || 
+			cnpj == "66666666666666" || 
+			cnpj == "77777777777777" || 
+			cnpj == "88888888888888" || 
+			cnpj == "99999999999999")
+			return false;
+			// Valida DVs
+			tamanho = cnpj.length - 2
+			numeros = cnpj.substring(0,tamanho);
+			digitos = cnpj.substring(tamanho);
+			soma = 0;
+			pos = tamanho - 7;
+			for (i = tamanho; i >= 1; i--) {
+				soma += numeros.charAt(tamanho - i) * pos--;
+				if (pos < 2)
+					pos = 9;
+			}
+			resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+			if (resultado != digitos.charAt(0))
+			return false;    
+			tamanho = tamanho + 1;
+			numeros = cnpj.substring(0,tamanho);
+			soma = 0;
+			pos = tamanho - 7;
+			for (i = tamanho; i >= 1; i--){
+				soma += numeros.charAt(tamanho - i) * pos--;
+				if (pos < 2)
+					pos = 9;
+			}
+			resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+			if (resultado != digitos.charAt(1))
 			return false;
 			return true;
+		}
+		function exibirCNPJ(cnpj){
+			if (!validarCNPJ(cnpj)){
+				$('#cnpjInvalido').show();
+				document.getElementById("enviar").disabled = true;
+			}else{
+				$('#cnpjInvalido').hide();
+				document.getElementById("enviar").disabled = false;
+			}
 		}
 	</script>
 </head>
@@ -278,14 +298,21 @@
 											<div class="form-group" >
 												<label class="col-md-3 control-label" for="profileCompany">Número do CNPJ</label>
 												<div class="col-md-6">
-													<input type="text" class="form-control" id="cnpj" name="cnpj" placeholder="Ex: 14.732.231/0001-02" maxlength="18" onkeypress="return Onlynumbers(event)" onkeyup="mascara('##.###.###/####-##',this,event)" >
+													<input type="text" name="cnpj" id="cnpj" onkeyup="FormataCnpj(this,event)" onblur="exibirCNPJ(this.value)" maxlength="18" class="form-control input-md" ng-model="cadastro.cnpj" placeholder="Ex: 77.777.777/7777-77" >
 												</div>														
 											</div>
 											
 											<div class="form-group">
+												<label class="col-md-3 control-label" for="profileCompany"></label>
+												<div class="col-md-6">
+													<p id="cnpjInvalido" style="display: none; color: #b30000">CNPJ INVÁLIDO!</p>
+												</div>														
+											</div>
+
+											<div class="form-group">
 												<label class="col-md-3 control-label" for="profileCompany">Número do CPF</label>
 												<div class="col-md-6">
-													<input type="text" class="form-control" id="NCPF" name="num_cpf" placeholder="Ex: 222.222.222-22" maxlength="14" onblur="validarCPF(this.value)" onkeypress="return Onlynumbers(event)" onkeyup="mascara('###.###.###-##',this,event)" required>
+													<input type="text" class="form-control" id="NCPF" name="num_cpf" placeholder="Ex: 222.222.222-22" maxlength="14" onblur="validarCPF(this.value)" onkeypress="return Onlynumbers(event)" onkeyup="mascara('###.###.###-##',this,event)">
 												</div>														
 											</div>
 

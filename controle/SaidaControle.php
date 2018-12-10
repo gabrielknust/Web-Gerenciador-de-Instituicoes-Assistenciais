@@ -55,7 +55,16 @@ class SaidaControle
             echo $msg;
         }
     }
-    public function excluir(){
-
+    public function listarId(){
+        extract($_REQUEST);
+        try{
+            $saidaDAO = new SaidaDAO();
+            $saida = $saidaDAO->listarId($id_saida);
+            session_start();
+            $_SESSION['saida'] = $saida;
+            header('Location: ' . $nextPage);
+        } catch (PDOException $e) {
+            echo "ERROR: " . $e->getMessage();
+        }
     }
 }
