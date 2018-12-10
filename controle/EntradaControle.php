@@ -55,7 +55,17 @@ class EntradaControle
             echo $msg;
         }
     }
-    public function excluir(){
 
+    public function listarId(){
+        extract($_REQUEST);
+        try{
+            $entradaDAO = new EntradaDAO();
+            $entrada = $entradaDAO->listarId($id_entrada);
+            session_start();
+            $_SESSION['entrada'] = $entrada;
+            header('Location: ' . $nextPage);
+        } catch (PDOException $e) {
+            echo "ERROR: " . $e->getMessage();
+        }
     }
 }
