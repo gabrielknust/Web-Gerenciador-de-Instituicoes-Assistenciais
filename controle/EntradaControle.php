@@ -1,32 +1,22 @@
 <?php
 include_once '../classes/Entrada.php';
 include_once '../dao/EntradaDAO.php';
+include_once '../classes/Origem.php';
+include_once '../dao/OrigemDAO.php';
+include_once '../classes/Almoxarifado.php';
+include_once '../dao/AlmoxarifadoDAO.php';
+include_once '../classes/TipoEntrada.php';
+include_once '../dao/TipoEntradaDAO.php';
 class EntradaControle
 {
     public function verificar(){
         extract($_REQUEST);
-
-        if((!isset($nome)) || (empty($nome))){
-            $msg = "Nome do entrada nÃ£o informado. Por favor, informe um nome!";
-            header('Location: ../html/entrada.html?msg='.$msg);
-        }
-        if((!isset($cnpj)) || (empty($cnpj))){
-            $calcado='null';
-        }
-        if((!isset($cpf)) || (empty($cpf))){
-            $calca='null';
-        }
-        if((!isset($telefone)) || (empty($telefone))){
-            $msg .= "Telefone do entrada nÃ£o informado. Por favor, informe um telefone!";
-            header('Location: ../html/entrada.html?msg='.$msg);
-        }
-
+        date_default_timezone_set('America/Sao_Paulo');
+        $horadata = date('Y-m-d H:i').split(' ');
+        $data = $horadata[0];
+        $hora = $horadata[1];
+        $valor_total = $total_total;
         $entrada = new Entrada($data,$hora,$valor_total);
-        $entrada->setId_entrada($linha['id_entrada']);
-        $entrada->setId_origem($linha['id_origem']);
-        $entrada->setId_almoxarifado($linha['id_almoxarifado']);
-        $entrada->setId_tipo($linha['id_tipo']);
-        $entrada->setId_respondavel($linha['id_responsavel']);
         
         return $entrada;
     }
@@ -43,15 +33,26 @@ class EntradaControle
     public function incluir(){
         $entrada = $this->verificar();
         $entradaDAO = new EntradaDAO();
+        $origemDAO = new OrigemDAO();
+        $almoxarifadoDAO = new AlmoxarifadoDAO();
+        $TipoEntradaDAO = new TipoEntradaDAO();
+
+        $origem = $origemDAO->listarUm($id_origem);
+        $almoxarifado = $almoxarifadoDAO->listarUm($id_almoxarifado);
+        $TipoEntrada =$TipoEntradaDAO->listarUm($id_tipo);
+
         try{
+
+            $entrada->setId_origem($origem);
+            $entrada->setId_almoxarifado($almoxarifado);
+            $entrada->setId_tipo($TipoEntradaDAO);
+
             $entradaDAO->incluir($entrada);
             session_start();
-            $_SESSION['msg']="entrada cadastrado com sucesso";
-            $_SESSION['proxima']="Cadastrar outra entrada";
-            $_SESSION['link']="../html/cadastro_doador.php";
-            header("Location: ../html/cadastro_produto.php");
+            echo "sucesso";
+            //header("Location: ../controle/control.php?metodo=incluir&nomeClasse=IentradaControle&nextPage=../html/cadastro_entrada.php");
         } catch (PDOException $e){
-            $msg= "NÃ£o foi possÃ­vel registrar o tipo"."<br>".$e->getMessage();
+            $msg= "Não foi possível adicionar a entrada"."<br>".$e->getMessage();
             echo $msg;
         }
     }
