@@ -134,7 +134,6 @@ create table voluntario_judicial(
 	dias_trabalhados varchar(100),
 	folga varchar(30),
 	observacoes varchar(240)
-
  )engine = InnoDB;
 */
 create table funcionario(
@@ -310,7 +309,6 @@ select max(id_pessoa) into idP FROM pessoa;
 
 /*insert into quadro_horario(escala, tipo, carga_horaria, entrada1, saida1, entrada2, saida2,total, dias_trabalhados, folga, observacoes)
 values(escala, tipo, carga_horaria, entrada1, saida1, entrada2, saida2,total, dias_trabalhados, folga, observacoes);
-
 select max(id_quadro_horario) into idQ FROM quadro_horario;*/
 
 insert into funcionario(id_pessoa,/*id_quadro_horario,*/vale_transporte,data_admissao,pis,ctps,
@@ -365,7 +363,7 @@ create table estoque(
 
 create table origem(
     id_origem int not null primary key auto_increment,
-    nome varchar(100) not null,
+    nome_origem varchar(100) not null,
     cnpj varchar(20),
 	cpf varchar(20),
     telefone varchar(33)
@@ -403,9 +401,11 @@ create table ientrada(
     foreign key(id_produto) references produto(id_produto)
 )engine = InnoDB;
 
+
+
 create table destino(
     id_destino int not null primary key auto_increment,
-    nome varchar(100) not null,
+    nome_destino varchar(100) not null,
     cnpj varchar(20),
     cpf varchar(20),
     telefone varchar(33)
@@ -421,6 +421,76 @@ create table saida(
     id_destino int not null,
     id_almoxarifado int not null,
     id_tipo int not null,
+    id_responsavel int not null,
+    
+    data date,
+    hora time,
+    valor_total decimal(10,2),
+    
+    foreign key(id_destino) references destino(id_destino),
+    foreign key(id_almoxarifado) references almoxarifado(id_almoxarifado),
+    foreign key(id_tipo) references tipo_saida(id_tipo),
+    foreign key(id_responsavel) references pessoa(id_pessoa)
+)engine = InnoDB;
+
+create table isaida(
+    id_isaida int not null primary key auto_increment,
+    id_saida int not null,
+    id_produto int not null,
+    qtd int,
+    valor_unitario decimal(10,2),
+    
+    foreign key(id_saida) references saida(id_saida),
+    foreign key(id_produto) references produto(id_produto)
+)engine = InnoDB;
+
+
+DELIMITER $
+
+
+/* criação do gatilho que insere na tabela estoque depois de um insert na tabela ientrada */
+CREATE TRIGGER tgr_ientrada_insert
+AFTER INSERT ON ientrada
+FOR EACH ROW
+BEGIN
+
+	INSERT IGNORE INTO estoque(id_produto, id_almoxarifado, qtd) values(NEW.id_produto, (SELECT id_almoxarifado FROM entrada WHERE id_entrada = NEW.id_entrada), 0);
+	
+    UPDATE estoque SET qtd = qtd+NEW.qtd WHERE id_produto = NEW.id_produto AND id_almoxarifado = (SELECT id_almoxarifado FROM entrada WHERE id_entrada = NEW.id_entrada);
+	
+END $
+
+CREATE TRIGGER tgr_ientrada_delete
+AFTER DELETE ON ientrada
+FOR EACH ROW
+BEGIN
+	
+    UPDATE estoque SET qtd = qtd - OLD.qtd WHERE id_produto = OLD.id_produto AND id_almoxarifado = (SELECT id_almoxarifado FROM entrada WHERE id_entrada = OLD.id_entrada);
+	
+END $
+
+CREATE TRIGGER tgr_isaida_delete
+AFTER DELETE ON isaida
+FOR EACH ROW
+BEGIN
+	
+    UPDATE estoque SET qtd = qtd+OLD.qtd WHERE id_produto = OLD.id_produto AND id_almoxarifado = (SELECT id_almoxarifado FROM saida WHERE id_saida = OLD.id_saida);
+	
+END $
+
+CREATE TRIGGER tgr_isaida_insert
+AFTER INSERT ON isaida
+FOR EACH ROW
+BEGIN
+	
+    UPDATE estoque SET qtd = qtd-NEW.qtd WHERE id_produto = NEW.id_produto AND id_almoxarifado = (SELECT id_almoxarifado FROM saida WHERE id_saida = NEW.id_saida);
+	
+END $
+
+DELIMITER ;
+
+
+ int not null,
     id_responsavel int not null,
     
     data date,
