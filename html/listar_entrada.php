@@ -75,7 +75,7 @@
 	<!-- jquery functions -->
 	<script>
 		function listarId(id){
-			window.location.replace('../controle/Control.php?metodo=listarId&nomeClasse=EntradaControle&id_entrada='+id);
+			window.location.replace('../controle/Control.php?metodo=listarId&nomeClasse=IentradaControle&nextPage=../html/listar_Ientrada.php&id_entrada='+id);
 		}
 	</script>
 	<script>

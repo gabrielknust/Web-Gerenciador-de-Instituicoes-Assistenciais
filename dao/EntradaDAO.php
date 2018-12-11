@@ -78,22 +78,30 @@ class EntradaDAO
             return $entrada;
         }
     public function listarId($id_entrada){
-    try{
+        try{
+        $entradas=array();
         $pdo = Conexao::connect();
-        $sql = "SELECT id_entrada, id_origem, id_almoxarifado, id_tipo, id_responsavel, data, hora, valor_total FROM entrada WHERE id_entrada = :id_entrada";
-        $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(':id_entrada',$id_entrada);
-
-        $stmt->execute();
-        $entradas = array();
-        while($linha = $stmt->fetch(PDO::FETCH_ASSOC)){
-            $entradas[]=array('id_entrada'=>$linha['id_entrada'],'id_origem'=>$linha['id_origem'],'id_almoxarifado'=>$linha['id_almoxarifado'],'id_tipo'=>$linha['id_tipo'],'id_responsavel'=>$linha['id_responsavel'],'data'=>$linha['data'],'hora'=>$linha['hora'],'valor_total'=>$linha['valor_total']);
+        $sql = "SELECT e.id_entrada, o.nome_origem, a.descricao_almoxarifado, t.descricao, p.nome, e.data, e.hora, e.valor_total 
+            FROM entrada e 
+            INNER JOIN origem o ON o.id_origem = e.id_origem
+            INNER JOIN almoxarifado a ON a.id_almoxarifado = e.id_almoxarifado
+            INNER JOIN tipo_entrada t ON t.id_tipo = e.id_tipo
+            INNER JOIN pessoa p ON p.id_pessoa = e.id_responsavel
+            WHERE e.id_entrada = :id_entrada";
+        $consulta = $pdo->prepare($sql);
+        $consulta->execute(array(
+            ':id_entrada' => $id_entrada
+        ));
+        
+        while($linha = $consulta->fetch(PDO::FETCH_ASSOC)){
+            $entradas[]=array('id_entrada'=>$linha['id_entrada'],'nome_origem'=>$linha['nome_origem'],'descricao_almoxarifado'=>$linha['descricao_almoxarifado'],'descricao'=>$linha['descricao'],'nome'=>$linha['nome'],'data'=>$linha['data'],'hora'=>$linha['hora'],'valor_total'=>$linha['valor_total']);
         }
-        } catch(PDOExeption $e){
-            echo 'Erro: ' .  $e->getMessage();
+        } catch (PDOExeption $e){
+            echo 'Error:' . $e->getMessage;
         }
-        return json_encode($entradas);  
+        return json_encode($entradas);
     }
+
     public function ultima(){
         $pdo = Conexao::connect();
         $sql = "SELECT MAX(id_entrada) as id_entrada FROM entrada";

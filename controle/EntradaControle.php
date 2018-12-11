@@ -82,8 +82,6 @@ class EntradaControle
             $x++;
             header('Location: ../html/cadastro_entrada.php');
             }
-
-            //header("Location: ../controle/control.php?metodo=incluir&nomeClasse=IentradaControle&nextPage=../html/cadastro_entrada.php");
         } catch (PDOException $e){
             $msg= "Não foi possível adicionar a entrada"."<br>".$e->getMessage();
             echo $msg;
@@ -97,6 +95,7 @@ class EntradaControle
             $entrada = $entradaDAO->listarId($id_entrada);
             session_start();
             $_SESSION['entrada'] = $entrada;
+            echo $_SESSION['entrada'];
             header('Location: ' . $nextPage);
         } catch (PDOException $e) {
             echo "ERROR: " . $e->getMessage();
