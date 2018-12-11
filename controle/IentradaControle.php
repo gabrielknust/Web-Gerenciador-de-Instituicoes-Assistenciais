@@ -9,9 +9,9 @@ class IentradaControle
         try{
             $ientradaDAO = new IentradaDAO();
             $ientrada = $ientradaDAO->listarId($id_entrada);
-            echo $ientrada;
             session_start();
             $_SESSION['ientrada'] = $ientrada;
+            echo $_SESSION['ientrada'];
             header('Location: ' . $nextPage);
         } catch (PDOException $e) {
             echo "ERROR: " . $e->getMessage();

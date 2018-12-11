@@ -8,7 +8,7 @@
 	session_start();
 	if(isset($_SESSION['ientrada'])){
 		$ientrada = $_SESSION['ientrada'];
-	    unset($_SESSION['ientrada']);  
+	    unset($_SESSION['ientrada']);
 	}
 ?>
 	<!-- Basic -->
@@ -75,12 +75,16 @@
 				echo $ientrada; 
 				?>;
 
-			$.each(entrada, function(i,item){
+			$.each(ientrada, function(i,item){
 
 				$('#tabela')
 					.append($('<tr />')
 						.append($('<td />')
-							.text())
+							.text(item.descricao))
+						.append($('<td />')
+							.text(item.qtd))
+						.append($('<td />')
+							.text(item.valor_unitario)))
 					});
 		});
 	</script>
