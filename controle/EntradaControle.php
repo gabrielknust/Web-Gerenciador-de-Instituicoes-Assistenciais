@@ -12,7 +12,8 @@ class EntradaControle
     public function verificar(){
         extract($_REQUEST);
         date_default_timezone_set('America/Sao_Paulo');
-        $horadata = date('Y-m-d H:i').split(' ');
+        $horadata = date('Y-m-d H:i');
+        $horadata = explode(" ", $horadata);
         $data = $horadata[0];
         $hora = $horadata[1];
         $valor_total = $total_total;
@@ -31,18 +32,18 @@ class EntradaControle
     }
     
     public function incluir(){
+        extract($_REQUEST);
         $entrada = $this->verificar();
         $entradaDAO = new EntradaDAO();
         $origemDAO = new OrigemDAO();
         $almoxarifadoDAO = new AlmoxarifadoDAO();
         $TipoEntradaDAO = new TipoEntradaDAO();
 
-        $origem = $origemDAO->listarUm($id_origem);
-        $almoxarifado = $almoxarifadoDAO->listarUm($id_almoxarifado);
-        $TipoEntrada =$TipoEntradaDAO->listarUm($id_tipo);
+        $origem = $origemDAO->listarUm($origem);
+        $almoxarifado = $almoxarifadoDAO->listarUm($almoxarifado);
+        $TipoEntrada =$TipoEntradaDAO->listarUm($tipo_entrada);
 
         try{
-
             $entrada->setId_origem($origem);
             $entrada->setId_almoxarifado($almoxarifado);
             $entrada->setId_tipo($TipoEntradaDAO);
