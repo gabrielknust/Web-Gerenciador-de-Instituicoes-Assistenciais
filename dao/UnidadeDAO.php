@@ -25,23 +25,25 @@ class UnidadeDAO
         }
     }
 
-    public function listarUm($id_unidade)
+    public function listarUm($descricao_unidade)
     {
-        try{
-            $pdo = Conexao::connect();
-            $sql = "SELECT id_unidade, descricao_unidade  FROM unidade WHERE id_unidade = :id_unidade";
-            $consulta = $pdo->prepare($sql);
-            $consulta->execute(array(
-                'id_unidade' => $id_unidade,
-            ));
-            while($linha = $consulta->fetch(PDO::FETCH_ASSOC)){
-                $unidade = new Unidade($linha['descricao_unidade']);
-                $unidade->setId_unidade($linha['id_unidade']);
+        $descricao_unidade = "%" . $descricao_unidade . "%";
+            try{
+                $pdo = Conexao::connect();
+                $sql = "SELECT descricao_unidade FROM unidade WHERE descricao_unidade LIKE :descricao_unidade";
+                $consulta = $pdo->prepare($sql);
+                $consulta->execute(array(
+                    ':descricao_unidade' => $descricao_unidade
+                ));
+                $unidades = Array();
+                while ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) {
+                    $unidade = new Unidade($descricao_unidade);
+                    $unidades[] = $unidade;
+                }
+            }catch (PDOExeption $e){
+                echo 'Error: ' .  $e->getMessage();
             }
-        }catch(PDOExeption $e){
-            throw $e;
-        }
-        return $unidade;
+            return $unidades;
     }
 
         public function excluir($id_unidade)

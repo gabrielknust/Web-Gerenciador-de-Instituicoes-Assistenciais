@@ -21,35 +21,42 @@ class EntradaDAO
         }
         return json_encode($entradas);
     }
+    public function listarUm($descricao)
+    {
+        $descricao = "%" . $descricao . "%";
+            try{
+                $pdo = Conexao::connect();
+                $sql = "SELECT descricao FROM tipo_saida WHERE descricao LIKE :descricao";
+                $consulta = $pdo->prepare($sql);
+                $consulta->execute(array(
+                    ':descricao' => $descricao
+                ));
+                $tiposaidas = Array();
+                while ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) {
+                    $tiposaida = new TipoSaida($descricao);
+                    $tiposaidas[] = $tiposaida;
+                }
+            }catch (PDOExeption $e){
+                echo 'Error: ' .  $e->getMessage();
+            }
+            return $tiposaidas;
+    }
+    public function listarId($id_entrada){
+    try{
+        $pdo = Conexao::connect();
+        $sql = "SELECT id_entrada, id_origem, id_almoxarifado, id_tipo, id_responsavel, data, hora, valor_total FROM entrada WHERE id_entrada = :id_entrada";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':id_entrada',$id_entrada);
 
-    public function incluir($entrada){
-        try{
-            extract($_REQUEST);
-            $pdo = Conexao::connect();
-
-            $sql = 'INSERT entrada(id_origem,id_almoxarifado,id_tipo,data,hora,valor_total) VALUES( :id_origem,:id_almoxarifado,:id_tipo,:data,:hora,:valor_total)';
-            $sql = str_replace("'", "\'", $sql);            
-            $stmt = $pdo->prepare($sql);
-
-            $id_origem = $entrada->getId_origem()->getId_origem();
-            $id_almoxarifado = $entrada->getId_almoxarifado()->getId_almoxarifado();
-            $id_tipo = $entrada->getId_tipo()->getId_tipo();
-            $data = $entrada->getData();
-            $hora = $entrada->getHora();
-            $valor_total = $entrada->getValor_total();
-
-            $stmt->bindParam(':id_origem',$id_origem);
-            $stmt->bindParam(':id_almoxarifado',$id_tipo);
-            $stmt->bindParam(':id_tipo',$id_tipo);
-            $stmt->bindParam(':data',$data);
-            $stmt->bindParam(':hora',$hora);
-            $stmt->bindParam(':valor_total',$valor_total);
-
-            $stmt->execute();
-        } catch(PDOExeption $e){
-            echo : 'Error: <b>  na tabela produto = ' . $sql . '</b> <br /><br />' . $e->getMessage();
+        $stmt->execute();
+        $entradas = array();
+        while($linha = $stmt->fetch(PDO::FETCH_ASSOC)){
+            $entradas[]=array('id_entrada'=>$linha['id_entrada'],'id_origem'=>$linha['id_origem'],'id_almoxarifado'=>$linha['id_almoxarifado'],'id_tipo'=>$linha['id_tipo'],'id_responsavel'=>$linha['id_responsavel'],'data'=>$linha['data'],'hora'=>$linha['hora'],'valor_total'=>$linha['valor_total']);
         }
-
+        } catch(PDOExeption $e){
+            echo 'Erro: ' .  $e->getMessage();
+        }
+        return json_encode($entradas);  
     }
 }
 ?>

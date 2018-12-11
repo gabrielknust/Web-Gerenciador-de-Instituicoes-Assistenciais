@@ -24,23 +24,25 @@ class TipoSaidaDAO
             echo 'Error: <b>  na tabela tipo_saida = ' . $sql . '</b> <br /><br />' . $e->getMessage();
         }
     }
-    public function listarUm($id_tipo)
+    public function listarUm($descricao)
     {
-        try{
-            $pdo = Conexao::connect();
-            $sql = "SELECT id_tipo,descricao  FROM tipo_saida WHERE id_tipo = :id_tipo";
-            $consulta = $pdo->prepare($sql);
-            $consulta->execute(array(
-                'id_tipo' => $id_tipo,
-            ));
-            while($linha = $consulta->fetch(PDO::FETCH_ASSOC)){
-                $tipo_saida = new TipoSaida($linha['descricao']);
-                $tipo_saida->setId_tipo($linha['id_tipo']);
+        $descricao = "%" . $descricao . "%";
+            try{
+                $pdo = Conexao::connect();
+                $sql = "SELECT descricao FROM tipo_saida WHERE descricao LIKE :descricao";
+                $consulta = $pdo->prepare($sql);
+                $consulta->execute(array(
+                    ':descricao' => $descricao
+                ));
+                $tiposaidas = Array();
+                while ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) {
+                    $tiposaida = new TipoSaida($descricao);
+                    $tiposaidas[] = $tiposaida;
+                }
+            }catch (PDOExeption $e){
+                echo 'Error: ' .  $e->getMessage();
             }
-        }catch(PDOExeption $e){
-            throw $e;
-        }
-        return $tipo_saida;
+            return $tiposaidas;
     }
         public function excluir($id_tipo)
 	    {

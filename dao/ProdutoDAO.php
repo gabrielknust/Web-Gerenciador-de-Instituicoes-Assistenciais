@@ -86,7 +86,7 @@ class ProdutoDAO
         		}
         		return json_encode($produtos);	
 	        }
-
+/*
 	        public function listarporCodigo($codigo)
 	        {
 		        $codigo = "%" . $codigo . "%";
@@ -146,7 +146,7 @@ class ProdutoDAO
 	            }
 				return json_encode($produtos);
 	            }
-
+*/
 }
 
 ?>

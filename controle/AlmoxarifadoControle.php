@@ -47,5 +47,6 @@ class AlmoxarifadoControle
             echo "ERROR";
         }
     }
+    
 }
     
