@@ -8,14 +8,14 @@ class IentradaDAO
     public function listarId($id_entrada){
         try{
             $pdo = Conexao::connect();
-            $sql = "SELECT id_ientrada,id_entrada,id_produto,qtd,valor_unitario FROM ientrada WHERE id_entrada = :id_entrada";
+            $sql = "SELECT id_ientrada,id_produto,qtd,valor_unitario FROM ientrada WHERE id_entrada = :id_entrada";
             $stmt = $pdo->prepare($sql);
             $stmt->bindParam(':id_ientrada',$id_entrada);
 
             $stmt->execute();
             $entradas = array();
             while($linha = $stmt->fetch(PDO::FETCH_ASSOC)){
-                $entradas[]=array('id_ientrada'=>$linha['id_ientrada'], 'id_entrada'=>$linha['id_entrada'], 'id_produto'=>$linha['id_produto'], 'qtd'=>$linha['qtd'], 'valor_unitario'=>$linha['valor_unitario']);
+                $entradas[]=array('id_ientrada'=>$linha['id_ientrada'], 'id_produto'=>$linha['id_produto'], 'qtd'=>$linha['qtd'], 'valor_unitario'=>$linha['valor_unitario']);
                 }
         } catch(PDOExeption $e){
             echo 'Erro: ' .  $e->getMessage();
