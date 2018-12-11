@@ -21,26 +21,6 @@ class EntradaDAO
         }
         return json_encode($entradas);
     }
-    public function listarUm($descricao)
-    {
-        $descricao = "%" . $descricao . "%";
-            try{
-                $pdo = Conexao::connect();
-                $sql = "SELECT descricao FROM tipo_saida WHERE descricao LIKE :descricao";
-                $consulta = $pdo->prepare($sql);
-                $consulta->execute(array(
-                    ':descricao' => $descricao
-                ));
-                $tiposaidas = Array();
-                while ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) {
-                    $tiposaida = new TipoSaida($descricao);
-                    $tiposaidas[] = $tiposaida;
-                }
-            }catch (PDOExeption $e){
-                echo 'Error: ' .  $e->getMessage();
-            }
-            return $tiposaidas;
-    }
     public function listarId($id_entrada){
     try{
         $pdo = Conexao::connect();
