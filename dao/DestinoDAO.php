@@ -10,7 +10,7 @@ class DestinoDAO
         try {
         	$pdo = Conexao::connect();
 
-            $sql = 'INSERT destino(nome,cnpj,cpf,telefone) VALUES(:nome,:cnpj,:cpf,:telefone)';
+            $sql = 'INSERT destino(nome_destino,cnpj,cpf,telefone) VALUES(:nome_destino,:cnpj,:cpf,:telefone)';
             $sql = str_replace("'", "\'", $sql);            
  
             $stmt = $pdo->prepare($sql);
@@ -20,7 +20,7 @@ class DestinoDAO
             $cpf=$destino->getCpf();
             $telefone=$destino->getTelefone();
 
-            $stmt->bindParam(':nome',$nome);
+            $stmt->bindParam(':nome_destino',$nome);
             $stmt->bindParam(':cnpj',$cnpj);
             $stmt->bindParam(':cpf',$cpf);
             $stmt->bindParam(':telefone',$telefone);
@@ -34,13 +34,13 @@ class DestinoDAO
         {
              try {
                 $pdo = Conexao::connect();
-                $sql = "SELECT id_destino, nome, cnpj, cpf, telefone  FROM destino where id_destino = :id_destino";
+                $sql = "SELECT id_destino, nome_destino, cnpj, cpf, telefone  FROM destino where id_destino = :id_destino";
                 $consulta = $pdo->prepare($sql);
                 $consulta->execute(array(
                 ':id_destino' => $id,
             ));
             while ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) {
-                $destino = new Destino($linha['nome'],$linha['cnpj'],$linha['cpf'],$linha['telefone']);
+                $destino = new Destino($linha['nome_destino'],$linha['cnpj'],$linha['cpf'],$linha['telefone']);
                 $destino->setId_destino($linha['id_destino']);
 
             }
@@ -68,10 +68,10 @@ class DestinoDAO
         try{
             $destinos=array();
             $pdo = Conexao::connect();
-            $consulta = $pdo->query("SELECT id_destino,nome,cnpj,cpf,telefone FROM destino");
+            $consulta = $pdo->query("SELECT id_destino,nome_destino,cnpj,cpf,telefone FROM destino");
             $x=0;
             while($linha = $consulta->fetch(PDO::FETCH_ASSOC)){
-                $destinos[$x]=array('id_destino'=>$linha['id_destino'],'nome'=>$linha['nome'],'cnpj'=>$linha['cnpj'],'cpf'=>$linha['cpf'],'telefone'=>$linha['telefone']);
+                $destinos[$x]=array('id_destino'=>$linha['id_destino'],'nome_destino'=>$linha['nome_destino'],'cnpj'=>$linha['cnpj'],'cpf'=>$linha['cpf'],'telefone'=>$linha['telefone']);
                 $x++;
             }
             } catch (PDOExeption $e){

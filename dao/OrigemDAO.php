@@ -10,7 +10,7 @@ class OrigemDAO
         try {
         	$pdo = Conexao::connect();
 
-            $sql = 'INSERT origem(nome,cnpj,cpf,telefone) VALUES(:nome,:cnpj,:cpf,:telefone)';
+            $sql = 'INSERT origem(nome_origem,cnpj,cpf,telefone) VALUES(:nome_origem,:cnpj,:cpf,:telefone)';
             $sql = str_replace("'", "\'", $sql);            
  
             $stmt = $pdo->prepare($sql);
@@ -20,7 +20,7 @@ class OrigemDAO
             $cpf=$origem->getCpf();
             $telefone=$origem->getTelefone();
 
-            $stmt->bindParam(':nome',$nome);
+            $stmt->bindParam(':nome_origem',$nome);
             $stmt->bindParam(':cnpj',$cnpj);
             $stmt->bindParam(':cpf',$cpf);
             $stmt->bindParam(':telefone',$telefone);
@@ -34,13 +34,13 @@ class OrigemDAO
         {
              try {
                 $pdo = Conexao::connect();
-                $sql = "SELECT id_origem, nome, cnpj, cpf, telefone  FROM origem where id_origem = :id_origem";
+                $sql = "SELECT id_origem, nome_origem, cnpj, cpf, telefone  FROM origem where id_origem = :id_origem";
                 $consulta = $pdo->prepare($sql);
                 $consulta->execute(array(
                 ':id_origem' => $id,
             ));
             while ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) {
-                $origem = new Origem($linha['nome'],$linha['cnpj'],$linha['cpf'],$linha['telefone']);
+                $origem = new Origem($linha['nome_origem'],$linha['cnpj'],$linha['cpf'],$linha['telefone']);
                 $origem->setId_origem($linha['id_origem']);
 
             }
@@ -67,10 +67,10 @@ class OrigemDAO
         try{
             $origens=array();
             $pdo = Conexao::connect();
-            $consulta = $pdo->query("SELECT id_origem,nome,cnpj,cpf,telefone FROM origem");
+            $consulta = $pdo->query("SELECT id_origem,nome_origem,cnpj,cpf,telefone FROM origem");
             $x=0;
             while($linha = $consulta->fetch(PDO::FETCH_ASSOC)){
-                $origens[$x]=array('id_origem'=>$linha['id_origem'],'nome'=>$linha['nome'],'cnpj'=>$linha['cnpj'],'cpf'=>$linha['cpf'],'telefone'=>$linha['telefone']);
+                $origens[$x]=array('id_origem'=>$linha['id_origem'],'nome_origem'=>$linha['nome_origem'],'cnpj'=>$linha['cnpj'],'cpf'=>$linha['cpf'],'telefone'=>$linha['telefone']);
                 $x++;
             }
             } catch (PDOExeption $e){
@@ -84,10 +84,10 @@ class OrigemDAO
             try{
             $origens=array();
             $pdo = Conexao::connect();
-            $consulta = $pdo->query("SELECT id_origem,nome FROM origem");
+            $consulta = $pdo->query("SELECT id_origem,nome_origem FROM origem");
             $x=0;
             while($linha = $consulta->fetch(PDO::FETCH_ASSOC)){
-                $origens[$x]=array('id_origem'=>$linha['id_origem'],'nome'=>$linha['nome']);
+                $origens[$x]=array('id_origem'=>$linha['id_origem'],'nome_origem'=>$linha['nome_origem']);
                 $x++;
             }
             } catch (PDOExeption $e){

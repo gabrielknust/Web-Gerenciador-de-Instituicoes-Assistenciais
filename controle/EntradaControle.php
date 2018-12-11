@@ -33,7 +33,8 @@ class EntradaControle
         $origens = $entradaDAO->listarTodos();
         session_start();
         $_SESSION['entrada']=$origens;
-        header('Location: ../html/cadastro_entrada.php');
+        echo $_SESSION['entrada'];
+        header('Location: ../html/listar_entrada.php');
     }
     
     public function incluir(){

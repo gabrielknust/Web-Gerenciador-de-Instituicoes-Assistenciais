@@ -73,7 +73,7 @@
          		$('#tabela')
          			.append($('<tr />')
          				.append($('<td />')
-         					.text(item.nome))
+         					.text(item.nome_destino))
          				.append($('<td />')
          					.attr('onclick','excluir("'+item.id_destino+'")')
          					.html('<i class="fas fa-trash-alt"></i>')));

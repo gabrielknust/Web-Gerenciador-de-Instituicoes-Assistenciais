@@ -1,21 +1,19 @@
 <!doctype html>
 <html class="fixed">
 <head>
-<?php/*
+<?php
 	include_once '../dao/Conexao.php';
   	include_once '../dao/EntradaDAO.php';
   
 	session_start();
 	if(!isset($_SESSION['entrada'])){
-		header('Location: ../controle/Control.php?metodo=listarTodos&nomeClasse=entradaControle&nextPage=../html/listar_entrada.php');
-	}
-	if(isset($_SESSION['msg'])){
-		$msg = $_SESSION['msg'];
+		header('Location: ../controle/Control.php?metodo=listarTodos&nomeClasse=EntradaControle&nextPage=../html/listar_entrada.php');
 	}
 	if(isset($_SESSION['entrada'])){
 		$entrada = $_SESSION['entrada'];
-	    session_destroy();  
-	}*/
+
+	    unset($_SESSION['entrada']);
+	}
 ?>
 	<!-- Basic -->
 	<meta charset="UTF-8">
@@ -76,8 +74,14 @@
 		
 	<!-- jquery functions -->
 	<script>
-		$(function(){
-			var entrada= <?php 
+		function listarId(id){
+			window.location.replace('../controle/Control.php?metodo=listarId&nomeClasse=EntradaControle&id_entrada='+id);
+		}
+	</script>
+	<script>
+		$(function(){	
+
+			var entrada = <?php 
 				echo $entrada; 
 				?>;
 
@@ -85,8 +89,22 @@
 
 				$('#tabela')
 					.append($('<tr />')
+						.attr('onclick','listarId("'+ item.id_entrada +'")')
 						.append($('<td />')
-					});
+							.text(item.nome_origem))
+						.append($('<td />')
+							.text(item.descricao_almoxarifado))
+						.append($('<td />')
+							.text(item.descricao))
+						.append($('<td />')
+							.text(item.nome))
+						.append($('<td />')
+							.text(item.valor_total))
+						.append($('<td />')
+							.text(item.data))
+						.append($('<td />')
+							.text(item.hora)))
+					})
 		});
 	</script>
 

@@ -43,10 +43,15 @@ class EntradaDAO
     try{
         $entradas=array();
         $pdo = Conexao::connect();
-        $consulta = $pdo->query("SELECT id_entrada, id_origem, id_almoxarifado, id_tipo, id_responsavel, data, hora, valor_total FROM entrada");
+        $consulta = $pdo->query("SELECT e.id_entrada, o.nome_origem, a.descricao_almoxarifado, t.descricao, p.nome, e.data, e.hora, e.valor_total 
+            FROM entrada e 
+            INNER JOIN origem o ON o.id_origem = e.id_origem
+            INNER JOIN almoxarifado a ON a.id_almoxarifado = e.id_almoxarifado
+            INNER JOIN tipo_entrada t ON t.id_tipo = e.id_tipo
+            INNER JOIN pessoa p ON p.id_pessoa = e.id_responsavel");
         $x=0;
         while($linha = $consulta->fetch(PDO::FETCH_ASSOC)){
-            $entradas[$x]=array('id_entrada'=>$linha['id_entrada'],'id_origem'=>$linha['id_origem'],'id_almoxarifado'=>$linha['id_almoxarifado'],'id_tipo'=>$linha['id_tipo'],'id_responsavel'=>$linha['id_responsavel'],'data'=>$linha['data'],'hora'=>$linha['hora'],'valor_total'=>$linha['valor_total']);
+            $entradas[$x]=array('id_entrada'=>$linha['id_entrada'],'nome_origem'=>$linha['nome_origem'],'descricao_almoxarifado'=>$linha['descricao_almoxarifado'],'descricao'=>$linha['descricao'],'nome'=>$linha['nome'],'data'=>$linha['data'],'hora'=>$linha['hora'],'valor_total'=>$linha['valor_total']);
             $x++;
         }
         } catch (PDOExeption $e){

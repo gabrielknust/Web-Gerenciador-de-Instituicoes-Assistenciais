@@ -99,7 +99,7 @@
 			})
 
 			$.each(origem,function(i,item){
-				$('#origens').append('<option value="' + item.id_origem + '-' + item.nome + '">');
+				$('#origens').append('<option value="' + item.id_origem + '-' + item.nome_origem + '">');
 			})
 
 			$('#input_produtos').on('input',function(){
