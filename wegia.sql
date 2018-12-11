@@ -196,28 +196,6 @@ create table cargo(
 )engine = InnoDB; /* O cargo que o usuário tiver definirá a quais tabelas ele terá acesso e quais não, se é possível 
 modificá-la ou apenas fazer uma consulta nela. */
 
-/*
-insert into cargo(id_cargo,descricao)
-values
-(01,'Agente Administrativo'),
-(02,'Assistente Social'),
-(03,'Auxiliar Administrativo'),
-(04,'Auxiliar de Enfermagem'),
-(05,'Cozinheiro(a)'),
-(06,'Cuidador(a)'),
-(07,'Enfermeira Chefe'),
-(08,'Enfermeiro(a)'),
-(09,'Fisioterapeuta'),
-(10,'Motorista'),
-(11,'Nutricionista'),
-(12,'Pedreiro'),
-(13,'Psicólogo(a)'),
-(14,'Recreador(a)'),
-(15,'Recepcionista'),
-(16,'Serviços Gerais'),
-(17,'Técnico de Enfermagem'),
-(18,'Técnico de Informática'); /* cargos existentes na tabela CARGO */
-
 create table acao(
 	id_acao int not null primary key auto_increment,
     descricao varchar(240)
@@ -307,9 +285,6 @@ complemento,ibge,registro_geral,orgao_emissor,data_expedicao, nome_pai, nome_mae
 
 select max(id_pessoa) into idP FROM pessoa;
 
-/*insert into quadro_horario(escala, tipo, carga_horaria, entrada1, saida1, entrada2, saida2,total, dias_trabalhados, folga, observacoes)
-values(escala, tipo, carga_horaria, entrada1, saida1, entrada2, saida2,total, dias_trabalhados, folga, observacoes);
-select max(id_quadro_horario) into idQ FROM quadro_horario;*/
 
 insert into funcionario(id_pessoa,/*id_quadro_horario,*/vale_transporte,data_admissao,pis,ctps,
 uf_ctps,numero_titulo,zona,secao,certificado_reservista_numero,certificado_reservista_serie,calcado,calca,jaleco,camisa,
@@ -488,109 +463,3 @@ BEGIN
 END $
 
 DELIMITER ;
-
-
- int not null,
-    id_responsavel int not null,
-    
-    data date,
-    hora time,
-    valor_total decimal(10,2),
-    
-    foreign key(id_destino) references destino(id_destino),
-    foreign key(id_almoxarifado) references almoxarifado(id_almoxarifado),
-    foreign key(id_tipo) references tipo_saida(id_tipo),
-    foreign key(id_responsavel) references funcionario(id_funcionario)
-)engine = InnoDB;
-
-create table isaida(
-    id_isaida int not null primary key auto_increment,
-    id_saida int not null,
-    id_produto int not null,
-    qtd int,
-    valor_unitario varchar(100),
-    
-    foreign key(id_saida) references saida(id_saida),
-    foreign key(id_produto) references produto(id_produto)
-)engine = InnoDB;
-
-
-DELIMITER $
-/* Criação da procedure que cadastra na tabela entrada e ientrada */
-CREATE PROCEDURE cadentrada (in id_origem int, in id_almoxarifado int, in id_tipo int, in id_responsavel int, in data date, in hora time, in valor_total DECIMAL(10,2),
-in id_entrada int, in id_produto int, in qtd int, in valor_unitario DECIMAL(10,2))
-begin
-
-declare idE int;
-
-insert into entrada (id_origem, id_almoxarifado, id_tipo, id_responsavel, data, hora, valor_total)
-	values(id_origem, id_almoxarifado, id_tipo, id_responsavel, data, hora, valor_total);
-
-SELECT 
-	MAX(id_entrada)
-INTO idE FROM entrada;
-
-insert into ientrada(id_entrada, id_produto, qtd, valor_unitario)
-	values(idE, id_produto, qtd, valor_unitario);
-end $
-
-/* Criação da procedure que cadastra na tabela saida e isaida */
-CREATE PROCEDURE cadsaida (in id_destino int, in id_almoxarifado int, in id_tipo int, in id_responsavel int, in data date, in hora time, in valor_total DECIMAL(10,2),
-in id_saida int, in id_produto int, in qtd int, in valor_unitario DECIMAL(10,2))
-begin
-
-declare idS int;
-
-insert into saida (id_destino, id_almoxarifado, id_tipo, id_responsavel, data, hora, valor_total)
-	values(id_destino, id_almoxarifado, id_tipo, id_responsavel, data, hora, valor_total);
-
-SELECT 
-	MAX(id_saida)
-INTO idS FROM saida;
-
-insert into isaida(id_saida, id_produto, qtd, valor_unitario)
-	values(idS, id_produto, qtd, valor_unitario);
-end $
-
-/* criação do gatilho que insere na tabela estoque depois de um insert na tabela ientrada */
-CREATE TRIGGER tgr_ientrada_insert
-AFTER INSERT ON ientrada
-FOR EACH ROW
-BEGIN
-
-	INSERT IGNORE INTO estoque(id_produto, id_almoxarifado, qtd) values(NEW.id_produto, (SELECT id_almoxarifado FROM entrada WHERE id_entrada = NEW.id_entrada), 0);
-	
-    UPDATE estoque SET qtd = qtd+NEW.qtd WHERE id_produto = NEW.id_produto AND id_almoxarifado = (SELECT id_almoxarifado FROM entrada WHERE id_entrada = NEW.id_entrada);
-	
-END $
-
-CREATE TRIGGER tgr_ientrada_delete
-AFTER DELETE ON ientrada
-FOR EACH ROW
-BEGIN
-	
-    UPDATE estoque SET qtd = qtd - OLD.qtd WHERE id_produto = OLD.id_produto AND id_almoxarifado = (SELECT id_almoxarifado FROM entrada WHERE id_entrada = OLD.id_entrada);
-	
-END $
-
-CREATE TRIGGER tgr_isaida_delete
-AFTER DELETE ON isaida
-FOR EACH ROW
-BEGIN
-	
-    UPDATE estoque SET qtd = qtd+OLD.qtd WHERE id_produto = OLD.id_produto AND id_almoxarifado = (SELECT id_almoxarifado FROM saida WHERE id_saida = OLD.id_saida);
-	
-END $
-
-CREATE TRIGGER tgr_isaida_insert
-AFTER INSERT ON isaida
-FOR EACH ROW
-BEGIN
-	
-    UPDATE estoque SET qtd = qtd-NEW.qtd WHERE id_produto = NEW.id_produto AND id_almoxarifado = (SELECT id_almoxarifado FROM saida WHERE id_saida = NEW.id_saida);
-	
-END $
-
-DELIMITER ;
-    
-SELECT * FROM estoque;
