@@ -254,7 +254,6 @@
 
 
 					<div class="row">
-
 						<div onclick="listarFuncionario()" style="color: #0088cc;">
 							<div class="col-lg-2 col-md-8 i">
 								<form id="listarFuncionario" method="POST" action="../controle/control.php">
@@ -268,40 +267,67 @@
 						</div>
 
 						<div onclick="listarInterno()" style="color: #0088cc;">
-						<div class="col-lg-2 col-md-8 i">
-						<form id="listarInterno" method="POST" action="../controle/control.php">
-							<i  class="far fa-clipboard" id="listarInterno"></i>
-							<h4>Informação internos</h4>
-							<input type="hidden" name="nomeClasse" value="InternoControle">
-							<input type="hidden" name="metodo" value="listartodos">
-							<input type="hidden" name="nextPage" value="../html/informacao_interno.php">
-						</form>
-						</div>
+							<div class="col-lg-2 col-md-8 i">
+								<form id="listarInterno" method="POST" action="../controle/control.php">
+									<i  class="far fa-clipboard" id="listarInterno"></i>
+									<h4>Informação internos</h4>
+									<input type="hidden" name="nomeClasse" value="InternoControle">
+									<input type="hidden" name="metodo" value="listartodos">
+									<input type="hidden" name="nextPage" value="../html/informacao_interno.php">
+								</form>
+							</div>
 						</div>
 						
-						<div class="col-lg-2 col-md-8 i">
-						<form>
-							<i  class="fa fa-barcode"></i>
-							<h4>Estoque</h4>
-						</form>
-						</div>
+						<a href="">
+							<div class="col-lg-2 col-md-8 i">
+								<form>
+									<i  class="far fa-address-card"></i>
+									<h4>Cadastrar Doador</h4>
+								</form>
+							</div>
 						</a>
 
-						
-						<div class="col-lg-2 col-md-8 i">
-						<form>
-							<i  class="far fa-address-card"></i>
-							<h4>Cadastrar cargo</h4>
-						</form>
+						<a href="">
+							<div class="col-lg-2 col-md-8 i">
+								<form>
+									<i  class="far fa-address-card"></i>
+									<h4>Cadastrar </h4>
+								</form>
+							</div>
 						</a>
-						</div>
 						
-						
-
-						
-
 					</div>
 
+
+					<div class="row">
+						<a href="../html/estoque.php">
+							<div class="col-lg-2 col-md-8 i">
+								<form>
+									<i  class="fa fa-barcode"></i>
+									<h4>Estoque</h4>
+								</form>
+							</div>
+						</a>
+
+						<a href="../html/cadastro_entrada.php">
+							<div class="col-lg-2 col-md-8 i">
+								<form>
+									<i  class="fa fa-barcode"></i>
+									<h4>Cadastrar Produtos</h4>
+								</form>
+							</div>
+						</a>
+
+						<div class="col-lg-2 col-md-8 i">
+							<i class="far fa-calendar-alt"></i>
+							<h4>Cadastrar Eventos</h4>
+						</div>
+
+						<div class="col-lg-2 col-lg-offset-1 col-md-8 i">
+							<i class="far fa-folder-open"></i>
+							<h4>Gerenciar Documentação</h4>
+						</div>
+					</div>
 
 					<div class="row">
 						<div class="col-lg-2 col-md-8 i">
@@ -309,9 +335,11 @@
 							<h4>Cadastrar Funcionário</h4>
 						</div>
 
-						<div class="col-lg-2 col-lg-offset-1 col-md-8 i" >
-							<i class="far fa-clipboard"></i>
-							<h4>Cadastrar Funcionário</h4>
+						<div class="col-lg-2 col-md-8 i">
+						<form>
+							<i  class="far fa-address-card"></i>
+							<h4>Cadastrar cargo</h4>
+						</form>
 						</div>
 
 						<div class="col-lg-2 col-md-8 i">
