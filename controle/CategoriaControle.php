@@ -7,7 +7,7 @@ class CategoriaControle
         extract($_REQUEST);
         if((!isset($descricao_categoria)) || (empty($descricao_categoria))){
             $msg = "Descricao da Categoria não informada. Por favor, informe uma descricao!";
-            //header('Location: ../html/categoria.html?msg='.$msg);
+            header('Location: ../html/categoria.html?msg='.$msg);
         }
         else{
             $categoria = new Categoria($descricao_categoria);
@@ -20,6 +20,7 @@ class CategoriaControle
         $categorias = $categoriaDAO->listarTodos();
         session_start();
         $_SESSION['categoria']=$categorias;
+        echo $_SESSION['categoria'];
         header('Location: '.$nextPage);
     }
     
