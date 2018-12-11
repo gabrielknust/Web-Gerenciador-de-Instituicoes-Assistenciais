@@ -4,11 +4,12 @@ include_once '../dao/IentradaDAO.php';
 
 class IentradaControle
 {
-    public function listarId($id_ientrada){
+    public function listarId(){
         extract($_REQUEST);
         try{
             $ientradaDAO = new IentradaDAO();
-            $ientrada = $ientradaDAO->listarId($id_ientrada);
+            $ientrada = $ientradaDAO->listarId($id_entrada);
+            echo $ientrada;
             session_start();
             $_SESSION['ientrada'] = $ientrada;
             header('Location: ' . $nextPage);

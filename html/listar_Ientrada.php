@@ -1,21 +1,15 @@
 <!doctype html>
 <html class="fixed">
 <head>
-<?php/*
+<?php
 	include_once '../dao/Conexao.php';
   	include_once '../dao/entradaDAO.php';
   
 	session_start();
-	if(!isset($_SESSION['entrada'])){
-		header('Location: ../controle/Control.php?metodo=listarTodos&nomeClasse=entradaControle&nextPage=../html/listar_entrada.php');
+	if(isset($_SESSION['ientrada'])){
+		$ientrada = $_SESSION['ientrada'];
+	    unset($_SESSION['ientrada']);  
 	}
-	if(isset($_SESSION['msg'])){
-		$msg = $_SESSION['msg'];
-	}
-	if(isset($_SESSION['entrada'])){
-		$entrada = $_SESSION['entrada'];
-	    session_destroy();  
-	}*/
 ?>
 	<!-- Basic -->
 	<meta charset="UTF-8">
@@ -77,8 +71,8 @@
 	<!-- jquery functions -->
 	<script>
 		$(function(){
-			var entrada= <?php 
-				echo $entrada; 
+			var ientrada= <?php 
+				echo $ientrada; 
 				?>;
 
 			$.each(entrada, function(i,item){
@@ -86,6 +80,7 @@
 				$('#tabela')
 					.append($('<tr />')
 						.append($('<td />')
+							.text())
 					});
 		});
 	</script>
