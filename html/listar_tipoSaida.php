@@ -6,12 +6,12 @@
           	include_once '../dao/TipoSaidaDAO.php';
           
           	session_start();
-          	if(!isset($_SESSION['tiposaida'])){
+          	if(!isset($_SESSION['tipo_saida'])){
             	header('Location: ../controle/Control.php?metodo=listarTodos&nomeClasse=TipoSaidaControle&nextPage=../html/listar_tipoSaida.php');
           	}
-          	if(isset($_SESSION['tiposaida'])){
-            	$tipo = $_SESSION['tiposaida'];
-            	unset($_SESSION['tiposaida']);
+          	if(isset($_SESSION['tipo_saida'])){
+            	$tipo = $_SESSION['tipo_saida'];
+            	unset($_SESSION['tipo_saida']);
             }
       ?>
       <!-- Basic -->

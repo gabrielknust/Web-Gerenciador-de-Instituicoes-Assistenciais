@@ -24,26 +24,24 @@ class TipoSaidaDAO
             echo 'Error: <b>  na tabela tipo_saida = ' . $sql . '</b> <br /><br />' . $e->getMessage();
         }
     }
-    public function listarUm($descricao)
-    {
-        $descricao = "%" . $descricao . "%";
-            try{
+    public function listarUm($id)
+        {
+             try {
                 $pdo = Conexao::connect();
-                $sql = "SELECT descricao FROM tipo_saida WHERE descricao LIKE :descricao";
+                $sql = "SELECT id_tipo, descricao FROM tipo_saida where id_tipo = :id_tipo";
                 $consulta = $pdo->prepare($sql);
                 $consulta->execute(array(
-                    ':descricao' => $descricao
-                ));
-                $tiposaidas = Array();
-                while ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) {
-                    $tiposaida = new TipoSaida($descricao);
-                    $tiposaidas[] = $tiposaida;
-                }
-            }catch (PDOExeption $e){
-                echo 'Error: ' .  $e->getMessage();
+                ':id_tipo' => $id,
+            ));
+            while ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) {
+                $x = new TipoSaida($linha['descricao']);
+                $x->setId_tipo($linha['id_tipo']);
             }
-            return $tiposaidas;
-    }
+            } catch (PDOException $e) {
+                throw $e;
+            }
+            return $x;
+        }
         public function excluir($id_tipo)
 	    {
 	        try{

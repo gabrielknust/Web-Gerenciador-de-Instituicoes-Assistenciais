@@ -98,14 +98,11 @@ class ProdutoControle
             
             $produto->set_categoria_produto($categoria);
             $produto->set_unidade($unidade);
-
+            
             $produtoDAO->incluir($produto);
 
             session_start();
-            $_SESSION['msg']="produto cadastrado com sucesso";
-            $_SESSION['proxima']="Cadastrar outro produto";
-            $_SESSION['link']="../html/cadastro_produto.php";
-            header("Location: ../html/sucesso.php");
+            header("Location: ../html/cadastro_produto.php");
         } catch (PDOException $e){
             $msg= "Não foi possível registrar o funcionário"."<br>".$e->getMessage();
             echo $msg;

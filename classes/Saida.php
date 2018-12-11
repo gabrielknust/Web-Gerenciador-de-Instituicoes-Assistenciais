@@ -11,9 +11,10 @@ class Saida
    private $hora;
    private $valor_total;
    
-    public function __construct($data,$hora,$valor_total)
+    public function __construct($id_responsavel,$data,$hora,$valor_total)
     {
 
+        $this->id_responsavel=$id_responsavel;
         $this->data=$data;
         $this->hora=$hora;
         $this->valor_total=$valor_total;

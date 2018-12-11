@@ -24,7 +24,7 @@ class EntradaDAO
             $valor_total = $entrada->getValor_total();
 
             $stmt->bindParam(':id_origem',$id_origem);
-            $stmt->bindParam(':id_almoxarifado',$id_tipo);
+            $stmt->bindParam(':id_almoxarifado',$id_almoxarifado);
             $stmt->bindParam(':id_tipo',$id_tipo);
             $stmt->bindParam(':id_responsavel',$id_responsavel);
             $stmt->bindParam(':data',$data);

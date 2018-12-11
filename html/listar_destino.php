@@ -6,12 +6,12 @@
           	include_once '../dao/DestinoDAO.php';
           
           	session_start();
-          	if(!isset($_SESSION['destinos'])){
+          	if(!isset($_SESSION['destino'])){
             	header('Location: ../controle/Control.php?metodo=listarTodos&nomeClasse=DestinoControle&nextPage=../html/listar_destino.php');
           	}
-          	if(isset($_SESSION['destinos'])){
-            	$destino = $_SESSION['destinos'];
-            	unset($_SESSION['destinos']);
+          	if(isset($_SESSION['destino'])){
+            	$destino = $_SESSION['destino'];
+            	unset($_SESSION['destino']);
             }
          ?>
       <!-- Basic -->

@@ -5,12 +5,12 @@ require_once'../Functions/funcoes.php';
 class IsaidaDAO
 {
     //Consultar um utilizando o ID
-    public function listarId($id_isaida){
+    public function listarId($id_saida){
         try{
             $pdo = Conexao::connect();
-            $sql = "SELECT id_isaida,id_saida,id_produto,qtd,valor_unitario FROM isaida";
+            $sql = "SELECT id_isaida,id_saida,id_produto,qtd,valor_unitario FROM isaida WHERE id_saida = :id_saida";
             $stmt = $pdo->prepare($sql);
-            $stmt->bindParam(':id_isaida',$id_isaida);
+            $stmt->bindParam(':id_saida',$id_saida);
 
             $stmt->execute();
             $isaidas = array();
@@ -23,6 +23,30 @@ class IsaidaDAO
         return json_encode($isaidas);  
     }
 
-}
+    public function incluir($isaida)
+        {        
+            try {
+                $pdo = Conexao::connect();
 
-?>
+                $sql = 'INSERT INTO isaida(id_saida,id_produto,qtd,valor_unitario) VALUES(:id_saida,:id_produto,:qtd,:valor_unitario)';
+                $sql = str_replace("'", "\'", $sql);            
+                
+                $stmt = $pdo->prepare($sql);
+
+                $id_saida = $isaida->getId_saida()->getId_saida();
+                $id_produto = $isaida->getId_produto()->getId_produto();
+                $qtd = $isaida->getQtd();
+                $valor_unitario = $isaida->getValor_unitario();
+
+                $stmt->bindParam(':id_entrada',$id_saida);
+                $stmt->bindParam(':id_produto',$id_produto);                
+                $stmt->bindParam(':qtd',$qtd);
+                $stmt->bindParam(':valor_unitario',$valor_unitario);
+
+                $stmt->execute();
+            }catch (PDOExeption $e) {
+                echo 'Error: <b>  na tabela produto = ' . $sql . '</b> <br /><br />' . $e->getMessage();
+            }
+
+}
+}

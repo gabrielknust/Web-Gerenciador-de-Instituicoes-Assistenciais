@@ -30,26 +30,25 @@ class DestinoDAO
             echo 'Error: <b>  na tabela destino = ' . $sql . '</b> <br /><br />' . $e->getMessage();
         }
     }
-    public function listarUm($nome)
-    {
-        $nome = "%" . $nome . "%";
-            try{
+    public function listarUm($id)
+        {
+             try {
                 $pdo = Conexao::connect();
-                $sql = "SELECT nome FROM destino WHERE nome LIKE :nome";
+                $sql = "SELECT id_destino, nome, cnpj, cpf, telefone  FROM destino where id_destino = :id_destino";
                 $consulta = $pdo->prepare($sql);
                 $consulta->execute(array(
-                    ':nome' => $nome
-                ));
-                $destinos = Array();
-                while ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) {
-                    $destino = new destino($nome);
-                    $destinos[] = $destino;
-                }
-            }catch (PDOExeption $e){
-                echo 'Error: ' .  $e->getMessage();
+                ':id_destino' => $id,
+            ));
+            while ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) {
+                $destino = new Destino($linha['nome'],$linha['cnpj'],$linha['cpf'],$linha['telefone']);
+                $destino->setId_destino($linha['id_destino']);
+
             }
-            return $destinos;
-    }
+            } catch (PDOException $e) {
+                throw $e;
+            }
+            return $destino;
+        }
 
         public function excluir($id_destino)
 	    {

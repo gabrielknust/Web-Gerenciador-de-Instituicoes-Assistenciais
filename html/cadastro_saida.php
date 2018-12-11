@@ -25,7 +25,7 @@
 			$tipo_saida = $_SESSION['tipo_saida'];
 			$autocomplete = $_SESSION['autocomplete'];
 			$destino = $_SESSION['destino'];
-			echo $destino;
+
 			unset($_SESSION['almoxarifado']);
 			unset($_SESSION['tipo_saida']);
 			unset($_SESSION['autocomplete']);
@@ -116,6 +116,7 @@
 
 			//adicionar tabela
 			var conta = 0;
+			var verificar = 0;
 			$(".add-row").click(function(){
 				var val=$("#input_produtos").val();
 
@@ -146,7 +147,8 @@
 							x += (quantidade*preco);
 							
 							$("#total_total").val(x);
-												
+							verificar++;
+							$("#verifica").val(verificar);				
 						}
 					})
 				}else{
@@ -154,6 +156,8 @@
 	    		 	$("#input_produtos").val("");
 	    		 	$("#input_produtos").focus();
 	    		 	$("#valor_unitario").empty();
+	    		 	verificar--;
+	    		 	$("#verifica").val(verificar);
     			}
 			});
 
@@ -187,6 +191,7 @@
 		function validar(){
 			var almox = document.getElementById("almoxarifado");
 			var tipo = document.getElementById("tipo_entrada");
+			var verificar = document.getElementById("verifica");
 			if(almox.value == "blank"){
 				alert("Selecione um almoxarifado");
 				almox.focus();
@@ -197,8 +202,9 @@
 				tipo.focus();
 				return false;
 			}
-			else if(verificar == 0){
+			else if(verificar.value == 0){
 				alert("Nenhum produto inserido");
+				document.getElementById("input_produtos").focus();
 				return false;
 			}
 		}
@@ -349,11 +355,11 @@
 											<div class="form-group">
 												<label class="col-md-3 control-label" >Destino</label>
 												<div class="col-md-8">
-													<input type="search" list="origens" id="origem" name="origem" class="form-control" autocomplete="off" required>
+													<input type="search" list="origens" id="origem" name="destino" class="form-control" autocomplete="off" required>
 													<datalist id="origens">
 													</datalist>
 												</div>
-												<a href="cadastro_doadorf.php"><i class="fas fa-plus w3-xlarge"></i></a>
+												<a href="cadastro_destino.php"><i class="fas fa-plus w3-xlarge"></i></a>
 											</div>
 											
 											<div class="form-group">
@@ -369,11 +375,11 @@
 											<div class="form-group">
 												<label class="col-md-3 control-label" >Tipo</label>
 												<div class="col-md-6">
-													<select class="form-control " name="tipo_entrada" id="tipo_entrada">
+													<select class="form-control " name="tipo_saida" id="tipo_entrada">
 														<option selected disabled value="blank">Selecionar</option>
 													</select>
 												</div>
-												<a href="adicionar_tipoEntrada.php"><i class="fas fa-plus w3-xlarge"></i></a>
+												<a href="adicionar_tipoSaida.php"><i class="fas fa-plus w3-xlarge"></i></a>
 											</div>
 										</div>
 										
@@ -385,7 +391,7 @@
 															<a href="cadastro_produto.php" class="fas fa-plus w3-xlarge" style="float:right;" id="produto" class="produto">
 															</a>
 														</th>
-														<th>quantidade<a href="" class="fas fa-plus w3-xlarge" style="float: right;"></a></th>
+														<th>quantidade</th>
 														<th>valor unitário</th>
 														<th>incluir</th>
 													</tr>
@@ -424,6 +430,7 @@
 															<td id="valor-total">
 															<input type="number" id="total_total"  name="total_total" readonly="readonly">
 															<input type="hidden" id="conta" name="conta" readonly="readonly">
+															<input type="hidden" id="verifica" disabled>
 															</td>
 
 														</tr>

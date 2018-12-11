@@ -231,7 +231,7 @@
 													<div class="col-md-9 col-md-offset-3">
 														<button id="enviar" class="btn btn-primary" type="submit">Enviar</button>
 														<input type="reset" class="btn btn-default">
-														<a href="cadastro_produto.php" style="color: white; text-decoration: none;"><button class="btn btn-info" type="button">Voltar</button></a>
+														<a href="cadastro_saida.php" style="color: white; text-decoration: none;"><button class="btn btn-info" type="button">Voltar</button></a>
 														<a href="listar_tipoSaida.php" style="color: white; text-decoration:none;"><button class="btn btn-success" type="button">Listar Saida</button></a>
 												
 													</div>
