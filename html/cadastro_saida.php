@@ -1,7 +1,37 @@
 <!doctype html>
 <html class="js flexbox flexboxlegacy csstransforms csstransforms3d no-overflowscrolling translated-ltr">
 <head>
+	<?php session_start(); 
+		include_once '../dao/Conexao.php';
+		include_once '../dao/AlmoxarifadoDAO.php';
+		include_once '../dao/TipoEntradaDAO.php';
+		include_once '../dao/ProdutoDAO.php';
 	
+		if (!isset($_SESSION['almoxarifado'])) {
+			header('Location: ../controle/control.php?metodo=listarTodos&nomeClasse=AlmoxarifadoControle&nextPage=../html/cadastro_saida.php');
+		}
+		if(!isset($_SESSION['tipo_saida'])){
+			header('Location: ../controle/control.php?metodo=listarTodos&nomeClasse=TipoSaidaControle&nextPage=../html/cadastro_saida.php');	
+		}
+		if(!isset($_SESSION['autocomplete'])) {
+			header('Location: ../controle/control.php?metodo=listarDescricao&nomeClasse=ProdutoControle&nextPage=../html/cadastro_saida.php');
+		}
+		if(!isset($_SESSION['destino'])) {
+			header('Location: ../controle/control.php?metodo=listarTodos&nomeClasse=DestinoControle&nextPage=../html/cadastro_saida.php');
+		}
+		if(isset($_SESSION['almoxarifado']) && isset($_SESSION['tipo_saida']) &&  isset($_SESSION['autocomplete']) && isset($_SESSION['destino'])){
+
+			$almoxarifado = $_SESSION['almoxarifado'];
+			$tipo_saida = $_SESSION['tipo_saida'];
+			$autocomplete = $_SESSION['autocomplete'];
+			$destino = $_SESSION['destino'];
+			echo $destino;
+			unset($_SESSION['almoxarifado']);
+			unset($_SESSION['tipo_saida']);
+			unset($_SESSION['autocomplete']);
+			unset($_SESSION['destino']);
+		}
+	?>
 	
 	<!-- Basic -->
 	<meta charset="UTF-8">
@@ -44,23 +74,23 @@
 				echo $almoxarifado;
 			?>;
 				
-			var tipo_entrada = <?php 
-				echo $tipo_entrada; 
+			var tipo_saida = <?php 
+				echo $tipo_saida; 
 			?>;
 			
 			var produtos_autocomplete = <?php
 				echo $autocomplete;
 			?>;
 			
-			var saida = <?php
-				echo $saida;
+			var destino = <?php
+				echo $destino;
 			?>;
 
 			$.each(almoxarifado,function(i,item){
 				$('#almoxarifado').append('<option value="' + item.id_almoxarifado + '">' + item.descricao_almoxarifado + '</option>');
 			})
 
-			$.each(tipo_entrada,function(i,item){
+			$.each(tipo_saida,function(i,item){
 				$('#tipo_entrada').append('<option value="' + item.id_tipo + '">' + item.descricao + '</option>');
 			})
 
@@ -68,8 +98,8 @@
 				$('#produtos_autocomplete').append('<option value="' + item.id_produto + '-' + item.descricao + '">');
 			})
 
-			$.each(saida,function(i,item){
-				$('#origens').append('<option value="' + item.saida + '-' + item.nome + '">');
+			$.each(destino,function(i,item){
+				$('#origens').append('<option value="' + item.id_destino + '-' + item.nome + '">');
 			})
 
 			$('#input_produtos').on('input',function(){
@@ -83,7 +113,9 @@
 				})
 			
 			});
+
 			//adicionar tabela
+			var conta = 0;
 			$(".add-row").click(function(){
 				var val=$("#input_produtos").val();
 
@@ -99,37 +131,52 @@
 					if(produto[0]==item.id_produto && produto[1]==item.descricao)
 					{
 						var quantidade = $("#quantidade").val();
-						var preco = item.preco;
+						var preco = parseFloat(item.preco);
 						
-						var markup = "<tr class='produtoRow' id='" + item.id_produto +"'><td class='prod' style='width: 160px;'><input type='text' size='25' value='" + val + "' disabled></td><td class='quant'><input type='text' class='number'  id='qtd' maxlength='2' size='2' class='form-control' min='1' value='" + quantidade +"' disabled ></td><td><input type='text' class='preco' value='" + preco +"'  size='2' disabled></td><td><input type='text' size='3' id='total' class='total' value='" + quantidade * preco +"' disabled></td><td><button type='button' class='delete-row'>remover</button></td></tr>";
+						conta = conta + 1;
+
+						$("#conta").val(conta);
+
+						var markup = "<tr class='produtoRow'><td class='prod' style='width: 160px;'><input type='text' value='"+val+"' name='id"+conta+"' readonly='readonly'></td><td class='quant'><input type='text' class='number'  id='qtd' maxlength='2' size='2' class='form-control' min='1' value='"+quantidade+"' name='qtd"+conta+"' readonly='readonly'></td><td><input type='text' class='preco' value='"+preco+"' name='valor_unitario"+conta+"'  size='2' readonly='readonly'></td><th><input type='text' size='3' id='total' class='total' value='"+quantidade*preco+"' readonly='readonly'></th><td><button type='button' class='delete-row'>remover</button></td></tr>";
 							$("table tbody ").append(markup);
 							$("#valor_unitario").empty();
-							$("#input_produtos").val("");					
+							$("#input_produtos").val("");
+							var x=$("#total_total").val();
+							x=Number(x);
+							x += (quantidade*preco);
+							
+							$("#total_total").val(x);
+												
 						}
 					})
 				}else{
     		 		alert("Produto inválido!");
-	    		 $("#input_produtos").val("");
-	    		 $("#input_produtos").focus();
-	    		 $("#valor_unitario").empty();
+	    		 	$("#input_produtos").val("");
+	    		 	$("#input_produtos").focus();
+	    		 	$("#valor_unitario").empty();
     			}
 			});
 
 			//remover tabela
 			$("table tbody").on('click','.delete-row',function(){
+				var valor_menos = $(this).closest('tr').find('th').find('input').val();
+				var xx = $("#total_total").val();
+				xx = xx - valor_menos;
+				$("#total_total").val(xx);
 				$(this).closest('tr').remove();
+				verificar = verificar - 1;
 			});
 
-			// validar saida
-			$("#saida").blur(function(){
-			var val=$("#saida").val();
+			// validar origem
+			$("#origem").blur(function(){
+			var val=$("#origem").val();
 			var obj=$("#origens").find("option[value='"+val+"']");
 			if(obj !=null && obj.length>0){
 				return true;
 			}
 			else{
-				alert("Destino inválida, por favor insira uma saida válida");
-				$("#saida").val("");
+				alert("Origem inválida, por favor insira uma origem válida");
+				$("#origem").val("");
 			}
 		});
 	});
@@ -150,8 +197,15 @@
 				tipo.focus();
 				return false;
 			}
+			else if(verificar == 0){
+				alert("Nenhum produto inserido");
+				return false;
+			}
 		}
+		
 	</script>
+
+
 
 	<!--CSS-->
 	<style type="text/css">
@@ -290,18 +344,16 @@
 						<div class="tab-content" style="width: 832px;">
 							<div id="overview" class="tab-pane active">
 								<form class="form-horizontal" method="post" id="formulario" onsubmit="return validar()" action="../controle/Control.php" autocomplete="off">
-									<input type="hidden" name="nomeClasse" value="FuncionarioControle">
-										<input type="hidden" name="metodo" value="incluir">
 									<fieldset>
 										<div class="info-entrada" >
 											<div class="form-group">
-												<label class="col-md-3 control-label" >saida</label>
+												<label class="col-md-3 control-label" >Destino</label>
 												<div class="col-md-8">
-													<input type="search" list="origens" id="saida" name="saida" class="form-control" autocomplete="off" required>
+													<input type="search" list="origens" id="origem" name="origem" class="form-control" autocomplete="off" required>
 													<datalist id="origens">
 													</datalist>
 												</div>
-												<a href="cadastro_destino.php"><i class="fas fa-plus w3-xlarge"></i></a>
+												<a href="cadastro_doadorf.php"><i class="fas fa-plus w3-xlarge"></i></a>
 											</div>
 											
 											<div class="form-group">
@@ -369,7 +421,11 @@
 													<tfoot>
 														<tr >
 															<td>Valor total:</td>
-															<td id="valor-total"></td>
+															<td id="valor-total">
+															<input type="number" id="total_total"  name="total_total" readonly="readonly">
+															<input type="hidden" id="conta" name="conta" readonly="readonly">
+															</td>
+
 														</tr>
 													</tfoot>
 												</table>
@@ -381,6 +437,8 @@
 									</fieldset><br>
 									<div class="row">
 										<div class="col-md-9 col-md-offset-3">
+										    <input type="hidden" name="nomeClasse" value="SaidaControle">			
+											<input type="hidden" name="metodo" value="incluir">
 											<input type="submit" class="btn btn-primary" >
 										</div>
 									</div>

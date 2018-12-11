@@ -147,6 +147,25 @@ class ProdutoDAO
 				return json_encode($produtos);
 	            }
 
+	        public function listarUm($id)
+       		{
+             try {
+                $pdo = Conexao::connect();
+                $sql = "SELECT id_produto, descricao, codigo, preco FROM produto where id_produto = :id_produto";
+                $consulta = $pdo->prepare($sql);
+                $consulta->execute(array(
+                ':id_produto' => $id,
+            ));
+            while ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) {
+                $produto = new Produto($linha['descricao'],$linha['codigo'],$linha['preco']);
+                $produto->setId_produto($linha['id_produto']);
+            }
+            } catch (PDOException $e) {
+                throw $e;
+            }
+            return $produto;
+        }
+
 }
 
 ?>

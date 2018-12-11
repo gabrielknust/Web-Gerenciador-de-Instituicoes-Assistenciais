@@ -5,23 +5,50 @@ require_once'../Functions/funcoes.php';
 class IentradaDAO
 {
     //Consultar um utilizando o ID
-    public function listarId($id_ientrada){
+    public function listarId($id_entrada){
         try{
             $pdo = Conexao::connect();
-            $sql = "SELECT id_ientrada,id_entrada,id_produto,qtd,valor_unitario FROM ientrada";
+            $sql = "SELECT id_ientrada,id_entrada,id_produto,qtd,valor_unitario FROM ientrada WHERE id_entrada = :id_entrada";
             $stmt = $pdo->prepare($sql);
-            $stmt->bindParam(':id_ientrada',$id_ientrada);
+            $stmt->bindParam(':id_ientrada',$id_entrada);
 
             $stmt->execute();
-            $ientradas = array();
+            $entradas = array();
             while($linha = $stmt->fetch(PDO::FETCH_ASSOC)){
-                $ientradas[]=array('id_ientrada'=>$linha['id_ientrada'], 'id_entrada'=>$linha['id_entrada'], 'id_produto'=>$linha['id_produto'], 'qtd'=>$linha['qtd'], 'valor_unitario'=>$linha['valor_unitario'],);
+                $entradas[]=array('id_ientrada'=>$linha['id_ientrada'], 'id_entrada'=>$linha['id_entrada'], 'id_produto'=>$linha['id_produto'], 'qtd'=>$linha['qtd'], 'valor_unitario'=>$linha['valor_unitario']);
                 }
         } catch(PDOExeption $e){
             echo 'Erro: ' .  $e->getMessage();
         }
-        return json_encode($ientradas);  
+        return json_encode($entradas);  
     }
+
+    public function incluir($ientrada)
+        {        
+            try {
+                $pdo = Conexao::connect();
+
+                $sql = 'INSERT INTO ientrada(id_entrada,id_produto,qtd,valor_unitario) VALUES(:id_entrada,:id_produto,:qtd,:valor_unitario)';
+                $sql = str_replace("'", "\'", $sql);            
+                
+                $stmt = $pdo->prepare($sql);
+
+                $id_entrada = $ientrada->getId_entrada()->getId_entrada();
+                $id_produto = $ientrada->getId_produto()->getId_produto();
+                $qtd = $ientrada->getQtd();
+                $valor_unitario = $ientrada->getValor_unitario();
+
+                $stmt->bindParam(':id_entrada',$id_entrada);
+                $stmt->bindParam(':id_produto',$id_produto);                
+                $stmt->bindParam(':qtd',$qtd);
+                $stmt->bindParam(':valor_unitario',$valor_unitario);
+
+                $stmt->execute();
+            }catch (PDOExeption $e) {
+                echo 'Error: <b>  na tabela produto = ' . $sql . '</b> <br /><br />' . $e->getMessage();
+            }
+
+        }
 
 }
 

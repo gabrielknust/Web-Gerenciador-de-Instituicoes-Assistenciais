@@ -7,6 +7,10 @@ include_once '../classes/Almoxarifado.php';
 include_once '../dao/AlmoxarifadoDAO.php';
 include_once '../classes/TipoEntrada.php';
 include_once '../dao/TipoEntradaDAO.php';
+include_once '../classes/Ientrada.php';
+include_once '../dao/IentradaDAO.php';
+include_once '../classes/Produto.php';
+include_once '../dao/ProdutoDAO.php';
 class EntradaControle
 {
     public function verificar(){
@@ -17,7 +21,8 @@ class EntradaControle
         $data = $horadata[0];
         $hora = $horadata[1];
         $valor_total = $total_total;
-        $entrada = new Entrada($data,$hora,$valor_total);
+        $responsavel = 1;
+        $entrada = new Entrada($data,$hora,$valor_total,$responsavel);
         
         return $entrada;
     }
@@ -34,23 +39,49 @@ class EntradaControle
     public function incluir(){
         extract($_REQUEST);
         $entrada = $this->verificar();
+
         $entradaDAO = new EntradaDAO();
         $origemDAO = new OrigemDAO();
         $almoxarifadoDAO = new AlmoxarifadoDAO();
         $TipoEntradaDAO = new TipoEntradaDAO();
-
+        $origem = explode("-", $origem);
+        $origem = $origem[0];
         $origem = $origemDAO->listarUm($origem);
         $almoxarifado = $almoxarifadoDAO->listarUm($almoxarifado);
         $TipoEntrada =$TipoEntradaDAO->listarUm($tipo_entrada);
 
         try{
-            $entrada->setId_origem($origem);
-            $entrada->setId_almoxarifado($almoxarifado);
-            $entrada->setId_tipo($TipoEntradaDAO);
+            $entrada->set_origem($origem);
+            $entrada->set_almoxarifado($almoxarifado);
+            $entrada->set_tipo($TipoEntrada);
 
             $entradaDAO->incluir($entrada);
-            session_start();
-            echo "sucesso";
+
+            $id_responsavel = $entradaDAO->ultima();
+            $id_responsavel = implode("",$id_responsavel);
+
+            $x = 1;
+            $id = "id";
+            $qtdd = "qtd";
+            $valor_unitario = "valor_unitario";
+            while($x<=$conta){
+                if(isset(${$id.$x})){
+                    $ientrada = new Ientrada(${$qtdd.$x},${$valor_unitario.$x});
+                    $ientradaDAO = new IentradaDAO();
+                    $produtoDAO = new ProdutoDAO();
+                    $produto = $produtoDAO->listarUm(${$id.$x});
+                    $entrada = $entradaDAO->listarUm($id_responsavel);
+
+
+                    $ientrada->setId_produto($produto);
+                    $ientrada->setId_entrada($entrada);
+                    $ientrada = $ientradaDAO->incluir($ientrada);
+
+                }
+            $x++;
+            header('Location: ../html/cadastro_entrada.php');
+            }
+            echo ${$id.$x};
             //header("Location: ../controle/control.php?metodo=incluir&nomeClasse=IentradaControle&nextPage=../html/cadastro_entrada.php");
         } catch (PDOException $e){
             $msg= "Não foi possível adicionar a entrada"."<br>".$e->getMessage();

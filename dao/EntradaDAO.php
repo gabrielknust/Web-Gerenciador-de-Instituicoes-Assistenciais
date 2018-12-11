@@ -10,13 +10,15 @@ class EntradaDAO
             extract($_REQUEST);
             $pdo = Conexao::connect();
 
-            $sql = 'INSERT entrada(id_origem,id_almoxarifado,id_tipo,data,hora,valor_total) VALUES( :id_origem,:id_almoxarifado,:id_tipo,:data,:hora,:valor_total)';
+            $sql = 'INSERT entrada(id_origem,id_almoxarifado,id_tipo,id_responsavel,data,hora,valor_total) VALUES( :id_origem,:id_almoxarifado,:id_tipo,:id_responsavel,:data,:hora,:valor_total)';
             $sql = str_replace("'", "\'", $sql);            
             $stmt = $pdo->prepare($sql);
 
-            $id_origem = $entrada->getId_origem()->getId_origem();
-            $id_almoxarifado = $entrada->getId_almoxarifado()->getId_almoxarifado();
-            $id_tipo = $entrada->getId_tipo()->getId_tipo();
+            $id_origem = $entrada->get_origem()->getId_origem();
+            
+            $id_almoxarifado = $entrada->get_almoxarifado()->getId_almoxarifado();
+            $id_tipo = $entrada->get_tipo()->getId_tipo();
+            $id_responsavel = $entrada->get_responsavel();
             $data = $entrada->getData();
             $hora = $entrada->getHora();
             $valor_total = $entrada->getValor_total();
@@ -24,6 +26,7 @@ class EntradaDAO
             $stmt->bindParam(':id_origem',$id_origem);
             $stmt->bindParam(':id_almoxarifado',$id_tipo);
             $stmt->bindParam(':id_tipo',$id_tipo);
+            $stmt->bindParam(':id_responsavel',$id_responsavel);
             $stmt->bindParam(':data',$data);
             $stmt->bindParam(':hora',$hora);
             $stmt->bindParam(':valor_total',$valor_total);
@@ -51,6 +54,24 @@ class EntradaDAO
         }
         return json_encode($entradas);
     }
+    public function listarUm($id)
+        {
+             try {
+                $pdo = Conexao::connect();
+                $sql = "SELECT id_entrada, data, hora, valor_total, id_responsavel FROM entrada where id_entrada = :id_entrada";
+                $consulta = $pdo->prepare($sql);
+                $consulta->execute(array(
+                ':id_entrada' => $id,
+            ));
+            while ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) {
+                $entrada = new Entrada($linha['data'],$linha['hora'],$linha['valor_total'],$linha['id_responsavel']);
+                $entrada->setId_entrada($linha['id_entrada']);
+            }
+            } catch (PDOException $e) {
+                throw $e;
+            }
+            return $entrada;
+        }
     public function listarId($id_entrada){
     try{
         $pdo = Conexao::connect();
@@ -67,6 +88,16 @@ class EntradaDAO
             echo 'Erro: ' .  $e->getMessage();
         }
         return json_encode($entradas);  
+    }
+    public function ultima(){
+        $pdo = Conexao::connect();
+        $sql = "SELECT MAX(id_entrada) as id_entrada FROM entrada";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        while($linha = $stmt->fetch(PDO::FETCH_ASSOC)){
+            $ultima = array('id_entrada'=>$linha['id_entrada']);
+        }
+        return $ultima;
     }
 }
 ?>

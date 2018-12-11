@@ -11,12 +11,13 @@ class Entrada
    private $hora;
    private $valor_total;
    
-    public function __construct($data,$hora,$valor_total)
+    public function __construct($data,$hora,$valor_total,$id_responsavel)
     {
 
         $this->data=$data;
         $this->hora=$hora;
         $this->valor_total=$valor_total;
+        $this->id_responsavel=$id_responsavel;
 
     }
 
@@ -25,22 +26,22 @@ class Entrada
         return $this->id_entrada;
     }
 
-    public function getId_origem()
+    public function get_origem()
     {
         return $this->id_origem;
     }
 
-    public function getId_almoxarifado()
+    public function get_almoxarifado()
     {
         return $this->id_almoxarifado;
     }
 
-    public function getId_tipo()
+    public function get_tipo()
     {
         return $this->id_tipo;
     }
 
-    public function getId_responsavel()
+    public function get_responsavel()
     {
         return $this->id_responsavel;
     }
@@ -65,22 +66,22 @@ class Entrada
         $this->id_entrada = $id_entrada;
     }
 
-    public function setId_origem($id_origem)
+    public function set_origem($id_origem)
     {
         $this->id_origem = $id_origem;
     }
 
-    public function setId_almoxarifado($id_almoxarifado)
+    public function set_almoxarifado($id_almoxarifado)
     {
         $this->id_almoxarifado = $id_almoxarifado;
     }
 
-    public function setId_tipo($id_tipo)
+    public function set_tipo($id_tipo)
     {
         $this->id_tipo = $id_tipo;
     }
 
-    public function setId_responsavel($id_responsavel)
+    public function set_responsavel($id_responsavel)
     {
         $this->id_responsavel = $id_responsavel;
     }

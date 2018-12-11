@@ -25,6 +25,7 @@
 			$tipo_entrada = $_SESSION['tipo_entrada'];
 			$autocomplete = $_SESSION['autocomplete'];
 			$origem = $_SESSION['origem'];
+
 			unset($_SESSION['almoxarifado']);
 			unset($_SESSION['tipo_entrada']);
 			unset($_SESSION['autocomplete']);
@@ -136,17 +137,15 @@
 
 						$("#conta").val(conta);
 
-						var markup = "<tr class='produtoRow'><td class='prod' style='width: 160px;'><input type='text' value='"+val+"' name='id"+conta+"' disabled></td><td class='quant'><input type='text' class='number'  id='qtd' maxlength='2' size='2' class='form-control' min='1' value='"+quantidade+"' name='qtdd"+conta+"' disabled ></td><td><input type='text' class='preco' value='"+preco+"' name='valor_unitario"+conta+"'  size='2' disabled></td><th><input type='text' size='3' id='total' class='total' value='"+quantidade*preco+"' disabled></th><td><button type='button' class='delete-row'>remover</button></td></tr>";
+						var markup = "<tr class='produtoRow'><td class='prod' style='width: 160px;'><input type='text' value='"+val+"' name='id"+conta+"' readonly='readonly'></td><td class='quant'><input type='text' class='number'  id='qtd' maxlength='2' size='2' class='form-control' min='1' value='"+quantidade+"' name='qtd"+conta+"' readonly='readonly'></td><td><input type='text' class='preco' value='"+preco+"' name='valor_unitario"+conta+"'  size='2' readonly='readonly'></td><th><input type='text' size='3' id='total' class='total' value='"+quantidade*preco+"' readonly='readonly'></th><td><button type='button' class='delete-row'>remover</button></td></tr>";
 							$("table tbody ").append(markup);
 							$("#valor_unitario").empty();
 							$("#input_produtos").val("");
 							var x=$("#total_total").val();
-							var y=x+preco*quantidade;
+							x=Number(x);
+							x += (quantidade*preco);
 							
-							$("#total_total").val(y);
-							//y = parseFloat(preco) * parseFloat(quantidade) + parseFloat(y);
-							console.log(y);
-							
+							$("#total_total").val(x);
 												
 						}
 					})
@@ -423,8 +422,8 @@
 														<tr >
 															<td>Valor total:</td>
 															<td id="valor-total">
-															<input type="number" id="total_total"  name="total_total">
-															<input type="hidden" id="conta" name="conta" disabled>
+															<input type="number" id="total_total"  name="total_total" readonly="readonly">
+															<input type="hidden" id="conta" name="conta" readonly="readonly">
 															</td>
 
 														</tr>

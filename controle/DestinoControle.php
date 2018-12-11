@@ -1,5 +1,5 @@
 <?php
-include_once '../classes/TipoSaida.php';
+include_once '../classes/Destino.php';
 include_once '../dao/DestinoDAO.php';
 class DestinoControle
 {
@@ -35,7 +35,7 @@ class DestinoControle
         $destinoDAO= new DestinoDAO();
         $destinos = $destinoDAO->listarTodos();
         session_start();
-        $_SESSION['destinos']=$destinos;
+        $_SESSION['destino']=$destinos;
         header('Location: '.$nextPage);
     }
     

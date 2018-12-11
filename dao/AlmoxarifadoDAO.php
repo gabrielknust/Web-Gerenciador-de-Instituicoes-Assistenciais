@@ -24,25 +24,23 @@ class AlmoxarifadoDAO
             echo 'Error: <b>  na tabela almoxarifado = ' . $sql . '</b> <br /><br />' . $e->getMessage();
         }
     }
-    public function listarUm($descricao)
+   public function listarUm($id_almoxarifado)
     {
-        $descricao = "%" . $descricao . "%";
-            try{
-                $pdo = Conexao::connect();
-                $sql = "SELECT descricao_almoxarifado FROM almoxarifado WHERE descricao_almoxarifado LIKE :descricao_almoxarifado";
-                $consulta = $pdo->prepare($sql);
-                $consulta->execute(array(
-                    ':descricao_almoxarifado' => $descricao
-                ));
-                $almoxarifados = Array();
-                while ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) {
-                    $almoxarifado = new Almoxarifado($descricao_almoxarifado);
-                    $almoxarifados[] = $almoxarifado;
-                }
-            }catch (PDOExeption $e){
-                echo 'Error: ' .  $e->getMessage();
+        try{
+            $pdo = Conexao::connect();
+            $sql = "SELECT id_almoxarifado, descricao_almoxarifado  FROM almoxarifado WHERE id_almoxarifado = :id_almoxarifado";
+            $consulta = $pdo->prepare($sql);
+            $consulta->execute(array(
+                'id_almoxarifado' => $id_almoxarifado,
+            ));
+            while($linha = $consulta->fetch(PDO::FETCH_ASSOC)){
+                $almoxarifado = new Almoxarifado($linha['descricao_almoxarifado']);
+                $almoxarifado->setId_almoxarifado($linha['id_almoxarifado']);
             }
-            return $almoxarifados;
+        }catch(PDOExeption $e){
+            throw $e;
+        }
+        return $almoxarifado;
     }
     public function excluir($id_almoxarifado){
         try{

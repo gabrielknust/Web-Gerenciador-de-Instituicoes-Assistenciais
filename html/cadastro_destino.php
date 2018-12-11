@@ -276,7 +276,7 @@
 							<div class="tab-content">
 								<div id="overview" class="tab-pane active">
 									<form class="form-horizontal" method="post" action="../controle/control.php">
-										<input type="hidden" name="nomeClasse" value="FuncionarioControle">
+										<input type="hidden" name="nomeClasse" value="DestinoControle">
 										<input type="hidden" name="metodo" value="incluir">
 										<fieldset>
 											<h4 class="mb-xlg">Doador</h4>
@@ -320,17 +320,15 @@
 													<input type="text" class="form-control" minlength="12" name="telefone" id="telefone" id="profileCompany" placeholder="Ex: (22)999999999" onkeypress="return Onlynumbers(event)" onkeyup="mascara('(##)############',this,event)" required>
 												</div>
 											</div>
-												<input type="hidden" name="nomeClasse" value="OrigemControle">
-												<input type="hidden" name="metodo" value="incluir">
 											
 											<div class="row">
 												<div class="col-md-9 col-md-offset-3">
 													<button id="enviar" class="btn btn-primary" type="submit">Enviar</button>
 													<input type="reset" class="btn btn-default">
-													<a href="cadastro_entrada.php" color: white; text-decoration: none;>
-														<button type="button" class="btn btn-info">voltar</button>
+													<a href="cadastro_saida.php" >
+														<button type="button" class="btn btn-info">Voltar</button>
 													</a>
-													<a href="listar_origem.php" style="color: white; text-decoration:none;"><button class="btn btn-success" type="button">Listar doadores</button></a>
+													<a href="listar_destino.php" style="color: white; text-decoration:none;"><button class="btn btn-success" type="button">Listar destinos</button></a>
 												</div>
 											</div>
 										</fieldset>

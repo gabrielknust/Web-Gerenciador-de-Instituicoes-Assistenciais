@@ -4,7 +4,7 @@ include_once '../dao/IentradaDAO.php';
 
 class IentradaControle
 {
-    public function listarId(){
+    public function listarId($id_ientrada){
         extract($_REQUEST);
         try{
             $ientradaDAO = new IentradaDAO();

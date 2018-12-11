@@ -30,26 +30,25 @@ class OrigemDAO
             echo 'Error: <b>  na tabela origem = ' . $sql . '</b> <br /><br />' . $e->getMessage();
         }
     }
-    public function listarUm($nome)
-    {
-        $nome = "%" . $nome . "%";
-            try{
+    public function listarUm($id)
+        {
+             try {
                 $pdo = Conexao::connect();
-                $sql = "SELECT nome FROM origem WHERE nome LIKE :nome";
+                $sql = "SELECT id_origem, nome, cnpj, cpf, telefone  FROM origem where id_origem = :id_origem";
                 $consulta = $pdo->prepare($sql);
                 $consulta->execute(array(
-                    ':nome' => $nome
-                ));
-                $origens = Array();
-                while ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) {
-                    $origem = new origem($nome);
-                    $origens[] = $origem;
-                }
-            }catch (PDOExeption $e){
-                echo 'Error: ' .  $e->getMessage();
+                ':id_origem' => $id,
+            ));
+            while ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) {
+                $origem = new Origem($linha['nome'],$linha['cnpj'],$linha['cpf'],$linha['telefone']);
+                $origem->setId_origem($linha['id_origem']);
+
             }
-            return $origens;
-    }
+            } catch (PDOException $e) {
+                throw $e;
+            }
+            return $origem;
+        }
         public function excluir($id_origem)
 	    {
 	        try{

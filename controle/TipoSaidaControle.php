@@ -20,8 +20,7 @@ class TipoSaidaControle
         $tiposaidaDAO= new TipoSaidaDAO();
         $tiposaida = $tiposaidaDAO->listarTodos();
         session_start();
-        $_SESSION['tiposaida']=$tiposaida;
-        //var_dump($_SESSION['tiposaida']);
+        $_SESSION['tipo_saida']=$tiposaida;
         header('Location: ' .$nextPage);
     }
     
@@ -34,7 +33,7 @@ class TipoSaidaControle
             $_SESSION['msg']="TipoSaida cadastrado com sucesso";
             $_SESSION['proxima']="Cadastrar outro TipoSaida";
             $_SESSION['link']="../html/adicionar_tipoSaida.php";
-            header("Location: ../html/cadastro_produto.php");
+            header("Location: ../html/cadastro_saida.php");
         } catch (PDOException $e){
             $msg= "NÃ£o foi possÃ­vel registrar o tipo"."<br>".$e->getMessage();
             echo $msg;

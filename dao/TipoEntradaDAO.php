@@ -24,26 +24,25 @@ class TipoEntradaDAO
             echo 'Error: <b>  na tabela tipo_entrada = ' . $sql . '</b> <br /><br />' . $e->getMessage();
         }
     }
-    public function listarUm($descricao)
-    {
-        $descricao = "%" . $descricao . "%";
-            try{
+    
+    public function listarUm($id)
+        {
+             try {
                 $pdo = Conexao::connect();
-                $sql = "SELECT descricao FROM tipo_entrada WHERE descricao LIKE :descricao";
+                $sql = "SELECT id_tipo, descricao FROM tipo_entrada where id_tipo = :id_tipo";
                 $consulta = $pdo->prepare($sql);
                 $consulta->execute(array(
-                    ':descricao' => $descricao
-                ));
-                $tipoentradas = Array();
-                while ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) {
-                    $tipoentrada = new TipoEntrada($descricao);
-                    $tipoentradas[] = $tipoentrada;
-                }
-            }catch (PDOExeption $e){
-                echo 'Error: ' .  $e->getMessage();
+                ':id_tipo' => $id,
+            ));
+            while ($linha = $consulta->fetch(PDO::FETCH_ASSOC)) {
+                $origem = new TipoEntrada($linha['descricao']);
+                $origem->setId_tipo($linha['id_tipo']);
             }
-            return $tipoentradas;
-    }
+            } catch (PDOException $e) {
+                throw $e;
+            }
+            return $origem;
+        }
         public function excluir($id_tipo)
 	    {
 	        try{
