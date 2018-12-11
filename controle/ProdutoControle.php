@@ -55,7 +55,7 @@ class ProdutoControle
         
         header('Location: '.$_REQUEST['nextPage']);
         
-    }/*
+    }
     public function listarporNome($descricao)
     {
         session_start();
@@ -84,7 +84,7 @@ class ProdutoControle
         $_SESSION['autocomplete']=$produtos;
         header('Location: '.$_REQUEST['nextPage']);
     }
-    */
+    
     public function incluir(){
         $produto = $this->verificar();
         extract($_REQUEST);
