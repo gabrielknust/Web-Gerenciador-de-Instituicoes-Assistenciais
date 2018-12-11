@@ -20,7 +20,7 @@
 	<!-- Basic -->
 	<meta charset="UTF-8">
 
-	<title>Informaçoes</title>
+	<title>Informaçoes Produtos Saidas</title>
 		
 	<!-- Mobile Metas -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
@@ -150,163 +150,158 @@
 				</div>
 				
 				<div class="nano">
-						<div class="nano-content">
-							<nav id="menu" class="nav-main" role="navigation">
-								<ul class="nav nav-main">
-									<li>
-										<a href="home.php">
-											<i class="fa fa-home" aria-hidden="true"></i>
-											<span>Início</span>
-										</a>
-									</li>
-									<li class="nav-parent nav-expanded nav-active">
-										<a>
-											<i class="fa fa-copy" aria-hidden="true"></i>
-											<span>Cadastros Pessoas</span>
-										</a>
-										<ul class="nav nav-children">
-											<li>
-												<a href="cadastro_funcionario.php">
-													 Cadastrar funcionário
-												</a>
-											</li>
-											<li>
-												<a href="cadastro_interno.php">
-													 Cadastrar interno
-												</a>
-											</li>
-											<li>
-												<a href="cadastro_voluntario.php">
-													 Cadastrar voluntário
-												</a>
-											</li>
-											<li>
-												<a href="cadastro_voluntario_judicial.php">
-													 Cadastrar voluntário judicial
-												</a>
-											</li>
-										</ul>
-									</li>
-
-									<li class="nav-parent nav-expanded nav-active">
-										<a>
-											<i class="fa fa-copy" aria-hidden="true"></i>
-											<span>Informação Pessoas</span>
-										</a>
-										<ul class="nav nav-children">
-											<li>
-											<a onclick="listarFuncionario()">
-												 Informações funcionarios
-											</a>
-										</li>
-										</ul>
-										<ul class="nav nav-children">
-											<li>
-												<a onclick="listarInterno()">
-													 Informações interno
-												</a>
-											</li>
-										</ul>
-									</li>
-
-									<li class="nav-parent nav-expanded nav-active">
-										<a>
-											<i class="fa fa-copy" aria-hidden="true"></i>
-											<span>Cadastrar Produtos</span>
-										</a>
-										<ul class="nav nav-children">
-											<li>
-												<a href="../html/cadastro_entrada.php">
-													 Cadastrar Produtos
-												</a>
-											</li>
-										</ul>
-										<ul class="nav nav-children">
-											<li>
-												<a href="../html/cadastro_saida.php">
-													 Saida de Produtos
-												</a>
-											</li>
-										</ul>
-									</li>
-
-									<li class="nav-parent nav-expanded nav-active">
-										<a>
-											<i class="fa fa-copy" aria-hidden="true"></i>
-											<span>Informações Produtos</span>
-										</a>
-										<ul class="nav nav-children">
-											<li>
-												<a href="../html/estoque.php">
-													 Estoque
-												</a>
-											</li>
-										</ul>
-										<ul class="nav nav-children">
-											<li>
-												<a href="../html/listar_almoxs.php">
-													 Almoxarifados
-												</a>
-											</li>
-										</ul>
-									</li>
-								</ul>
-							</nav>
-						</div>
-					</div>
-				</aside>
-				
-				<!-- end: sidebar -->
-				<section role="main" class="content-body">
-					<header class="page-header">
-						<h2>Informaçoes</h2>
-					
-						<div class="right-wrapper pull-right">
-							<ol class="breadcrumbs">
+					<div class="nano-content">
+						<nav id="menu" class="nav-main" role="navigation">
+							<ul class="nav nav-main">
 								<li>
 									<a href="home.php">
-										<i class="fa fa-home"></i>
+										<i class="fa fa-home" aria-hidden="true"></i>
+										<span>Início</span>
 									</a>
 								</li>
-								<li><span>Informações Saida</span></li>
-							</ol>
-					
-							<a class="sidebar-right-toggle"><i class="fa fa-chevron-left"></i></a>
+								<li class="nav-parent nav-expanded nav-active">
+									<a>
+										<i class="fa fa-copy" aria-hidden="true"></i>
+										<span>Cadastros Pessoas</span>
+									</a>
+									<ul class="nav nav-children">
+										<li>
+											<a href="cadastro_funcionario.php">
+												 Cadastrar funcionário
+											</a>
+										</li>
+										<li>
+										<a href="cadastro_interno.php">
+											 Cadastrar interno
+										</a>
+										</li>
+										<li>
+											<a href="cadastro_voluntario.php">
+												 Cadastrar voluntário
+											</a>
+										</li>
+										<li>
+											<a href="cadastro_voluntario_judicial.php">
+												 Cadastrar voluntário judicial
+											</a>
+										</li>
+									</ul>
+								</li>
+
+								<li class="nav-parent nav-expanded nav-active">
+									<a>
+										<i class="fa fa-copy" aria-hidden="true"></i>
+										<span>Informação Pessoas</span>
+									</a>
+									<ul class="nav nav-children">
+										<li>
+										<a onclick="listarFuncionario()">
+											 Informações funcionarios
+										</a>
+									</li>
+									</ul>
+									<ul class="nav nav-children">
+											<li>
+											<a onclick="listarInterno()">
+												 Informações interno
+											</a>
+										</li>
+									</ul>
+								</li>
+
+								<li class="nav-parent nav-expanded nav-active">
+									<a>
+										<i class="fa fa-copy" aria-hidden="true"></i>
+										<span>Cadastrar Produtos</span>
+									</a>
+									<ul class="nav nav-children">
+										<li>
+											<a href="../html/cadastro_entrada.php">
+												 Cadastrar Produtos
+											</a>
+										</li>
+									</ul>
+									<ul class="nav nav-children">
+										<li>
+											<a href="../html/cadastro_saida.php">
+												 Saida de Produtos
+											</a>
+										</li>
+									</ul>
+								</li>
+
+								<li class="nav-parent nav-expanded nav-active">
+									<a>
+										<i class="fa fa-copy" aria-hidden="true"></i>
+										<span>Informações Produtos</span>
+									</a>
+									<ul class="nav nav-children">
+										<li>
+											<a href="../html/estoque.php">
+												 Estoque
+											</a>
+										</li>
+									</ul>
+									<ul class="nav nav-children">
+										<li>
+											<a href="../html/listar_almoxs.php">
+												 Almoxarifados
+											</a>
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</nav>
+					</div>
+				</div>
+			</aside>
+				
+			<!-- end: sidebar -->
+			<section role="main" class="content-body">
+				<header class="page-header">
+					<h2>Informaçoes Produtos Saida</h2>
+				
+					<div class="right-wrapper pull-right">
+						<ol class="breadcrumbs">
+							<li>
+								<a href="home.php">
+									<i class="fa fa-home"></i>
+								</a>
+							</li>
+							<li><span>Informações Produto Saida</span></li>
+						</ol>
+						<a class="sidebar-right-toggle"><i class="fa fa-chevron-left"></i></a>
+					</div>
+				</header>
+
+				<!-- start: page -->
+			
+				<section class="panel">
+					<header class="panel-heading">
+						<div class="panel-actions">
+							<a href="#" class="fa fa-caret-down"></a>
 						</div>
+						<h2 class="panel-title">Produto Saida</h2>
 					</header>
-
-					<!-- start: page -->
-					
-					<section class="panel">
-						<header class="panel-heading">
-							<div class="panel-actions">
-								<a href="#" class="fa fa-caret-down"></a>
-							</div>
-							<h2 class="panel-title">Saida</h2>
-						</header>
-						<div class="panel-body">
-							<table class="table table-bordered table-striped mb-none" id="datatable-default">
-								<thead>
-									<tr>
-										<th>Origem</th>
-										<th>Almoxarifado</th>
-										<th>Tipo</th>
-										<th>resposavel</th>
-										<th>Valor Total</th>
-										<th>Data</th>
-										<th>Hora</th>
-									</tr>
-								</thead>
-								<tbody id="tabela">	
-								</tbody>
-							</table>
-						</div><br>
-					</section>
+					<div class="panel-body">
+						<table class="table table-bordered table-striped mb-none" id="datatable-default">
+							<thead>
+								<tr>
+									<th>Produto</th>
+									<th>Quantidade</th>
+									<th>Valor Unitario</th>
+								</tr>
+							</thead>
+							<tbody id="tabela">	
+							</tbody>
+						</table>
+					</div><br>
 				</section>
-			</div>
-		</section>
-		<!-- end: page -->
-
+			</section>
+		</div>
+	</section>
+	<!-- end: page -->
+			
 	<!-- Specific Page Vendor -->
 	<script src="../assets/vendor/select2/select2.js"></script>
 	<script src="../assets/vendor/jquery-datatables/media/js/jquery.dataTables.js"></script>
@@ -318,7 +313,7 @@
 		
 	<!-- Theme Custom -->
 	<script src="../assets/javascripts/theme.custom.js"></script>
-	
+		
 	<!-- Theme Initialization Files -->
 	<script src="../assets/javascripts/theme.init.js"></script>
 
