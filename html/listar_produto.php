@@ -76,16 +76,18 @@
 		function excluir(id){
 			window.location.replace('../controle/Control.php?metodo=excluir&nomeClasse=ProdutoControle&id_produto='+id);
 		}
-		function alterar(id){
-			window.location.replace('../controle/Control.php?metodo=listarId&nomeClasse=ProdutoControle&nextPage= ../html/alterar_produto.php&id_produto='+id);
-		}
+
+		function clicar(id)
+		   		{
+		   			window.location.href = '../html/alterar_produto.php?id_produto='+id;
+		   		}
+
 	</script>
 	<script>
 		$(function(){
 			var produtos = <?php 
 				echo $produtos;
 				?>;
-
 			$.each(produtos, function(i,item){
 
 				$('#tabela')
@@ -101,7 +103,7 @@
 						)
 						.append($('<button/>')
 							.html('<i class="fas fa-pencil-alt"</i>')
-							.attr('onclick','alterar("'+item.id_produto+'")')
+							.attr('onclick','clicar('+item.id_produto+')')
 						)
 					)
 				);

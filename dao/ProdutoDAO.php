@@ -46,10 +46,7 @@ class ProdutoDAO
                     echo 'Error: <b>  na tabela produto = ' . $sql . '</b> <br /><br />' . $e->getMessage();
             }
 		    }
-		    public function alterar($id_produto,$id_categoria_produto,$id_unidade,$preco,$descricao,$codigo)
-		    {
-		       
-		    }
+
 		    public function listarTodos(){
 
 	        try{
@@ -72,14 +69,17 @@ class ProdutoDAO
 	        public function listarId($id_produto){
 	        	try{
 	        		$pdo = Conexao::connect();
-	        		$sql = "SELECT p.id_produto,p.preco,p.descricao,p.codigo,c.descricao_categoria,u.descricao_unidade FROM produto p INNER JOIN categoria_produto c ON p.id_categoria_produto = c.id_categoria_produto INNER JOIN unidade u ON p.id_unidade = u.id_unidade WHERE p.id_produto = :id_produto";
+	        		$sql = "SELECT p.id_produto,p.preco,p.descricao,p.codigo,p.id_categoria_produto, c.descricao_categoria, p.id_unidade, u.descricao_unidade FROM produto p 
+	        		INNER JOIN categoria_produto c ON p.id_categoria_produto = c.id_categoria_produto 
+	        		INNER JOIN unidade u ON p.id_unidade = u.id_unidade 
+	        		WHERE p.id_produto = :id_produto";
 	        		$stmt = $pdo->prepare($sql);
 	        		$stmt->bindParam(':id_produto',$id_produto);
 
 	        		$stmt->execute();
 	        		$produtos = array();
 	        		while($linha = $stmt->fetch(PDO::FETCH_ASSOC)){
-	        			$produtos[]=array('id_produto'=>$linha['id_produto'], 'preco'=>$linha['preco'], 'descricao'=>$linha['descricao'], 'codigo'=>$linha['codigo'], 'descricao_categoria'=>$linha['descricao_categoria'], 'descricao_unidade'=>$linha['descricao_unidade']);
+	        			$produtos[]=array('id_produto'=>$linha['id_produto'], 'preco'=>$linha['preco'], 'descricao'=>$linha['descricao'], 'codigo'=>$linha['codigo'], 'id_categoria_produto'=>$linha['id_categoria_produto'], 'descricao_categoria'=>$linha['descricao_categoria'], 'id_unidade'=>$linha['id_unidade'], 'descricao_unidade'=>$linha['descricao_unidade']);
 	        		}
 	        	} catch(PDOExeption $e){
             		echo 'Erro: ' .  $e->getMessage();
@@ -165,6 +165,29 @@ class ProdutoDAO
             }
             return $produto;
         }
+        public function alterarProduto($produto){
+        try {
+            $sql = 'update produto set descricao=:descricao,codigo=:codigo,preco=:preco where id_produto=:id_produto';
+            
+           	$sql = str_replace("'", "\'", $sql);
+            $pdo = Conexao::connect();
+            $stmt = $pdo->prepare($sql);
+            
+            $stmt = $pdo->prepare($sql);
+            $descricao=$produto->getDescricao();
+            $codigo=$produto->getCodigo();
+            $preco=$produto->getPreco();
+
+
+            $stmt->bindParam(':descricao',$descricao);
+            $stmt->bindParam(':codigo',$codigo);
+            $stmt->bindParam(':preco',$preco);
+
+            $stmt->execute();
+        } catch (PDOException $e) {
+            echo 'Error: <b>  na tabela produtos = ' . $sql . '</b> <br /><br />' . $e->getMessage();
+        }
+    }
 
 }
 

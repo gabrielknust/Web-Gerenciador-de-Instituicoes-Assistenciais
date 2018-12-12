@@ -4,26 +4,28 @@ session_start();
 include_once '../dao/Conexao.php';
 include_once '../dao/CategoriaDAO.php';
 include_once '../dao/UnidadeDAO.php';
-
-	if (!isset($_SESSION['unidade'])) {
+include_once '../dao/ProdutoDAO.php';
+	
+	if(!isset($_SESSION['produto'])) {
+		extract($_REQUEST);
+		header('Location: ../controle/control.php?metodo=listarId&nomeClasse=ProdutoControle&nextPage=../html/alterar_produto.php&id_produto='.$id_produto);
+	}
+	if(!isset($_SESSION['unidade'])) {
 		header('Location: ../controle/control.php?metodo=listarTodos&nomeClasse=UnidadeControle&nextPage=../html/alterar_produto.php');
 	}
 	if(!isset($_SESSION['categoria'])){
 		header('Location: ../controle/control.php?metodo=listarTodos&nomeClasse=CategoriaControle&nextPage=../html/alterar_produto.php');	
 	}
-	//if(!isset($_SESSION['produto'])){
-	//	header('Location: ');
-	//}
-	if(isset($_SESSION['categoria']) && isset($_SESSION['unidade']) ){
+
+	if(isset($_SESSION['categoria']) && isset($_SESSION['unidade']) && isset($_SESSION['produto'])){
+		$produto = $_SESSION['produto'];
 		$unidade = $_SESSION['unidade'];
 		$categoria = $_SESSION['categoria'];
-		//echo $_SESSION['produto'];
-		$produto = $_SESSION['produto'];
-		unset($_SESSION['unidade']);
-		unset($_SESSION['categoria']);
-		unset($_SESSION['produto']);
-	}
 
+		unset($_SESSION['produto']);
+		unset($_SESSION['categoria']);
+		unset($_SESSION['unidade']);
+	}
 ?>
 <!doctype html>
 <html class="fixed">
@@ -73,44 +75,80 @@ include_once '../dao/UnidadeDAO.php';
 
 		<!-- jquery functions -->
 		<script>
+
 			$(function(){
 
-				var produto = <?php echo $produto;?>;
-				var unidade = <?php echo $unidade;?>;
-				var categoria = <?php echo $categoria;?>;
+				$("#produto").prop('disabled', true);
+	            $("#id_categoria").prop('disabled', true);
+	            $("#id_unidade").prop('disabled', true);
+	            $("#codigo").prop('disabled', true);     
+	            $("#valor").prop('disabled', true);
 
+	            $("#botaoEditarIP").html('Editar');
+	            $("#botaoSalvarIP").prop('disabled', true);
 
-				$.each(funcionarios,function(i,item){
-					if(i==id)
-					{
+           		var produtos = <?php echo $produto; ?>;
+           		var categoria = <?php echo $categoria; ?>;
+           		var unidade = <?php echo $unidade; ?>;
 
+           		$.each(produtos, function(i,item){
 
-						if (item.sexo == 'f') {
-							$('#reservista').hide();
-						}
-
-						console.log(item);
-						$("#nome").text("Nome: "+item.nome);
-
-						if(item.sexo=="m")
-						{
-							$("#sexo").html("Sexo: <i class='fa fa-male'></i>  Masculino");
-						}
-						else if(item.sexo=="f")
-						{
-							$("#sexo").html("Sexo: <i class='fa fa-female'>  Feminino");
-						}
-
-						$("#telefone").text("Telefone: "+item.telefone);
-
-						$("#sangue").text("Sangue: "+item.tipo_sanguineo);
-						
-						$("#nascimento").text("Data de nascimento: "+item.data_nascimento);
-
-						
-					}
+					$('#nome')
+						.text('Nome do Produto: ' + item.descricao)
+					$('#Categoria')
+						.text('Categoria: ' + item.descricao_categoria)
+					$('#Unidade')
+						.text('Unidade: ' + item.descricao_unidade)
+					$('#Codigo')
+						.text('Codigo: ' + item.codigo)
+					$('#Valor')
+						.text('Valor: ' + item.preco)
+				
 				})
-			});
+				
+
+			/*$.each(categoria, function(i,item){
+				if(produtos.id_categoria == item.id_categoria_produto){
+					$('#id_categoria').append('<option value="' + item.id_categoria_produto + '" selected>' + item.descricao_categoria + '</option>');	
+				}
+				else{
+				$('#id_categoria').append('<option value="' + item.id_categoria_produto + '">' + item.descricao_categoria + '</option>');
+				}
+
+			})*/
+		});
+			
+			function editar_produto()
+           {
+
+            $("#produto").prop('disabled', false);
+            $("#id_categoria").prop('disabled', false);
+            $("#id_unidade").prop('disabled', false);
+            $("#codigo").prop('disabled', false); 
+            $("#valor").prop('disabled', false);
+
+            $("#botaoEditarIP").html('Cancelar');
+            $("#botaoSalvarIP").prop('disabled', false);
+            $("#botaoEditarIP").removeAttr('onclick');
+            $("#botaoEditarIP").attr('onclick', "return cancelar_produto()");
+
+           }
+
+            function cancelar_produto()
+           {
+
+            $("#produto").prop('disabled', true);
+            $("#id_categoria").prop('disabled', true);
+            $("#id_unidade").prop('disabled', true);
+            $("#codigo").prop('disabled', true);     
+            $("#valor").prop('disabled', true);
+
+            $("#botaoEditarIP").html('Editar');
+            $("#botaoSalvarIP").prop('disabled', true);
+            $("#botaoEditarIP").removeAttr('onclick');
+            $("#botaoEditarIP").attr('onclick', "return editar_produto()");
+
+           }
 		</script>
 
 
@@ -289,7 +327,7 @@ include_once '../dao/UnidadeDAO.php';
 							<div class="tabs">
 								<ul class="nav nav-tabs tabs-primary">
 									<li class="active">
-										<a href="#overview" data-toggle="tab">Visaõ Geral</a>
+										<a href="#overview" data-toggle="tab">Visão Geral</a>
 									</li>
 
 									<li>
@@ -315,8 +353,7 @@ include_once '../dao/UnidadeDAO.php';
 														<li id="nome">Nome do Produto:</li>
 														<li id="Categoria">Categoria:</li>
 														<li id="Unidade">Unidade:</li>
-														<li id="nascimento">Codigo:</li>
-														<li id="Codigo">Codigo</li>
+														<li id="Codigo">Codigo:</li>
 														<li id="Valor">Valor:</li>
 													</ul>
 												</div>
@@ -361,7 +398,7 @@ include_once '../dao/UnidadeDAO.php';
 											<div class="form-group">
 												<label class="col-md-3 control-label" for="profileCompany">Código</label>
 												<div class="col-md-8">
-													<input type="text" name="codigo" class="form-control" minlength="11" id="profileCompany" id="codigo" >
+													<input type="text" name="codigo" class="form-control" minlength="11" id="codigo" id="profileCompany">
 
 													<input type="hidden" name="nomeClasse" value="ProdutoControle">
 														
@@ -372,7 +409,7 @@ include_once '../dao/UnidadeDAO.php';
 											<div class="form-group">
 												<label class="col-md-3 control-label" for="profileCompany">Valor</label>
 												<div class="col-md-8">
-													<input type="text" name="preco" class="form-control" id="profileCompany" id="valor" maxlength="13" placeholder="Ex: 22.00" onkeypress="return Onlynumbers(event)" >
+													<input type="text" name="preco" class="form-control" id="valor" id="profileCompany" maxlength="13" placeholder="Ex: 22.00" onkeypress="return Onlynumbers(event)" >
 
 													<input type="hidden" name="nomeClasse" value="ProdutoControle">
 														
@@ -384,7 +421,8 @@ include_once '../dao/UnidadeDAO.php';
 											<div class="panel-footer">
 												<div class="row">
 													<div class="col-md-9 col-md-offset-3">
-														<button type="submit" class="btn btn-primary" >Enviar</button>
+														<button type="button" class="btn btn-primary" id="botaoEditarIP" onclick="return editar_produto()">Editar</button>
+                                    					<input type="submit" class="btn btn-primary" disabled="true"  value="Salvar" id="botaoSalvarIP">
 														<input type="reset" class="btn btn-default">  
 													</div>
 												</div>

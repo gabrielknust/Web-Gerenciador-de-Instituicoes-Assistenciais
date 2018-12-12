@@ -121,15 +121,29 @@ class ProdutoControle
     }
 
     public function listarId(){
-        extract($_REQUEST);
+        $id = $_GET['id_produto'];
         try{
             $produtoDAO = new ProdutoDAO();
-            $produto = $produtoDAO->listarId($id_produto);
+            $produto = $produtoDAO->listarId($id);
+            echo $id;
             session_start();
             $_SESSION['produto'] = $produto;
-            header('Location: ' . $nextPage);
+            echo $_SESSION['produto'];
+            header('Location: ' . $nextPage );
         } catch (PDOException $e) {
             echo "ERROR: " . $e->getMessage();
         }
+    }
+    public function alterarProduto(){
+        extract($_REQUEST);
+        $produto = new Produto($descricao,$codigo,$preco);
+        $produtoDAO = new ProdutoDAO();
+        try {
+            $produtoDAO->alterarProduto($produto);
+            header("Location: ../html/alterar_produto.php?id=".$id_produto);
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+        
     }
 }
