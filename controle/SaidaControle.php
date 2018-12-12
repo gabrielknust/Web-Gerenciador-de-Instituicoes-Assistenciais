@@ -34,7 +34,7 @@ class SaidaControle
         $origens = $saidaDAO->listarTodos();
         session_start();
         $_SESSION['saida']=$origens;
-        header('Location: ../html/cadastro_saida.php');
+        header('Location: ../html/listar_saida.php');
     }
     
     public function incluir(){

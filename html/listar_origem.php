@@ -74,6 +74,12 @@
          			.append($('<tr />')
          				.append($('<td />')
          					.text(item.nome_origem))
+                     .append($('<td />')
+                        .text(item.cnpj))
+                     .append($('<td />')
+                        .text(item.cpf))
+                     .append($('<td />')
+                        .text(item.telefone))
          				.append($('<td />')
          					.attr('onclick','excluir("'+item.id_origem+'")')
          					.html('<i class="fas fa-trash-alt"></i>')));
@@ -225,7 +231,10 @@
                <thead>
                   <tr>
                      <th>Pessoa/Empresa</th>
-                     <th>acão</th>
+                     <th>CNPJ</th>
+                     <th>CPF</th>
+                     <th>Telefone</th>
+                     <th>Acão</th>
                   </tr>
                </thead>
                <tbody id="tabela">	

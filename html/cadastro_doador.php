@@ -149,6 +149,16 @@
 			}
 		}
 	</script>
+	<script type="text/javascript">
+		function validar(){
+			var cnpj = document.getElementById("cnpj");
+			var cpf = document.getElementById("NCPF");
+			if(cnpj.value.length == 0 and cpf.value.length == 0){
+				alert("Preencha o campo CNPJ ou o campo CPF");
+				return false;
+			}
+		}
+	</script>
 </head>
 <body>
 	<section class="body">
@@ -292,7 +302,7 @@
 											<div class="form-group">
 												<label class="col-md-3 control-label" for="profileFirstName">Nome</label>
 												<div class="col-md-6">
-													<input type="text" class="form-control" name="nome" id="nome" onkeypress="return Onlychars(event)" required>
+													<input type="text" class="form-control" name="nome" id="nome" required>
 												</div>
 											</div>
 											<div class="form-group" >

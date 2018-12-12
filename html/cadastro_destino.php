@@ -1,16 +1,13 @@
+
 <!doctype html>
 <html class="fixed">
 <head>
 	<!-- Basic -->
 	<meta charset="UTF-8">
 
-	<title>Cadastro de Destino</title>
+	<title>Cadastro de Doador</title>
 
-	<!-- Mobile Metas -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-
-	<!-- Web Fonts  -->
-	<link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800|Shadows+Into+Light" rel="stylesheet" type="text/css">
 
 	<!-- Vendor CSS -->
 	<link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.css" />
@@ -18,6 +15,7 @@
 	<link rel="stylesheet" href="../assets/vendor/magnific-popup/magnific-popup.css" />
 	<link rel="stylesheet" href="../assets/vendor/bootstrap-datepicker/css/datepicker3.css" />
 	<link rel="icon" href="../img/logofinal.png" type="image/x-icon">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 
 	<!-- Theme CSS -->
 	<link rel="stylesheet" href="../assets/stylesheets/theme.css" />
@@ -31,7 +29,20 @@
 	<!-- Head Libs -->
 	<script src="../assets/vendor/modernizr/modernizr.js"></script>
 
-	<script type="text/javascript">
+	<!-- Javascript functions -->
+
+	<script src="../assets/vendor/jquery/jquery.min.js"></script>
+
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+	<!-- Functions -->
+	<script src="../Functions/mascara.js"></script>
+	<script src="../Functions/onlyNumbers.js"></script>
+	<script src="../Functions/onlyChars.js"></script>
+	<script>
+		
 		function testaCPF(strCPF) { //strCPF é o cpf que será validado. Ele deve vir em formato string e sem nenhum tipo de pontuação.
 			var strCPF = strCPF.replace(/[^\d]+/g,''); // Limpa a string do CPF removendo espaços em branco e caracteres especiais. 
 			// PODE SER QUE NÃO ESTEJA LIMPANDO COMPLETAMENTE. FAVOR FAZER O TESTE!!!!
@@ -139,7 +150,16 @@
 			}
 		}
 	</script>
-
+	<script type="text/javascript">
+		function validar(){
+			var cnpj = document.getElementById("cnpj");
+			var cpf = document.getElementById("NCPF");
+			if(cnpj.value.length == 0 and cpf.value.length == 0){
+				alert("Preencha o campo CNPJ ou o campo CPF");
+				return false;
+			}
+		}
+	</script>
 </head>
 <body>
 	<section class="body">
@@ -256,7 +276,7 @@
 								</a>
 							</li>
 							<li><span>Cadastro</span></li>
-							<li><span>Doador</span></li>
+							<li><span>Destino</span></li>
 						</ol>
 				
 						<a class="sidebar-right-toggle"><i class="fa fa-chevron-left"></i></a>
@@ -270,7 +290,7 @@
 						<div class="tabs"  >
 							<ul class="nav nav-tabs tabs-primary">
 								<li class="active">
-									<a href="#overview" data-toggle="tab">Cadastro do Destinatário</a>
+									<a href="#overview" data-toggle="tab">Cadastro de Destino</a>
 								</li>
 							</ul>
 							<div class="tab-content">
@@ -279,11 +299,11 @@
 										<input type="hidden" name="nomeClasse" value="DestinoControle">
 										<input type="hidden" name="metodo" value="incluir">
 										<fieldset>
-											<h4 class="mb-xlg">Doador</h4>
+											<h4 class="mb-xlg">Destino</h4>
 											<div class="form-group">
 												<label class="col-md-3 control-label" for="profileFirstName">Nome</label>
 												<div class="col-md-6">
-													<input type="text" class="form-control" name="nome" id="nome" onkeypress="return Onlychars(event)" required>
+													<input type="text" class="form-control" name="nome" id="nome" required>
 												</div>
 											</div>
 											<div class="form-group" >
@@ -303,7 +323,7 @@
 											<div class="form-group">
 												<label class="col-md-3 control-label" for="profileCompany">Número do CPF</label>
 												<div class="col-md-6">
-													<input type="text" class="form-control" id="NCPF" name="cpf" placeholder="Ex: 222.222.222-22" maxlength="14" onblur="validarCPF(this.value)" onkeypress="return Onlynumbers(event)" onkeyup="mascara('###.###.###-##',this,event)">
+													<input type="text" class="form-control" id="NCPF" name="num_cpf" placeholder="Ex: 222.222.222-22" maxlength="14" onblur="validarCPF(this.value)" onkeypress="return Onlynumbers(event)" onkeyup="mascara('###.###.###-##',this,event)">
 												</div>														
 											</div>
 
@@ -325,8 +345,8 @@
 												<div class="col-md-9 col-md-offset-3">
 													<button id="enviar" class="btn btn-primary" type="submit">Enviar</button>
 													<input type="reset" class="btn btn-default">
-													<a href="cadastro_saida.php" >
-														<button type="button" class="btn btn-info">Voltar</button>
+													<a href="cadastro_entrada.php" color: white; text-decoration: none;>
+														<button type="button" class="btn btn-info">voltar</button>
 													</a>
 													<a href="listar_destino.php" style="color: white; text-decoration:none;"><button class="btn btn-success" type="button">Listar destinos</button></a>
 												</div>
@@ -341,76 +361,10 @@
 					<!-- end: page -->
 			</section>
 		</div>
-
-		<aside id="sidebar-right" class="sidebar-right">
-			<div class="nano">
-				<div class="nano-content">
-					<a href="#" class="mobile-close visible-xs">
-						Collapse <i class="fa fa-chevron-right"></i>
-					</a>
-			
-					<div class="sidebar-right-wrapper">
-		
-						<div class="sidebar-widget widget-calendar">
-							<h6>Upcoming Tasks</h6>
-							<div data-plugin-datepicker data-plugin-skin="dark" ></div>
-							<ul>
-								<li>
-									<time datetime="2014-04-19T00:00+00:00">04/19/2014</time>
-									<span>Company Meeting</span>
-								</li>
-							</ul>
-						</div>
-			
-						<div class="sidebar-widget widget-friends">
-							<h6>Friends</h6>
-							<ul>
-								<li class="status-online">
-									<figure class="profile-picture">
-										<img src="../assets/images/!sample-user.jpg" alt="Joseph Doe" class="img-circle">
-									</figure>
-									<div class="profile-info">
-										<span class="name">Joseph Doe Junior</span>
-										<span class="title">Hey, how are you?</span>
-									</div>
-								</li>
-								<li class="status-online">
-									<figure class="profile-picture">
-										<img src="../assets/images/!sample-user.jpg" alt="Joseph Doe" class="img-circle">
-									</figure>
-									<div class="profile-info">
-										<span class="name">Joseph Doe Junior</span>
-										<span class="title">Hey, how are you?</span>
-									</div>
-								</li>
-								<li class="status-offline">
-									<figure class="profile-picture">
-										<img src="../assets/images/!sample-user.jpg" alt="Joseph Doe" class="img-circle">
-									</figure>
-									<div class="profile-info">
-										<span class="name">Joseph Doe Junior</span>
-										<span class="title">Hey, how are you?</span>
-									</div>
-								</li>
-								<li class="status-offline">
-									<figure class="profile-picture">
-										<img src="../assets/images/!sample-user.jpg" alt="Joseph Doe" class="img-circle">
-									</figure>
-									<div class="profile-info">
-										<span class="name">Joseph Doe Junior</span>
-										<span class="title">Hey, how are you?</span>
-									</div>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</idv>
-		</aside>
 	</section>
 
 	<!-- Vendor -->
-	<script src="../assets/vendor/jquery/jquery.js"></script>
+	
 	<script src="../assets/vendor/jquery-browser-mobile/jquery.browser.mobile.js"></script>
 	<script src="../assets/vendor/bootstrap/js/bootstrap.js"></script>
 	<script src="../assets/vendor/nanoscroller/nanoscroller.js"></script>
@@ -429,6 +383,8 @@
 	
 	<!-- Theme Initialization Files -->
 	<script src="../assets/javascripts/theme.init.js"></script>
+	<script type="text/javascript">
+	</script>
 
 </body>
 </html>

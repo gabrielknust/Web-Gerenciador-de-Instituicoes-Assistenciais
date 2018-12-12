@@ -11,7 +11,6 @@ class IentradaControle
             $ientrada = $ientradaDAO->listarId($id_entrada);
             session_start();
             $_SESSION['ientrada'] = $ientrada;
-            echo $_SESSION['ientrada'];
             header('Location: ' . $nextPage);
         } catch (PDOException $e) {
             echo "ERROR: " . $e->getMessage();

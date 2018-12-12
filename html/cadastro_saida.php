@@ -179,7 +179,7 @@
 				return true;
 			}
 			else{
-				alert("Origem inválida, por favor insira uma origem válida");
+				alert("Destino inválido, por favor insira um destino válido");
 				$("#origem").val("");
 			}
 		});
@@ -198,7 +198,7 @@
 				return false;
 			}
 			else if(tipo.value == "blank"){
-				alert("Selecione o tipo da entrada")
+				alert("Selecione o tipo da saida")
 				tipo.focus();
 				return false;
 			}

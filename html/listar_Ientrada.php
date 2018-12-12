@@ -3,7 +3,7 @@
 <head>
 <?php
 	include_once '../dao/Conexao.php';
-  	include_once '../dao/entradaDAO.php';
+  	include_once '../dao/EntradaDAO.php';
   
 	session_start();
 	if(isset($_SESSION['ientrada'])){

@@ -1,21 +1,15 @@
 <!doctype html>
 <html class="fixed">
 <head>
-<?php/*
+<?php
 	include_once '../dao/Conexao.php';
-  	include_once '../dao/entradaDAO.php';
+  	include_once '../dao/SaidaDAO.php';
   
 	session_start();
-	if(!isset($_SESSION['entrada'])){
-		header('Location: ../controle/Control.php?metodo=listarTodos&nomeClasse=entradaControle&nextPage=../html/listar_entrada.php');
+	if(isset($_SESSION['isaida'])){
+		$isaida = $_SESSION['isaida'];
+		unset($_SESSION['isaida']);	
 	}
-	if(isset($_SESSION['msg'])){
-		$msg = $_SESSION['msg'];
-	}
-	if(isset($_SESSION['entrada'])){
-		$entrada = $_SESSION['entrada'];
-	    session_destroy();  
-	}*/
 ?>
 	<!-- Basic -->
 	<meta charset="UTF-8">
@@ -77,15 +71,20 @@
 	<!-- jquery functions -->
 	<script>
 		$(function(){
-			var entrada= <?php 
-				echo $entrada; 
+			var isaida = <?php 
+				echo $isaida; 
 				?>;
 
-			$.each(entrada, function(i,item){
+			$.each(isaida, function(i,item){
 
 				$('#tabela')
-					.append($('<tr />')
+					.append($('<tr />').attr('id',item.id_isaida)
 						.append($('<td />')
+							.text(item.descricao))
+						.append($('<td />')
+							.text(item.qtd))
+						.append($('<td />')
+							.text(item.valor_unitario)))
 					});
 		});
 	</script>

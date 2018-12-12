@@ -8,14 +8,17 @@ class IsaidaDAO
     public function listarId($id_saida){
         try{
             $pdo = Conexao::connect();
-            $sql = "SELECT id_isaida,id_saida,id_produto,qtd,valor_unitario FROM isaida WHERE id_saida = :id_saida";
+            $sql = "SELECT i.id_isaida,i.id_saida,p.descricao,i.qtd,i.valor_unitario
+             FROM isaida i 
+             RIGHT JOIN produto p ON p.id_produto = i.id_produto 
+             WHERE i.id_saida = :id_saida";
             $stmt = $pdo->prepare($sql);
             $stmt->bindParam(':id_saida',$id_saida);
 
             $stmt->execute();
             $isaidas = array();
             while($linha = $stmt->fetch(PDO::FETCH_ASSOC)){
-                $isaidas[]=array('id_isaida'=>$linha['id_isaida'], 'id_saida'=>$linha['id_saida'], 'id_produto'=>$linha['id_produto'], 'qtd'=>$linha['qtd'], 'valor_unitario'=>$linha['valor_unitario'],);
+                $isaidas[]=array('id_isaida'=>$linha['id_isaida'], 'id_saida'=>$linha['id_saida'], 'descricao'=>$linha['descricao'], 'qtd'=>$linha['qtd'], 'valor_unitario'=>$linha['valor_unitario']);
                 }
         } catch(PDOExeption $e){
             echo 'Erro: ' .  $e->getMessage();
@@ -38,7 +41,7 @@ class IsaidaDAO
                 $qtd = $isaida->getQtd();
                 $valor_unitario = $isaida->getValor_unitario();
 
-                $stmt->bindParam(':id_entrada',$id_saida);
+                $stmt->bindParam(':id_saida',$id_saida);
                 $stmt->bindParam(':id_produto',$id_produto);                
                 $stmt->bindParam(':qtd',$qtd);
                 $stmt->bindParam(':valor_unitario',$valor_unitario);

@@ -8,7 +8,7 @@ class IsaidaControle
         extract($_REQUEST);
         try{
             $isaidaDAO = new IsaidaDAO();
-            $isaida = $isaidaDAO->listarId($id_isaida);
+            $isaida = $isaidaDAO->listarId($id_saida);
             session_start();
             $_SESSION['isaida'] = $isaida;
             header('Location: ' . $nextPage);

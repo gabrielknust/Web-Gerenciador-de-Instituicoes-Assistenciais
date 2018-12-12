@@ -1,21 +1,18 @@
 <!doctype html>
 <html class="fixed">
 <head>
-<?php/*
+<?php
 	include_once '../dao/Conexao.php';
-  	include_once '../dao/entradaDAO.php';
+  	include_once '../dao/SaidaDAO.php';
   
 	session_start();
-	if(!isset($_SESSION['entrada'])){
-		header('Location: ../controle/Control.php?metodo=listarTodos&nomeClasse=entradaControle&nextPage=../html/listar_entrada.php');
+	if(!isset($_SESSION['saida'])){
+		header('Location: ../controle/Control.php?metodo=listarTodos&nomeClasse=SaidaControle&nextPage=../html/listar_saida.php');
 	}
-	if(isset($_SESSION['msg'])){
-		$msg = $_SESSION['msg'];
+	if(isset($_SESSION['saida'])){
+		$saida = $_SESSION['saida'];
+	    unset($_SESSION['saida']);  
 	}
-	if(isset($_SESSION['entrada'])){
-		$entrada = $_SESSION['entrada'];
-	    session_destroy();  
-	}*/
 ?>
 	<!-- Basic -->
 	<meta charset="UTF-8">
@@ -76,17 +73,38 @@
 		
 	<!-- jquery functions -->
 	<script>
+		function listarId(id){
+			window.location.replace('../controle/Control.php?metodo=listarId&nomeClasse=IsaidaControle&nextPage=../html/listar_Isaida.php&id_saida='+id);
+		}
+	</script>
+	<script>
 		$(function(){
-			var entrada= <?php 
-				echo $entrada; 
+			var saida = <?php 
+				echo $saida; 
 				?>;
 
-			$.each(entrada, function(i,item){
+			$.each(saida, function(i,item){
 
 				$('#tabela')
 					.append($('<tr />')
+						.attr('onclick','listarId("'+item.id_saida+'")')
 						.append($('<td />')
-					});
+							.text(item.nome_destino))
+						.append($('<td />')
+							.text(item.descricao_almoxarifado))
+						.append($('<td />')
+							.text(item.descricao))
+						.append($('<td />')
+							.text(item.nome))
+						.append($('<td />')
+							.text(item.valor_total))
+						.append($('<td />')
+							.text(item.data))
+						.append($('<td />')
+							.text(item.hora)
+						)
+					)
+			})
 		});
 	</script>
 </head>
@@ -288,10 +306,10 @@
 							<table class="table table-bordered table-striped mb-none" id="datatable-default">
 								<thead>
 									<tr>
-										<th>Origem</th>
+										<th>Destino</th>
 										<th>Almoxarifado</th>
 										<th>Tipo</th>
-										<th>resposavel</th>
+										<th>Resposavel</th>
 										<th>Valor Total</th>
 										<th>Data</th>
 										<th>Hora</th>
