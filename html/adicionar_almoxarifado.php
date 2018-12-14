@@ -1,3 +1,9 @@
+<?php
+	session_start();
+	if(!isset($_SESSION['usuario'])){
+		header ("Location: ../index.html");
+	}
+?>
 <!doctype html>
 <html class="fixed">
 <head>
@@ -5,9 +11,6 @@
 	<meta charset="UTF-8">
 
 	<title>Adicionar Almoxarifado</title>
-	<meta name="keywords" content="HTML5 Admin Template" />
-	<meta name="description" content="Porto Admin - Responsive HTML5 Template">
-	<meta name="author" content="okler.net">
 
 	<!-- Mobile Metas -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
@@ -18,7 +21,6 @@
 	<!-- Vendor CSS -->
 	<link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.css" />
 	<link rel="stylesheet" href="../assets/vendor/font-awesome/css/font-awesome.css" />
-	<link rel="stylesheet" href="../assets/vendor/fontawesome/svg-with-js/css/fa-svg-with-js.css" />
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 	<link rel="stylesheet" href="../assets/vendor/magnific-popup/magnific-popup.css" />
 	<link rel="stylesheet" href="../assets/vendor/bootstrap-datepicker/css/datepicker3.css" />
@@ -74,7 +76,7 @@
 		<!-- start: header -->
 		<header class="header">
 			<div class="logo-container">
-				<a href="home.html" class="logo">
+				<a href="home.php" class="logo">
 					<img src="../img/logofinal.png" height="35" alt="Porto Admin" />
 				</a>
 				<div class="visible-xs toggle-sidebar-left" data-toggle-class="sidebar-left-opened" data-target="html" data-fire-event="sidebar-left-opened">
@@ -88,11 +90,11 @@
 				<div id="userbox" class="userbox">
 					<a href="#" data-toggle="dropdown">
 						<figure class="profile-picture">
-							<img src="../img/koala.jpg" alt="Joseph Doe" class="img-circle" data-lock-picture="../assets/images/!logged-user.jpg" />
+							<img src="../img/semfoto.jpg" alt="Joseph Doe" class="img-circle" data-lock-picture="../assets/images/!logged-user.jpg" />
 						</figure>
 						<div class="profile-info" data-lock-name="John Doe" data-lock-email="johndoe@okler.com">
-							<span class="name">John Doe Junior</span>
-							<span class="role">administrator</span>
+							<span class="name">Usuário</span>
+							<span class="role">Funcionário</span>
 						</div>
 						<i class="fa custom-caret"></i>
 					</a>
@@ -101,19 +103,16 @@
 						<ul class="list-unstyled">
 							<li class="divider"></li>
 							<li>
-								<a role="menuitem" tabindex="-1" href="../html/profile.html"><i class="fa fa-user"></i>My Profile</a>
+								<a role="menuitem" tabindex="-1" href="../html/profile.php"><i class="fa fa-user"></i> Meu perfil</a>
 							</li>
 							<li>
-								<a role="menuitem" tabindex="-1" href="#" data-lock-screen="true"><i class="fa fa-lock"></i>Lock Screen </a>
-							</li>
-							<li>
-								<a role="menuitem" tabindex="-1" href="../index.html"><i class="fa fa-power-off"></i> Logout</a>
+								<a role="menuitem" tabindex="-1" href="./logout.php"><i class="fa fa-power-off"></i> Sair da sessão</a>
 							</li>
 						</ul>
 					</div>
 				</div>
 			</div>
-				<!-- end: search & user box -->
+		<!-- end: search & user box -->
 		</header>
 		<!-- end: header -->
 		<div class="inner-wrapper">
@@ -128,117 +127,177 @@
 						<i class="fa fa-bars" aria-label="Toggle sidebar"></i>
 					</div>
 				</div>
-				
-					<div class="nano">
-						<div class="nano-content">
-							<nav id="menu" class="nav-main" role="navigation">
-								<ul class="nav nav-main">
-									<li>
-										<a href="home.html">
-											<i class="fa fa-home" aria-hidden="true"></i>
-											<span>Início</span>
-										</a>
-									</li>
-									<li class="nav-parent nav-expanded nav-active">
-										<a>
-											<i class="fa fa-copy" aria-hidden="true"></i>
-											<span>Cadastros</span>
-										</a>
-										<ul class="nav nav-children">
-											<li>
-												<a href="cadastro_funcionario.html">
-													 Cadastrar funcionário
-												</a>
-											</li>
-											<li>
-												<a href="cadastro_interno.html">
-													 Cadastrar interno
-												</a>
-											</li>
-											<li>
-												<a href="cadastro_voluntario.html">
-													 Cadastrar voluntário
-												</a>
-											</li>
-											<li>
-												<a href="cadastro_voluntario_judicial.html">
-													 Cadastrar voluntário judicial
-												</a>
-											</li>
-										</ul>
-									</li>
-							</nav>
-				
-						</div>
-				
-					</div>
-				
-				</aside>
-				<!-- end: sidebar -->
-
-				<section role="main" class="content-body">
-					<header class="page-header">
-						<h2>Cadastro</h2>
-					
-						<div class="right-wrapper pull-right">
-							<ol class="breadcrumbs">
+				<div class="nano">
+					<div class="nano-content">
+						<nav id="menu" class="nav-main" role="navigation">
+							<ul class="nav nav-main">
 								<li>
 									<a href="home.php">
-										<i class="fa fa-home"></i>
+										<i class="fa fa-home" aria-hidden="true"></i>
+										<span>Início</span>
 									</a>
 								</li>
-								<li><span>Páginas</span></li>
-								<li><span>Perfil</span></li>
-							</ol>
+								<li class="nav-parent nav-expanded nav-active">
+									<a>
+										<i class="fa fa-copy" aria-hidden="true"></i>
+										<span>Cadastros Pessoas</span>
+									</a>
+									<ul class="nav nav-children">
+										<li>
+											<a href="cadastro_funcionario.php">
+												 Cadastrar funcionário
+											</a>
+										</li>
+										<li>
+											<a href="cadastro_interno.php">
+												 Cadastrar interno
+											</a>
+										</li>
+										<li>
+											<a href="cadastro_voluntario.php">
+												 Cadastrar voluntário
+											</a>
+										</li>
+										<li>
+											<a href="cadastro_voluntario_judicial.php">
+												 Cadastrar voluntário judicial
+											</a>
+										</li>
+									</ul>
+								</li>
+
+								<li class="nav-parent nav-expanded nav-active">
+									<a>
+										<i class="fa fa-copy" aria-hidden="true"></i>
+										<span>Informação Pessoas</span>
+									</a>
+									<ul class="nav nav-children">
+										<li>
+											<a onclick="listarFuncionario()">
+												 Informações funcionarios
+											</a>
+										</li>
+									</ul>
+									<ul class="nav nav-children">
+										<li>
+											<a onclick="listarInterno()">
+												 Informações interno
+											</a>
+										</li>
+									</ul>
+								</li>
+
+								<li class="nav-parent nav-expanded nav-active">
+									<a>
+										<i class="fa fa-copy" aria-hidden="true"></i>
+										<span>Cadastrar Produtos</span>
+									</a>
+									<ul class="nav nav-children">
+										<li>
+											<a href="../html/cadastro_entrada.php">
+												 Cadastrar Produtos
+											</a>
+										</li>
+									</ul>
+									<ul class="nav nav-children">
+										<li>
+											<a href="../html/cadastro_saida.php">
+												 Saida de Produtos
+											</a>
+										</li>
+									</ul>
+								</li>
+
+								<li class="nav-parent nav-expanded nav-active">
+									<a>
+										<i class="fa fa-copy" aria-hidden="true"></i>
+										<span>Informações Produtos</span>
+									</a>
+									<ul class="nav nav-children">
+										<li>
+											<a href="../html/estoque.php">
+												 Estoque
+											</a>
+										</li>
+									</ul>
+									<ul class="nav nav-children">
+										<li>
+											<a href="../html/listar_almoxs.php">
+												 Almoxarifados
+											</a>
+										</li>
+									</ul>
+								</li>
+							</ul>
+						</nav>
+					</div>
+				</div>
+			</aside>
+			<!-- end: sidebar -->
+
+			<section role="main" class="content-body">
+				<header class="page-header">
+					<h2>Cadastro</h2>
 					
-							<a class="sidebar-right-toggle"><i class="fa fa-chevron-left"></i></a>
-						</div>
-					</header>
+					<div class="right-wrapper pull-right">
+						<ol class="breadcrumbs">
+							<li>
+								<a href="home.php">
+									<i class="fa fa-home"></i>
+								</a>
+							</li>
+							<li><span>Páginas</span></li>
+							<li><span>Adicionar Almoxarifado</span></li>
+						</ol>
+					
+						<a class="sidebar-right-toggle"><i class="fa fa-chevron-left"></i></a>
+					</div>
+				</header>
 
-					<!-- start: page -->
-
-					<div class="row">
-						<div class="col-md-4 col-lg-2" style="visibility: hidden;"></div>
-						<div class="col-md-8 col-lg-8" >
-
-							<div class="tabs">
-								<ul class="nav nav-tabs tabs-primary">
-									<li class="active">
-										<a href="#overview" data-toggle="tab">Inserir almoxarifado</a>
-									</li>
-								</ul>
-								<div class="tab-content">
-									<div id="overview" class="tab-pane active">
-											<fieldset>
-												<form method="post" id="formulario" action="../controle/Control.php">
-												<div class="form-group">
-													<br>
-													<label class="col-md-3 control-label">almoxarifado</label>
-													<div class="col-md-8">
-														<input type="text" class="form-control" name="descricao_almoxarifado" id="descricao_almoxarifado" required>
-													</div>
-												</div><br/>
-												<input type="hidden" name="nomeClasse" value="AlmoxarifadoControle">
-												<input type="hidden" name="metodo" value="incluir">
-												<div class="row">
-													<div class="col-md-9 col-md-offset-3">
-														<button id="enviar" class="btn btn-primary" type="submit">Enviar</button>
-														<input type="reset" class="btn btn-default">
-														<a href="cadastro_entrada.php" style="color: white; text-decoration: none;">
-															<button class="btn btn-info" type="button">Voltar</button></a>
-														<a href="listar_almox.php" style="color: white; text-decoration:none;">				<button class="btn btn-success" type="button">Listar almoxarifado</button></a>
-													</div>
+				<!-- start: page -->
+				<div class="row">
+					<div class="col-md-4 col-lg-2" style="visibility: hidden;"></div>
+					<div class="col-md-8 col-lg-8" >
+						<div class="tabs">
+							<ul class="nav nav-tabs tabs-primary">
+								<li class="active">
+									<a href="#overview" data-toggle="tab">Inserir almoxarifado
+									</a>
+								</li>
+							</ul>
+							<div class="tab-content">
+								<div id="overview" class="tab-pane active">
+									<fieldset>
+										<form method="post" id="formulario" action="../controle/control.php">
+											<div class="form-group"><br>
+												<label class="col-md-3 control-label">almoxarifado</label>
+												<div class="col-md-8">
+													<input type="text" class="form-control" name="descricao_almoxarifado" id="descricao_almoxarifado" required>
 												</div>
-												</form>
-											</fieldset>	
-									</div>
+											</div><br/>
+											<input type="hidden" name="nomeClasse" value="AlmoxarifadoControle">
+											<input type="hidden" name="metodo" value="incluir">
+											<div class="row">
+												<div class="col-md-9 col-md-offset-3">
+													<button id="enviar" class="btn btn-primary" type="submit">Enviar</button>
+													<input type="reset" class="btn btn-default">
+													<a href="cadastro_entrada.php" style="color: white; text-decoration: none;">
+														<button class="btn btn-info" type="button">Voltar</button>
+													</a>
+													<a href="listar_almox.php" style="color: white; text-decoration:none;">
+														<button class="btn btn-success" type="button">Listar almoxarifado</button></a>
+												</div>
+											</div>
+										</form>
+									</fieldset>	
 								</div>
 							</div>
 						</div>
+					</div>
 				</div>
-				<!-- end: page -->
+			<!-- end: page -->
 			</section>
-			
+		</div>	
 		<aside id="sidebar-right" class="sidebar-right">
 			<div class="nano">
 				<div class="nano-content">

@@ -1,3 +1,10 @@
+<?php
+   session_start();
+   if(!isset($_SESSION['usuario'])){
+      header ("Location: ../index.html");
+   }
+?>
+
 <!doctype html>
 <html class="fixed">
    <head>
@@ -7,7 +14,7 @@
           
           	session_start();
           	if(!isset($_SESSION['destino'])){
-            	header('Location: ../controle/Control.php?metodo=listarTodos&nomeClasse=DestinoControle&nextPage=../html/listar_destino.php');
+            	header('Location: ../controle/control.php?metodo=listarTodos&nomeClasse=DestinoControle&nextPage=../html/listar_destino.php');
           	}
           	if(isset($_SESSION['destino'])){
             	$destino = $_SESSION['destino'];

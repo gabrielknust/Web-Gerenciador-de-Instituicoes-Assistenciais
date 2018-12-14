@@ -1,3 +1,10 @@
+<?php
+	session_start();
+	if(!isset($_SESSION['usuario'])){
+		header ("Location: ../index.html");
+	}
+?>
+
 <!doctype html>
 <html class="fixed">
 <head>
@@ -7,14 +14,14 @@
   
 	session_start();
 	if(!isset($_SESSION['categoria'])){
-		header('Location: ../controle/Control.php?metodo=listarTodos&nomeClasse=CategoriaControle&nextPage=../html/listar_categoria.php');
+		header('Location: ../controle/control.php?metodo=listarTodos&nomeClasse=CategoriaControle&nextPage=../html/listar_categoria.php');
 	}
 	if(isset($_SESSION['msg'])){
 		$msg = $_SESSION['msg'];
 	}
 	if(isset($_SESSION['categoria'])){
 		$categoria = $_SESSION['categoria'];
-	    session_destroy();  
+	    unset($_SESSION['categoria']);  
 	}
 ?>
 	<!-- Basic -->
@@ -76,16 +83,9 @@
 		
 	<!-- jquery functions -->
 	<script>
-		/*<?php
-			if(isset($msg)){
-				?>
-				alert(<?php echo $msg ?>);
-				<?php
-			}
-		?>*/
 
 		function excluir(id){
-			window.location.replace('../controle/Control.php?metodo=excluir&nomeClasse=CategoriaControle&id_categoria_produto='+id);
+			window.location.replace('../controle/control.php?metodo=excluir&nomeClasse=CategoriaControle&id_categoria_produto='+id);
 		}
 	</script>
 	<script>
@@ -174,7 +174,7 @@
 							<nav id="menu" class="nav-main" role="navigation">
 								<ul class="nav nav-main">
 									<li>
-										<a href="home.html">
+										<a href="home.php">
 											<i class="fa fa-home" aria-hidden="true"></i>
 											<span>Início</span>
 										</a>

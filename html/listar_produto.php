@@ -1,3 +1,9 @@
+<?php
+	session_start();
+	if(!isset($_SESSION['usuario'])){
+		header ("Location: ../index.html");
+	}
+?>
 <!doctype html>
 <html class="fixed">
 <head>
@@ -5,9 +11,8 @@
   include_once '../dao/Conexao.php';
   include_once '../dao/ProdutoDAO.php';
   
-  session_start();
   if(!isset($_SESSION['produtos'])){
-    header('Location: ../controle/Control.php?metodo=listarTodos&nomeClasse=ProdutoControle&nextPage=../html/listar_produto.php');
+    header('Location: ../controle/control.php?metodo=listarTodos&nomeClasse=ProdutoControle&nextPage=../html/listar_produto.php');
   }
   if(isset($_SESSION['produtos'])){
     $produtos = $_SESSION['produtos'];
@@ -74,12 +79,12 @@
 	<!-- jquery functions -->
 	<script>
 		function excluir(id){
-			window.location.replace('../controle/Control.php?metodo=excluir&nomeClasse=ProdutoControle&id_produto='+id);
+			window.location.replace('../controle/control.php?metodo=excluir&nomeClasse=ProdutoControle&id_produto='+id);
 		}
 
 		function clicar(id)
 		   		{
-		   			window.location.href = '../html/alterar_produto.php?id_produto='+id;
+		   			window.location.replace('../html/alterar_produto.php?id_produto='+id);
 		   		}
 
 	</script>
@@ -178,7 +183,7 @@
 							<nav id="menu" class="nav-main" role="navigation">
 								<ul class="nav nav-main">
 									<li>
-										<a href="home.html">
+										<a href="home.php">
 											<i class="fa fa-home" aria-hidden="true"></i>
 											<span>Início</span>
 										</a>
@@ -245,7 +250,7 @@
 						<div class="right-wrapper pull-right">
 							<ol class="breadcrumbs">
 								<li>
-									<a href="home.html">
+									<a href="home.php">
 										<i class="fa fa-home"></i>
 									</a>
 								</li>

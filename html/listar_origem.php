@@ -1,3 +1,10 @@
+
+<?php
+   session_start();
+   if(!isset($_SESSION['usuario'])){
+      header ("Location: ../index.html");
+   }
+?>
 <!doctype html>
 <html class="fixed">
    <head>
@@ -5,9 +12,8 @@
          	include_once '../dao/Conexao.php';
           	include_once '../dao/OrigemDAO.php';
           
-          	session_start();
           	if(!isset($_SESSION['origem'])){
-            	header('Location: ../controle/Control.php?metodo=listarTodos&nomeClasse=OrigemControle&nextPage=../html/listar_origem.php');
+            	header('Location: ../controle/control.php?metodo=listarTodos&nomeClasse=OrigemControle&nextPage=../html/listar_origem.php');
           	}
           	if(isset($_SESSION['origem'])){
             	$origem = $_SESSION['origem'];

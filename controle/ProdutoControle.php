@@ -46,7 +46,7 @@ class ProdutoControle
             $_SESSION['produto']= $produto;
         } catch (Exception $e) {
             $msg = "Não foi possível listar o produto!";
-            //header('Location: caminho.php?msg='.$msg);
+            header('Location: caminho.php?msg='.$msg);
         }
 
         $catDao = new CategoriaDAO();
@@ -121,14 +121,13 @@ class ProdutoControle
     }
 
     public function listarId(){
+        extract($_REQUEST);
         $id = $_GET['id_produto'];
         try{
             $produtoDAO = new ProdutoDAO();
             $produto = $produtoDAO->listarId($id);
-            echo $id;
             session_start();
             $_SESSION['produto'] = $produto;
-            echo $_SESSION['produto'];
             header('Location: ' . $nextPage );
         } catch (PDOException $e) {
             echo "ERROR: " . $e->getMessage();

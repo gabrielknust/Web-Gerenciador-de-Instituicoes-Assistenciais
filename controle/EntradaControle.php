@@ -21,7 +21,7 @@ class EntradaControle
         $data = $horadata[0];
         $hora = $horadata[1];
         $valor_total = $total_total;
-        $responsavel = 1;
+        $responsavel = 28;
         $entrada = new Entrada($data,$hora,$valor_total,$responsavel);
         
         return $entrada;

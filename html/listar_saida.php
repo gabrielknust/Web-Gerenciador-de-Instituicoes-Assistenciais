@@ -1,3 +1,9 @@
+<?php
+	session_start();
+	if(!isset($_SESSION['usuario'])){
+		header ("Location: ../index.html");
+	}
+?>
 <!doctype html>
 <html class="fixed">
 <head>
@@ -5,9 +11,8 @@
 	include_once '../dao/Conexao.php';
   	include_once '../dao/SaidaDAO.php';
   
-	session_start();
 	if(!isset($_SESSION['saida'])){
-		header('Location: ../controle/Control.php?metodo=listarTodos&nomeClasse=SaidaControle&nextPage=../html/listar_saida.php');
+		header('Location: ../controle/control.php?metodo=listarTodos&nomeClasse=SaidaControle&nextPage=../html/listar_saida.php');
 	}
 	if(isset($_SESSION['saida'])){
 		$saida = $_SESSION['saida'];

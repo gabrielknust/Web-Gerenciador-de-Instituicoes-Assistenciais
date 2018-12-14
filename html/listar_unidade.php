@@ -1,13 +1,18 @@
+<?php
+   session_start();
+   if(!isset($_SESSION['usuario'])){
+      header ("Location: ../index.html");
+   }
+?>
 <!doctype html>
 <html class="fixed">
    <head>
       <?php
          	include_once '../dao/Conexao.php';
           	include_once '../dao/unidadeDAO.php';
-          
-          	session_start();
+
           	if(!isset($_SESSION['unidade'])){
-            	header('Location: ../controle/Control.php?metodo=listarTodos&nomeClasse=unidadeControle&nextPage=../html/listar_unidade.php');
+            	header('Location: ../controle/control.php?metodo=listarTodos&nomeClasse=UnidadeControle&nextPage=../html/listar_unidade.php');
           	}
           	if(isset($_SESSION['unidade'])){
             	$unidade = $_SESSION['unidade'];
@@ -59,7 +64,7 @@
       <!-- jquery functions -->
       <script>
          function excluir(id){
-         	window.location.replace('../controle/Control.php?metodo=excluir&nomeClasse=unidadeControle&id_unidade='+id);
+         	window.location.replace('../controle/control.php?metodo=excluir&nomeClasse=UnidadeControle&id_unidade='+id);
          }
       </script>
       <script>

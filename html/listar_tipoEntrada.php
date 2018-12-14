@@ -1,3 +1,9 @@
+<?php
+   session_start();
+   if(!isset($_SESSION['usuario'])){
+      header ("Location: ../index.html");
+   }
+?>
 <!doctype html>
 <html class="fixed">
    <head>
@@ -5,9 +11,8 @@
          	include_once '../dao/Conexao.php';
           	include_once '../dao/TipoEntradaDAO.php';
           
-          	session_start();
           	if(!isset($_SESSION['tipo_entrada'])){
-            	header('Location: ../controle/Control.php?metodo=listarTodos&nomeClasse=TipoEntradaControle&nextPage=../html/listar_tipoEntrada.php');
+            	header('Location: ../controle/control.php?metodo=listarTodos&nomeClasse=TipoEntradaControle&nextPage=../html/listar_tipoEntrada.php');
           	}
           	if(isset($_SESSION['tipo_entrada'])){
             	$tipo = $_SESSION['tipo_entrada'];

@@ -1,3 +1,9 @@
+<?php
+	session_start();
+	if(!isset($_SESSION['usuario'])){
+		header ("Location: ../index.html");
+	}
+?>
 <!doctype html>
 <html class="fixed">
 <head>
@@ -5,7 +11,6 @@
 	include_once '../dao/Conexao.php';
   	include_once '../dao/EntradaDAO.php';
   
-	session_start();
 	if(isset($_SESSION['ientrada'])){
 		$ientrada = $_SESSION['ientrada'];
 	    unset($_SESSION['ientrada']);

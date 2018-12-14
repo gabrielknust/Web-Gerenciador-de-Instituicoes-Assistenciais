@@ -29,13 +29,9 @@ class CategoriaControle
         $categoriaDAO = new CategoriaDAO();
         try{
             $categoriaDAO->incluir($categoria);
-            session_start();
-            $_SESSION['msg']="categoria cadastrada com sucesso";
-            $_SESSION['proxima']="Cadastrar outra categoria";
-            $_SESSION['link']="../html/cadastrar_categoria.php";
-            header("Location: ../html/cadastro_produto.php");
+            header("Location: ../html/adicionar_categoria.php");
         } catch (PDOException $e){
-            $msg= "Não foi possível registrar o funcionário"."<br>".$e->getMessage();
+            $msg= "Não foi possível registrar a categoria"."<br>".$e->getMessage();
             echo $msg;
         }
     }

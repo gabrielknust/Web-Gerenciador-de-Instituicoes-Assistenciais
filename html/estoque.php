@@ -189,7 +189,7 @@
 						<nav id="menu" class="nav-main" role="navigation">
 							<ul class="nav nav-main">
 								<li>
-									<a href="home.html">
+									<a href="home.php">
 										<i class="fa fa-home" aria-hidden="true"></i>
 										<span>Início</span>
 									</a>
@@ -255,7 +255,7 @@
 					<div class="right-wrapper pull-right">
 						<ol class="breadcrumbs">
 							<li>
-								<a href="home.html">
+								<a href="home.php">
 									<i class="fa fa-home"></i>
 								</a>
 							</li>

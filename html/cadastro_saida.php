@@ -1,3 +1,10 @@
+<?php
+	session_start();
+	if(!isset($_SESSION['usuario'])){
+		header ("Location: ../index.html");
+	}
+?>
+
 <!doctype html>
 <html class="js flexbox flexboxlegacy csstransforms csstransforms3d no-overflowscrolling translated-ltr">
 <head>
@@ -349,7 +356,7 @@
 						</ul>
 						<div class="tab-content" style="width: 832px;">
 							<div id="overview" class="tab-pane active">
-								<form class="form-horizontal" method="post" id="formulario" onsubmit="return validar()" action="../controle/Control.php" autocomplete="off">
+								<form class="form-horizontal" method="post" id="formulario" onsubmit="return validar()" action="../controle/control.php" autocomplete="off">
 									<fieldset>
 										<div class="info-entrada" >
 											<div class="form-group">

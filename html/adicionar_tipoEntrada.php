@@ -1,17 +1,22 @@
+<?php
+	session_start();
+	if(!isset($_SESSION['usuario'])){
+		header ("Location: ../index.html");
+	}
+?>
 <!doctype html>
 <html class="fixed">
 <head>
 	<!-- Basic -->
 	<meta charset="UTF-8">
 
-	<title>Adicionar Tipo de Entrada</title>
+	<title>Adicionar Tipo</title>
 	<!-- Mobile Metas -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
 	<!-- Vendor CSS -->
 	<link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.css" />
 	<link rel="stylesheet" href="../assets/vendor/font-awesome/css/font-awesome.css" />
-	<link rel="stylesheet" href="../assets/vendor/fontawesome/svg-with-js/css/fa-svg-with-js.css" />
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 	<link rel="stylesheet" href="../assets/vendor/magnific-popup/magnific-popup.css" />
 	<link rel="stylesheet" href="../assets/vendor/bootstrap-datepicker/css/datepicker3.css" />
@@ -69,11 +74,11 @@
 				<div id="userbox" class="userbox">
 					<a href="#" data-toggle="dropdown">
 						<figure class="profile-picture">
-							<img src="../img/koala.jpg" alt="Joseph Doe" class="img-circle" data-lock-picture="../assets/images/!logged-user.jpg" />
+							<img src="../img/semfoto.jpg" alt="Joseph Doe" class="img-circle" data-lock-picture="../assets/images/!logged-user.jpg" />
 						</figure>
 						<div class="profile-info" data-lock-name="John Doe" data-lock-email="johndoe@okler.com">
-							<span class="name">John Doe Junior</span>
-							<span class="role">administrator</span>
+							<span class="name">Usuário</span>
+							<span class="role">Funcionário</span>
 						</div>
 						<i class="fa custom-caret"></i>
 					</a>
@@ -82,13 +87,10 @@
 						<ul class="list-unstyled">
 							<li class="divider"></li>
 							<li>
-								<a role="menuitem" tabindex="-1" href="../html/profile.html"><i class="fa fa-user"></i> My Profile</a>
+								<a role="menuitem" tabindex="-1" href="../html/profile.php"><i class="fa fa-user"></i> Meu perfil</a>
 							</li>
 							<li>
-								<a role="menuitem" tabindex="-1" href="#" data-lock-screen="true"><i class="fa fa-lock"></i> Lock Screen</a>
-							</li>
-							<li>
-								<a role="menuitem" tabindex="-1" href="../index.html"><i class="fa fa-power-off"></i> Logout</a>
+								<a role="menuitem" tabindex="-1" href="./logout.php"><i class="fa fa-power-off"></i> Sair da sessão</a>
 							</li>
 						</ul>
 					</div>
@@ -121,27 +123,90 @@
 								<li class="nav-parent nav-expanded nav-active">
 									<a>
 										<i class="fa fa-copy" aria-hidden="true"></i>
-										<span>Cadastros</span>
+										<span>Cadastros Pessoas</span>
 									</a>
 									<ul class="nav nav-children">
 										<li>
-											<a href="cadastro_funcionario.html">
-												Cadastrar funcionário
+											<a href="cadastro_funcionario.php">
+												 Cadastrar funcionário
 											</a>
 										</li>
 										<li>
-											<a href="cadastro_interno.html">
-												Cadastrar interno
+											<a href="cadastro_interno.php">
+												 Cadastrar interno
 											</a>
 										</li>
 										<li>
-											<a href="cadastro_voluntario.html">
-												Cadastrar voluntário
+											<a href="cadastro_voluntario.php">
+												 Cadastrar voluntário
 											</a>
 										</li>
 										<li>
-											<a href="cadastro_voluntario_judicial.html">
-												Cadastrar voluntário judicial
+											<a href="cadastro_voluntario_judicial.php">
+												 Cadastrar voluntário judicial
+											</a>
+										</li>
+									</ul>
+								</li>
+
+								<li class="nav-parent nav-expanded nav-active">
+									<a>
+										<i class="fa fa-copy" aria-hidden="true"></i>
+										<span>Informação Pessoas</span>
+									</a>
+									<ul class="nav nav-children">
+										<li>
+											<a onclick="listarFuncionario()">
+												 Informações funcionarios
+											</a>
+										</li>
+									</ul>
+									<ul class="nav nav-children">
+										<li>
+											<a onclick="listarInterno()">
+												 Informações interno
+											</a>
+										</li>
+									</ul>
+								</li>
+
+								<li class="nav-parent nav-expanded nav-active">
+									<a>
+										<i class="fa fa-copy" aria-hidden="true"></i>
+										<span>Cadastrar Produtos</span>
+									</a>
+									<ul class="nav nav-children">
+										<li>
+											<a href="../html/cadastro_entrada.php">
+												 Cadastrar Produtos
+											</a>
+										</li>
+									</ul>
+									<ul class="nav nav-children">
+										<li>
+											<a href="../html/cadastro_saida.php">
+												 Saida de Produtos
+											</a>
+										</li>
+									</ul>
+								</li>
+
+								<li class="nav-parent nav-expanded nav-active">
+									<a>
+										<i class="fa fa-copy" aria-hidden="true"></i>
+										<span>Informações Produtos</span>
+									</a>
+									<ul class="nav nav-children">
+										<li>
+											<a href="../html/estoque.php">
+												 Estoque
+											</a>
+										</li>
+									</ul>
+									<ul class="nav nav-children">
+										<li>
+											<a href="../html/listar_almoxs.php">
+												 Almoxarifados
 											</a>
 										</li>
 									</ul>
@@ -164,7 +229,7 @@
 								</a>
 							</li>
 							<li><span>Páginas</span></li>
-							<li><span>Perfil</span></li>
+							<li><span>Adicionat Tipo</span></li>
 						</ol>
 						<a class="sidebar-right-toggle"><i class="fa fa-chevron-left"></i></a>
 					</div>
@@ -182,7 +247,7 @@
 								<div class="tab-content">
 									<div id="overview" class="tab-pane active">
 										<fieldset>
-											<form method="post" id="formulario" action="../controle/Control.php">
+											<form method="post" id="formulario" action="../controle/control.php">
 												<div class="form-group"><br>
 													<label class="col-md-3 control-label">entrada</label>
 													<div class="col-md-8">

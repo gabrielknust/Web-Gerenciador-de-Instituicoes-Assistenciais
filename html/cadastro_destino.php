@@ -1,3 +1,9 @@
+<?php
+	session_start();
+	if(!isset($_SESSION['usuario'])){
+		header ("Location: ../index.html");
+	}
+?>
 
 <!doctype html>
 <html class="fixed">
@@ -176,29 +182,27 @@
 		
 			<!-- start: search & user box -->
 			<div class="header-right">
-			
 				<span class="separator"></span>
-			
 				<div id="userbox" class="userbox">
 					<a href="#" data-toggle="dropdown">
 						<figure class="profile-picture">
-							<img src="../img/koala.jpg" alt="Joseph Doe" class="img-circle" data-lock-picture="../assets/images/!logged-user.jpg" />
+							<img src="../img/semfoto.jpg" alt="Joseph Doe" class="img-circle" data-lock-picture="../assets/images/!logged-user.jpg" />
 						</figure>
 						<div class="profile-info" data-lock-name="John Doe" data-lock-email="johndoe@okler.com">
-							<span class="name">John Doe Junior</span>
-							<span class="role">administrator</span>
+							<span class="name">Usuário</span>
+							<span class="role">Funcionário</span>
 						</div>
-							<i class="fa custom-caret"></i>
+						<i class="fa custom-caret"></i>
 					</a>
 			
 					<div class="dropdown-menu">
 						<ul class="list-unstyled">
 							<li class="divider"></li>
 							<li>
-								<a role="menuitem" tabindex="-1" href="../html/profile.html"><i class="fa fa-user"></i> My Profile</a>
+								<a role="menuitem" tabindex="-1" href="../html/profile.php"><i class="fa fa-user"></i> Meu perfil</a>
 							</li>
 							<li>
-								<a role="menuitem" tabindex="-1" href="../index.html"><i class="fa fa-power-off"></i> Logout</a>
+								<a role="menuitem" tabindex="-1" href="./logout.php"><i class="fa fa-power-off"></i> Sair da sessão</a>
 							</li>
 						</ul>
 					</div>
@@ -232,34 +236,96 @@
 								<li class="nav-parent nav-expanded nav-active">
 									<a>
 										<i class="fa fa-copy" aria-hidden="true"></i>
-										<span>Cadastros</span>
+										<span>Cadastros Pessoas</span>
 									</a>
 									<ul class="nav nav-children">
 										<li>
-											<a href="cadastro_funcionario.html">
+											<a href="cadastro_funcionario.php">
 												 Cadastrar funcionário
 											</a>
 										</li>
 										<li>
-											<a href="cadastro_interno.html">
+											<a href="cadastro_interno.php">
 												 Cadastrar interno
 											</a>
 										</li>
 										<li>
-											<a href="cadastro_voluntario.html">
+											<a href="cadastro_voluntario.php">
 												 Cadastrar voluntário
 											</a>
 										</li>
 										<li>
-											<a href="cadastro_voluntario_judicial.html">
+											<a href="cadastro_voluntario_judicial.php">
 												 Cadastrar voluntário judicial
+											</a>
+										</li>
+									</ul>
+								</li>
+
+								<li class="nav-parent nav-expanded nav-active">
+									<a>
+										<i class="fa fa-copy" aria-hidden="true"></i>
+										<span>Informação Pessoas</span>
+									</a>
+									<ul class="nav nav-children">
+										<li>
+											<a onclick="listarFuncionario()">
+												 Informações funcionarios
+											</a>
+										</li>
+									</ul>
+									<ul class="nav nav-children">
+										<li>
+											<a onclick="listarInterno()">
+												 Informações interno
+											</a>
+										</li>
+									</ul>
+								</li>
+
+								<li class="nav-parent nav-expanded nav-active">
+									<a>
+										<i class="fa fa-copy" aria-hidden="true"></i>
+										<span>Cadastrar Produtos</span>
+									</a>
+									<ul class="nav nav-children">
+										<li>
+											<a href="../html/cadastro_entrada.php">
+												 Cadastrar Produtos
+											</a>
+										</li>
+									</ul>
+									<ul class="nav nav-children">
+										<li>
+											<a href="../html/cadastro_saida.php">
+												 Saida de Produtos
+											</a>
+										</li>
+									</ul>
+								</li>
+
+								<li class="nav-parent nav-expanded nav-active">
+									<a>
+										<i class="fa fa-copy" aria-hidden="true"></i>
+										<span>Informações Produtos</span>
+									</a>
+									<ul class="nav nav-children">
+										<li>
+											<a href="../html/estoque.php">
+												 Estoque
+											</a>
+										</li>
+									</ul>
+									<ul class="nav nav-children">
+										<li>
+											<a href="../html/listar_almoxs.php">
+												 Almoxarifados
 											</a>
 										</li>
 									</ul>
 								</li>
 							</ul>
 						</nav>
-				
 					</div>
 				</div>
 			</aside>

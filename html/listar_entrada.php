@@ -1,3 +1,9 @@
+<?php
+	session_start();
+	if(!isset($_SESSION['usuario'])){
+		header ("Location: ../index.html");
+	}
+?>
 <!doctype html>
 <html class="fixed">
 <head>
@@ -5,9 +11,8 @@
 	include_once '../dao/Conexao.php';
   	include_once '../dao/EntradaDAO.php';
   
-	session_start();
 	if(!isset($_SESSION['entrada'])){
-		header('Location: ../controle/Control.php?metodo=listarTodos&nomeClasse=EntradaControle&nextPage=../html/listar_entrada.php');
+		header('Location: ../controle/control.php?metodo=listarTodos&nomeClasse=EntradaControle&nextPage=../html/listar_entrada.php');
 	}
 	if(isset($_SESSION['entrada'])){
 		$entrada = $_SESSION['entrada'];
@@ -175,7 +180,7 @@
 							<nav id="menu" class="nav-main" role="navigation">
 								<ul class="nav nav-main">
 									<li>
-										<a href="home.html">
+										<a href="home.php">
 											<i class="fa fa-home" aria-hidden="true"></i>
 											<span>Início</span>
 										</a>

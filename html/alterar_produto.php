@@ -1,20 +1,25 @@
 <?php
+	session_start();
+	if(!isset($_SESSION['usuario'])){
+		header ("Location: ../index.html");
+	}
 
-session_start();
 include_once '../dao/Conexao.php';
 include_once '../dao/CategoriaDAO.php';
 include_once '../dao/UnidadeDAO.php';
 include_once '../dao/ProdutoDAO.php';
 	
-	if(!isset($_SESSION['produto'])) {
-		extract($_REQUEST);
-		header('Location: ../controle/control.php?metodo=listarId&nomeClasse=ProdutoControle&nextPage=../html/alterar_produto.php&id_produto='.$id_produto);
-	}
 	if(!isset($_SESSION['unidade'])) {
-		header('Location: ../controle/control.php?metodo=listarTodos&nomeClasse=UnidadeControle&nextPage=../html/alterar_produto.php');
+		extract($_REQUEST);
+		header('Location: ../controle/control.php?metodo=listarTodos&nomeClasse=UnidadeControle&nextPage=../html/alterar_produto.php?id_produto='.$id_produto);
 	}
 	if(!isset($_SESSION['categoria'])){
-		header('Location: ../controle/control.php?metodo=listarTodos&nomeClasse=CategoriaControle&nextPage=../html/alterar_produto.php');	
+		extract($_REQUEST);
+		header('Location: ../controle/control.php?metodo=listarTodos&nomeClasse=CategoriaControle&nextPage=../html/alterar_produto.php?id_produto='.$id_produto);	
+	}
+	if(!isset($_SESSION['produto'])) {
+		extract($_REQUEST);
+		header('Location: ../controle/control.php?metodo=listarId&nomeClasse=ProdutoControle&nextPage=../html/alterar_produto.php?id_produto='.$id_produto.'&id_produto='.$id_produto);
 	}
 
 	if(isset($_SESSION['categoria']) && isset($_SESSION['unidade']) && isset($_SESSION['produto'])){
@@ -103,19 +108,34 @@ include_once '../dao/ProdutoDAO.php';
 						.text('Codigo: ' + item.codigo)
 					$('#Valor')
 						.text('Valor: ' + item.preco)
-				
+					$('#produto')
+						.val(item.descricao)
+					$('#codigo')
+						.val(item.codigo)
+					$('#valor')
+						.val(item.preco)
 				})
 				
 
-			/*$.each(categoria, function(i,item){
-				if(produtos.id_categoria == item.id_categoria_produto){
+			$.each(categoria, function(i,item){
+				if(produto.id_categoria == item.id_categoria_produto){
 					$('#id_categoria').append('<option value="' + item.id_categoria_produto + '" selected>' + item.descricao_categoria + '</option>');	
 				}
 				else{
 				$('#id_categoria').append('<option value="' + item.id_categoria_produto + '">' + item.descricao_categoria + '</option>');
 				}
 
-			})*/
+			})
+
+			$.each(unidade, function(i,item){
+				if(produto.id_categoria == item.id_unidade){
+					$('#id_unidade').append('<option value="' + item.id_unidade + '" selected>' + item.descricao_unidade + '</option>');	
+				}
+				else{
+				$('#id_unidade').append('<option value="' + item.id_unidade + '">' + item.descricao_unidade + '</option>');
+				}
+
+			})
 		});
 			
 			function editar_produto()
@@ -184,7 +204,7 @@ include_once '../dao/ProdutoDAO.php';
 					<div id="userbox" class="userbox">
 						<a href="#" data-toggle="dropdown">
 							<figure class="profile-picture">
-								<img src="../img/koala.jpg" alt="Joseph Doe" class="img-circle" data-lock-picture="../assets/images/!logged-user.jpg" />
+								<img src="../img/semfoto.jpg" alt="Joseph Doe" class="img-circle" data-lock-picture="../assets/images/!logged-user.jpg" />
 							</figure>
 							<div class="profile-info" data-lock-name="John Doe" data-lock-email="johndoe@okler.com">
 								<span class="name">John Doe Junior</span>
@@ -362,7 +382,7 @@ include_once '../dao/ProdutoDAO.php';
 									</div>
 									
 									<div id="edit" class="tab-pane">
-										<form id="formulario" action="../controle/Control.php">
+										<form id="formulario" action="../controle/control.php">
 											<fieldset>
 												<div class="form-group"><br>
 													<label class="col-md-3 control-label">Nome do produto</label>
@@ -378,7 +398,6 @@ include_once '../dao/ProdutoDAO.php';
 													</a>
 													<div class="col-md-6">
 														<select name="id_categoria" id="id_categoria" class="form-control input-lg mb-md">
-															<option selected disabled value="blank">Selecionar</option>
 														</select>
 													</div>	
 												</div>
@@ -388,9 +407,6 @@ include_once '../dao/ProdutoDAO.php';
 												<a href="adicionar_unidade.php"><i class="fas fa-plus w3-xlarge" style="margin-top: 0.75vw"></i></a>
 												<div class="col-md-6">
 													<select name="id_unidade" id="id_unidade" class="form-control input-lg mb-md">
-														<option selected disabled value="blank">Selecionar</option>
-
-														
 													</select>
 												</div>	
 											</div>
@@ -400,9 +416,6 @@ include_once '../dao/ProdutoDAO.php';
 												<div class="col-md-8">
 													<input type="text" name="codigo" class="form-control" minlength="11" id="codigo" id="profileCompany">
 
-													<input type="hidden" name="nomeClasse" value="ProdutoControle">
-														
-													<input type="hidden" name="metodo" value="incluir">
 												</div>
 											</div>
 												
@@ -413,7 +426,7 @@ include_once '../dao/ProdutoDAO.php';
 
 													<input type="hidden" name="nomeClasse" value="ProdutoControle">
 														
-													<input type="hidden" name="metodo" value="incluir">
+													<input type="hidden" name="metodo" value="alterarProduto">
 
 												</div>
 											</div>
@@ -438,73 +451,7 @@ include_once '../dao/ProdutoDAO.php';
 				</section>
 			</div>
 
-			<!--<aside id="sidebar-right" class="sidebar-right">
-				<div class="nano">
-					<div class="nano-content">
-						<a href="#" class="mobile-close visible-xs">
-							Collapse <i class="fa fa-chevron-right"></i>
-						</a>
-			
-						<div class="sidebar-right-wrapper">
-			
-							<div class="sidebar-widget widget-calendar">
-								<h6>Upcoming Tasks</h6>
-								<div data-plugin-datepicker data-plugin-skin="dark" ></div>
-			
-								<ul>
-									<li>
-										<time datetime="2014-04-19T00:00+00:00">04/19/2014</time>
-										<span>Company Meeting</span>
-									</li>
-								</ul>
-							</div>
-			
-							<div class="sidebar-widget widget-friends">
-								<h6>Friends</h6>
-								<ul>
-									<li class="status-online">
-										<figure class="profile-picture">
-											<img src="../img/semfoto.jpg" alt="Joseph Doe" class="img-circle">
-										</figure>
-										<div class="profile-info">
-											<span class="name">Joseph Doe Junior</span>
-											<span class="title">Hey, how are you?</span>
-										</div>
-									</li>
-									<li class="status-online">
-										<figure class="profile-picture">
-											<img src="../img/semfoto.jpg" alt="Joseph Doe" class="img-circle">
-										</figure>
-										<div class="profile-info">
-											<span class="name">Joseph Doe Junior</span>
-											<span class="title">Hey, how are you?</span>
-										</div>
-									</li>
-									<li class="status-offline">
-										<figure class="profile-picture">
-											<img src="../img/semfoto.jpg" alt="Joseph Doe" class="img-circle">
-										</figure>
-										<div class="profile-info">
-											<span class="name">Joseph Doe Junior</span>
-											<span class="title">Hey, how are you?</span>
-										</div>
-									</li>
-									<li class="status-offline">
-										<figure class="profile-picture">
-											<img src="../img/semfoto.jpg" alt="Joseph Doe" class="img-circle">
-										</figure>
-										<div class="profile-info">
-											<span class="name">Joseph Doe Junior</span>
-											<span class="title">Hey, how are you?</span>
-										</div>
-									</li>
-								</ul>
-							</div>
-			
-						</div>
-					</div>
-				</div>
-			</aside>-->
+
 		</section>
 
 		<!-- Vendor -->

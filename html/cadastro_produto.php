@@ -1,3 +1,10 @@
+<?php
+	session_start();
+	if(!isset($_SESSION['usuario'])){
+		header ("Location: ../index.html");
+	}
+?>
+
 <!doctype html>
 <html class="fixed">
 <?php session_start(); 
@@ -14,7 +21,11 @@
 	if(isset($_SESSION['categoria']) && isset($_SESSION['unidade'])){
 		$unidade = $_SESSION['unidade'];
 		$categoria = $_SESSION['categoria'];
-		session_destroy();
+
+		unset($_SESSION['unidade']);
+		unset($_SESSION['categoria']);
+
+
 	}
 ?>
 <head>
@@ -112,7 +123,7 @@
 		<!-- start: header -->
 		<header class="header">
 			<div class="logo-container">
-				<a href="home.html" class="logo">
+				<a href="home.php" class="logo">
 					<img src="../img/logofinal.png" height="35" alt="Porto Admin" />
 				</a>
 				<div class="visible-xs toggle-sidebar-left" data-toggle-class="sidebar-left-opened" data-target="html" data-fire-event="sidebar-left-opened">
@@ -169,7 +180,7 @@
 						<nav id="menu" class="nav-main" role="navigation">
 							<ul class="nav nav-main">
 								<li>
-									<a href="home.html">
+									<a href="home.php">
 										<i class="fa fa-home" aria-hidden="true"></i>
 										<span>Início</span>
 									</a>
@@ -238,7 +249,7 @@
 							</ul>
 							<div class="tab-content">
 								<div id="overview" class="tab-pane active">
-									<form id="formulario" action="../controle/Control.php" onsubmit="return validar()" autocomplete="off">
+									<form id="formulario" action="../controle/control.php" onsubmit="return validar()" autocomplete="off">
 										<fieldset>
 											<div class="form-group"><br>
 												<label class="col-md-3 control-label">Nome do produto</label>

@@ -1,3 +1,10 @@
+<?php
+	session_start();
+	if(!isset($_SESSION['usuario'])){
+		header ("Location: ../index.html");
+	}
+?>
+
 <!doctype html>
 <html class="fixed">
 <head>
@@ -5,13 +12,13 @@
   include_once '../dao/Conexao.php';
   include_once '../dao/AlmoxarifadoDAO.php';
   
-  session_start();
+
   if(!isset($_SESSION['almoxarifado'])){
-    header('Location: ../controle/Control.php?metodo=listarTodos&nomeClasse=AlmoxarifadoControle&nextPage=../html/listar_almox.php');
+    header('Location: ../controle/control.php?metodo=listarTodos&nomeClasse=AlmoxarifadoControle&nextPage=../html/listar_almox.php');
   }
   if(isset($_SESSION['almoxarifado'])){
     $almoxarifado = $_SESSION['almoxarifado'];
-    session_destroy();  
+    unset($_SESSION['almoxarifado']);
   }
 ?>
 	<!-- Basic -->
@@ -74,7 +81,7 @@
 	<!-- jquery functions -->
 	<script>
 		function excluir(id){
-			window.location.replace('../controle/Control.php?metodo=excluir&nomeClasse=AlmoxarifadoControle&id_almoxarifado='+id);
+			window.location.replace('../controle/control.php?metodo=excluir&nomeClasse=AlmoxarifadoControle&id_almoxarifado='+id);
 		}
 	</script>
 	<script>
@@ -163,7 +170,7 @@
 							<nav id="menu" class="nav-main" role="navigation">
 								<ul class="nav nav-main">
 									<li>
-										<a href="home.html">
+										<a href="home.php">
 											<i class="fa fa-home" aria-hidden="true"></i>
 											<span>Início</span>
 										</a>
@@ -230,7 +237,7 @@
 						<div class="right-wrapper pull-right">
 							<ol class="breadcrumbs">
 								<li>
-									<a href="home.html">
+									<a href="home.php">
 										<i class="fa fa-home"></i>
 									</a>
 								</li>
